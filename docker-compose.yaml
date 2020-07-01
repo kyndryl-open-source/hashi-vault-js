@@ -1,0 +1,17 @@
+version: '3'
+services:
+  vault:
+    image: vault:1.4.2
+    container_name: my-vault
+    ports:
+      - "8200:8200"
+    restart: always
+    environment:
+      VAULT_ADDR: "https://127.0.0.1:8200"
+    volumes:
+      - ./volumes/logs:/vault/logs
+      - ./volumes/file:/vault/file
+      - ./volumes/config:/vault/config
+    cap_add:
+      - IPC_LOCK
+    entrypoint: vault server -config=/vault/config/vault.json

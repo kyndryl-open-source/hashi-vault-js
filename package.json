@@ -1,0 +1,37 @@
+{
+  "name": "hashi-vault",
+  "version": "0.1.0",
+  "description": "A node.js module to interact with the Hashicorp Vault API.",
+  "main": "Vault.js",
+  "scripts": {
+    "test:unit": "source tests/process.env && jest tests/Unit.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rod4n4m1/hashi-vault-js"
+  },
+  "keywords": [
+    "ibm",
+    "hashicorp",
+    "nodejs",
+    "promises",
+    "api",
+    "async"
+  ],
+  "author": "Rod Anami (rod.anami@br.ibm.com)",
+  "license": "IPL-1.0",
+  "bugs": {
+    "url": "https://github.com/rod4n4m1/hashi-vault-js/issues"
+  },
+  "homepage": "https://github.com/rod4n4m1/hashi-vault-js#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "fs": "0.0.1-security"
+  },
+  "devDependencies": {
+    "jest": "^26.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
