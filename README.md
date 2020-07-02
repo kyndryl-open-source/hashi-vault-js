@@ -25,6 +25,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.2.1`
+  * Fixed README and documentation
+
 * `0.2.0`
   * Added new functions `generateAppRoleSecretId`, `readAppRoleSecretId` and `destroyAppRoleSecretId`
   * Improved test suite
@@ -50,12 +53,12 @@ This module provides a set of functions to help **JavaScript** Developers workin
   // Indicate the server name/IP, port and API version for the Vault,
   // all paths are relative to this one
   baseUrl: 'https://127.0.0.1:8200/v1',
-  // Sets the root path after the base URL, it translates to a partition inside
-  // the Vault
-  rootPath: 'knight',
+  // Sets the root path after the base URL, it translates to a
+  // partition inside the Vault where the secret engine was enabled
+  rootPath: 'secret',
   // HTTP request timeout in milliseconds
   timeout: 1000,
-  // If should use a proxy or not
+  // If should use a proxy or not by the HTTP request
   proxy: false
 }
 ```
@@ -65,7 +68,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 **Note:** This module only implements API client for the Vault KV version 2 secret engine
 
 ```javascript
-const Vault = require('Vault.js');
+const Vault = require('hashi-vault-js');
 
 const vault = new Vault( {
     https: true,
@@ -73,7 +76,7 @@ const vault = new Vault( {
     key: './client.key',
     cacert: './ca.crt',
     baseUrl: 'https://127.0.0.1:8200/v1',
-    rootPath: 'secrets',
+    rootPath: 'secret',
     timeout: 2000,
     proxy: false
 });
@@ -262,6 +265,15 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @returns {Promise}
 */
 ```
+
+### Limitations
+
+The following Hashicorp Vault API endpoints are currently covered:
+
+* [AppRole Auth Method](https://www.vaultproject.io/api-docs/auth/approle) - Partially
+
+* [KV Secrets Engine - Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) - Totally
+
 
 ### Creating your test environment (with HTTPS)
 

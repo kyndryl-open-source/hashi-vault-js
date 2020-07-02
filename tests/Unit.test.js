@@ -1,4 +1,4 @@
-const Vault = require('../Vault');
+const Vault = require('hashi-vault-js');
 
 const SECRET1={
   name: "slack",

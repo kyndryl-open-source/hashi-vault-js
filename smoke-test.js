@@ -13,7 +13,7 @@ const Metadata = {
   tag2: "smoke-test"
 };
 
-const Vault = require('./Vault');
+const Vault = require('hashi-vault-js');
 const vault = new Vault( {
     https: true,
     cert: ClientCert,
