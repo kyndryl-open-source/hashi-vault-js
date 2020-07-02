@@ -66,6 +66,7 @@ class Vault {
   */
   async loginWithAppRole(roleId, secretId) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const postOptions = {
         url: config.appRoleLogin,
         method: 'post',
@@ -75,9 +76,14 @@ class Vault {
         }
       };
       this.instance(postOptions).then(function(response){
-        resolve(response.data.auth);
+        if (response.data) {
+          message = response.data.auth;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -98,6 +104,7 @@ class Vault {
   */
   async readKVEngineConfig(token) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const getOptions = {
         url: `/${this.rootPath}/${config.enginePath}`,
         method: 'get',
@@ -106,9 +113,14 @@ class Vault {
         }
       };
       this.instance(getOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -130,6 +142,7 @@ class Vault {
   */
   async createKVSecret(token, name, secrets) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const postOptions = {
         url: `/${this.rootPath}/${config.createPath}/${name}`,
         method: 'post',
@@ -144,9 +157,14 @@ class Vault {
         }
       };
       this.instance(postOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -170,6 +188,7 @@ class Vault {
   */
   async updateKVSecret(token, name, secrets, version) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const postOptions = {
         url: `/${this.rootPath}/${config.updatePath}/${name}`,
         method: 'post',
@@ -184,9 +203,14 @@ class Vault {
         }
       };
       this.instance(postOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -209,6 +233,7 @@ class Vault {
   */
   async readKVSecret(token, name, version) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const suffix = version ? `?version=${version}` : "";
       const getOptions = {
         url: `/${this.rootPath}/${config.readPath}/${name}${suffix}`,
@@ -218,9 +243,14 @@ class Vault {
         }
       };
       this.instance(getOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -242,6 +272,7 @@ class Vault {
   */
   async deleteLatestVerKVSecret(token, name) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const deleteOptions = {
         url: `/${this.rootPath}/${config.lvDeletePath}/${name}`,
         method: 'delete',
@@ -250,9 +281,14 @@ class Vault {
         }
       };
       this.instance(deleteOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -275,6 +311,7 @@ class Vault {
   */
   async deleteVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const postOptions = {
         url: `/${this.rootPath}/${config.deletePath}/${name}`,
         method: 'post',
@@ -286,9 +323,14 @@ class Vault {
         }
       };
       this.instance(postOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -311,6 +353,7 @@ class Vault {
   */
   async undeleteVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const postOptions = {
         url: `/${this.rootPath}/${config.undeletePath}/${name}`,
         method: 'post',
@@ -322,9 +365,14 @@ class Vault {
         }
       };
       this.instance(postOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -347,6 +395,7 @@ class Vault {
   */
   async destroyVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const postOptions = {
         url: `/${this.rootPath}/${config.destroyPath}/${name}`,
         method: 'post',
@@ -358,9 +407,14 @@ class Vault {
         }
       };
       this.instance(postOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -382,6 +436,7 @@ class Vault {
   */
   async listKVSecret(token, name) {
     return new Promise((resolve, reject) => {
+      let message = {};
       const getOptions = {
         url: `/${this.rootPath}/${config.listPath}/${name}/?=list=true`,
         method: 'get',
@@ -390,9 +445,14 @@ class Vault {
         }
       };
       this.instance(getOptions).then(function(response){
-        resolve(response.data);
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
       }).catch(function(error){
-        let message = {};
         if (error.response){
           message['status']= error.response.status;
           message['data']= error.response.data;
@@ -406,6 +466,133 @@ class Vault {
       });
     });
   }
+
+  /**
+  * @param {String} token
+  * @param {String} appRole
+  * @param {String} metadata
+  * @returns {Promise}
+  */
+  async generateAppRoleSecretId(token, appRole, metadata) {
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const postOptions = {
+        url: `${config.appRolePath}/${appRole}/secret-id`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          "metadata": metadata
+        }
+      };
+      this.instance(postOptions).then(function(response){
+        if (response.data) {
+          message = response.data.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} appRole
+  * @param {String} secretId
+  * @returns {Promise}
+  */
+  async readAppRoleSecretId(token, appRole, secretId) {
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const postOptions = {
+        url: `${config.appRolePath}/${appRole}/secret-id/lookup`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          "secret_id": secretId
+        }
+      };
+      this.instance(postOptions).then(function(response){
+        if (response.data) {
+          message = response.data.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} appRole
+  * @param {String} secretId
+  * @returns {Promise}
+  */
+  async destroyAppRoleSecretId(token, appRole, secretId) {
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const postOptions = {
+        url: `${config.appRolePath}/${appRole}/secret-id/destroy`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          "secret_id": secretId
+        }
+      };
+      this.instance(postOptions).then(function(response){
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
 }
 
 module.exports = Vault;

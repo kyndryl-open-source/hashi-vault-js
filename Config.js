@@ -1,5 +1,5 @@
 const config = {
-  appName: 'chatops-knight', 
+  appName: 'chatops-knight',
   baseUrl: 'https://127.0.0.1:8200/v1',
   rootPath: 'secrets',
   timeout: 1000,
@@ -13,7 +13,8 @@ const config = {
   destroyPath: 'destroy',
   enginePath: 'config',
   listPath: 'metadata',
-  appRoleLogin: '/auth/approle/login'
+  appRoleLogin: '/auth/approle/login',
+  appRolePath: '/auth/approle/role'
 };
 
 module.exports = config;

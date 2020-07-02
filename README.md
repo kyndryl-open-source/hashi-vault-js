@@ -25,6 +25,10 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.2.0`
+  * Added new functions `generateAppRoleSecretId`, `readAppRoleSecretId` and `destroyAppRoleSecretId`
+  * Improved test suite
+
 * `0.1.1`
   * Removed dependency on fs as it's native now
 
@@ -222,6 +226,39 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} name
+* @returns {Promise}
+*/
+```
+
+* generateAppRoleSecretId(token, appRole, metadata)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} appRole
+* @param {String} metadata
+* @returns {Promise}
+*/
+```
+
+* readAppRoleSecretId(token, appRole, secretId)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} appRole
+* @param {String} secretId
+* @returns {Promise}
+*/
+```
+
+* destroyAppRoleSecretId(token, appRole, secretId)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} appRole
+* @param {String} secretId
 * @returns {Promise}
 */
 ```

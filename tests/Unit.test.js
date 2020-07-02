@@ -14,7 +14,12 @@ const SECRET2={
     abn_amro: "xoxb-123456789014-1234567890125-1w1lln0tt3llmys3cr3tatm3"
   }
 };
+const Metadata = {
+  tag1: "development",
+  tag2: "unit-test"
+};
 let token = null;
+let newSecretId = null;
 
 const RoleId = process.env.ROLE_ID;
 const SecretId = process.env.SECRET_ID;
@@ -23,6 +28,7 @@ const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
 const VaultUrl = process.env.VAULT_URL;
 const RootPath = process.env.ROOT_PATH;
+const AppRole = process.env.APPROLE;
 
 const vault = new Vault( {
     https: true,
@@ -35,7 +41,9 @@ const vault = new Vault( {
     proxy: false
 });
 
-test('the result is the authentication token', async () => {
+console.log(".................................\n \n \n");
+
+test('the result is a new AppRole authentication token', async () => {
     const data = await vault.loginWithAppRole(RoleId, SecretId);
     console.log(data);
     token = data.client_token;
@@ -43,68 +51,89 @@ test('the result is the authentication token', async () => {
 });
 
 
-test('the result is the kv engine config', async () => {
+test('the result is the KV engine config', async () => {
     const data = await vault.readKVEngineConfig(token);
-    console.log('kv engine config:\n',data);
+    console.log('readKVEngineConfig output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is a created new kv entry', async () => {
+test('the result is a new KV entry created', async () => {
     const data = await vault.createKVSecret(token, SECRET1.name , SECRET1.secrets);
-    console.log('Create output:\n',data);
+    console.log('createKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is a read kv entry', async () => {
+test('the result is a KV entry information', async () => {
     const data = await vault.readKVSecret(token, SECRET1.name);
-    console.log('Read output:\n',data);
+    console.log('readKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is an updated kv entry', async () => {
+test('the result is a KV entry updated with new version', async () => {
     const data = await vault.updateKVSecret(token, SECRET2.name , SECRET2.secrets, 1);
-    console.log('Update output:\n',data);
+    console.log('updateKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is an updated kv entry', async () => {
+test('the result is a KV entry updated with new version', async () => {
     const data = await vault.updateKVSecret(token, SECRET2.name , SECRET2.secrets, 2);
-    console.log('Update output:\n',data);
+    console.log('updateKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is an updated kv entry', async () => {
+test('the result is a KV entry updated with new version', async () => {
     const data = await vault.updateKVSecret(token, SECRET2.name , SECRET2.secrets, 3);
-    console.log('Update output:\n',data);
+    console.log('updateKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is the latest version of kv entry deleted', async () => {
+test('the result is the latest version (one version) of KV entry deleted - HTTP 204', async () => {
     const data = await vault.deleteLatestVerKVSecret(token, SECRET1.name);
-    console.log('LV Delete output:\n',data);
+    console.log('deleteLatestVerKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is the versions of kv entry deleted', async () => {
+test('the result is the versions (one or more) of KV entry deleted - HTTP 204', async () => {
     const data = await vault.deleteVersionsKVSecret(token, SECRET1.name, [2, 3]);
-    console.log('Versions Delete output:\n',data);
+    console.log('deleteVersionsKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is the versions of kv entry undeleted', async () => {
+test('the result is the versions (one or more) of KV entry undeleted - HTTP 204', async () => {
     const data = await vault.undeleteVersionsKVSecret(token, SECRET1.name, [2, 3]);
-    console.log('Versions Undelete output:\n',data);
+    console.log('undeleteVersionsKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is the versions of kv entry destroyed', async () => {
+test('the result is the versions of KV entry destroyed - HTTP 204', async () => {
     const data = await vault.destroyVersionsKVSecret(token, SECRET1.name, [ 1 ]);
-    console.log('Versions Detroy output:\n',data);
+    console.log('destroyVersionsKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
-test('the result is the list of keys for a kv entry', async () => {
+test('the result is the list of keys for a KV entry', async () => {
     const data = await vault.listKVSecret(token, SECRET1.name);
-    console.log('List output:\n',data);
+    console.log('listKVSecret:\n',data);
 	return expect(data).toBeDefined();
 });
+
+test('the result is the AppRole secret-id information', async () => {
+    const data = await vault.readAppRoleSecretId(token, AppRole, SecretId);
+    console.log('readAppRoleSecretId output:\n',data);
+	return expect(data).toBeDefined();
+});
+
+test('the result is new AppRole secret-id generated', async () => {
+    const data = await vault.generateAppRoleSecretId(token, AppRole, JSON.stringify(Metadata));
+    console.log('generateAppRoleSecretId output:\n',data);
+    newSecretId = data.secret_id;
+	return expect(data).toBeDefined();
+});
+
+test('the result is an AppRole secret-id destroyed - HTTP 204', async () => {
+    const data = await vault.destroyAppRoleSecretId(token, AppRole, newSecretId);
+    console.log('generateAppRoleSecretId output:\n',data);
+	return expect(data).toBeDefined();
+});
+
+console.log("\n \n \n.................................\n");
