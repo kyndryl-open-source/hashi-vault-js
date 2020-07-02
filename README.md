@@ -25,6 +25,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.1.1`
+  * Removed dependency on fs as it's native now
+
 * `0.1.0`
   * First working module with KV v2 secret engine
 
