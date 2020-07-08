@@ -60,6 +60,39 @@ class Vault {
   }
 
   /**
+  * @returns {Promise}
+  */
+  async healthCheck(){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const getOptions = {
+        url: config.sysHealth,
+        method: 'get'
+      };
+      this.instance(getOptions).then(function(response){
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
   * @param {String} roleId
   * @param {String} secretId
   * @returns {Object}

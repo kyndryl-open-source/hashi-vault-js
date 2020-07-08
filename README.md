@@ -5,7 +5,7 @@
 <img alt="NPM" src="https://img.shields.io/npm/l/hashi-vault-js">
 <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/rod4n4m1/hashi-vault-js">
 
-This module provides a set of functions to help **JavaScript** Developers working with Hashicorp Vault to authenticate and access API endpoints using Javascript promises.
+This module provides a set of functions to help **JavaScript** Developers working with Hashicorp Vault to authenticate and access API endpoints using **JavaScript** _promises_.
 
 ## Requirements (MacOS/Windows)
 
@@ -24,6 +24,10 @@ This module provides a set of functions to help **JavaScript** Developers workin
 `npm uninstall hashi-corp-js`
 
 ### Change Log
+
+* `0.2.2`
+  * Improved documentation and README
+  * Added new function `healthCheck`
 
 * `0.2.1`
   * Fixed README and documentation
@@ -59,6 +63,8 @@ This module provides a set of functions to help **JavaScript** Developers workin
   // HTTP request timeout in milliseconds
   timeout: 1000,
   // If should use a proxy or not by the HTTP request
+  // Example:
+  // proxy: { host: proxy.ip, port: proxy.port }
   proxy: false
 }
 ```
@@ -81,7 +87,14 @@ const vault = new Vault( {
     proxy: false
 });
 ```
-Perform a login on the Vault with role-id/secret-id pair (AppRole login)and get a valid client token:
+
+Check health status of the Vault server:
+
+```javascript
+const status = await vault.healthCheck();
+```
+
+Perform a login on the Vault with role-id/secret-id pair (AppRole login) and get a valid client token:
 
 ```javascript
 const token = await vault.loginWithAppRole(RoleId, SecretId).client_token;
@@ -126,6 +139,14 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```
 
 ### List of functions available
+
+* healthCheck()
+
+```javascript
+/**
+* @returns {Promise}
+*/
+```
 
 * loginWithAppRole(roleId, secretId)
 
@@ -270,9 +291,11 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 The following Hashicorp Vault API endpoints are currently covered:
 
+* [System Backend](https://www.vaultproject.io/api-docs/system) - Partially
+
 * [AppRole Auth Method](https://www.vaultproject.io/api-docs/auth/approle) - Partially
 
-* [KV Secrets Engine - Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) - Totally
+* [KV Secrets Engine - Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) - Full
 
 
 ### Creating your test environment (with HTTPS)
@@ -297,11 +320,14 @@ The following Hashicorp Vault API endpoints are currently covered:
 * Create volumes and copy any certificate/key that you have
 
   ```
+  # Create volumes on your local filesystem, for cloud environments you'll need a private volume
   mkdir ./volumes
   mkdir ./volumes/config
   mkdir ./volumes/file
   mkdir ./volumes/logs
+  # Copy Vault server config to the volume
   cp vault.json ./volumes/config/
+  # Copy Vault server TLS certificate and key to the volume, this can be created by Vault PKI secret engine
   cp vault.crt ./volumes/config/
   cp vault.key ./volumes/config/
   ```
@@ -314,12 +340,13 @@ The following Hashicorp Vault API endpoints are currently covered:
 
   ```
   vault operator unseal $KEY1
-  vault operator unseal $KEY1
-  vault operator unseal $KEY1
+  vault operator unseal $KEY2
+  vault operator unseal $KEY3
   ```
 
   * Every time you restart your Vault you'll need to unseal it
   * It's recommended that no single person has all the 6 keys
+  * It's possible to automate this unsealing process for high availability
 
 * Configure your Vault accordingly, but minimally
   * Enable the KV v2 secret engine
@@ -356,15 +383,21 @@ The following Hashicorp Vault API endpoints are currently covered:
   * Create an AppRole with role_id and secret_id
 
   ```
+  # Policy indicates the permissions and scopes an AppRole will have
   vault policy write policy-name policy-permissions.hcl
+  # Create an AppRole, usually one per application
   vault write auth/approle/role/role-name secret_id_ttl="720h"  token_ttl="12h"  token_max_tll="12h"  policies="policy-name"
+  # Get the AppRole role-id
   vault read auth/approle/role/role-name/role-id
+  # Get the initial secret-id tied to the role-id
   vault write -f auth/approle/role/role-name/secret-id
   ```
 
 ### References
 
-  * Docker Hub [page](https://hub.docker.com/_/vault)
+  * Hashicorp Vault Using KV engine [doc](https://learn.hashicorp.com/vault/secrets-management/sm-versioned-kv)
+
+  * Hashicorp Vault Docker Hub [page](https://hub.docker.com/_/vault)
 
   * Ruan Bekker's Blog [post](https://blog.ruanbekker.com/blog/2019/05/06/setup-hashicorp-vault-server-on-docker-and-cli-guide/)
 
@@ -378,6 +411,8 @@ Written by Rod Anami <rod.anami@br.ibm.com>, June 2020.
 
 
 ### License
-This project is licensed under the IBM Public License.
+This project is licensed under the [IBM Public License 1.0](https://opensource.org/licenses/IPL-1.0).
 
 Copyright (c) 2020 IBM
+
+Hashicorp Vault open source is licensed under the [Mozilla Public License 2.0](https://github.com/hashicorp/vault/blob/master/LICENSE).

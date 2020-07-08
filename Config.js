@@ -14,7 +14,8 @@ const config = {
   enginePath: 'config',
   listPath: 'metadata',
   appRoleLogin: '/auth/approle/login',
-  appRolePath: '/auth/approle/role'
+  appRolePath: '/auth/approle/role',
+  sysHealth: '/sys/health'
 };
 
 module.exports = config;
