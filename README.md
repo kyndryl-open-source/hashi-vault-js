@@ -25,6 +25,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.2.3`
+  * Fixed security vulnerability on lodash dependency
+
 * `0.2.2`
   * Improved documentation and README
   * Added new function `healthCheck`
