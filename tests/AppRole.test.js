@@ -43,13 +43,8 @@ const vault = new Vault( {
 
 console.log(".................................\n \n \n");
 
-test('the result is status of the Vault server', async () => {
-    const data = await vault.healthCheck();
-    console.log(data);
-	return expect(data).toBeDefined();
-});
-//TODO: Improve expect assertion
-
+//TODO: Improve expect assertion on all tests
+//TODO: Automatically delete previous data on KV engine
 
 test('the result is a new AppRole authentication token', async () => {
     const data = await vault.loginWithAppRole(RoleId, SecretId);
@@ -57,63 +52,55 @@ test('the result is a new AppRole authentication token', async () => {
     token = data.client_token;
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
+
 
 test('the result is the KV engine config', async () => {
     const data = await vault.readKVEngineConfig(token);
     console.log('readKVEngineConfig output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is a new KV entry created', async () => {
     const data = await vault.createKVSecret(token, SECRET1.name , SECRET1.secrets);
     console.log('createKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is a KV entry information', async () => {
     const data = await vault.readKVSecret(token, SECRET1.name);
     console.log('readKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is a KV entry updated with new version', async () => {
     const data = await vault.updateKVSecret(token, SECRET2.name , SECRET2.secrets, 1);
     console.log('updateKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is a KV entry updated with new version', async () => {
     const data = await vault.updateKVSecret(token, SECRET2.name , SECRET2.secrets, 2);
     console.log('updateKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is a KV entry updated with new version', async () => {
     const data = await vault.updateKVSecret(token, SECRET2.name , SECRET2.secrets, 3);
     console.log('updateKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is the latest version (one version) of KV entry deleted - HTTP 204', async () => {
     const data = await vault.deleteLatestVerKVSecret(token, SECRET1.name);
     console.log('deleteLatestVerKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is the versions (one or more) of KV entry deleted - HTTP 204', async () => {
     const data = await vault.deleteVersionsKVSecret(token, SECRET1.name, [2, 3]);
     console.log('deleteVersionsKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is the versions (one or more) of KV entry undeleted - HTTP 204', async () => {
     const data = await vault.undeleteVersionsKVSecret(token, SECRET1.name, [2, 3]);
@@ -126,21 +113,18 @@ test('the result is the versions of KV entry destroyed - HTTP 204', async () => 
     console.log('destroyVersionsKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is the list of keys for a KV entry', async () => {
     const data = await vault.listKVSecret(token, SECRET1.name);
     console.log('listKVSecret:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is the AppRole secret-id information', async () => {
     const data = await vault.readAppRoleSecretId(token, AppRole, SecretId);
     console.log('readAppRoleSecretId output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is new AppRole secret-id generated', async () => {
     const data = await vault.generateAppRoleSecretId(token, AppRole, JSON.stringify(Metadata));
@@ -148,13 +132,11 @@ test('the result is new AppRole secret-id generated', async () => {
     newSecretId = data.secret_id;
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 test('the result is an AppRole secret-id destroyed - HTTP 204', async () => {
     const data = await vault.destroyAppRoleSecretId(token, AppRole, newSecretId);
     console.log('generateAppRoleSecretId output:\n',data);
 	return expect(data).toBeDefined();
 });
-//TODO: Improve expect assertion
 
 console.log("\n \n \n.................................\n");

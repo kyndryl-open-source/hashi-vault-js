@@ -93,6 +93,330 @@ class Vault {
   }
 
   /**
+  * @returns {Promise}
+  */
+  async sealStatus(){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const getOptions = {
+        url: config.sysSealStatus,
+        method: 'get'
+      };
+      this.instance(getOptions).then(function(response){
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
+  * @param {String} sudoToken
+  * @returns {Promise}
+  */
+  async sysHostInfo(sudoToken){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const getOptions = {
+        url: config.sysHostInfo,
+        method: 'get',
+        headers: {
+          "X-Vault-Token": sudoToken
+        }
+      };
+      this.instance(getOptions).then(function(response){
+        if (response.data) {
+          message = response.data.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
+  * @param {String} sudoToken
+  * @param {String} token
+  * @param {[String]} paths
+  * @returns {Promise}
+  */
+  async sysCapabilities(sudoToken, token, paths){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const postOptions = {
+        url: config.sysCapabilities,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": sudoToken
+        },
+        data: {
+          token: token,
+          paths: paths
+        }
+      };
+      this.instance(postOptions).then(function(response){
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {[String]} paths
+  * @returns {Promise}
+  */
+  async sysCapabilitiesSelf(token, paths){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const postOptions = {
+        url: config.sysCapabilitiesSelf,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          paths: paths
+        }
+      };
+      this.instance(postOptions).then(function(response){
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
+  * @param {String} sudoToken
+  * @param {Const} type
+  * @returns {Promise}
+  */
+  async sysInternalCounters(sudoToken, type){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      if (config.sysCounterTypes.includes(type)) {
+        const getOptions = {
+          url: `${config.sysInternalCounters}/${type}`,
+          method: 'get',
+          headers: {
+            "X-Vault-Token": sudoToken
+          }
+        };
+        this.instance(getOptions).then(function(response){
+          if (response.data) {
+            message = response.data.data;
+          } else {
+            message['status']= response.status;
+            message['statusText'] = response.statusText;
+          }
+          resolve(message);
+        }).catch(function(error){
+          if (error.response){
+            message['status']= error.response.status;
+            message['data']= error.response.data;
+            message['headers']= error.response.headers;
+          } else if (error.request) {
+            message = error.request;
+          } else {
+            message = error.message;
+          }
+          reject(message);
+        });
+      } else {
+        message['status']= 400;
+        message['statusText'] = 'Bad request: Counter type error';
+        reject(message);
+      }
+    });
+  }
+
+  /**
+  * @param {String} sudoToken
+  * @param {Const} type
+  * @returns {Promise}
+  */
+  async sysMetrics(sudoToken, format){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const getOptions = {
+        url: '',
+        method: 'get',
+        headers: {
+          "X-Vault-Token": sudoToken
+        }
+      };
+      if (config.sysMetricFormats.includes(format)) {
+        getOptions.url= `${config.sysMetrics}?format=${format}`;
+      }
+      else {
+        getOptions.url= `${config.sysMetrics}`;
+      }
+      this.instance(getOptions).then(function(response){
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      }) ;
+    });
+  }
+
+  /**
+  * @param {String} sudoToken
+  * @returns {Promise}
+  */
+  async sysSeal(sudoToken){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const putOptions = {
+        url: config.sysSeal,
+        method: 'put',
+        headers: {
+          "X-Vault-Token": sudoToken
+        }
+      };
+      this.instance(putOptions).then(function(response){
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
+  * @param {String} sudoToken
+  * @param {String} key
+  * @param {Boolean} reset
+  * @param {Boolean} migrate
+  * @returns {Promise}
+  */
+  async sysUnseal(sudoToken, key, reset, migrate){
+    return new Promise((resolve, reject) => {
+      let message = {};
+      const putOptions = {
+        url: config.sysUnseal,
+        method: 'put',
+        headers: {
+          "X-Vault-Token": sudoToken
+        },
+        data: {
+          "key": key,
+          "reset": reset,
+          "migrate": migrate
+        }
+      };
+      this.instance(putOptions).then(function(response){
+        if (response.data) {
+          message = response.data;
+        } else {
+          message['status']= response.status;
+          message['statusText'] = response.statusText;
+        }
+        resolve(message);
+      }).catch(function(error){
+        if (error.response){
+          message['status']= error.response.status;
+          message['data']= error.response.data;
+          message['headers']= error.response.headers;
+        } else if (error.request) {
+          message = error.request;
+        } else {
+          message = error.message;
+        }
+        reject(message);
+      });
+    });
+  }
+
+  /**
   * @param {String} roleId
   * @param {String} secretId
   * @returns {Object}

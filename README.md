@@ -11,7 +11,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 * Node v10.x
 * npm v6.x
-* Hashicorp Vault v1.4.x
+* Hashicorp Vault v1.4.x, v1.5.x
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
@@ -24,6 +24,11 @@ This module provides a set of functions to help **JavaScript** Developers workin
 `npm uninstall hashi-corp-js`
 
 ### Change Log
+
+* `0.3.1`
+  * Added /sys helper functions `sysHostInfo`, `sysCapabilities`, `sysCapabilitiesSelf`, `sysInternalCounters`, and `sysMetrics`
+  * Added /sys Seal functions `sealStatus`, `sysSeal`, and `sysUnseal`
+  * Refactored and added to test suite
 
 * `0.2.3`
   * Fixed security vulnerability on lodash dependency
@@ -147,6 +152,85 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 ```javascript
 /**
+* @returns {Promise}
+*/
+```
+
+* sysHostInfo(sudoToken)
+
+```javascript
+/**
+* @param {String} sudoToken
+* @returns {Promise}
+*/
+```
+
+* sysCapabilities(sudoToken, token, paths)
+
+```javascript
+/**
+* @param {String} sudoToken
+* @param {String} token
+* @param {[String]} paths
+* @returns {Promise}
+*/
+```
+
+* sysCapabilitiesSelf(token, paths)
+
+```javascript
+/**
+* @param {String} token
+* @param {[String]} paths
+* @returns {Promise}
+*/
+```
+
+* sysInternalCounters(sudoToken, type)
+
+```javascript
+/**
+* @param {String} sudoToken
+* @param {Const} type
+* @returns {Promise}
+*/
+```
+
+* sysMetrics(sudoToken, format)
+
+```javascript
+/**
+* @param {String} sudoToken
+* @param {Const} type
+* @returns {Promise}
+*/
+```
+
+* sealStatus()
+
+```javascript
+/**
+* @returns {Promise}
+*/
+```
+
+* sysSeal(sudoToken)
+
+```javascript
+/**
+* @param {String} sudoToken
+* @returns {Promise}
+*/
+```
+
+* sysUnseal(sudoToken, key, reset, migrate)
+
+```javascript
+/**
+* @param {String} sudoToken
+* @param {String} key
+* @param {Boolean} reset
+* @param {Boolean} migrate
 * @returns {Promise}
 */
 ```

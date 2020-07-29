@@ -15,7 +15,17 @@ const config = {
   listPath: 'metadata',
   appRoleLogin: '/auth/approle/login',
   appRolePath: '/auth/approle/role',
-  sysHealth: '/sys/health'
+  sysHealth: '/sys/health',
+  sysSealStatus: '/sys/seal-status',
+  sysHostInfo: '/sys/host-info',
+  sysCapabilities: '/sys/capabilities',
+  sysCapabilitiesSelf: '/sys/capabilities-self',
+  sysInternalCounters: '/sys/internal/counters',
+  sysCounterTypes: [ "requests", "entities", "tokens" ],
+  sysMetrics: '/sys/metrics',
+  sysMetricFormats: [ "prometheus" ],
+  sysSeal: '/sys/seal',
+  sysUnseal: '/sys/unseal'
 };
 
 module.exports = config;
