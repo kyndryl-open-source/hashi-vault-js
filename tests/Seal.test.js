@@ -23,39 +23,36 @@ const vault = new Vault( {
 
 let sealed = false;
 
-console.log(".................................\n \n \n");
 
 //TODO: Improve expected data assertion on all tests
 
 test('the result is status of Vault seal', async () => {
     const data = await vault.sealStatus();
-    console.log(data);
+    //console.log(data);
     sealed = data.sealed;
 	return expect(data).toBeDefined();
 });
 
 test('the result is a sealed Vault', async () => {
     const data = await vault.sysSeal(RootToken);
-    console.log(data);
+    //console.log(data);
   return expect(data).toBeDefined();
 });
 
 test('the result is a accepted unseal key 1 shard', async () => {
     const data = await vault.sysUnseal(RootToken, VaultUnsealKey1, false, false);
-    console.log(data);
+    //console.log(data);
   return expect(data).toBeDefined();
 });
 
 test('the result is a accepted unseal key 2 shard', async () => {
     const data = await vault.sysUnseal(RootToken, VaultUnsealKey2, false, false);
-    console.log(data);
+    //console.log(data);
   return expect(data).toBeDefined();
 });
 
 test('the result is a accepted unseal key 3 shard', async () => {
     const data = await vault.sysUnseal(RootToken, VaultUnsealKey3, false, false);
-    console.log(data);
+    //console.log(data);
   return expect(data).toBeDefined();
 });
-
-console.log("\n \n \n.................................\n");

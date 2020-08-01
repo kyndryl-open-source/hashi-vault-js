@@ -19,38 +19,34 @@ const vault = new Vault( {
     proxy: false
 });
 
-console.log(".................................\n \n \n");
-
 //TODO: Improve expected data assertion on all tests
 
 test('the result is the Vault host info', async () => {
     const data = await vault.sysHostInfo(RootToken);
-    console.log(data);
+    //console.log(data);
 	return expect(data).toBeDefined();
 });
 
 test('the result is the Vault internal counters', async () => {
     const data = await vault.sysInternalCounters(RootToken, 'tokens');
-    console.log(data);
+    //console.log(data);
 	return expect(data).toBeDefined();
 });
 
 test('the result is the Vault system metrics', async () => {
     const data = await vault.sysMetrics(RootToken, 'promotheus');
-    console.log(data);
+    //console.log(data);
 	return expect(data).toBeDefined();
 });
 
 test('the result is the root token capabilities on paths', async () => {
     const data = await vault.sysCapabilities(RootToken, RootToken, Paths);
-    console.log(data);
+    //console.log(data);
 	return expect(data).toBeDefined();
 });
 
 test('the result is the root token capabilities on paths using self', async () => {
     const data = await vault.sysCapabilitiesSelf(RootToken, Paths);
-    console.log(data);
+    //console.log(data);
 	return expect(data).toBeDefined();
 });
-
-console.log("\n \n \n.................................\n");

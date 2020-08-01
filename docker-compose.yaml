@@ -1,7 +1,7 @@
 version: '3'
 services:
   vault:
-    image: vault:1.4.2
+    image: vault:1.5.0
     container_name: my-vault
     ports:
       - "8200:8200"

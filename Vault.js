@@ -35,7 +35,38 @@ const getAxiosInstance = function(baseurl, timeout, agent, proxy) {
   });
 }
 
+// Internal function - parse axios response
+const parseAxiosResponse = function(response){
+  let message = {};
+  if (response.data.data) {
+    message = response.data.data;
+  } else if (response.data.auth){
+    message = response.data.auth;
+  } else if (response.data) {
+    message = response.data;
+  } else {
+    message['status']= response.status;
+    message['statusText'] = response.statusText;
+  }
+  return message;
+}
 
+// Internal function - parse axios error
+const parseAxiosError = function(error){
+  let message = {};
+  if (error.response){
+    message['status']= error.response.status;
+    message['data']= error.response.data;
+    message['headers']= error.response.headers;
+  } else if (error.request) {
+    message = error.request;
+  } else {
+    message = error.message;
+  }
+  return message;
+}
+
+// main class constructor
 class Vault {
   constructor(params) {
     this.https = params.https || false;
@@ -59,35 +90,20 @@ class Vault {
     }
   }
 
+  // /sys API endpoints
   /**
   * @returns {Promise}
   */
   async healthCheck(){
     return new Promise((resolve, reject) => {
-      let message = {};
-      const getOptions = {
+      const Options = {
         url: config.sysHealth,
         method: 'get'
       };
-      this.instance(getOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -97,30 +113,14 @@ class Vault {
   */
   async sealStatus(){
     return new Promise((resolve, reject) => {
-      let message = {};
-      const getOptions = {
+      const Options = {
         url: config.sysSealStatus,
         method: 'get'
       };
-      this.instance(getOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -131,33 +131,17 @@ class Vault {
   */
   async sysHostInfo(sudoToken){
     return new Promise((resolve, reject) => {
-      let message = {};
-      const getOptions = {
+      const Options = {
         url: config.sysHostInfo,
         method: 'get',
         headers: {
           "X-Vault-Token": sudoToken
         }
       };
-      this.instance(getOptions).then(function(response){
-        if (response.data) {
-          message = response.data.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -170,8 +154,7 @@ class Vault {
   */
   async sysCapabilities(sudoToken, token, paths){
     return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
+      const Options = {
         url: config.sysCapabilities,
         method: 'post',
         headers: {
@@ -182,25 +165,10 @@ class Vault {
           paths: paths
         }
       };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -212,8 +180,7 @@ class Vault {
   */
   async sysCapabilitiesSelf(token, paths){
     return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
+      const Options = {
         url: config.sysCapabilitiesSelf,
         method: 'post',
         headers: {
@@ -223,25 +190,10 @@ class Vault {
           paths: paths
         }
       };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -255,32 +207,17 @@ class Vault {
     return new Promise((resolve, reject) => {
       let message = {};
       if (config.sysCounterTypes.includes(type)) {
-        const getOptions = {
+        const Options = {
           url: `${config.sysInternalCounters}/${type}`,
           method: 'get',
           headers: {
             "X-Vault-Token": sudoToken
           }
         };
-        this.instance(getOptions).then(function(response){
-          if (response.data) {
-            message = response.data.data;
-          } else {
-            message['status']= response.status;
-            message['statusText'] = response.statusText;
-          }
-          resolve(message);
+        this.instance(Options).then(function(response){
+          resolve(parseAxiosResponse(response));
         }).catch(function(error){
-          if (error.response){
-            message['status']= error.response.status;
-            message['data']= error.response.data;
-            message['headers']= error.response.headers;
-          } else if (error.request) {
-            message = error.request;
-          } else {
-            message = error.message;
-          }
-          reject(message);
+          reject(parseAxiosError(error));
         });
       } else {
         message['status']= 400;
@@ -297,8 +234,7 @@ class Vault {
   */
   async sysMetrics(sudoToken, format){
     return new Promise((resolve, reject) => {
-      let message = {};
-      const getOptions = {
+      const Options = {
         url: '',
         method: 'get',
         headers: {
@@ -306,30 +242,15 @@ class Vault {
         }
       };
       if (config.sysMetricFormats.includes(format)) {
-        getOptions.url= `${config.sysMetrics}?format=${format}`;
+        Options.url= `${config.sysMetrics}?format=${format}`;
       }
       else {
-        getOptions.url= `${config.sysMetrics}`;
+        Options.url= `${config.sysMetrics}`;
       }
-      this.instance(getOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       }) ;
     });
   }
@@ -340,33 +261,17 @@ class Vault {
   */
   async sysSeal(sudoToken){
     return new Promise((resolve, reject) => {
-      let message = {};
-      const putOptions = {
+      const Options = {
         url: config.sysSeal,
         method: 'put',
         headers: {
           "X-Vault-Token": sudoToken
         }
       };
-      this.instance(putOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -380,8 +285,7 @@ class Vault {
   */
   async sysUnseal(sudoToken, key, reset, migrate){
     return new Promise((resolve, reject) => {
-      let message = {};
-      const putOptions = {
+      const Options = {
         url: config.sysUnseal,
         method: 'put',
         headers: {
@@ -393,29 +297,378 @@ class Vault {
           "migrate": migrate
         }
       };
-      this.instance(putOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
 
+  // Token auth method API endpoints
+  /**
+  * @param {String} vaultToken
+  * @param {String} roleName
+  * @param {[String]} policies
+  * @param {Object} meta
+  * @param {Boolean} noParent
+  * @param {Boolean} noDefaultPolicy
+  * @param {Boolean} renewable
+  * @param {String} ttl
+  * @param {String} type
+  * @param {String} explicitMaxTtl
+  * @param {String} displayName
+  * @param {Integer} numUses
+  * @param {String} period
+  * @param {String} entityAlias
+  * @returns {Promise}
+  */
+  async createToken(vaultToken, id, roleName, policies, meta, noParent,
+    noDefaultPolicy, renewable, ttl, type, explicitMaxTtl, displayName,
+    numUses, period, entityAlias) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenCreate,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": vaultToken
+        },
+        data: {
+          id: id || null,
+          policies: policies || null,
+          meta: meta || null,
+          no_parent: noParent || false,
+          no_default_policy: noDefaultPolicy || false,
+          renewable: renewable || true,
+          ttl: ttl || null,
+          type: type || 'service',
+          explicit_max_ttl: explicitMaxTtl || null,
+          display_name: displayName || '',
+          num_uses: numUses || 0,
+          period: period || null,
+          entity_alias: entityAlias || null
+        }
+      };
+      if (roleName) {
+        Options.url = `${config.tokenCreate}/${roleName}`;
+      }
+      //console.log(Options.data);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  //createToken encapsulations
+  /**
+  * @param {String} vaultToken
+  * @param {String} roleName
+  * @param {[String]} policies
+  * @param {Boolean} renewable
+  * @param {String} ttl
+  * @returns {Promise}
+  */
+  async createSToken(vaultToken, roleName, policies, renewable, ttl) {
+    const Metadata = {
+      calledFunction: "createSToken"
+    };
+    return await this.createToken(vaultToken, null, roleName, policies,
+      Metadata, false, false, renewable, ttl, 'service', null,
+      null, 0, null, null);
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {String} roleName
+  * @param {[String]} policies
+  * @param {String} ttl
+  * @returns {Promise}
+  */
+  async createBToken(vaultToken, roleName, policies, ttl) {
+    const Metadata = {
+      calledFunction: "createBToken"
+    };
+    return await this.createToken(vaultToken, null, roleName, policies,
+      Metadata, false, false, false, ttl, 'batch', null, null,
+      0, null, null);
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {[String]} policies
+  * @param {Boolean} renewable
+  * @param {String} ttl
+  * @returns {Promise}
+  */
+  async createOrphanSToken(vaultToken, policies, renewable, ttl) {
+    const Metadata = {
+      calledFunction: "createOrphanSToken"
+    };
+    return await this.createToken(vaultToken, null, null, policies,
+      Metadata, true, false, renewable, ttl, 'service', null,
+      null, 0, null, null);
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {[String]} policies
+  * @param {String} ttl
+  * @returns {Promise}
+  */
+  async createOrphanBToken(vaultToken, policies, ttl) {
+    const Metadata = {
+      calledFunction: "createOrphanBToken"
+    };
+    return await this.createToken(vaultToken, null, null, policies,
+      Metadata, true, false, false, ttl, 'batch', null,
+      null, 0, null, null);
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {String} clientToken
+  * @returns {Promise}
+  */
+  async revokeToken(vaultToken, clientToken) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenRevoke,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": vaultToken
+        },
+        data: {
+          token: clientToken
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} clientToken
+  * @returns {Promise}
+  */
+  async revokeSelfToken(clientToken) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenRevokeSelf,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": clientToken
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {String} clientToken
+  * @returns {Promise}
+  */
+  async lookupToken(vaultToken, clientToken) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenLookup,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": vaultToken
+        },
+        data: {
+          token: clientToken
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} clientToken
+  * @returns {Promise}
+  */
+  async lookupSelfToken(clientToken) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenLookupSelf,
+        method: 'get',
+        headers: {
+          "X-Vault-Token": clientToken
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {String} clientToken
+  * @param {String} increment
+  * @returns {Promise}
+  */
+  async renewToken(vaultToken, clientToken, increment) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenRenew,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": vaultToken
+        },
+        data: {
+          token: clientToken,
+          increment: increment || null
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} clientToken
+  * @param {String} increment
+  * @returns {Promise}
+  */
+  async renewSelfToken(clientToken, increment) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenRenewSelf,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": clientToken
+        },
+        data: {
+          increment: increment || null
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} sudoToken
+  * @returns {Promise}
+  */
+  async listAccessors(sudoToken) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenListAccessors,
+        method: 'list',
+        headers: {
+          "X-Vault-Token": sudoToken
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {String} accessor
+  * @returns {Promise}
+  */
+  async lookupAccessor(vaultToken, accessor) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenLookupAccessor,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": vaultToken
+        },
+        data: {
+          accessor: accessor
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {String} accessor
+  * @param {String} increment
+  * @returns {Promise}
+  */
+  async renewAccessor(vaultToken, accessor, increment) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenRenewAccessor,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": vaultToken
+        },
+        data: {
+          accessor: accessor,
+          increment: increment || null
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} vaultToken
+  * @param {String} accessor
+  * @returns {Promise}
+  */
+  async revokeAccessor(vaultToken, accessor) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: config.tokenRevokeAccessor,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": vaultToken
+        },
+        data: {
+          accessor: accessor
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  // AppRole auth method API endpoints
   /**
   * @param {String} roleId
   * @param {String} secretId
@@ -423,8 +676,7 @@ class Vault {
   */
   async loginWithAppRole(roleId, secretId) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
+      const Options = {
         url: config.appRoleLogin,
         method: 'post',
         data: {
@@ -432,65 +684,114 @@ class Vault {
           secret_id: secretId
         }
       };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data.auth;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
 
   /**
   * @param {String} token
+  * @param {String} appRole
+  * @param {String} metadata
+  * @returns {Promise}
+  */
+  async generateAppRoleSecretId(token, appRole, metadata) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.appRolePath}/${appRole}/secret-id`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          "metadata": metadata
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} appRole
+  * @param {String} secretId
+  * @returns {Promise}
+  */
+  async readAppRoleSecretId(token, appRole, secretId) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.appRolePath}/${appRole}/secret-id/lookup`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          "secret_id": secretId
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} appRole
+  * @param {String} secretId
+  * @returns {Promise}
+  */
+  async destroyAppRoleSecretId(token, appRole, secretId) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.appRolePath}/${appRole}/secret-id/destroy`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          "secret_id": secretId
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  // KV secret engine API endpoints
+  /**
+  * @param {String} token
   * @returns {Promise}
   */
   async readKVEngineConfig(token) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const getOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.enginePath}`,
         method: 'get',
         headers: {
           "X-Vault-Token": token
         }
       };
-      this.instance(getOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
+
   /**
   * @param {String} token
   * @param {String} name
@@ -499,8 +800,7 @@ class Vault {
   */
   async createKVSecret(token, name, secrets) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.createPath}/${name}`,
         method: 'post',
         headers: {
@@ -513,25 +813,10 @@ class Vault {
           data: secrets
         }
       };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -545,8 +830,7 @@ class Vault {
   */
   async updateKVSecret(token, name, secrets, version) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.updatePath}/${name}`,
         method: 'post',
         headers: {
@@ -559,25 +843,10 @@ class Vault {
           data: secrets
         }
       };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -590,34 +859,18 @@ class Vault {
   */
   async readKVSecret(token, name, version) {
     return new Promise((resolve, reject) => {
-      let message = {};
       const suffix = version ? `?version=${version}` : "";
-      const getOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.readPath}/${name}${suffix}`,
         method: 'get',
         headers: {
           "X-Vault-Token": token
         }
       };
-      this.instance(getOptions).then(function(response){
-        if (response.data) {
-          message = response.data.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -629,33 +882,17 @@ class Vault {
   */
   async deleteLatestVerKVSecret(token, name) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const deleteOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.lvDeletePath}/${name}`,
         method: 'delete',
         headers: {
           "X-Vault-Token": token
         }
       };
-      this.instance(deleteOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -668,8 +905,7 @@ class Vault {
   */
   async deleteVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.deletePath}/${name}`,
         method: 'post',
         headers: {
@@ -679,25 +915,10 @@ class Vault {
           "versions": versions
         }
       };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -710,8 +931,7 @@ class Vault {
   */
   async undeleteVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.undeletePath}/${name}`,
         method: 'post',
         headers: {
@@ -721,25 +941,10 @@ class Vault {
           "versions": versions
         }
       };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -752,8 +957,7 @@ class Vault {
   */
   async destroyVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.destroyPath}/${name}`,
         method: 'post',
         headers: {
@@ -763,25 +967,10 @@ class Vault {
           "versions": versions
         }
       };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }
@@ -793,159 +982,17 @@ class Vault {
   */
   async listKVSecret(token, name) {
     return new Promise((resolve, reject) => {
-      let message = {};
-      const getOptions = {
+      const Options = {
         url: `/${this.rootPath}/${config.listPath}/${name}/?=list=true`,
         method: 'get',
         headers: {
           "X-Vault-Token": token
         }
       };
-      this.instance(getOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
       }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} appRole
-  * @param {String} metadata
-  * @returns {Promise}
-  */
-  async generateAppRoleSecretId(token, appRole, metadata) {
-    return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
-        url: `${config.appRolePath}/${appRole}/secret-id`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "metadata": metadata
-        }
-      };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
-      }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} appRole
-  * @param {String} secretId
-  * @returns {Promise}
-  */
-  async readAppRoleSecretId(token, appRole, secretId) {
-    return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
-        url: `${config.appRolePath}/${appRole}/secret-id/lookup`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "secret_id": secretId
-        }
-      };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
-      }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} appRole
-  * @param {String} secretId
-  * @returns {Promise}
-  */
-  async destroyAppRoleSecretId(token, appRole, secretId) {
-    return new Promise((resolve, reject) => {
-      let message = {};
-      const postOptions = {
-        url: `${config.appRolePath}/${appRole}/secret-id/destroy`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "secret_id": secretId
-        }
-      };
-      this.instance(postOptions).then(function(response){
-        if (response.data) {
-          message = response.data;
-        } else {
-          message['status']= response.status;
-          message['statusText'] = response.statusText;
-        }
-        resolve(message);
-      }).catch(function(error){
-        if (error.response){
-          message['status']= error.response.status;
-          message['data']= error.response.data;
-          message['headers']= error.response.headers;
-        } else if (error.request) {
-          message = error.request;
-        } else {
-          message = error.message;
-        }
-        reject(message);
+        reject(parseAxiosError(error));
       });
     });
   }

@@ -25,6 +25,16 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.3.3`
+  * Added token auth method functions:
+    * `createToken` (`createSToken`, `createBToken`, `createOrphanSToken`, `createOrphanBToken`)
+    * `listAccessors`, `lookupAccessor`, `renewAccessor` and `revokeAccessor`
+    * `renewToken` and `renewTokenSelf`
+    * `lookupToken` and `lookupSelfToken`
+    * `revokeToken` and `revokeSelfToken`
+    * `listAccessors`, `lookupAccessor`, `renewAccessor` and `revokeAccessor`
+  * Refactored Axios options, and response parsing, and returned error parsing
+
 * `0.3.1`
   * Added /sys helper functions `sysHostInfo`, `sysCapabilities`, `sysCapabilitiesSelf`, `sysInternalCounters`, and `sysMetrics`
   * Added /sys Seal functions `sealStatus`, `sysSeal`, and `sysUnseal`
@@ -148,6 +158,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 ### List of functions available
 
+**/sys API endpoints - General**
+
 * healthCheck()
 
 ```javascript
@@ -206,6 +218,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
+**/sys API endpoints - SEAL operations**
+
 * sealStatus()
 
 ```javascript
@@ -235,6 +249,181 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
+**Token auth method API endpoints - /auth/token**
+
+* createToken(vaultToken, id, roleName, policies, meta, noParent,
+  noDefaultPolicy, renewable, ttl, type, explicitMaxTtl, displayName,
+  numUses, period, entityAlias)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} roleName
+* @param {[String]} policies
+* @param {Object} meta
+* @param {Boolean} noParent
+* @param {Boolean} noDefaultPolicy
+* @param {Boolean} renewable
+* @param {String} ttl
+* @param {String} type
+* @param {String} explicitMaxTtl
+* @param {String} displayName
+* @param {Integer} numUses
+* @param {String} period
+* @param {String} entityAlias
+* @returns {Promise}
+*/
+```
+
+* createSToken(vaultToken, roleName, policies, renewable, ttl)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} roleName
+* @param {[String]} policies
+* @param {Boolean} renewable
+* @param {String} ttl
+* @returns {Promise}
+*/
+```
+
+* createBToken(vaultToken, roleName, policies, ttl)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} roleName
+* @param {[String]} policies
+* @param {String} ttl
+* @returns {Promise}
+*/
+```
+
+* createOrphanSToken(vaultToken, policies, renewable, ttl)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {[String]} policies
+* @param {Boolean} renewable
+* @param {String} ttl
+* @returns {Promise}
+*/
+```
+
+* createOrphanBToken(vaultToken, policies, ttl)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {[String]} policies
+* @param {String} ttl
+* @returns {Promise}
+*/
+```
+
+* revokeToken(vaultToken, clientToken)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} clientToken
+* @returns {Promise}
+*/
+```
+
+* revokeSelfToken(clientToken)
+
+```javascript
+/**
+* @param {String} clientToken
+* @returns {Promise}
+*/
+```
+
+* lookupToken(vaultToken, clientToken)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} clientToken
+* @returns {Promise}
+*/
+```
+
+* lookupSelfToken(clientToken)
+
+```javascript
+/**
+* @param {String} clientToken
+* @returns {Promise}
+*/
+```
+
+* renewToken(vaultToken, clientToken, increment)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} clientToken
+* @param {String} increment
+* @returns {Promise}
+*/
+```
+
+* renewSelfToken(clientToken, increment)
+
+```javascript
+/**
+* @param {String} clientToken
+* @param {String} increment
+* @returns {Promise}
+*/
+```
+
+* listAccessors(sudoToken)
+
+```javascript
+/**
+* @param {String} sudoToken
+* @returns {Promise}
+*/
+```
+
+* lookupAccessor(vaultToken, accessor)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} accessor
+* @returns {Promise}
+*/
+```
+
+* renewAccessor(vaultToken, accessor, increment)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} accessor
+* @param {String} increment
+* @returns {Promise}
+*/
+```
+
+* revokeAccessor(vaultToken, accessor)
+
+```javascript
+/**
+* @param {String} vaultToken
+* @param {String} accessor
+* @returns {Promise}
+*/
+```
+
+**AppRole auth method API endpoints - /auth/approle**
+
 * loginWithAppRole(roleId, secretId)
 
 ```javascript
@@ -243,7 +432,42 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} secretId
 * @returns {Object}
 */
-```  
+```
+
+* generateAppRoleSecretId(token, appRole, metadata)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} appRole
+* @param {String} metadata
+* @returns {Promise}
+*/
+```
+
+* readAppRoleSecretId(token, appRole, secretId)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} appRole
+* @param {String} secretId
+* @returns {Promise}
+*/
+```
+
+* destroyAppRoleSecretId(token, appRole, secretId)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} appRole
+* @param {String} secretId
+* @returns {Promise}
+*/
+```
+
+**KV v2 secret engine API endpoints**
 
 * readKVEngineConfig(token)
 
@@ -341,38 +565,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
-* generateAppRoleSecretId(token, appRole, metadata)
 
-```javascript
-/**
-* @param {String} token
-* @param {String} appRole
-* @param {String} metadata
-* @returns {Promise}
-*/
-```
-
-* readAppRoleSecretId(token, appRole, secretId)
-
-```javascript
-/**
-* @param {String} token
-* @param {String} appRole
-* @param {String} secretId
-* @returns {Promise}
-*/
-```
-
-* destroyAppRoleSecretId(token, appRole, secretId)
-
-```javascript
-/**
-* @param {String} token
-* @param {String} appRole
-* @param {String} secretId
-* @returns {Promise}
-*/
-```
 
 ### Limitations
 
@@ -381,6 +574,8 @@ The following Hashicorp Vault API endpoints are currently covered:
 * [System Backend](https://www.vaultproject.io/api-docs/system) - Partially
 
 * [AppRole Auth Method](https://www.vaultproject.io/api-docs/auth/approle) - Partially
+
+* [Token Auth Method](https://www.vaultproject.io/api-docs/auth/token) - Most of them
 
 * [KV Secrets Engine - Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) - Full
 

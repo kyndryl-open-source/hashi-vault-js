@@ -25,7 +25,20 @@ const config = {
   sysMetrics: '/sys/metrics',
   sysMetricFormats: [ "prometheus" ],
   sysSeal: '/sys/seal',
-  sysUnseal: '/sys/unseal'
+  sysUnseal: '/sys/unseal',
+  tokenCreate: '/auth/token/create',
+  tokenCreateOrphan: '/auth/token/create-orphan',
+  tokenCreateRole: '/auth/token/create',
+  tokenRevoke: '/auth/token/revoke',
+  tokenRevokeSelf: '/auth/token/revoke-self',
+  tokenLookup:'/auth/token/lookup',
+  tokenLookupSelf:'/auth/token/lookup-self',
+  tokenRenew: '/auth/token/renew',
+  tokenRenewSelf: '/auth/token/renew-self',
+  tokenListAccessors: '/auth/token/accessors',
+  tokenLookupAccessor: '/auth/token/lookup-accessor',
+  tokenRenewAccessor: '/auth/token/renew-accessor',
+  tokenRevokeAccessor: '/auth/token/revoke-accessor'
 };
 
 module.exports = config;
