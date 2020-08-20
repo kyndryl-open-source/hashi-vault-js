@@ -92,7 +92,7 @@ class Vault {
 
   // /sys API endpoints
   /**
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async healthCheck(){
     return new Promise((resolve, reject) => {
@@ -109,7 +109,7 @@ class Vault {
   }
 
   /**
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async sealStatus(){
     return new Promise((resolve, reject) => {
@@ -127,7 +127,7 @@ class Vault {
 
   /**
   * @param {String} sudoToken
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async sysHostInfo(sudoToken){
     return new Promise((resolve, reject) => {
@@ -150,7 +150,7 @@ class Vault {
   * @param {String} sudoToken
   * @param {String} token
   * @param {[String]} paths
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async sysCapabilities(sudoToken, token, paths){
     return new Promise((resolve, reject) => {
@@ -176,7 +176,7 @@ class Vault {
   /**
   * @param {String} token
   * @param {[String]} paths
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async sysCapabilitiesSelf(token, paths){
     return new Promise((resolve, reject) => {
@@ -201,7 +201,7 @@ class Vault {
   /**
   * @param {String} sudoToken
   * @param {Const} type
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async sysInternalCounters(sudoToken, type){
     return new Promise((resolve, reject) => {
@@ -230,7 +230,7 @@ class Vault {
   /**
   * @param {String} sudoToken
   * @param {Const} type
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async sysMetrics(sudoToken, format){
     return new Promise((resolve, reject) => {
@@ -257,7 +257,7 @@ class Vault {
 
   /**
   * @param {String} sudoToken
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async sysSeal(sudoToken){
     return new Promise((resolve, reject) => {
@@ -281,7 +281,7 @@ class Vault {
   * @param {String} key
   * @param {Boolean} reset
   * @param {Boolean} migrate
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async sysUnseal(sudoToken, key, reset, migrate){
     return new Promise((resolve, reject) => {
@@ -321,7 +321,7 @@ class Vault {
   * @param {Integer} numUses
   * @param {String} period
   * @param {String} entityAlias
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async createToken(vaultToken, id, roleName, policies, meta, noParent,
     noDefaultPolicy, renewable, ttl, type, explicitMaxTtl, displayName,
@@ -368,7 +368,7 @@ class Vault {
   * @param {[String]} policies
   * @param {Boolean} renewable
   * @param {String} ttl
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async createSToken(vaultToken, roleName, policies, renewable, ttl) {
     const Metadata = {
@@ -384,7 +384,7 @@ class Vault {
   * @param {String} roleName
   * @param {[String]} policies
   * @param {String} ttl
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async createBToken(vaultToken, roleName, policies, ttl) {
     const Metadata = {
@@ -400,7 +400,7 @@ class Vault {
   * @param {[String]} policies
   * @param {Boolean} renewable
   * @param {String} ttl
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async createOrphanSToken(vaultToken, policies, renewable, ttl) {
     const Metadata = {
@@ -415,7 +415,7 @@ class Vault {
   * @param {String} vaultToken
   * @param {[String]} policies
   * @param {String} ttl
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async createOrphanBToken(vaultToken, policies, ttl) {
     const Metadata = {
@@ -429,7 +429,7 @@ class Vault {
   /**
   * @param {String} vaultToken
   * @param {String} clientToken
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async revokeToken(vaultToken, clientToken) {
     return new Promise((resolve, reject) => {
@@ -453,7 +453,7 @@ class Vault {
 
   /**
   * @param {String} clientToken
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async revokeSelfToken(clientToken) {
     return new Promise((resolve, reject) => {
@@ -475,7 +475,7 @@ class Vault {
   /**
   * @param {String} vaultToken
   * @param {String} clientToken
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async lookupToken(vaultToken, clientToken) {
     return new Promise((resolve, reject) => {
@@ -499,7 +499,7 @@ class Vault {
 
   /**
   * @param {String} clientToken
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async lookupSelfToken(clientToken) {
     return new Promise((resolve, reject) => {
@@ -522,7 +522,7 @@ class Vault {
   * @param {String} vaultToken
   * @param {String} clientToken
   * @param {String} increment
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async renewToken(vaultToken, clientToken, increment) {
     return new Promise((resolve, reject) => {
@@ -548,7 +548,7 @@ class Vault {
   /**
   * @param {String} clientToken
   * @param {String} increment
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async renewSelfToken(clientToken, increment) {
     return new Promise((resolve, reject) => {
@@ -572,7 +572,7 @@ class Vault {
 
   /**
   * @param {String} sudoToken
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async listAccessors(sudoToken) {
     return new Promise((resolve, reject) => {
@@ -594,7 +594,7 @@ class Vault {
   /**
   * @param {String} vaultToken
   * @param {String} accessor
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async lookupAccessor(vaultToken, accessor) {
     return new Promise((resolve, reject) => {
@@ -620,7 +620,7 @@ class Vault {
   * @param {String} vaultToken
   * @param {String} accessor
   * @param {String} increment
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async renewAccessor(vaultToken, accessor, increment) {
     return new Promise((resolve, reject) => {
@@ -646,7 +646,7 @@ class Vault {
   /**
   * @param {String} vaultToken
   * @param {String} accessor
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async revokeAccessor(vaultToken, accessor) {
     return new Promise((resolve, reject) => {
@@ -696,7 +696,7 @@ class Vault {
   * @param {String} token
   * @param {String} appRole
   * @param {String} metadata
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async generateAppRoleSecretId(token, appRole, metadata) {
     return new Promise((resolve, reject) => {
@@ -722,7 +722,7 @@ class Vault {
   * @param {String} token
   * @param {String} appRole
   * @param {String} secretId
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async readAppRoleSecretId(token, appRole, secretId) {
     return new Promise((resolve, reject) => {
@@ -748,7 +748,7 @@ class Vault {
   * @param {String} token
   * @param {String} appRole
   * @param {String} secretId
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async destroyAppRoleSecretId(token, appRole, secretId) {
     return new Promise((resolve, reject) => {
@@ -773,7 +773,7 @@ class Vault {
   // KV secret engine API endpoints
   /**
   * @param {String} token
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async readKVEngineConfig(token) {
     return new Promise((resolve, reject) => {
@@ -796,7 +796,7 @@ class Vault {
   * @param {String} token
   * @param {String} name
   * @param {Object} secrets
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async createKVSecret(token, name, secrets) {
     return new Promise((resolve, reject) => {
@@ -826,7 +826,7 @@ class Vault {
   * @param {String} name
   * @param {Object} secrets
   * @param {Number} version
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async updateKVSecret(token, name, secrets, version) {
     return new Promise((resolve, reject) => {
@@ -855,7 +855,7 @@ class Vault {
   * @param {String} token
   * @param {String} name
   * @param {Number} version
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async readKVSecret(token, name, version) {
     return new Promise((resolve, reject) => {
@@ -878,7 +878,7 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} name
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async deleteLatestVerKVSecret(token, name) {
     return new Promise((resolve, reject) => {
@@ -900,8 +900,8 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} name
-  * @param {[Number]} versions
-  * @returns {Promise}
+  * @param {[Integer]} versions
+  * @returns {Promise<Object>}
   */
   async deleteVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
@@ -926,8 +926,8 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} name
-  * @param {[Number]} versions
-  * @returns {Promise}
+  * @param {[Integer]} versions
+  * @returns {Promise<Object>}
   */
   async undeleteVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
@@ -952,8 +952,8 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} name
-  * @param {[Number]} versions
-  * @returns {Promise}
+  * @param {[Integer]} versions
+  * @returns {Promise<Object>}
   */
   async destroyVersionsKVSecret(token, name, versions) {
     return new Promise((resolve, reject) => {
@@ -978,7 +978,7 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} name
-  * @returns {Promise}
+  * @returns {Promise<Object>}
   */
   async listKVSecret(token, name) {
     return new Promise((resolve, reject) => {

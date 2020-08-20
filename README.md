@@ -9,7 +9,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ## Requirements (MacOS/Windows)
 
-* Node v10.x
+* Node v10.x, v12.x
 * npm v6.x
 * Hashicorp Vault v1.4.x, v1.5.x
 
@@ -24,6 +24,10 @@ This module provides a set of functions to help **JavaScript** Developers workin
 `npm uninstall hashi-corp-js`
 
 ### Change Log
+
+* `0.3.6`
+  * Upgraded dev environment to node.js v12.x
+  * Fixed functions' interfaces documentation
 
 * `0.3.3`
   * Added token auth method functions:
@@ -89,7 +93,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Module usage
 
-**Note:** This module only implements API client for the Vault KV version 2 secret engine
+**Note:** This package covers some auth methods and KV v2 secret engine. Check `Limitations` section for more details.
 
 ```javascript
 const Vault = require('hashi-vault-js');
@@ -164,7 +168,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 ```javascript
 /**
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -173,9 +177,12 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```javascript
 /**
 * @param {String} sudoToken
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
+
+**Note:** sudoToken is a Vault token that has _sudo_ capability on the `sys/*` path.
+
 
 * sysCapabilities(sudoToken, token, paths)
 
@@ -184,7 +191,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} sudoToken
 * @param {String} token
 * @param {[String]} paths
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -194,7 +201,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {[String]} paths
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -204,7 +211,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} sudoToken
 * @param {Const} type
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -214,7 +221,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} sudoToken
 * @param {Const} type
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -224,7 +231,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 ```javascript
 /**
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -233,7 +240,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```javascript
 /**
 * @param {String} sudoToken
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -245,7 +252,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} key
 * @param {Boolean} reset
 * @param {Boolean} migrate
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -271,9 +278,10 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {Integer} numUses
 * @param {String} period
 * @param {String} entityAlias
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
+**Note:** vaultToken is a Vault token that has _create_ capability on the `auth/token/create` path.
 
 * createSToken(vaultToken, roleName, policies, renewable, ttl)
 
@@ -284,7 +292,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {[String]} policies
 * @param {Boolean} renewable
 * @param {String} ttl
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -296,7 +304,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} roleName
 * @param {[String]} policies
 * @param {String} ttl
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -308,7 +316,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {[String]} policies
 * @param {Boolean} renewable
 * @param {String} ttl
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -319,7 +327,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} vaultToken
 * @param {[String]} policies
 * @param {String} ttl
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -329,7 +337,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} vaultToken
 * @param {String} clientToken
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -338,7 +346,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```javascript
 /**
 * @param {String} clientToken
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -348,7 +356,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} vaultToken
 * @param {String} clientToken
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -357,7 +365,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```javascript
 /**
 * @param {String} clientToken
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -368,7 +376,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} vaultToken
 * @param {String} clientToken
 * @param {String} increment
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -378,7 +386,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} clientToken
 * @param {String} increment
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -387,7 +395,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```javascript
 /**
 * @param {String} sudoToken
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -397,7 +405,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} vaultToken
 * @param {String} accessor
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -408,7 +416,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} vaultToken
 * @param {String} accessor
 * @param {String} increment
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -418,7 +426,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} vaultToken
 * @param {String} accessor
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -441,7 +449,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} token
 * @param {String} appRole
 * @param {String} metadata
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -452,7 +460,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} token
 * @param {String} appRole
 * @param {String} secretId
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -463,7 +471,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} token
 * @param {String} appRole
 * @param {String} secretId
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -474,7 +482,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```javascript
 /**
 * @param {String} token
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -485,7 +493,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} token
 * @param {String} name
 * @param {Object} secrets
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -496,8 +504,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @param {String} token
 * @param {String} name
 * @param {Object} secrets
-* @param {Number} version
-* @returns {Promise}
+* @param {Integer} version
+* @returns {Promise<Object>}
 */
 ```
 
@@ -507,8 +515,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} name
-* @param {Number} version
-* @returns {Promise}
+* @param {Integer} version
+* @returns {Promise<Object>}
 */
 ```
 
@@ -518,7 +526,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} name
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -528,8 +536,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} name
-* @param {[Number]} versions
-* @returns {Promise}
+* @param {[Integer]} versions
+* @returns {Promise<Object>}
 */
 ```
 
@@ -539,8 +547,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} name
-* @param {[Number]} versions
-* @returns {Promise}
+* @param {[Integer]} versions
+* @returns {Promise<Object>}
 */
 ```
 
@@ -550,8 +558,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} name
-* @param {[Number]} versions
-* @returns {Promise}
+* @param {[Integer]} versions
+* @returns {Promise<Object>}
 */
 ```
 
@@ -561,10 +569,9 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} name
-* @returns {Promise}
+* @returns {Promise<Object>}
 */
 ```
-
 
 
 ### Limitations
