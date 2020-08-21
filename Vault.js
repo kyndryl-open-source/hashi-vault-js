@@ -38,10 +38,10 @@ const getAxiosInstance = function(baseurl, timeout, agent, proxy) {
 // Internal function - parse axios response
 const parseAxiosResponse = function(response){
   let message = {};
-  if (response.data.data) {
-    message = response.data.data;
-  } else if (response.data.auth){
+  if (response.data.auth) {
     message = response.data.auth;
+  } else if (response.data.data){
+    message = response.data.data;
   } else if (response.data) {
     message = response.data;
   } else {
@@ -58,10 +58,10 @@ const parseAxiosError = function(error){
     message['status']= error.response.status;
     message['data']= error.response.data;
     message['headers']= error.response.headers;
-  } else if (error.request) {
-    message = error.request;
-  } else {
+  } else if (error.message) {
     message = error.message;
+  } else {
+    message = error.request;
   }
   return message;
 }
@@ -668,7 +668,241 @@ class Vault {
     });
   }
 
+  //
+  // ldap auth method API endpoints
+  //
+
+  /**
+  * @param {String} username
+  * @param {String} password
+  * @returns {Object}
+  */
+  async loginWithLdap(username, password) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapLogin}/${username}`,
+        method: 'post',
+        data: {
+          password: password
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @param {String} policies
+  * @param {String} groups
+  * @returns {Promise<Oject>}
+  */
+  async createLdapUser(token, username, policies, groups) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapCreateUser}/${username}`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          policies: policies,
+          groups: groups
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @param {String} policies
+  * @param {String} groups
+  * @returns {Promise<Oject>}
+  */
+  async updateLdapUser(token, username, policies, groups) {
+    return await this.createLdapUser(token, username, policies, groups);
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} group
+  * @param {String} policies
+  * @returns {Promise<Oject>}
+  */
+  async createLdapGroup(token, group, policies) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapCreateGroup}/${group}`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          policies: policies
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} group
+  * @param {String} policies
+  * @returns {Promise<Oject>}
+  */
+  async updateLdapGroup(token, group, policies) {
+    return await this.createLdapGroup(token, group, policies);
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} group
+  * @returns {Promise<Object>}
+  */
+  async readLdapGroup(token, group) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapReadGroup}/${group}`,
+        method: 'get',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @returns {Promise<Object>}
+  */
+  async readLdapUser(token, username) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapReadUser}/${username}`,
+        method: 'get',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @returns {Promise<Object>}
+  */
+  async listLdapUsers(token) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapListUsers}`,
+        method: 'list',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @returns {Promise<Object>}
+  */
+  async listLdapGroups(token) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapListGroups}`,
+        method: 'list',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @returns {Promise<Object>}
+  */
+  async deleteLdapUser(token, username) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapDeleteUser}/${username}`,
+        method: 'delete',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} group
+  * @returns {Promise<Object>}
+  */
+  async deleteLdapGroup(token, group) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.ldapDeleteGroup}/${group}`,
+        method: 'delete',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  //
   // AppRole auth method API endpoints
+  //
+
   /**
   * @param {String} roleId
   * @param {String} secretId

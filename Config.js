@@ -38,7 +38,16 @@ const config = {
   tokenListAccessors: '/auth/token/accessors',
   tokenLookupAccessor: '/auth/token/lookup-accessor',
   tokenRenewAccessor: '/auth/token/renew-accessor',
-  tokenRevokeAccessor: '/auth/token/revoke-accessor'
+  tokenRevokeAccessor: '/auth/token/revoke-accessor',
+  ldapLogin: '/auth/ldap/login',
+  ldapCreateUser: '/auth/ldap/users',
+  ldapCreateGroup: '/auth/ldap/groups',
+  ldapDeleteUser: '/auth/ldap/users',
+  ldapDeleteGroup: '/auth/ldap/groups',
+  ldapReadUser: '/auth/ldap/users',
+  ldapReadGroup: '/auth/ldap/groups',
+  ldapListUsers: '/auth/ldap/users',
+  ldapListGroups: '/auth/ldap/groups'
 };
 
 module.exports = config;

@@ -5,13 +5,13 @@
 <img alt="NPM" src="https://img.shields.io/npm/l/hashi-vault-js">
 <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/rod4n4m1/hashi-vault-js">
 
-This module provides a set of functions to help **JavaScript** Developers working with Hashicorp Vault to authenticate and access API endpoints using **JavaScript** _promises_.
+This module provides a set of functions to help **JavaScript** Developers working with HashiCorp Vault to authenticate and access API endpoints using **JavaScript** _promises_.
 
 ## Requirements (MacOS/Windows)
 
 * Node v10.x, v12.x
 * npm v6.x
-* Hashicorp Vault v1.4.x, v1.5.x
+* HashiCorp Vault v1.4.x, v1.5.x
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
@@ -24,6 +24,12 @@ This module provides a set of functions to help **JavaScript** Developers workin
 `npm uninstall hashi-corp-js`
 
 ### Change Log
+
+* `0.3.7`
+  * Added LDAP auth method functions
+    * `createLdapUser` (`updateLdapUser`), `readLdapUser`, `deleteLdapUser`, `listLdapUsers`
+    * `createLdapGroup` (`updateLdapGroup`), `readLdapGroup`, `deleteLdapGroup`, `listLdapGroup`
+  * Fixed Axios parsing order for error and response handling
 
 * `0.3.6`
   * Upgraded dev environment to node.js v12.x
@@ -120,6 +126,12 @@ Perform a login on the Vault with role-id/secret-id pair (AppRole login) and get
 
 ```javascript
 const token = await vault.loginWithAppRole(RoleId, SecretId).client_token;
+```
+
+Perform a login on the Vault with LDAP username/password pair and get a valid client token:
+
+```javascript
+const token = await vault.loginWithLdap(Username, Password).client_token;
 ```
 
 Define a function to return secret engine information from the Vault:
@@ -430,6 +442,122 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
+**LDAP auth method API endpoints - /auth/ldap**
+
+* loginWithLdap(username, password)
+
+```javascript
+/**
+* @param {String} username
+* @param {String} password
+* @returns {Object}
+*/
+```
+
+* listLdapUsers(token)
+
+```javascript
+/**
+* @param {String} token
+* @returns {Promise<Object>}
+*/
+```
+
+* createLdapUser(token, username, policies, groups)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @param {String} policies
+* @param {String} groups
+* @returns {Promise<Oject>}
+*/
+```
+
+* readLdapUser(token, username)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @returns {Promise<Object>}
+*/
+```
+
+* updateLdapUser(token, username, policies, groups)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @param {String} policies
+* @param {String} groups
+* @returns {Promise<Oject>}
+*/
+```
+
+* deleteLdapUser(token, username)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @returns {Promise<Object>}
+*/
+```
+
+* listLdapGroups(token)
+
+```javascript
+/**
+* @param {String} token
+* @returns {Promise<Object>}
+*/
+```
+
+* createLdapGroup(token, group, policies)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} group
+* @param {String} policies
+* @returns {Promise<Oject>}
+*/
+```
+
+* readLdapGroup(token, group)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} group
+* @returns {Promise<Object>}
+*/
+```
+
+* updateLdapGroup(token, group, policies)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} group
+* @param {String} policies
+* @returns {Promise<Oject>}
+*/
+```
+
+* deleteLdapGroup(token, group)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} group
+* @returns {Promise<Object>}
+*/
+```
+
 **AppRole auth method API endpoints - /auth/approle**
 
 * loginWithAppRole(roleId, secretId)
@@ -576,11 +704,13 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 ### Limitations
 
-The following Hashicorp Vault API endpoints are currently covered:
+The following HashiCorp Vault API endpoints are currently covered:
 
 * [System Backend](https://www.vaultproject.io/api-docs/system) - Partially
 
 * [AppRole Auth Method](https://www.vaultproject.io/api-docs/auth/approle) - Partially
+
+* [LDAP Auth Method](https://www.vaultproject.io/api-docs/auth/ldap) - Most of it
 
 * [Token Auth Method](https://www.vaultproject.io/api-docs/auth/token) - Most of them
 
@@ -684,11 +814,11 @@ The following Hashicorp Vault API endpoints are currently covered:
 
 ### References
 
-  * Hashicorp Vault Using KV engine [doc](https://learn.hashicorp.com/vault/secrets-management/sm-versioned-kv)
+  * HashiCorp Vault Using KV engine [doc](https://learn.HashiCorp.com/vault/secrets-management/sm-versioned-kv)
 
-  * Hashicorp Vault Docker Hub [page](https://hub.docker.com/_/vault)
+  * HashiCorp Vault Docker Hub [page](https://hub.docker.com/_/vault)
 
-  * Ruan Bekker's Blog [post](https://blog.ruanbekker.com/blog/2019/05/06/setup-hashicorp-vault-server-on-docker-and-cli-guide/)
+  * Ruan Bekker's Blog [post](https://blog.ruanbekker.com/blog/2019/05/06/setup-HashiCorp-vault-server-on-docker-and-cli-guide/)
 
 
 ### Contributing
@@ -704,4 +834,4 @@ This project is licensed under the [IBM Public License 1.0](https://opensource.o
 
 Copyright (c) 2020 IBM
 
-Hashicorp Vault open source is licensed under the [Mozilla Public License 2.0](https://github.com/hashicorp/vault/blob/master/LICENSE).
+HashiCorp Vault open source is licensed under the [Mozilla Public License 2.0](https://github.com/HashiCorp/vault/blob/master/LICENSE).

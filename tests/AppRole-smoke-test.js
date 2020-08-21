@@ -28,35 +28,34 @@ const vault = new Vault( {
     proxy: false
 });
 
-console.log(".................................\n \n \n");
 let token = null;
 
 vault.healthCheck().then(function(data) {
-  console.log('healthCheck output: \n',data);
+  console.log('> healthCheck output: \n',data);
   if (!data.sealed) {
     vault.loginWithAppRole(RoleId, SecretId).then(function(data){
       token = data.client_token;
+      console.log('>> loginWithAppRole output: \n',data);
       vault.readAppRoleSecretId(data.client_token, AppRole, SecretId).then(function(data){
-        console.log('readAppRoleSecretId output: \n',data);
+        console.log('>>> readAppRoleSecretId output: \n',data);
       }).catch(function(readError){
-        console.error('readAppRoleSecretId error: \n',readError);
+        console.error('>>> readAppRoleSecretId error: \n',readError);
       });
       vault.generateAppRoleSecretId(token, AppRole, JSON.stringify(Metadata)).then(function(data){
-        console.log('generateNewAppRoleSecretId output: \n',data);
+        console.log('>>> generateNewAppRoleSecretId output: \n',data);
         let newSecretId = data.secret_id;
         vault.destroyAppRoleSecretId(token, AppRole, newSecretId).then(function(data) {
-          console.log('destroyAppRoleSecretId output: \n',data);
-          console.log("\n \n \n.................................\n");
+          console.log('>>>> destroyAppRoleSecretId output: \n',data);
         }).catch(function(destroyError) {
-          console.error('destroyAppRoleSecretId error: \n',destroyError);
+          console.error('>>>> destroyAppRoleSecretId error: \n',destroyError);
         });
       }).catch(function(generateError) {
-        console.error('generateNewAppRoleSecretId error: \n',generateError);
+        console.error('>>> generateNewAppRoleSecretId error: \n',generateError);
       });
     }).catch(function(loginError){
-        console.error('loginWithAppRole error: \n',loginError);
+        console.error('>> loginWithAppRole error: \n',loginError);
     });
   }
 }).catch(function(healthError){
-  console.error('healthCheck error: \n',healthError);
+  console.error('> healthCheck error: \n',healthError);
 });
