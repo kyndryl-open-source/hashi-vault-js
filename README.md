@@ -308,6 +308,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
+**Note:** This is a pre-parameterized call to createToken.
+
 * createBToken(vaultToken, roleName, policies, ttl)
 
 ```javascript
@@ -319,6 +321,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @returns {Promise<Object>}
 */
 ```
+
+**Note:** This is a pre-parameterized call to createToken.
 
 * createOrphanSToken(vaultToken, policies, renewable, ttl)
 
@@ -332,6 +336,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
+**Note:** This is a pre-parameterized call to createToken.
+
 * createOrphanBToken(vaultToken, policies, ttl)
 
 ```javascript
@@ -342,6 +348,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @returns {Promise<Object>}
 */
 ```
+
+**Note:** This is a pre-parameterized call to createToken.
 
 * revokeToken(vaultToken, clientToken)
 
@@ -497,6 +505,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
+**Note:** This is just an alias to createLdapUser as they share the same API endpoint.
+
 * deleteLdapUser(token, username)
 
 ```javascript
@@ -547,6 +557,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @returns {Promise<Oject>}
 */
 ```
+
+**Note:** This is just an alias to createLdapGroup as they share the same API endpoint.
 
 * deleteLdapGroup(token, group)
 
