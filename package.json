@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/rod4n4m1/hashi-vault-js#readme",
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.20.0"
   },
   "devDependencies": {
     "jest": "^26.0"
