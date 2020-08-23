@@ -30,6 +30,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
     * `createLdapUser` (`updateLdapUser`), `readLdapUser`, `deleteLdapUser`, `listLdapUsers`
     * `createLdapGroup` (`updateLdapGroup`), `readLdapGroup`, `deleteLdapGroup`, `listLdapGroup`
   * Fixed Axios parsing order for error and response handling
+  * Upgraded Axios to `0.20.0`
 
 * `0.3.6`
   * Upgraded dev environment to node.js v12.x
