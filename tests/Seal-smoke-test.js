@@ -29,35 +29,31 @@ const vault = new Vault( {
     proxy: false
 });
 
-console.log(".................................\n \n \n");
-
 vault.sealStatus().then(function(data){
-  console.log('sealStatus output: \n', data);
+  console.log('> sealStatus output: \n', data);
   if (!data.sealed && data.initialized) {
     vault.sysSeal(RootToken).then(function(data){
-      console.log('sysSeal output: \n', data);
+      console.log('> sysSeal output: \n', data);
     }).catch(function(sealError){
-      console.error('sysSeal error: \n',sealError);
+      console.error('> sysSeal error: \n',sealError);
     });
   } else {
     vault.sysUnseal(RootToken, VaultUnsealKey1, false, false).then(function(data){
-      console.log('sysUnseal output: \n', data);
+      console.log('> sysUnseal output: \n', data);
     }).catch(function(unsealError){
-      console.error('sysUnseal error: \n',unsealError);
+      console.error('> sysUnseal error: \n',unsealError);
     });
     vault.sysUnseal(RootToken, VaultUnsealKey2, false, false).then(function(data){
-      console.log('sysUnseal output: \n', data);
+      console.log('> sysUnseal output: \n', data);
     }).catch(function(unsealError){
-      console.error('sysUnseal error: \n',unsealError);
+      console.error('> sysUnseal error: \n',unsealError);
     });
     vault.sysUnseal(RootToken, VaultUnsealKey3, false, false).then(function(data){
-      console.log('sysUnseal output: \n', data);
+      console.log('> sysUnseal output: \n', data);
     }).catch(function(unsealError){
-      console.error('sysUnseal error: \n',unsealError);
+      console.error('> sysUnseal error: \n',unsealError);
     });
   }
 }).catch(function(sealError){
-  console.error('sealStatus error: \n',sealError);
+  console.error('> sealStatus error: \n',sealError);
 });
-
-console.log("\n \n \n.................................\n");
