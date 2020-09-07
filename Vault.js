@@ -697,7 +697,7 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} username
-  * @param {String} policies
+  * @param {[String]} policies
   * @param {String} groups
   * @returns {Promise<Oject>}
   */
@@ -725,7 +725,7 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} username
-  * @param {String} policies
+  * @param {[String]} policies
   * @param {String} groups
   * @returns {Promise<Oject>}
   */
@@ -736,7 +736,7 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} group
-  * @param {String} policies
+  * @param {[String]} policies
   * @returns {Promise<Oject>}
   */
   async createLdapGroup(token, group, policies) {
@@ -762,7 +762,7 @@ class Vault {
   /**
   * @param {String} token
   * @param {String} group
-  * @param {String} policies
+  * @param {[String]} policies
   * @returns {Promise<Oject>}
   */
   async updateLdapGroup(token, group, policies) {
@@ -898,6 +898,191 @@ class Vault {
       });
     });
   }
+
+
+  //
+  // Userpass auth method API endpoints
+  //
+
+  /**
+  * @param {String} username
+  * @param {String} password
+  * @returns {Promise<Object>}
+  */
+  async loginWithUserpass(username, password) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.userpassLogin}/${username}`,
+        method: 'post',
+        data: {
+          password: password
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @param {String} password
+  * @param {[String]} policies
+  * @returns {Promise<Object>}
+  */
+  async createUserpassUser(token, username, password, policies) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.userpassCreateUser}/${username}`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          policies: policies,
+          password: password
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @param {String} password
+  * @param {[String]} policies
+  * @returns {Promise<Object>}
+  */
+  async updateUserpassUser(token, username, password, policies) {
+    return await this.createUserpassUser(token, username, password, policies);
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @returns {Promise<Object>}
+  */
+  async readUserpassUser(token, username) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.userpassReadUser}/${username}`,
+        method: 'get',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @returns {Promise<Object>}
+  */
+  async deleteUserpassUser(token, username) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.userpassDeleteUser}/${username}`,
+        method: 'delete',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @param {String} password
+  * @returns {Promise<Oject>}
+  */
+  async updateUserpassPassword(token, username, password) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.userpassUpdatePass}/${username}/password`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          password: password
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} username
+  * @param {[String]} policies
+  * @returns {Promise<Oject>}
+  */
+  async updateUserpassPolicies(token, username, policies) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.userpassUpdatePass}/${username}/policies`,
+        method: 'post',
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          policies: policies
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @returns {Promise<Object>}
+  */
+  async listUserpassUsers(token) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.userpassListUsers}`,
+        method: 'list',
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+
 
   //
   // AppRole auth method API endpoints

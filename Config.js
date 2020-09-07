@@ -47,7 +47,13 @@ const config = {
   ldapReadUser: '/auth/ldap/users',
   ldapReadGroup: '/auth/ldap/groups',
   ldapListUsers: '/auth/ldap/users',
-  ldapListGroups: '/auth/ldap/groups'
+  ldapListGroups: '/auth/ldap/groups',
+  userpassCreateUser: '/auth/userpass/users',
+  userpassReadUser: '/auth/userpass/users',
+  userpassDeleteUser: '/auth/userpass/users',
+  userpassUpdatePass: '/auth/userpass/users',
+  userpassListUsers: '/auth/userpass/users',
+  userpassLogin: '/auth/userpass/login'
 };
 
 module.exports = config;

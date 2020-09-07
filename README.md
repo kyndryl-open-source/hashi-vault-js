@@ -9,7 +9,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ## Requirements (MacOS/Windows)
 
-* Node v10.x, v12.x
+* Node > v10.x (recommended v12.x)
 * npm v6.x
 * HashiCorp Vault v1.4.x, v1.5.x
 
@@ -25,10 +25,16 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.3.8`
+  * Added Userpass auth method functions
+    * `loginWithUserpass`
+    * `createUserpassUser` (`updateUserpassUser`), `readUserpassUser`, `deleteUserpassUser`, `updateUserpassPassword`, `updateUserpassPolicies`, and `listUserpassUsers`
+
 * `0.3.7`
   * Added LDAP auth method functions
-    * `createLdapUser` (`updateLdapUser`), `readLdapUser`, `deleteLdapUser`, `listLdapUsers`
-    * `createLdapGroup` (`updateLdapGroup`), `readLdapGroup`, `deleteLdapGroup`, `listLdapGroup`
+    * `loginWithLdap`
+    * `createLdapUser` (`updateLdapUser`), `readLdapUser`, `deleteLdapUser`, and `listLdapUsers`
+    * `createLdapGroup` (`updateLdapGroup`), `readLdapGroup`, `deleteLdapGroup`, and `listLdapGroup`
   * Fixed Axios parsing order for error and response handling
   * Upgraded Axios to `0.20.0`
 
@@ -39,7 +45,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 * `0.3.3`
   * Added token auth method functions:
     * `createToken` (`createSToken`, `createBToken`, `createOrphanSToken`, `createOrphanBToken`)
-    * `listAccessors`, `lookupAccessor`, `renewAccessor` and `revokeAccessor`
+    * `listAccessors`, `lookupAccessor`, `renewAccessor`, and `revokeAccessor`
     * `renewToken` and `renewTokenSelf`
     * `lookupToken` and `lookupSelfToken`
     * `revokeToken` and `revokeSelfToken`
@@ -47,8 +53,8 @@ This module provides a set of functions to help **JavaScript** Developers workin
   * Refactored Axios options, and response parsing, and returned error parsing
 
 * `0.3.1`
-  * Added /sys helper functions `sysHostInfo`, `sysCapabilities`, `sysCapabilitiesSelf`, `sysInternalCounters`, and `sysMetrics`
-  * Added /sys Seal functions `sealStatus`, `sysSeal`, and `sysUnseal`
+  * Added *System backend* helper functions `sysHostInfo`, `sysCapabilities`, `sysCapabilitiesSelf`, `sysInternalCounters`, and `sysMetrics`
+  * Added *System backend* Seal functions `sealStatus`, `sysSeal`, and `sysUnseal`
   * Refactored and added to test suite
 
 * `0.2.3`
@@ -69,7 +75,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
   * Removed dependency on fs as it's native now
 
 * `0.1.0`
-  * First working module with KV v2 secret engine
+  * First working module with AppRole auth method and KV v2 secret engine
 
 ### Class Constructor
 
@@ -135,6 +141,12 @@ Perform a login on the Vault with LDAP username/password pair and get a valid cl
 const token = await vault.loginWithLdap(Username, Password).client_token;
 ```
 
+Perform a login on the Vault with Userpass username/password pair and get a valid client token:
+
+```javascript
+const token = await vault.loginWithUserpass(Username, Password).client_token;
+```
+
 Define a function to return secret engine information from the Vault:
 
 ```javascript
@@ -175,7 +187,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 ### List of functions available
 
-**/sys API endpoints - General**
+**System Backend API endpoints - General**
 
 * healthCheck()
 
@@ -238,7 +250,7 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
-**/sys API endpoints - SEAL operations**
+**System Backend API endpoints - SEAL operations**
 
 * sealStatus()
 
@@ -478,9 +490,9 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} username
-* @param {String} policies
+* @param {[String]} policies
 * @param {String} groups
-* @returns {Promise<Oject>}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -500,9 +512,9 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} username
-* @param {String} policies
+* @param {[String]} policies
 * @param {String} groups
-* @returns {Promise<Oject>}
+* @returns {Promise<Object>}
 */
 ```
 
@@ -533,8 +545,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} group
-* @param {String} policies
-* @returns {Promise<Oject>}
+* @param {[String]} policies
+* @returns {Promise<Object>}
 */
 ```
 
@@ -554,8 +566,8 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 /**
 * @param {String} token
 * @param {String} group
-* @param {String} policies
-* @returns {Promise<Oject>}
+* @param {[String]} policies
+* @returns {Promise<Object>}
 */
 ```
 
@@ -570,6 +582,94 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 * @returns {Promise<Object>}
 */
 ```
+
+**Userpass auth method API endpoints - /auth/userpass**
+
+* loginWithUserpass(username, password)
+
+```javascript
+/**
+* @param {String} username
+* @param {String} password
+* @returns {Promise<Object>}
+*/
+```
+
+* createUserpassUser(token, username, password, policies)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @param {String} password
+* @param {[String]} policies
+* @returns {Promise<Object>}
+*/
+```
+
+* updateUserpassUser(token, username, password, policies)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @param {String} password
+* @param {[String]} policies
+* @returns {Promise<Object>}
+*/
+```
+
+* readUserpassUser(token, username)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @returns {Promise<Object>}
+*/
+```
+
+* deleteUserpassUser(token, username)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @returns {Promise<Object>}
+*/
+```
+
+* updateUserpassPassword(token, username, password)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @param {String} password
+* @returns {Promise<Object>}
+*/
+```
+
+* updateUserpassPolicies(token, username, policies)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} username
+* @param {[String]} policies
+* @returns {Promise<Object>}
+*/
+```
+
+* listUserpassUsers(token)
+
+```javascript
+/**
+* @param {String} token
+* @returns {Promise<Object>}
+*/
+```
+
 
 **AppRole auth method API endpoints - /auth/approle**
 
@@ -715,19 +815,28 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```
 
 
-### Limitations
+### Coverage and Limitations
 
 The following HashiCorp Vault API endpoints are currently covered:
 
 * [System Backend](https://www.vaultproject.io/api-docs/system) - Partially
 
-* [AppRole Auth Method](https://www.vaultproject.io/api-docs/auth/approle) - Partially
+* Auth methods:
 
-* [LDAP Auth Method](https://www.vaultproject.io/api-docs/auth/ldap) - Most of it
+| **Method** | **Coverage status** |
+|:-----------|:-----------|
+|  [AppRole](https://www.vaultproject.io/api-docs/auth/approle) | `Partially` |
+| [LDAP](https://www.vaultproject.io/api-docs/auth/ldap) | `Most of them` |
+| [Userpass](https://www.vaultproject.io/api-docs/auth/userpass) | `All endpoints` |
+| [Token](https://www.vaultproject.io/api-docs/auth/token) | `Most of them` |
+| | |
 
-* [Token Auth Method](https://www.vaultproject.io/api-docs/auth/token) - Most of them
+* Secret engines:
 
-* [KV Secrets Engine - Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) - Full
+| **Engine** | **Coverage status** |
+|:------------|:-----------|
+| [KV Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) | `All endpoints` |
+| | |
 
 
 ### Creating your test environment (with HTTPS)

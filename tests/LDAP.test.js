@@ -25,8 +25,6 @@ const vault = new Vault( {
 
 //TODO: Improve expect assertion on all tests
 
-console.log(Password);
-
 test('loginWithLdap: the result is a new LDAP authentication token', async () => {
   const data = await vault.loginWithLdap(Username, Password);
     console.log(data);
