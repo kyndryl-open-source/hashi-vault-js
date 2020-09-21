@@ -53,7 +53,17 @@ const config = {
   userpassDeleteUser: '/auth/userpass/users',
   userpassUpdatePass: '/auth/userpass/users',
   userpassListUsers: '/auth/userpass/users',
-  userpassLogin: '/auth/userpass/login'
+  userpassLogin: '/auth/userpass/login',
+  pkiReadCACert: [ '/pki/ca', 'get'],
+  pkiReadCAChain: ['/pki/ca_chain', 'get'],
+  pkiReadCert: ['/pki/cert', 'get'],
+  pkiListCerts: ['/pki/certs', 'list'],
+  pkiSetCACert: ['/pki/config/ca', 'post'],
+  pkiReadCrlConf: ['/pki/config/crl', 'get'],
+  pkiSetCrlConf: ['/pki/config/crl', 'post'],
+  pkiReadUrls: ['/pki/config/urls', 'get'],
+  pkiSetUrls: ['/pki/config/urls', 'post'],
+  pkiReadCrl: ['/pki/crl', 'get']
 };
 
 module.exports = config;

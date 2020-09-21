@@ -1189,7 +1189,244 @@ class Vault {
     });
   }
 
+
+  //
+  // PKI secret engine API endpoints
+  //
+
+  /**
+  * @param {String: 'der', 'pem'} format
+  * @returns {Promise<String>}
+  */
+  async readCACertificate(format) {
+    let url = "";
+    if (format === 'pem') {
+      url = config.pkiReadCACert[0]+"/pem";
+    } else {
+      url = config.pkiReadCACert[0];
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: url,
+        method: config.pkiReadCACert[1]
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String: 'der', 'pem'} format
+  * @returns {Promise<String>}
+  */
+  async readPkiCrl(format) {
+    let url = "";
+    if (format === 'pem') {
+      url = config.pkiReadCrl[0]+"/pem";
+    } else {
+      url = config.pkiReadCrl[0];
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: url,
+        method: config.pkiReadCrl[1]
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @returns {Promise<String>}
+  */
+  async readCAChain() {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.pkiReadCAChain[0]}`,
+        method: config.pkiReadCAChain[1]
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} serial
+  * @returns {Promise<Object>}
+  */
+  async readCertificate(serial) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.pkiReadCert[0]}/${serial}`,
+        method: config.pkiReadCert[1]
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+
+  /**
+  * @param {String} token
+  * @returns {Promise<Object>}
+  */
+  async listCertificates(token) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.pkiListCerts[0]}`,
+        method: config.pkiListCerts[1],
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} pemBundle
+  * @returns {Promise<Object>}
+  */
+  async setCACertificate(token, pemBundle) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.pkiSetCACert[0]}`,
+        method: config.pkiSetCACert[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          pem_bundle: pemBundle
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @returns {Promise<Object>}
+  */
+  async readCrlConfig(token) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.pkiReadCrlConf[0]}`,
+        method: config.pkiReadCrlConf[1],
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {String} expiry
+  * @param {Boolean} disable
+  * @returns {Promise<Object>}
+  */
+  async setCrlConfig(token, expiry, disable) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.pkiSetCrlConf[0]}`,
+        method: config.pkiSetCrlConf[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          expiry: expiry,
+          disable: disable
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @returns {Promise<Object>}
+  */
+  async readPkiUrls(token) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.pkiReadUrls[0]}`,
+        method: config.pkiReadUrls[1],
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String} token
+  * @param {[String]} issuingCertificates
+  * @param {[String]} crlDistributionPoints
+  * @param {[String]} oscpServers
+  * @returns {Promise<Object>}
+  */
+  async setPkiUrls(token, issuingCertificates, crlDistributionPoints, oscpServers) {
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${config.pkiSetUrls[0]}`,
+        method: config.pkiSetUrls[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          issuing_certificates: issuingCertificates,
+          crl_distribution_points: crlDistributionPoints,
+          ocsp_servers: oscpServers
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+
+  //
   // KV secret engine API endpoints
+  //
+
   /**
   * @param {String} token
   * @returns {Promise<Object>}

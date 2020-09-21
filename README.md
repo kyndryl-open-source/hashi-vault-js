@@ -9,7 +9,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ## Requirements (MacOS/Windows)
 
-* Node > v10.x (recommended v12.x)
+* Node > v10.x (v12.x recommended)
 * npm v6.x
 * HashiCorp Vault v1.4.x, v1.5.x
 
@@ -24,6 +24,11 @@ This module provides a set of functions to help **JavaScript** Developers workin
 `npm uninstall hashi-corp-js`
 
 ### Change Log
+
+* `0.3.9`
+  * Added PKI secret engine functions
+    * `setCACertificate`, `readCACertificate`, `readCAChain`, `listCertificates`, and `readCertificate`
+    * `setCrlConfig`, `readCrlConfig`, `setPkiUrls`, `readPkiUrls`, and `readPkiCrl`
 
 * `0.3.8`
   * Added Userpass auth method functions
@@ -716,6 +721,104 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 */
 ```
 
+**PKI secret engine API endpoints**
+
+* setCACertificate(token, pemBundle)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} pemBundle
+* @returns {Promise<Object>}
+*/
+```
+
+* readCACertificate(format)
+
+```javascript
+/**
+* @param {String: 'der', 'pem'} format
+* @returns {Promise<String>}
+*/
+```
+
+* readCAChain()
+
+```javascript
+/**
+* @returns {Promise<String>}
+*/
+```
+
+* readCertificate(serial)
+
+```javascript
+/**
+* @param {String} serial
+* @returns {Promise<Object>}
+*/
+```
+
+* listCertificates(token)
+
+```javascript
+/**
+* @param {String} token
+* @returns {Promise<Object>}
+*/
+```
+
+* readCrlConfig(token)
+
+```javascript
+/**
+* @param {String} token
+* @returns {Promise<Object>}
+*/
+```
+
+* setCrlConfig(token, expiry, disable)
+
+```javascript
+/**
+* @param {String} token
+* @param {String} expiry
+* @param {Boolean} disable
+* @returns {Promise<Object>}
+*/
+```
+
+* readPkiUrls(token)
+
+```javascript
+/**
+* @param {String} token
+* @returns {Promise<Object>}
+*/
+```
+
+* setPkiUrls(token, issuingCertificates, crlDistributionPoints, oscpServers)
+
+```javascript
+/**
+* @param {String} token
+* @param {[String]} issuingCertificates
+* @param {[String]} crlDistributionPoints
+* @param {[String]} oscpServers
+* @returns {Promise<Object>}
+*/
+```
+
+* readPkiCrl(format)
+
+```javascript
+/**
+* @param {String: 'der', 'pem'} format
+* @returns {Promise<String>}
+*/
+```
+
+
 **KV v2 secret engine API endpoints**
 
 * readKVEngineConfig(token)
@@ -836,6 +939,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 | **Engine** | **Coverage status** |
 |:------------|:-----------|
 | [KV Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) | `All endpoints` |
+| [PKI](https://www.vaultproject.io/api-docs/secret/pki) | `Partially` |
 | | |
 
 
