@@ -1,5 +1,6 @@
-# hashicorp vault
-volumes/*
+# Private keys
+*.key
+tests/*.key
 
 # Logs
 logs
@@ -60,6 +61,7 @@ typings/
 # dotenv environment variables file
 *.env
 tests/*.env
+ha/*.env
 
 # next.js build output
 .next

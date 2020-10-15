@@ -1196,14 +1196,23 @@ class Vault {
 
   /**
   * @param {String: 'der', 'pem'} format
+  * @param {String} mount
   * @returns {Promise<String>}
   */
-  async readCACertificate(format) {
+  async readCACertificate(format, mount) {
     let url = "";
-    if (format === 'pem') {
-      url = config.pkiReadCACert[0]+"/pem";
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
     } else {
-      url = config.pkiReadCACert[0];
+      rootPath = config.pkiRootPath;
+    }
+    if (format === 'pem') {
+      url = `${rootPath}/${config.pkiReadCACert[0]}/pem`;
+    } else {
+      url = `${rootPath}/${config.pkiReadCACert[0]}`;
     }
     return new Promise((resolve, reject) => {
       const Options = {
@@ -1220,12 +1229,21 @@ class Vault {
 
   /**
   * @param {String: 'der', 'pem'} format
+  * @param {String} mount
   * @returns {Promise<String>}
   */
-  async readPkiCrl(format) {
+  async readPkiCrl(format, mount) {
     let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     if (format === 'pem') {
-      url = config.pkiReadCrl[0]+"/pem";
+      url = `${rootPath}/${config.pkiReadCrl[0]}/pem`;
     } else {
       url = config.pkiReadCrl[0];
     }
@@ -1243,12 +1261,21 @@ class Vault {
   }
 
   /**
+  * @param {String} mount
   * @returns {Promise<String>}
   */
-  async readCAChain() {
+  async readCAChain(mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `${config.pkiReadCAChain[0]}`,
+        url: `${rootPath}/${config.pkiReadCAChain[0]}`,
         method: config.pkiReadCAChain[1]
       };
       this.instance(Options).then(function(response){
@@ -1260,13 +1287,22 @@ class Vault {
   }
 
   /**
-  * @param {String} serial
+  * @param {String<required>} serial
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async readCertificate(serial) {
+  async readCertificate(serial, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `${config.pkiReadCert[0]}/${serial}`,
+        url: `${rootPath}/${config.pkiReadCert[0]}/${serial}`,
         method: config.pkiReadCert[1]
       };
       this.instance(Options).then(function(response){
@@ -1279,13 +1315,22 @@ class Vault {
 
 
   /**
-  * @param {String} token
+  * @param {String<required>} token
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async listCertificates(token) {
+  async listCertificates(token, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `${config.pkiListCerts[0]}`,
+        url: `${rootPath}/${config.pkiListCerts[0]}`,
         method: config.pkiListCerts[1],
         headers: {
           "X-Vault-Token": token
@@ -1300,14 +1345,23 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} pemBundle
+  * @param {String<required>} token
+  * @param {String<required>} pemBundle
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async setCACertificate(token, pemBundle) {
+  async setCACertificate(token, pemBundle, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `${config.pkiSetCACert[0]}`,
+        url: `${rootPath}/${config.pkiSetCACert[0]}`,
         method: config.pkiSetCACert[1],
         headers: {
           "X-Vault-Token": token
@@ -1325,13 +1379,22 @@ class Vault {
   }
 
   /**
-  * @param {String} token
+  * @param {String<required>} token
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async readCrlConfig(token) {
+  async readCrlConfig(token, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `${config.pkiReadCrlConf[0]}`,
+        url: `${rootPath}/${config.pkiReadCrlConf[0]}`,
         method: config.pkiReadCrlConf[1],
         headers: {
           "X-Vault-Token": token
@@ -1346,15 +1409,24 @@ class Vault {
   }
 
   /**
-  * @param {String} token
+  * @param {String<required>} token
   * @param {String} expiry
   * @param {Boolean} disable
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async setCrlConfig(token, expiry, disable) {
+  async setCrlConfig(token, expiry, disable, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `${config.pkiSetCrlConf[0]}`,
+        url: `${rootPath}/${config.pkiSetCrlConf[0]}`,
         method: config.pkiSetCrlConf[1],
         headers: {
           "X-Vault-Token": token
@@ -1373,13 +1445,22 @@ class Vault {
   }
 
   /**
-  * @param {String} token
+  * @param {String<required} token
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async readPkiUrls(token) {
+  async readPkiUrls(token, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `${config.pkiReadUrls[0]}`,
+        url: `${rootPath}/${config.pkiReadUrls[0]}`,
         method: config.pkiReadUrls[1],
         headers: {
           "X-Vault-Token": token
@@ -1394,16 +1475,25 @@ class Vault {
   }
 
   /**
-  * @param {String} token
+  * @param {String<required>} token
   * @param {[String]} issuingCertificates
   * @param {[String]} crlDistributionPoints
   * @param {[String]} oscpServers
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async setPkiUrls(token, issuingCertificates, crlDistributionPoints, oscpServers) {
+  async setPkiUrls(token, issuingCertificates, crlDistributionPoints, oscpServers, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `${config.pkiSetUrls[0]}`,
+        url: `${rootPath}/${config.pkiSetUrls[0]}`,
         method: config.pkiSetUrls[1],
         headers: {
           "X-Vault-Token": token
@@ -1412,6 +1502,413 @@ class Vault {
           issuing_certificates: issuingCertificates,
           crl_distribution_points: crlDistributionPoints,
           ocsp_servers: oscpServers
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async rotatePkiCrl(token, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiRotateCrl[0]}`,
+        method: config.pkiRotateCrl[1],
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} sudoToken
+  * @param {String<required>: 'internal', 'exported'} params.type
+  * @param {String<required>} params.commonName
+  * @param {String} params.altNames
+  * @param {String} params.ipSans
+  * @param {String} params.uriSans
+  * @param {String} params.otherSans
+  * @param {String} params.ttl
+  * @param {String: 'der', 'pem', 'pem_bundle'} params.format
+  * @param {String: 'der', 'pkcs8'} params.pkFormat
+  * @param {String: 'rsa', 'ec'} params.keyType
+  * @param {Integer} params.keyBits
+  * @param {Boolean} params.excludeCnFromSans
+  * @param {Integer} params.maxPathLength
+  * @param {String} params.permittedDnsDomains
+  * @param {String} params.ou
+  * @param {String} params.organization
+  * @param {String} params.country
+  * @param {String} params.locality
+  * @param {String} params.province
+  * @param {String} params.streetAddress
+  * @param {String} params.postalCode
+  * @param {String} params.serialNumber
+  * @param {String} mount
+  * @returns {Promise<String>}
+  */
+  async generateRootCA(sudoToken, params, mount) {
+    let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    if (params.type === 'exported') {
+      url = `${rootPath}/${config.pkiGenerateRoot[0]}/exported`;
+    } else {
+      url = `${rootPath}/${config.pkiGenerateRoot[0]}/internal`;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: url,
+        method: config.pkiGenerateRoot[1],
+        headers: {
+          "X-Vault-Token": sudoToken
+        },
+        data: {
+          common_name: params.commonName,
+          alt_names: params.altNames,
+          ip_sans: params.ipSans,
+          uri_sans: params.uriSans,
+          other_sans: params.otherSans,
+          ttl: params.ttl,
+          format: params.format,
+          private_key_format: params.pkFormat,
+          key_type: params.keyType,
+          key_bits: params.keyBits,
+          max_path_length: params.maxPathLength,
+          exclude_cn_from_sans: params.excludeCnFromSans,
+          permitted_dns_domains: params.permittedDnsDomains,
+          ou: params.ou,
+          organization: params.organization,
+          country: params.country,
+          locality: params.locality,
+          province: params.province,
+          street_address: params.streetAddress,
+          postal_code: params.postalCode,
+          serial_number: params.serialNumber
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} sudoToken
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async deleteRootCA(sudoToken, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiDeleteRoot[0]}`,
+        method: config.pkiDeleteRoot[1],
+        headers: {
+          "X-Vault-Token": sudoToken
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>: 'internal', 'exported'} params.type
+  * @param {String<required>} params.commonName
+  * @param {String} params.altNames
+  * @param {String} params.ipSans
+  * @param {String} params.uriSans
+  * @param {String} params.otherSans
+  * @param {String: 'der', 'pem', 'pem_bundle'} params.format
+  * @param {String: 'der', 'pkcs8'} params.pkFormat
+  * @param {String: 'rsa', 'ec'} params.keyType
+  * @param {Integer} params.keyBits
+  * @param {Boolean} params.excludeCnFromSans
+  * @param {String} params.ou
+  * @param {String} params.organization
+  * @param {String} params.country
+  * @param {String} params.locality
+  * @param {String} params.province
+  * @param {String} params.streetAddress
+  * @param {String} params.postalCode
+  * @param {String} params.serialNumber
+  * @param {String} mount
+  * @returns {Promise<String>}
+  */
+  async genIntermediateCA(token, params, mount) {
+    let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    if (params.type === 'exported') {
+      url = `${rootPath}/${config.pkiGenIntermediate[0]}/exported`;
+    } else {
+      url = `${rootPath}/${config.pkiGenIntermediate[0]}/internal`;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: url,
+        method: config.pkiGenIntermediate[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          common_name: params.commonName,
+          alt_names: params.altNames,
+          ip_sans: params.ipSans,
+          uri_sans: params.uriSans,
+          other_sans: params.otherSans,
+          format: params.format,
+          private_key_format: params.pkFormat,
+          key_type: params.keyType,
+          key_bits: params.keyBits,
+          exclude_cn_from_sans: params.excludeCnFromSans,
+          ou: params.ou,
+          organization: params.organization,
+          country: params.country,
+          locality: params.locality,
+          province: params.province,
+          street_address: params.streetAddress,
+          postal_code: params.postalCode,
+          serial_number: params.serialNumber
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} sudoToken
+  * @param {String<required>} params.csr
+  * @param {String<required>} params.commonName
+  * @param {String} params.altNames
+  * @param {String} params.ipSans
+  * @param {String} params.uriSans
+  * @param {String} params.otherSans
+  * @param {String} params.ttl
+  * @param {String: 'der', 'pem', 'pem_bundle'} params.format
+  * @param {Integer} params.maxPathLength
+  * @param {Boolean} params.excludeCnFromSans
+  * @param {Boolean} params.useCsrValues
+  * @param {String} params.permittedDnsDomains
+  * @param {String} params.ou
+  * @param {String} params.organization
+  * @param {String} params.country
+  * @param {String} params.locality
+  * @param {String} params.province
+  * @param {String} params.streetAddress
+  * @param {String} params.postalCode
+  * @param {String} params.serialNumber
+  * @param {String} mount
+  * @returns {Promise<String>}
+  */
+  async signIntermediateCA(sudoToken, params, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiSignIntermediate[0]}`,
+        method: config.pkiSignIntermediate[1],
+        headers: {
+          "X-Vault-Token": sudoToken
+        },
+        data: {
+          csr: params.csr,
+          common_name: params.commonName,
+          alt_names: params.altNames,
+          ip_sans: params.ipSans,
+          uri_sans: params.uriSans,
+          other_sans: params.otherSans,
+          format: params.format || 'pem',
+          max_path_length: params.maxPathLength,
+          exclude_cn_from_sans: params.excludeCnFromSans,
+          use_csr_values: params.useCsrValues,
+          permitted_dns_domains: params.permittedDnsDomains,
+          ou: params.ou,
+          organization: params.organization,
+          country: params.country,
+          locality: params.locality,
+          province: params.province,
+          street_address: params.streetAddress,
+          postal_code: params.postalCode,
+          serial_number: params.serialNumber
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} certificate
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async setIntermediateCA(token, certificate, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiSetIntermediate[0]}`,
+        method: config.pkiSetIntermediate[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          certificate: certificate
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>: 'internal', 'exported'} params.role
+  * @param {String<required>} params.commonName
+  * @param {String} params.altNames
+  * @param {String} params.ipSans
+  * @param {String} params.uriSans
+  * @param {String} params.otherSans
+  * @param {String} params.ttl
+  * @param {String: 'der', 'pem', 'pem_bundle'} params.format
+  * @param {String: 'der', 'pkcs8'} params.pkFormat
+  * @param {Boolean} params.excludeCnFromSans
+  * @param {String} mount
+  * @returns {Promise<String>}
+  */
+  async genPkiCertificate(token, params, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiGenerateCertificate[0]}/${params.role}`,
+        method: config.pkiGenerateCertificate[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          common_name: params.commonName,
+          alt_names: params.altNames,
+          ip_sans: params.ipSans,
+          uri_sans: params.uriSans,
+          other_sans: params.otherSans,
+          ttl: params.ttl,
+          format: params.format,
+          private_key_format: params.pkFormat,
+          exclude_cn_from_sans: params.excludeCnFromSans
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} serialNumber
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async revokePkiCertificate(token, serialNumber, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiRevokeCertificate[0]}`,
+        method: config.pkiRevokeCertificate[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          serial_number: serialNumber
         }
       };
       this.instance(Options).then(function(response){
