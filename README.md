@@ -17,11 +17,11 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Install
 
-`npm install hashi-corp-js`
+`npm install hashi-vault-js`
 
 ### Uninstall
 
-`npm uninstall hashi-corp-js`
+`npm uninstall hashi-vaul-js`
 
 ### Change Log
 
