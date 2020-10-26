@@ -32,10 +32,10 @@
   },
   "homepage": "https://github.com/rod4n4m1/hashi-vault-js#readme",
   "dependencies": {
-    "axios": "^0.20.0"
+    "axios": "^0.21.0"
   },
   "devDependencies": {
-    "jest": "^26.0"
+    "jest": "^26.6.1"
   },
   "jest": {
     "testEnvironment": "node"
