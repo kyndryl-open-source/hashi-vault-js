@@ -10,8 +10,8 @@ This module provides a set of functions to help **JavaScript** Developers workin
 ## Requirements (MacOS/Windows)
 
 * Node > v10.x (v12.x recommended)
-* npm v6.x
-* HashiCorp Vault v1.4.x, v1.5.x
+* npm > v6.x
+* HashiCorp Vault v1.4.x or v1.5.x
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
@@ -21,24 +21,16 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Uninstall
 
-`npm uninstall hashi-vaul-js`
+`npm uninstall hashi-vault-js`
 
 ### Change Log
 
-* `0.3.12`
-  * Added *PKI secret engine* certificate functions:
-    * `genPkiCertificate`, and `revokePkiCertificate`
-  * Added *PKI secret engine* CA functions:
-    * `genIntermediateCA`, `setIntermediateCA`, and `signIntermediateCA`
-    * `deleteRootCA`, and `generateRootCA`
-  * Added *PKI secret engine* CRL Functions: `rotatePkiCrl`
-  * Restructured documentation
-  * Improved PKI test suite
-  * Fixed parameters mismatch for `setPkiUrls`
-  * Added to PKI functions support for RootPath from the constructor
-  * Added mount as parameter for PKI functions
+* `0.3.13`
+  * Fixed package name type in readme
+  * Upgraded axios to `0.21.0` and jest to `26.6.1`
+  * Set jest async callback timeout on PKI test suite
 
-[Older changes](/docs/CHANGELOG.md)
+[Older releases](/docs/CHANGELOG.md)
 
 ### Class Constructor
 

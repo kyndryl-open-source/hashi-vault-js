@@ -2,6 +2,23 @@
 
 ## Change Log
 
+* `0.3.12`
+  * Added *PKI secret engine* certificate functions:
+    * `genPkiCertificate`, and `revokePkiCertificate`
+  * Added *PKI secret engine* CA functions:
+    * `genIntermediateCA`, `setIntermediateCA`, and `signIntermediateCA`
+    * `deleteRootCA`, and `generateRootCA`
+  * Added *PKI secret engine* CRL Functions: `rotatePkiCrl`
+  * Restructured documentation
+  * Improved PKI test suite
+  * Fixed parameters mismatch for `setPkiUrls`
+  * Added to PKI functions support for RootPath from the constructor
+  * Added mount as parameter for PKI functions
+
+* `0.3.10`
+  * Added *PKI secret engine* certificate functions: `genPkiCertificate`, `revokePkiCertificate`, `setIntermediateCA`, `signIntermediateCA`, `genIntermediateCA`, `deleteRootCA`, and `generateRootCA`
+  * Added PKI secret engine CRL Functions: `rotatePkiCrl`
+
 * `0.3.9`
   * Added *PKI secret engine* functions
     * `setCACertificate`, `readCACertificate`, `readCAChain`, `listCertificates`, and `readCertificate`

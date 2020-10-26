@@ -33,6 +33,8 @@ const CertParams = {
   excludeCnFromSans: false
 };
 
+// Set jest async callback timeout
+jest.setTimeout(10000);
 //TODO: Improve expect assertion on all tests
 
 test('genPkiCertificate: the result is a new certificate issued', async () => {

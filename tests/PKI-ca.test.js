@@ -97,6 +97,9 @@ try {
   console.error('FS error: ', error);
 }
 
+// Set jest async callback timeout
+jest.setTimeout(10000);
+
 test('setCACertificate: the result is a new CA root certificate and key configured', async () => {
   const data = await vault.setCACertificate(RootToken, caBundle);
     console.log(data);
