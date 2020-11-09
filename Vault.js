@@ -1919,6 +1919,259 @@ class Vault {
     });
   }
 
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} params.name
+  * @param {String} params.ttl
+  * @param {String} params.maxTtl
+  * @param {Boolean} params.allowLocalhost
+  * @param {[String]} params.allowedDomains
+  * @param {Boolean} params.allowedDomainsTemplate
+  * @param {Boolean} params.allowBareDomains
+  * @param {Boolean} params.allowSubdomains
+  * @param {Boolean} params.allowGlobDomains
+  * @param {Boolean} params.allowAnyName
+  * @param {Boolean} params.enforceHostnames
+  * @param {String} params.allowIpSans
+  * @param {String} params.allowedUriSans
+  * @param {String} params.allowedOtherSans
+  * @param {Boolean} params.serverFlag
+  * @param {Boolean} params.clientFlag
+  * @param {Boolean} params.codeSigningFlag
+  * @param {Boolean} params.emailProtectionFlag
+  * @param {String: 'rsa', 'ec'} params.keyType
+  * @param {Integer} params.keyBits
+  * @param {[String]} params.keyUsage
+  * @param {[String]} params.externalKeyUsage
+  * @param {String} params.extKeyUsageOids
+  * @param {Boolean} params.useCsrCommonName
+  * @param {Boolean} params.useCsrSans
+  * @param {String} params.ou
+  * @param {String} params.organization
+  * @param {String} params.country
+  * @param {String} params.locality
+  * @param {String} params.province
+  * @param {String} params.streetAddress
+  * @param {String} params.postalCode
+  * @param {String} params.serialNumber
+  * @param {Boolean} params.generateLease
+  * @param {Boolean} params.noStore
+  * @param {Boolean} params.requireCn
+  * @param {[String]} params.policyIdentifiers
+  * @param {Boolean} params.basicConstraintsValidForNonCa
+  * @param {String} params.notBeforeDuration
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async createPkiRole(token, params, mount) {
+    let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiCreateRole[0]}/${params.name}`,
+        method: config.pkiCreateRole[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+        data: {
+          ttl: params.ttl,
+          max_ttl: params.maxTtl,
+          allow_localhost: params.allowLocalhost,
+          allowed_domains: params.allowedDomains,
+          allowed_domains_template: params.allowedDomainsTemplate,
+          allow_bare_domains: params.allowBareDomains,
+          allow_subdomains: params.allowSubdomains,
+          allow_glob_domains: params.allowGlobDomains,
+          allow_any_name: params.allowAnyName,
+          enforce_hostnames: params.enforceHostnames,
+          allow_ip_sans: params.allowIpSans,
+          allowed_uri_sans: params.allowedUriSans,
+          allowed_other_sans: params.allowedOtherSans,
+          server_flag: params.serverFlag,
+          client_flag: params.clientFlag,
+          code_signing_flag: params.codeSigningFlag,
+          email_protection_flag: params.emailProtectionFlag,
+          key_type: params.keyType,
+          key_bits: params.keyBits,
+          key_usage: params.keyUsage,
+          external_key_usage: params.externalKeyUsage,
+          ext_key_usage_oids: params.extKeyUsageOids,
+          use_csr_common_name: params.useCsrCommonName,
+          use_csr_sans: params.useCsrSans,
+          ou: params.ou,
+          organization: params.organization,
+          country: params.country,
+          locality: params.locality,
+          province: params.province,
+          street_address: params.streetAddress,
+          postal_code: params.postalCode,
+          serial_number: params.serialNumber,
+          generate_lease: params.generateLease,
+          no_store: params.noStore,
+          require_cn: params.requireCn,
+          policy_identifiers: params.policyIdentifiers,
+          basic_constraints_valid_for_non_ca: params.basicConstraintsValidForNonCa,
+          not_before_duration: params.notBeforeDuration
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} params.name
+  * @param {String} params.ttl
+  * @param {String} params.maxTtl
+  * @param {Boolean} params.allowLocalhost
+  * @param {[String]} params.allowedDomains
+  * @param {Boolean} params.allowedDomainsTemplate
+  * @param {Boolean} params.allowBareDomains
+  * @param {Boolean} params.allowSubdomains
+  * @param {Boolean} params.allowGlobDomains
+  * @param {Boolean} params.allowAnyName
+  * @param {Boolean} params.enforceHostnames
+  * @param {String} params.allowIpSans
+  * @param {String} params.allowedUriSans
+  * @param {String} params.allowedOtherSans
+  * @param {Boolean} params.serverFlag
+  * @param {Boolean} params.clientFlag
+  * @param {Boolean} params.codeSigningFlag
+  * @param {Boolean} params.emailProtectionFlag
+  * @param {String: 'rsa', 'ec'} params.keyType
+  * @param {Integer} params.keyBits
+  * @param {[String]} params.keyUsage
+  * @param {[String]} params.externalKeyUsage
+  * @param {String} params.extKeyUsageOids
+  * @param {Boolean} params.useCsrCommonName
+  * @param {Boolean} params.useCsrSans
+  * @param {String} params.ou
+  * @param {String} params.organization
+  * @param {String} params.country
+  * @param {String} params.locality
+  * @param {String} params.province
+  * @param {String} params.streetAddress
+  * @param {String} params.postalCode
+  * @param {String} params.serialNumber
+  * @param {Boolean} params.generateLease
+  * @param {Boolean} params.noStore
+  * @param {Boolean} params.requireCn
+  * @param {[String]} params.policyIdentifiers
+  * @param {Boolean} params.basicConstraintsValidForNonCa
+  * @param {String} params.notBeforeDuration
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async updatePkiRole(token, params, mount) {
+    return await this.createPkiRole(token, params, mount);
+  }
+
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async readPkiRole(token, name, mount) {
+    let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiReadRole[0]}/${name}`,
+        method: config.pkiReadRole[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async listPkiRoles(token, mount) {
+    let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiListRoles[0]}`,
+        method: config.pkiListRoles[1],
+        headers: {
+          "X-Vault-Token": token
+        },
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async deletePkiRole(token, name, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.pkiRootPath;
+    }
+    return new Promise((resolve, reject) => {
+      const Options = {
+        url: `${rootPath}/${config.pkiDeleteRole[0]}/${name}`,
+        method: config.pkiDeleteRole[1],
+        headers: {
+          "X-Vault-Token": token
+        }
+      };
+      this.instance(Options).then(function(response){
+        resolve(parseAxiosResponse(response));
+      }).catch(function(error){
+        reject(parseAxiosError(error));
+      });
+    });
+  }
+
 
   //
   // KV secret engine API endpoints

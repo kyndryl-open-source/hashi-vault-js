@@ -26,6 +26,8 @@ This module provides a set of functions to help **JavaScript** Developers workin
 ### Change Log
 
 * `0.3.15`
+  * Added *PKI secret engine* role functions:
+    * `createPkiRole` (`updatePkiRole`), `readPkiRole`, `listPkiRoles`, and `deletePkiRole`
 
 * `0.3.14`
   * Fixed package name typo in readme
@@ -198,7 +200,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 | **Engine** | **Coverage status** |
 |:------------|:-----------|
 | [KV Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) | `All endpoints` |
-| [PKI](https://www.vaultproject.io/api-docs/secret/pki) | `Partially` |
+| [PKI](https://www.vaultproject.io/api-docs/secret/pki) | `Most of them` |
 | | |
 
 
@@ -315,8 +317,6 @@ Written by Rod Anami <rod.anami@br.ibm.com>, June 2020.
 
 
 ### License
-This project is licensed under the [IBM Public License 1.0](https://opensource.org/licenses/IPL-1.0).
-
-Copyright (c) 2020 IBM
+This project is licensed under the [IBM Public License 1.0](https://opensource.org/licenses/IPL-1.0). Copyright (c) 2020 IBM
 
 HashiCorp Vault open source is licensed under the [Mozilla Public License 2.0](https://github.com/HashiCorp/vault/blob/master/LICENSE).

@@ -72,7 +72,11 @@ const config = {
   pkiGenerateCertificate: ['issue', 'post'],
   pkiRevokeCertificate: ['revoke', 'post'],
   pkiDeleteRoot: ['root', 'delete'],
-  pkiGenerateRoot: ['root/generate', 'post']
+  pkiGenerateRoot: ['root/generate', 'post'],
+  pkiCreateRole: ['roles', 'post'],
+  pkiReadRole: ['roles', 'get'],
+  pkiListRoles: ['roles', 'list'],
+  pkiDeleteRole: ['roles', 'delete']
 };
 
 module.exports = config;

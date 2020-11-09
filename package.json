@@ -11,7 +11,8 @@
     "test:token": "source tests/process.env && jest tests/Token.test.js",
     "test:userpass": "source tests/process.env && jest tests/Userpass.test.js",
     "test:pki-gen": "source tests/process.env && jest tests/PKI-gen.test.js",
-    "test:pki-ca": "source tests/process.env && jest tests/PKI-ca.test.js"
+    "test:pki-ca": "source tests/process.env && jest tests/PKI-ca.test.js",
+    "test:pki-roles": "source tests/process.env && jest tests/PKI-roles.test.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,8 @@
     "nodejs",
     "promises",
     "api",
-    "async"
+    "async",
+    "vault"
   ],
   "author": "Rod Anami (rod.anami@br.ibm.com)",
   "license": "IPL-1.0",

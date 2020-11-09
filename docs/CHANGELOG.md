@@ -8,7 +8,7 @@
   * Added *PKI secret engine* CA functions:
     * `genIntermediateCA`, `setIntermediateCA`, and `signIntermediateCA`
     * `deleteRootCA`, and `generateRootCA`
-  * Added *PKI secret engine* CRL Functions: `rotatePkiCrl`
+  * Added *PKI secret engine* CRL functions: `rotatePkiCrl`
   * Restructured documentation
   * Improved PKI test suite
   * Fixed parameters mismatch for `setPkiUrls`

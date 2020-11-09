@@ -261,3 +261,133 @@
 * @returns {Promise<Object>}
 */
 ```
+
+* createPkiRole(token, params, mount)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String<required>} params.name
+* @param {String} params.ttl
+* @param {String} params.maxTtl
+* @param {Boolean} params.allowLocalhost
+* @param {[String]} params.allowedDomains
+* @param {Boolean} params.allowedDomainsTemplate
+* @param {Boolean} params.allowBareDomains
+* @param {Boolean} params.allowSubdomains
+* @param {Boolean} params.allowGlobDomains
+* @param {Boolean} params.allowAnyName
+* @param {Boolean} params.enforceHostnames
+* @param {String} params.allowIpSans
+* @param {String} params.allowedUriSans
+* @param {String} params.allowedOtherSans
+* @param {Boolean} params.serverFlag
+* @param {Boolean} params.clientFlag
+* @param {Boolean} params.codeSigningFlag
+* @param {Boolean} params.emailProtectionFlag
+* @param {String: 'rsa', 'ec'} params.keyType
+* @param {Integer} params.keyBits
+* @param {[String]} params.keyUsage
+* @param {[String]} params.externalKeyUsage
+* @param {String} params.extKeyUsageOids
+* @param {Boolean} params.useCsrCommonName
+* @param {Boolean} params.useCsrSans
+* @param {String} params.ou
+* @param {String} params.organization
+* @param {String} params.country
+* @param {String} params.locality
+* @param {String} params.province
+* @param {String} params.streetAddress
+* @param {String} params.postalCode
+* @param {String} params.serialNumber
+* @param {Boolean} params.generateLease
+* @param {Boolean} params.noStore
+* @param {Boolean} params.requireCn
+* @param {[String]} params.policyIdentifiers
+* @param {Boolean} params.basicConstraintsValidForNonCa
+* @param {String} params.notBeforeDuration
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
+
+* updatePkiRole(token, params, mount)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String<required>} params.name
+* @param {String} params.ttl
+* @param {String} params.maxTtl
+* @param {Boolean} params.allowLocalhost
+* @param {[String]} params.allowedDomains
+* @param {Boolean} params.allowedDomainsTemplate
+* @param {Boolean} params.allowBareDomains
+* @param {Boolean} params.allowSubdomains
+* @param {Boolean} params.allowGlobDomains
+* @param {Boolean} params.allowAnyName
+* @param {Boolean} params.enforceHostnames
+* @param {String} params.allowIpSans
+* @param {String} params.allowedUriSans
+* @param {String} params.allowedOtherSans
+* @param {Boolean} params.serverFlag
+* @param {Boolean} params.clientFlag
+* @param {Boolean} params.codeSigningFlag
+* @param {Boolean} params.emailProtectionFlag
+* @param {String: 'rsa', 'ec'} params.keyType
+* @param {Integer} params.keyBits
+* @param {[String]} params.keyUsage
+* @param {[String]} params.externalKeyUsage
+* @param {String} params.extKeyUsageOids
+* @param {Boolean} params.useCsrCommonName
+* @param {Boolean} params.useCsrSans
+* @param {String} params.ou
+* @param {String} params.organization
+* @param {String} params.country
+* @param {String} params.locality
+* @param {String} params.province
+* @param {String} params.streetAddress
+* @param {String} params.postalCode
+* @param {String} params.serialNumber
+* @param {Boolean} params.generateLease
+* @param {Boolean} params.noStore
+* @param {Boolean} params.requireCn
+* @param {[String]} params.policyIdentifiers
+* @param {Boolean} params.basicConstraintsValidForNonCa
+* @param {String} params.notBeforeDuration
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
+
+* readPkiRole(token, name, mount)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
+
+* listPkiRoles(token, mount)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
+
+* deletePkiRole(token, name, mount)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
