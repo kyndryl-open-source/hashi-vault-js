@@ -25,6 +25,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.3.16`
+  * Changed license to EPL-2.0
+
 * `0.3.15`
   * Added *PKI secret engine* role functions:
     * `createPkiRole` (`updatePkiRole`), `readPkiRole`, `listPkiRoles`, and `deletePkiRole`
@@ -317,6 +320,6 @@ Written by Rod Anami <rod.anami@br.ibm.com>, June 2020.
 
 
 ### License
-This project is licensed under the [IBM Public License 1.0](https://opensource.org/licenses/IPL-1.0). Copyright (c) 2020 IBM
+This project is licensed under the [Eclipse Public License 2.0](https://opensource.org/licenses/EPL-2.0).
 
 HashiCorp Vault open source is licensed under the [Mozilla Public License 2.0](https://github.com/HashiCorp/vault/blob/master/LICENSE).
