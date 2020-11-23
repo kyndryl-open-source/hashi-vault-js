@@ -2,6 +2,11 @@
 
 ## Change Log
 
+* `0.3.14`
+  * Fixed package name typo in readme
+  * Upgraded axios to `0.21.0` and jest to `26.6.1`
+  * Set jest async callback timeout on PKI test suite
+
 * `0.3.12`
   * Added *PKI secret engine* certificate functions:
     * `genPkiCertificate`, and `revokePkiCertificate`

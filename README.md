@@ -17,7 +17,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Install
 
-`npm install hashi-vault-js`
+`npm install hashi-vault-js --save`
 
 ### Uninstall
 
@@ -26,16 +26,12 @@ This module provides a set of functions to help **JavaScript** Developers workin
 ### Change Log
 
 * `0.3.16`
-  * Changed license to EPL-2.0
+  * Changed software license to EPL-2.0
+  * Improved documentation about creating your test environment with HTTPS
 
 * `0.3.15`
   * Added *PKI secret engine* role functions:
     * `createPkiRole` (`updatePkiRole`), `readPkiRole`, `listPkiRoles`, and `deletePkiRole`
-
-* `0.3.14`
-  * Fixed package name typo in readme
-  * Upgraded axios to `0.21.0` and jest to `26.6.1`
-  * Set jest async callback timeout on PKI test suite
 
 [Older releases](/docs/CHANGELOG.md)
 
@@ -209,98 +205,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 
 ### Creating your test environment (with HTTPS)
 
-* Install Vault CLI. Instructions are on this [link](https://www.vaultproject.io/downloads)
-
-* Configure your Vault CLI environment
-
-  ```
-  # Should match the Vault listener configuration
-  export VAULT_ADDR="https://127.0.0.1:8200"
-  # CA root certificate for HTTPS protocol
-  export VAULT_CACERT=~/Library/vault/CA_cert.crt
-  # Location of the vault command
-  export PATH=$PATH:~/Library/vault
-  ```
-
-* Modify Docker compose configuration on this file: `docker-compose.yaml`
-
-* Alter Vault server configuration on this file: `vault.json`
-
-* Create volumes and copy any certificate/key that you have
-
-  ```
-  # Create volumes on your local filesystem, for cloud environments you'll need a private volume
-  mkdir ./volumes
-  mkdir ./volumes/config
-  mkdir ./volumes/file
-  mkdir ./volumes/logs
-  # Copy Vault server config to the volume
-  cp vault.json ./volumes/config/
-  # Copy Vault server TLS certificate and key to the volume, this can be created by Vault PKI secret engine
-  cp vault.crt ./volumes/config/
-  cp vault.key ./volumes/config/
-  ```
-
-* Spin up the container on your environment `docker-compose up --build -d`
-
-* Initiate your Vault with the following command: `vault operator init -key-shares=6 -key-threshold=3`
-
-* Unseal your Vault by providing at least 3 keys out of 6
-
-  ```
-  vault operator unseal $KEY1
-  vault operator unseal $KEY2
-  vault operator unseal $KEY3
-  ```
-
-  * Every time you restart your Vault you'll need to unseal it
-  * It's recommended that no single person has all the 6 keys
-  * It's possible to automate this unsealing process for high availability
-
-* Configure your Vault accordingly, but minimally
-  * Enable the KV v2 secret engine
-
-  ```
-  vault secrets enable -path=secrets kv-v2
-  ```
-
-  * Create root CA, intermediate and Vault certificates
-
-  ```
-  # Enable PKI secret engine
-  vault secrets enable pki
-  # Configure PKI TTL
-  vault secrets tune -max-lease-ttl="87600h" pki
-  # Create root CA certificate
-  vault write -field=certificate pki/root/generate/internal common_name="example.com" ttl="87600h" > ca.crt
-  # Enable Intermediary PKI
-  vault secrets enable -path=pki_int pki
-  # Configure Intermediary PKI TTL
-  vault secrets tune -max-lease-ttl="87600h" pki_int
-  # Create intermediate CSR
-  vault write -format=json pki_int/intermediate/generate/internal common_name="example.com Intermediate Authority" | jq -r '.data.csr' > intermediate.csr
-  # Sign intermediate Certificate
-  vault write -format=json pki/root/sign-intermediate csr=@intermediate.csr format=pem_bundle ttl="87600h" | jq -r '.data.certificate' > intermediate.pem
-  # Sign intermediate certificate with root CA
-  vault write pki_int/intermediate/set-signed certificate=@intermediate.pem
-  # Create a role
-  vault write pki_int/roles/role-name allowed_domains="example.com" allow_subdomains=true max_ttl="87600h"
-  # Issue new certificate
-  vault write pki_int/issue/role-name common_name="vault.example.com" ttl="87500h"
-  ```
-
-  * Create an AppRole with role_id and secret_id
-
-  ```
-  # Policy indicates the permissions and scopes an AppRole will have
-  vault policy write policy-name policy-permissions.hcl
-  # Create an AppRole, usually one per application
-  vault write auth/approle/role/role-name secret_id_ttl="720h"  token_ttl="12h"  token_max_tll="12h"  policies="policy-name"
-  # Get the AppRole role-id
-  vault read auth/approle/role/role-name/role-id
-  # Get the initial secret-id tied to the role-id
-  vault write -f auth/approle/role/role-name/secret-id
-  ```
+Follow the detailed instructions from this [doc](/docs/Test-environment.md)
 
 ### References
 
