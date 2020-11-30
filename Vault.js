@@ -2389,8 +2389,8 @@ class Vault {
   async listKVSecret(token, name) {
     return new Promise((resolve, reject) => {
       const Options = {
-        url: `/${this.rootPath}/${config.listPath}/${name}/?=list=true`,
-        method: 'get',
+        url: `/${this.rootPath}/${config.listPath}/${name}`,
+        method: 'list',
         headers: {
           "X-Vault-Token": token
         }

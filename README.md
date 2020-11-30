@@ -28,6 +28,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 * `0.3.16`
   * Changed software license to EPL-2.0
   * Improved documentation about creating your test environment with HTTPS
+  * Fixed KVV2 Function `listKVSecret` to use the proper method
 
 * `0.3.15`
   * Added *PKI secret engine* role functions:
@@ -213,7 +214,7 @@ Follow the detailed instructions from this [doc](/docs/Test-environment.md)
 
   * HashiCorp Vault Docker Hub [page](https://hub.docker.com/_/vault)
 
-  * Ruan Bekker's Blog [post](https://blog.ruanbekker.com/blog/2019/05/06/setup-HashiCorp-vault-server-on-docker-and-cli-guide/)
+  * Ruan Bekker's Blog [post](https://blog.ruanbekker.com/blog/2019/05/06/setup-hashicorp-vault-server-on-docker-and-cli-guide/)
 
 
 ### Contributing

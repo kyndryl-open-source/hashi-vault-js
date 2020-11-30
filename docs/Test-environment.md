@@ -207,7 +207,7 @@ path "my-role/delete/*" {
   capabilities = ["update"]
 }
 
-path "example/undelete/*" {
+path "my-role/undelete/*" {
     capabilities = ["update"]
 }
 
@@ -240,6 +240,10 @@ path "/auth/approle/role/my-role/secret-id-accessor" {
 
 path "/auth/approle/role/my-role/secret-id-accessor/*" {
     capabilities = ["create", "read", "update", "delete", "list"]
+}
+
+path "secret*" {
+  capabilities = [ "create", "read", "update", "delete", "list" ]
 }
 EOF
   ```

@@ -6,7 +6,7 @@
 
 ```javascript
 /**
-* @param {String} token
+* @param {String<required>} token
 * @returns {Promise<Object>}
 */
 ```
@@ -15,9 +15,9 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} name
-* @param {Object} secrets
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {Object<required>} secrets
 * @returns {Promise<Object>}
 */
 ```
@@ -26,10 +26,10 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} name
-* @param {Object} secrets
-* @param {Integer} version
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {Object<required>} secrets
+* @param {Integer<required>} version
 * @returns {Promise<Object>}
 */
 ```
@@ -38,8 +38,8 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} name
+* @param {String<required>} token
+* @param {String<required>} name
 * @param {Integer} version
 * @returns {Promise<Object>}
 */
@@ -49,8 +49,8 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} name
+* @param {StringInteger} token
+* @param {StringInteger} name
 * @returns {Promise<Object>}
 */
 ```
@@ -59,9 +59,9 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} name
-* @param {[Integer]} versions
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {[]Integer<required>} versions
 * @returns {Promise<Object>}
 */
 ```
@@ -70,9 +70,9 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} name
-* @param {[Integer]} versions
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {[]Integer<required>} versions
 * @returns {Promise<Object>}
 */
 ```
@@ -81,9 +81,9 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} name
-* @param {[Integer]} versions
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {[]Integer<required>} versions
 * @returns {Promise<Object>}
 */
 ```
@@ -92,7 +92,7 @@
 
 ```javascript
 /**
-* @param {String} token
+* @param {String<required>} token
 * @param {String} name
 * @returns {Promise<Object>}
 */
