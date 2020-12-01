@@ -88,12 +88,12 @@
 */
 ```
 
-* listKVSecret(token, name)
+* listKVSecrets(token, folder)
 
 ```javascript
 /**
 * @param {String<required>} token
-* @param {String} name
+* @param {String} folder
 * @returns {Promise<Object>}
 */
 ```

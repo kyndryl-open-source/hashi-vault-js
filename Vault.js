@@ -2386,10 +2386,16 @@ class Vault {
   * @param {String} name
   * @returns {Promise<Object>}
   */
-  async listKVSecret(token, name) {
+  async listKVSecrets(token, folder) {
     return new Promise((resolve, reject) => {
+      let url = "";
+      if (path) {
+        url = `/${this.rootPath}/${config.listPath}/${folder}`;
+      } else {
+        url = `/${this.rootPath}/${config.listPath}`;
+      }
       const Options = {
-        url: `/${this.rootPath}/${config.listPath}/${name}`,
+        url: url,
         method: 'list',
         headers: {
           "X-Vault-Token": token

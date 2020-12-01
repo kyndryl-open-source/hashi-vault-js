@@ -1,14 +1,14 @@
 const Vault = require('../Vault');
 
 const SECRET1={
-  name: "slack",
+  name: "slack5",
   secrets: {
     bot_token1: "xoxb-123456789012-1234567890123-1w1lln0tt3llmys3cr3tatm3",
     bot_token2: "xoxb-123456789013-1234567890124-1w1lln0tt3llmys3cr3tatm3"
   }
 };
 const SECRET2={
-  name: "slack",
+  name: "slack5",
   secrets: {
     bot_token1: "xoxb-123456789013-1234567890124-1w1lln0tt3llmys3cr3tatm3",
     bot_token2: "xoxb-123456789014-1234567890125-1w1lln0tt3llmys3cr3tatm3"
@@ -47,7 +47,7 @@ const vault = new Vault( {
 
 test('loginWithAppRole: the result is a new AppRole authentication token', async () => {
     const data = await vault.loginWithAppRole(RoleId, SecretId);
-    //console.log(data);
+    console.log(data);
     token = data.client_token;
 	return expect(data).toBeDefined();
 });
@@ -89,6 +89,12 @@ test('updateKVSecret: the result is a KV entry updated with new version', async 
 	return expect(data).toBeDefined();
 });
 
+test('listKVSecret: the result is the list of keys for a KV folder', async () => {
+    const data = await vault.listKVSecrets(token);
+    console.log('listKVSecrets:\n',data);
+	return expect(data).toBeDefined();
+});
+
 test('deleteLatestVerKVSecret: the result is the latest version (one version) of KV entry deleted - HTTP 204', async () => {
     const data = await vault.deleteLatestVerKVSecret(token, SECRET1.name);
     //console.log('deleteLatestVerKVSecret output:\n',data);
@@ -110,12 +116,6 @@ test('undeleteVersionsKVSecret: the result is the versions (one or more) of KV e
 test('destroyVersionsKVSecret: the result is the versions of KV entry destroyed - HTTP 204', async () => {
     const data = await vault.destroyVersionsKVSecret(token, SECRET1.name, [ 1 ]);
     //console.log('destroyVersionsKVSecret output:\n',data);
-	return expect(data).toBeDefined();
-});
-
-test('listKVSecret: the result is the list of keys for a KV entry', async () => {
-    const data = await vault.listKVSecret(token, SECRET1.name);
-    //console.log('listKVSecret:\n',data);
 	return expect(data).toBeDefined();
 });
 
