@@ -25,14 +25,13 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.3.17`
+  * Quick fix on KV v2 Function `listKVSecrets` when folder is defined
+
 * `0.3.16`
   * Changed software license to EPL-2.0
   * Improved documentation about creating your test environment with HTTPS
-  * Fixed and renamed KVV2 Function `listKVSecrets` to use the proper method
-
-* `0.3.15`
-  * Added *PKI secret engine* role functions:
-    * `createPkiRole` (`updatePkiRole`), `readPkiRole`, `listPkiRoles`, and `deletePkiRole`
+  * Fixed and renamed KV v2 Function `listKVSecrets` to use the proper method
 
 [Older releases](/docs/CHANGELOG.md)
 

@@ -2,6 +2,10 @@
 
 ## Change Log
 
+* `0.3.15`
+  * Added *PKI secret engine* role functions:
+    * `createPkiRole` (`updatePkiRole`), `readPkiRole`, `listPkiRoles`, and `deletePkiRole`
+
 * `0.3.14`
   * Fixed package name typo in readme
   * Upgraded axios to `0.21.0` and jest to `26.6.1`

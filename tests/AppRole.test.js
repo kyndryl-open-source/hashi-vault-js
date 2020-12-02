@@ -89,9 +89,9 @@ test('updateKVSecret: the result is a KV entry updated with new version', async 
 	return expect(data).toBeDefined();
 });
 
-test('listKVSecret: the result is the list of keys for a KV folder', async () => {
+test('listKVSecret: the result is the list of keys for a KV root folder', async () => {
     const data = await vault.listKVSecrets(token);
-    console.log('listKVSecrets:\n',data);
+    //console.log('listKVSecrets:\n',data);
 	return expect(data).toBeDefined();
 });
 

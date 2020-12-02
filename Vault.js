@@ -2389,7 +2389,7 @@ class Vault {
   async listKVSecrets(token, folder) {
     return new Promise((resolve, reject) => {
       let url = "";
-      if (path) {
+      if (folder) {
         url = `/${this.rootPath}/${config.listPath}/${folder}`;
       } else {
         url = `/${this.rootPath}/${config.listPath}`;
