@@ -95,34 +95,24 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async healthCheck(){
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.sysHealth,
-        method: 'get'
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.sysHealth,
+      method: 'get'
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
   * @returns {Promise<Object>}
   */
   async sealStatus(){
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.sysSealStatus,
-        method: 'get'
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.sysSealStatus,
+      method: 'get'
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -130,20 +120,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async sysHostInfo(sudoToken){
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.sysHostInfo,
-        method: 'get',
-        headers: {
-          "X-Vault-Token": sudoToken
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.sysHostInfo,
+      method: 'get',
+      headers: {
+        "X-Vault-Token": sudoToken
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -153,24 +138,19 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async sysCapabilities(sudoToken, token, paths){
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.sysCapabilities,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": sudoToken
-        },
-        data: {
-          token: token,
-          paths: paths
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.sysCapabilities,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": sudoToken
+      },
+      data: {
+        token: token,
+        paths: paths
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -179,23 +159,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async sysCapabilitiesSelf(token, paths){
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.sysCapabilitiesSelf,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          paths: paths
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.sysCapabilitiesSelf,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        paths: paths
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -203,28 +178,23 @@ class Vault {
   * @param {Const} type
   * @returns {Promise<Object>}
   */
-  async sysInternalCounters(sudoToken, type){
-    return new Promise((resolve, reject) => {
-      let message = {};
-      if (config.sysCounterTypes.includes(type)) {
-        const Options = {
-          url: `${config.sysInternalCounters}/${type}`,
-          method: 'get',
-          headers: {
-            "X-Vault-Token": sudoToken
-          }
-        };
-        this.instance(Options).then(function(response){
-          resolve(parseAxiosResponse(response));
-        }).catch(function(error){
-          reject(parseAxiosError(error));
-        });
-      } else {
-        message['status']= 400;
-        message['statusText'] = 'Bad request: Counter type error';
-        reject(message);
-      }
-    });
+  async sysInternalCounters(sudoToken, type) {
+    let message = {};
+    if (config.sysCounterTypes.includes(type)) {
+      const Options = {
+        url: `${config.sysInternalCounters}/${type}`,
+        method: 'get',
+        headers: {
+          "X-Vault-Token": sudoToken
+        }
+      };
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } else {
+      message['status']= 400;
+      message['statusText'] = 'Bad request: Counter type error';
+      reject(new Error(message));
+    }
   }
 
   /**
@@ -233,26 +203,21 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async sysMetrics(sudoToken, format){
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: '',
-        method: 'get',
-        headers: {
-          "X-Vault-Token": sudoToken
-        }
-      };
-      if (config.sysMetricFormats.includes(format)) {
-        Options.url= `${config.sysMetrics}?format=${format}`;
+    const Options = {
+      url: '',
+      method: 'get',
+      headers: {
+        "X-Vault-Token": sudoToken
       }
-      else {
-        Options.url= `${config.sysMetrics}`;
-      }
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      }) ;
-    });
+    };
+    if (config.sysMetricFormats.includes(format)) {
+      Options.url= `${config.sysMetrics}?format=${format}`;
+    }
+    else {
+      Options.url= `${config.sysMetrics}`;
+    }
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -260,20 +225,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async sysSeal(sudoToken){
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.sysSeal,
-        method: 'put',
-        headers: {
-          "X-Vault-Token": sudoToken
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.sysSeal,
+      method: 'put',
+      headers: {
+        "X-Vault-Token": sudoToken
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -284,25 +244,20 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async sysUnseal(sudoToken, key, reset, migrate){
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.sysUnseal,
-        method: 'put',
-        headers: {
-          "X-Vault-Token": sudoToken
-        },
-        data: {
-          "key": key,
-          "reset": reset,
-          "migrate": migrate
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.sysUnseal,
+      method: 'put',
+      headers: {
+        "X-Vault-Token": sudoToken
+      },
+      data: {
+        "key": key,
+        "reset": reset,
+        "migrate": migrate
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   // Token auth method API endpoints
@@ -326,7 +281,6 @@ class Vault {
   async createToken(vaultToken, id, roleName, policies, meta, noParent,
     noDefaultPolicy, renewable, ttl, type, explicitMaxTtl, displayName,
     numUses, period, entityAlias) {
-    return new Promise((resolve, reject) => {
       const Options = {
         url: config.tokenCreate,
         method: 'post',
@@ -352,13 +306,8 @@ class Vault {
       if (roleName) {
         Options.url = `${config.tokenCreate}/${roleName}`;
       }
-      //console.log(Options.data);
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
   }
 
   //createToken encapsulations
@@ -432,23 +381,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async revokeToken(vaultToken, clientToken) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenRevoke,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": vaultToken
-        },
-        data: {
-          token: clientToken
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenRevoke,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": vaultToken
+      },
+      data: {
+        token: clientToken
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -456,20 +400,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async revokeSelfToken(clientToken) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenRevokeSelf,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": clientToken
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenRevokeSelf,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": clientToken
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -478,23 +417,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async lookupToken(vaultToken, clientToken) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenLookup,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": vaultToken
-        },
-        data: {
-          token: clientToken
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenLookup,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": vaultToken
+      },
+      data: {
+        token: clientToken
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -502,20 +436,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async lookupSelfToken(clientToken) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenLookupSelf,
-        method: 'get',
-        headers: {
-          "X-Vault-Token": clientToken
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenLookupSelf,
+      method: 'get',
+      headers: {
+        "X-Vault-Token": clientToken
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -525,24 +454,19 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async renewToken(vaultToken, clientToken, increment) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenRenew,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": vaultToken
-        },
-        data: {
-          token: clientToken,
-          increment: increment || null
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenRenew,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": vaultToken
+      },
+      data: {
+        token: clientToken,
+        increment: increment || null
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -551,23 +475,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async renewSelfToken(clientToken, increment) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenRenewSelf,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": clientToken
-        },
-        data: {
-          increment: increment || null
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenRenewSelf,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": clientToken
+      },
+      data: {
+        increment: increment || null
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -575,20 +494,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async listAccessors(sudoToken) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenListAccessors,
-        method: 'list',
-        headers: {
-          "X-Vault-Token": sudoToken
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenListAccessors,
+      method: 'list',
+      headers: {
+        "X-Vault-Token": sudoToken
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -597,23 +511,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async lookupAccessor(vaultToken, accessor) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenLookupAccessor,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": vaultToken
-        },
-        data: {
-          accessor: accessor
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenLookupAccessor,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": vaultToken
+      },
+      data: {
+        accessor: accessor
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -623,24 +532,19 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async renewAccessor(vaultToken, accessor, increment) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenRenewAccessor,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": vaultToken
-        },
-        data: {
-          accessor: accessor,
-          increment: increment || null
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenRenewAccessor,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": vaultToken
+      },
+      data: {
+        accessor: accessor,
+        increment: increment || null
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -649,23 +553,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async revokeAccessor(vaultToken, accessor) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.tokenRevokeAccessor,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": vaultToken
-        },
-        data: {
-          accessor: accessor
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.tokenRevokeAccessor,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": vaultToken
+      },
+      data: {
+        accessor: accessor
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   //
@@ -678,20 +577,15 @@ class Vault {
   * @returns {Object}
   */
   async loginWithLdap(username, password) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapLogin}/${username}`,
-        method: 'post',
-        data: {
-          password: password
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapLogin}/${username}`,
+      method: 'post',
+      data: {
+        password: password
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -702,24 +596,19 @@ class Vault {
   * @returns {Promise<Oject>}
   */
   async createLdapUser(token, username, policies, groups) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapCreateUser}/${username}`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          policies: policies,
-          groups: groups
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapCreateUser}/${username}`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        policies: policies,
+        groups: groups
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -740,23 +629,18 @@ class Vault {
   * @returns {Promise<Oject>}
   */
   async createLdapGroup(token, group, policies) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapCreateGroup}/${group}`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          policies: policies
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapCreateGroup}/${group}`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        policies: policies
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -775,20 +659,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async readLdapGroup(token, group) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapReadGroup}/${group}`,
-        method: 'get',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapReadGroup}/${group}`,
+      method: 'get',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -797,20 +676,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async readLdapUser(token, username) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapReadUser}/${username}`,
-        method: 'get',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapReadUser}/${username}`,
+      method: 'get',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -818,20 +692,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async listLdapUsers(token) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapListUsers}`,
-        method: 'list',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapListUsers}`,
+      method: 'list',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -839,20 +708,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async listLdapGroups(token) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapListGroups}`,
-        method: 'list',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapListGroups}`,
+      method: 'list',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -861,20 +725,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async deleteLdapUser(token, username) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapDeleteUser}/${username}`,
-        method: 'delete',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapDeleteUser}/${username}`,
+      method: 'delete',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -883,20 +742,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async deleteLdapGroup(token, group) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.ldapDeleteGroup}/${group}`,
-        method: 'delete',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.ldapDeleteGroup}/${group}`,
+      method: 'delete',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
 
@@ -910,20 +764,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async loginWithUserpass(username, password) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.userpassLogin}/${username}`,
-        method: 'post',
-        data: {
-          password: password
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.userpassLogin}/${username}`,
+      method: 'post',
+      data: {
+        password: password
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -934,24 +783,19 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async createUserpassUser(token, username, password, policies) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.userpassCreateUser}/${username}`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          policies: policies,
-          password: password
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.userpassCreateUser}/${username}`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        policies: policies,
+        password: password
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -971,20 +815,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async readUserpassUser(token, username) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.userpassReadUser}/${username}`,
-        method: 'get',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.userpassReadUser}/${username}`,
+      method: 'get',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -993,20 +832,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async deleteUserpassUser(token, username) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.userpassDeleteUser}/${username}`,
-        method: 'delete',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.userpassDeleteUser}/${username}`,
+      method: 'delete',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1016,23 +850,18 @@ class Vault {
   * @returns {Promise<Oject>}
   */
   async updateUserpassPassword(token, username, password) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.userpassUpdatePass}/${username}/password`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          password: password
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.userpassUpdatePass}/${username}/password`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        password: password
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1042,23 +871,18 @@ class Vault {
   * @returns {Promise<Oject>}
   */
   async updateUserpassPolicies(token, username, policies) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.userpassUpdatePass}/${username}/policies`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          policies: policies
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.userpassUpdatePass}/${username}/policies`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        policies: policies
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1066,20 +890,15 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async listUserpassUsers(token) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.userpassListUsers}`,
-        method: 'list',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.userpassListUsers}`,
+      method: 'list',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
 
@@ -1094,21 +913,16 @@ class Vault {
   * @returns {Object}
   */
   async loginWithAppRole(roleId, secretId) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: config.appRoleLogin,
-        method: 'post',
-        data: {
-          role_id: roleId,
-          secret_id: secretId
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: config.appRoleLogin,
+      method: 'post',
+      data: {
+        role_id: roleId,
+        secret_id: secretId
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1118,23 +932,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async generateAppRoleSecretId(token, appRole, metadata) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.appRolePath}/${appRole}/secret-id`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "metadata": metadata
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.appRolePath}/${appRole}/secret-id`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        "metadata": metadata
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1144,23 +953,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async readAppRoleSecretId(token, appRole, secretId) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.appRolePath}/${appRole}/secret-id/lookup`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "secret_id": secretId
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.appRolePath}/${appRole}/secret-id/lookup`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        "secret_id": secretId
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1170,23 +974,18 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async destroyAppRoleSecretId(token, appRole, secretId) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${config.appRolePath}/${appRole}/secret-id/destroy`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "secret_id": secretId
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${config.appRolePath}/${appRole}/secret-id/destroy`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        "secret_id": secretId
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
 
@@ -1214,17 +1013,12 @@ class Vault {
     } else {
       url = `${rootPath}/${config.pkiReadCACert[0]}`;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: url,
-        method: config.pkiReadCACert[1]
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: url,
+      method: config.pkiReadCACert[1]
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1247,17 +1041,12 @@ class Vault {
     } else {
       url = config.pkiReadCrl[0];
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: url,
-        method: config.pkiReadCrl[1]
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: url,
+      method: config.pkiReadCrl[1]
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1273,17 +1062,12 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiReadCAChain[0]}`,
-        method: config.pkiReadCAChain[1]
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiReadCAChain[0]}`,
+      method: config.pkiReadCAChain[1]
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1300,17 +1084,12 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiReadCert[0]}/${serial}`,
-        method: config.pkiReadCert[1]
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiReadCert[0]}/${serial}`,
+      method: config.pkiReadCert[1]
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
 
@@ -1328,20 +1107,15 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiListCerts[0]}`,
-        method: config.pkiListCerts[1],
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiListCerts[0]}`,
+      method: config.pkiListCerts[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1359,23 +1133,18 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiSetCACert[0]}`,
-        method: config.pkiSetCACert[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          pem_bundle: pemBundle
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiSetCACert[0]}`,
+      method: config.pkiSetCACert[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        pem_bundle: pemBundle
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1392,20 +1161,15 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiReadCrlConf[0]}`,
-        method: config.pkiReadCrlConf[1],
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiReadCrlConf[0]}`,
+      method: config.pkiReadCrlConf[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1424,24 +1188,19 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiSetCrlConf[0]}`,
-        method: config.pkiSetCrlConf[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          expiry: expiry,
-          disable: disable
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiSetCrlConf[0]}`,
+      method: config.pkiSetCrlConf[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        expiry: expiry,
+        disable: disable
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1458,20 +1217,15 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiReadUrls[0]}`,
-        method: config.pkiReadUrls[1],
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiReadUrls[0]}`,
+      method: config.pkiReadUrls[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1491,25 +1245,20 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiSetUrls[0]}`,
-        method: config.pkiSetUrls[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          issuing_certificates: issuingCertificates,
-          crl_distribution_points: crlDistributionPoints,
-          ocsp_servers: oscpServers
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiSetUrls[0]}`,
+      method: config.pkiSetUrls[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        issuing_certificates: issuingCertificates,
+        crl_distribution_points: crlDistributionPoints,
+        ocsp_servers: oscpServers
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1526,20 +1275,15 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiRotateCrl[0]}`,
-        method: config.pkiRotateCrl[1],
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiRotateCrl[0]}`,
+      method: config.pkiRotateCrl[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1584,43 +1328,38 @@ class Vault {
     } else {
       url = `${rootPath}/${config.pkiGenerateRoot[0]}/internal`;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: url,
-        method: config.pkiGenerateRoot[1],
-        headers: {
-          "X-Vault-Token": sudoToken
-        },
-        data: {
-          common_name: params.commonName,
-          alt_names: params.altNames,
-          ip_sans: params.ipSans,
-          uri_sans: params.uriSans,
-          other_sans: params.otherSans,
-          ttl: params.ttl,
-          format: params.format,
-          private_key_format: params.pkFormat,
-          key_type: params.keyType,
-          key_bits: params.keyBits,
-          max_path_length: params.maxPathLength,
-          exclude_cn_from_sans: params.excludeCnFromSans,
-          permitted_dns_domains: params.permittedDnsDomains,
-          ou: params.ou,
-          organization: params.organization,
-          country: params.country,
-          locality: params.locality,
-          province: params.province,
-          street_address: params.streetAddress,
-          postal_code: params.postalCode,
-          serial_number: params.serialNumber
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: url,
+      method: config.pkiGenerateRoot[1],
+      headers: {
+        "X-Vault-Token": sudoToken
+      },
+      data: {
+        common_name: params.commonName,
+        alt_names: params.altNames,
+        ip_sans: params.ipSans,
+        uri_sans: params.uriSans,
+        other_sans: params.otherSans,
+        ttl: params.ttl,
+        format: params.format,
+        private_key_format: params.pkFormat,
+        key_type: params.keyType,
+        key_bits: params.keyBits,
+        max_path_length: params.maxPathLength,
+        exclude_cn_from_sans: params.excludeCnFromSans,
+        permitted_dns_domains: params.permittedDnsDomains,
+        ou: params.ou,
+        organization: params.organization,
+        country: params.country,
+        locality: params.locality,
+        province: params.province,
+        street_address: params.streetAddress,
+        postal_code: params.postalCode,
+        serial_number: params.serialNumber
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1637,20 +1376,15 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiDeleteRoot[0]}`,
-        method: config.pkiDeleteRoot[1],
-        headers: {
-          "X-Vault-Token": sudoToken
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiDeleteRoot[0]}`,
+      method: config.pkiDeleteRoot[1],
+      headers: {
+        "X-Vault-Token": sudoToken
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
 
@@ -1693,40 +1427,35 @@ class Vault {
     } else {
       url = `${rootPath}/${config.pkiGenIntermediate[0]}/internal`;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: url,
-        method: config.pkiGenIntermediate[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          common_name: params.commonName,
-          alt_names: params.altNames,
-          ip_sans: params.ipSans,
-          uri_sans: params.uriSans,
-          other_sans: params.otherSans,
-          format: params.format,
-          private_key_format: params.pkFormat,
-          key_type: params.keyType,
-          key_bits: params.keyBits,
-          exclude_cn_from_sans: params.excludeCnFromSans,
-          ou: params.ou,
-          organization: params.organization,
-          country: params.country,
-          locality: params.locality,
-          province: params.province,
-          street_address: params.streetAddress,
-          postal_code: params.postalCode,
-          serial_number: params.serialNumber
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: url,
+      method: config.pkiGenIntermediate[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        common_name: params.commonName,
+        alt_names: params.altNames,
+        ip_sans: params.ipSans,
+        uri_sans: params.uriSans,
+        other_sans: params.otherSans,
+        format: params.format,
+        private_key_format: params.pkFormat,
+        key_type: params.keyType,
+        key_bits: params.keyBits,
+        exclude_cn_from_sans: params.excludeCnFromSans,
+        ou: params.ou,
+        organization: params.organization,
+        country: params.country,
+        locality: params.locality,
+        province: params.province,
+        street_address: params.streetAddress,
+        postal_code: params.postalCode,
+        serial_number: params.serialNumber
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1763,41 +1492,36 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiSignIntermediate[0]}`,
-        method: config.pkiSignIntermediate[1],
-        headers: {
-          "X-Vault-Token": sudoToken
-        },
-        data: {
-          csr: params.csr,
-          common_name: params.commonName,
-          alt_names: params.altNames,
-          ip_sans: params.ipSans,
-          uri_sans: params.uriSans,
-          other_sans: params.otherSans,
-          format: params.format || 'pem',
-          max_path_length: params.maxPathLength,
-          exclude_cn_from_sans: params.excludeCnFromSans,
-          use_csr_values: params.useCsrValues,
-          permitted_dns_domains: params.permittedDnsDomains,
-          ou: params.ou,
-          organization: params.organization,
-          country: params.country,
-          locality: params.locality,
-          province: params.province,
-          street_address: params.streetAddress,
-          postal_code: params.postalCode,
-          serial_number: params.serialNumber
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiSignIntermediate[0]}`,
+      method: config.pkiSignIntermediate[1],
+      headers: {
+        "X-Vault-Token": sudoToken
+      },
+      data: {
+        csr: params.csr,
+        common_name: params.commonName,
+        alt_names: params.altNames,
+        ip_sans: params.ipSans,
+        uri_sans: params.uriSans,
+        other_sans: params.otherSans,
+        format: params.format || 'pem',
+        max_path_length: params.maxPathLength,
+        exclude_cn_from_sans: params.excludeCnFromSans,
+        use_csr_values: params.useCsrValues,
+        permitted_dns_domains: params.permittedDnsDomains,
+        ou: params.ou,
+        organization: params.organization,
+        country: params.country,
+        locality: params.locality,
+        province: params.province,
+        street_address: params.streetAddress,
+        postal_code: params.postalCode,
+        serial_number: params.serialNumber
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1815,23 +1539,18 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiSetIntermediate[0]}`,
-        method: config.pkiSetIntermediate[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          certificate: certificate
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiSetIntermediate[0]}`,
+      method: config.pkiSetIntermediate[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        certificate: certificate
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1858,31 +1577,26 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiGenerateCertificate[0]}/${params.role}`,
-        method: config.pkiGenerateCertificate[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          common_name: params.commonName,
-          alt_names: params.altNames,
-          ip_sans: params.ipSans,
-          uri_sans: params.uriSans,
-          other_sans: params.otherSans,
-          ttl: params.ttl,
-          format: params.format,
-          private_key_format: params.pkFormat,
-          exclude_cn_from_sans: params.excludeCnFromSans
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiGenerateCertificate[0]}/${params.role}`,
+      method: config.pkiGenerateCertificate[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        common_name: params.commonName,
+        alt_names: params.altNames,
+        ip_sans: params.ipSans,
+        uri_sans: params.uriSans,
+        other_sans: params.otherSans,
+        ttl: params.ttl,
+        format: params.format,
+        private_key_format: params.pkFormat,
+        exclude_cn_from_sans: params.excludeCnFromSans
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1900,23 +1614,18 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiRevokeCertificate[0]}`,
-        method: config.pkiRevokeCertificate[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          serial_number: serialNumber
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiRevokeCertificate[0]}`,
+      method: config.pkiRevokeCertificate[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        serial_number: serialNumber
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -1973,60 +1682,55 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiCreateRole[0]}/${params.name}`,
-        method: config.pkiCreateRole[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          ttl: params.ttl,
-          max_ttl: params.maxTtl,
-          allow_localhost: params.allowLocalhost,
-          allowed_domains: params.allowedDomains,
-          allowed_domains_template: params.allowedDomainsTemplate,
-          allow_bare_domains: params.allowBareDomains,
-          allow_subdomains: params.allowSubdomains,
-          allow_glob_domains: params.allowGlobDomains,
-          allow_any_name: params.allowAnyName,
-          enforce_hostnames: params.enforceHostnames,
-          allow_ip_sans: params.allowIpSans,
-          allowed_uri_sans: params.allowedUriSans,
-          allowed_other_sans: params.allowedOtherSans,
-          server_flag: params.serverFlag,
-          client_flag: params.clientFlag,
-          code_signing_flag: params.codeSigningFlag,
-          email_protection_flag: params.emailProtectionFlag,
-          key_type: params.keyType,
-          key_bits: params.keyBits,
-          key_usage: params.keyUsage,
-          external_key_usage: params.externalKeyUsage,
-          ext_key_usage_oids: params.extKeyUsageOids,
-          use_csr_common_name: params.useCsrCommonName,
-          use_csr_sans: params.useCsrSans,
-          ou: params.ou,
-          organization: params.organization,
-          country: params.country,
-          locality: params.locality,
-          province: params.province,
-          street_address: params.streetAddress,
-          postal_code: params.postalCode,
-          serial_number: params.serialNumber,
-          generate_lease: params.generateLease,
-          no_store: params.noStore,
-          require_cn: params.requireCn,
-          policy_identifiers: params.policyIdentifiers,
-          basic_constraints_valid_for_non_ca: params.basicConstraintsValidForNonCa,
-          not_before_duration: params.notBeforeDuration
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiCreateRole[0]}/${params.name}`,
+      method: config.pkiCreateRole[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        ttl: params.ttl,
+        max_ttl: params.maxTtl,
+        allow_localhost: params.allowLocalhost,
+        allowed_domains: params.allowedDomains,
+        allowed_domains_template: params.allowedDomainsTemplate,
+        allow_bare_domains: params.allowBareDomains,
+        allow_subdomains: params.allowSubdomains,
+        allow_glob_domains: params.allowGlobDomains,
+        allow_any_name: params.allowAnyName,
+        enforce_hostnames: params.enforceHostnames,
+        allow_ip_sans: params.allowIpSans,
+        allowed_uri_sans: params.allowedUriSans,
+        allowed_other_sans: params.allowedOtherSans,
+        server_flag: params.serverFlag,
+        client_flag: params.clientFlag,
+        code_signing_flag: params.codeSigningFlag,
+        email_protection_flag: params.emailProtectionFlag,
+        key_type: params.keyType,
+        key_bits: params.keyBits,
+        key_usage: params.keyUsage,
+        external_key_usage: params.externalKeyUsage,
+        ext_key_usage_oids: params.extKeyUsageOids,
+        use_csr_common_name: params.useCsrCommonName,
+        use_csr_sans: params.useCsrSans,
+        ou: params.ou,
+        organization: params.organization,
+        country: params.country,
+        locality: params.locality,
+        province: params.province,
+        street_address: params.streetAddress,
+        postal_code: params.postalCode,
+        serial_number: params.serialNumber,
+        generate_lease: params.generateLease,
+        no_store: params.noStore,
+        require_cn: params.requireCn,
+        policy_identifiers: params.policyIdentifiers,
+        basic_constraints_valid_for_non_ca: params.basicConstraintsValidForNonCa,
+        not_before_duration: params.notBeforeDuration
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -2094,20 +1798,15 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiReadRole[0]}/${name}`,
-        method: config.pkiReadRole[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiReadRole[0]}/${name}`,
+      method: config.pkiReadRole[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -2125,20 +1824,15 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiListRoles[0]}`,
-        method: config.pkiListRoles[1],
-        headers: {
-          "X-Vault-Token": token
-        },
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiListRoles[0]}`,
+      method: config.pkiListRoles[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   /**
@@ -2156,20 +1850,15 @@ class Vault {
     } else {
       rootPath = config.pkiRootPath;
     }
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `${rootPath}/${config.pkiDeleteRole[0]}/${name}`,
-        method: config.pkiDeleteRole[1],
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    const Options = {
+      url: `${rootPath}/${config.pkiDeleteRole[0]}/${name}`,
+      method: config.pkiDeleteRole[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
 
@@ -2178,235 +1867,271 @@ class Vault {
   //
 
   /**
-  * @param {String} token
+  * @param {String<required>} token
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async readKVEngineConfig(token) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `/${this.rootPath}/${config.enginePath}`,
-        method: 'get',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} name
-  * @param {Object} secrets
-  * @returns {Promise<Object>}
-  */
-  async createKVSecret(token, name, secrets) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `/${this.rootPath}/${config.createPath}/${name}`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          options: {
-            "cas": 0
-          },
-          data: secrets
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} name
-  * @param {Object} secrets
-  * @param {Number} version
-  * @returns {Promise<Object>}
-  */
-  async updateKVSecret(token, name, secrets, version) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `/${this.rootPath}/${config.updatePath}/${name}`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          options: {
-            "cas": version
-          },
-          data: secrets
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} name
-  * @param {Number} version
-  * @returns {Promise<Object>}
-  */
-  async readKVSecret(token, name, version) {
-    return new Promise((resolve, reject) => {
-      const suffix = version ? `?version=${version}` : "";
-      const Options = {
-        url: `/${this.rootPath}/${config.readPath}/${name}${suffix}`,
-        method: 'get',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} name
-  * @returns {Promise<Object>}
-  */
-  async deleteLatestVerKVSecret(token, name) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `/${this.rootPath}/${config.lvDeletePath}/${name}`,
-        method: 'delete',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} name
-  * @param {[Integer]} versions
-  * @returns {Promise<Object>}
-  */
-  async deleteVersionsKVSecret(token, name, versions) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `/${this.rootPath}/${config.deletePath}/${name}`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "versions": versions
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} name
-  * @param {[Integer]} versions
-  * @returns {Promise<Object>}
-  */
-  async undeleteVersionsKVSecret(token, name, versions) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `/${this.rootPath}/${config.undeletePath}/${name}`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "versions": versions
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} name
-  * @param {[Integer]} versions
-  * @returns {Promise<Object>}
-  */
-  async destroyVersionsKVSecret(token, name, versions) {
-    return new Promise((resolve, reject) => {
-      const Options = {
-        url: `/${this.rootPath}/${config.destroyPath}/${name}`,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": token
-        },
-        data: {
-          "versions": versions
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
-  }
-
-  /**
-  * @param {String} token
-  * @param {String} name
-  * @returns {Promise<Object>}
-  */
-  async listKVSecrets(token, folder) {
-    return new Promise((resolve, reject) => {
-      let url = "";
-      if (folder) {
-        url = `/${this.rootPath}/${config.listPath}/${folder}`;
-      } else {
-        url = `/${this.rootPath}/${config.listPath}`;
+  async readKVEngineConfig(token, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `/${rootPath}/${config.kvReadEngine}`,
+      method: 'get',
+      headers: {
+        "X-Vault-Token": token
       }
-      const Options = {
-        url: url,
-        method: 'list',
-        headers: {
-          "X-Vault-Token": token
-        }
-      };
-      this.instance(Options).then(function(response){
-        resolve(parseAxiosResponse(response));
-      }).catch(function(error){
-        reject(parseAxiosError(error));
-      });
-    });
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {Object<required>} secrets
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async createKVSecret(token, name, secrets, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `/${rootPath}/${config.kvCreateSecret}/${name}`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        options: {
+          "cas": 0
+        },
+        data: secrets
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {Object<required>} secrets
+  * @param {Integer<required>} version
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async updateKVSecret(token, name, secrets, version, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `/${rootPath}/${config.kvUpdateSecret}/${name}`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        options: {
+          "cas": version
+        },
+        data: secrets
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {Integer} version
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async readKVSecret(token, name, version, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const suffix = version ? `?version=${version}` : "";
+    const Options = {
+      url: `/${rootPath}/${config.kvReadSecret}/${name}${suffix}`,
+      method: 'get',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async deleteLatestVerKVSecret(token, name, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `/${rootPath}/${config.kvDeleteLatestSecret}/${name}`,
+      method: 'delete',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {[Integer]<required>} versions
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async deleteVersionsKVSecret(token, name, versions, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `/${rootPath}/${config.kvDeleteSecret}/${name}`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        "versions": versions
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {[Integer]<required>} versions
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async undeleteVersionsKVSecret(token, name, versions, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `/${rootPath}/${config.kvUndeleteSecret}/${name}`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        "versions": versions
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String<required>} name
+  * @param {[Integer]<required>} versions
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async destroyVersionsKVSecret(token, name, versions, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `/${rootPath}/${config.kvDestroySecret}/${name}`,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        "versions": versions
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String} folder
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async listKVSecrets(token, folder, mount) {
+    let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    if (folder) {
+      url = `/${rootPath}/${config.kvListSecrets}/${folder}`;
+    } else {
+      url = `/${rootPath}/${config.kvListSecrets}`;
+    }
+    const Options = {
+      url: url,
+      method: 'list',
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
 }

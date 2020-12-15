@@ -7,6 +7,7 @@
 ```javascript
 /**
 * @param {String<required>} token
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -18,6 +19,7 @@
 * @param {String<required>} token
 * @param {String<required>} name
 * @param {Object<required>} secrets
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -30,6 +32,7 @@
 * @param {String<required>} name
 * @param {Object<required>} secrets
 * @param {Integer<required>} version
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -41,6 +44,7 @@
 * @param {String<required>} token
 * @param {String<required>} name
 * @param {Integer} version
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -49,8 +53,9 @@
 
 ```javascript
 /**
-* @param {StringInteger} token
-* @param {StringInteger} name
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -61,7 +66,8 @@
 /**
 * @param {String<required>} token
 * @param {String<required>} name
-* @param {[]Integer<required>} versions
+* @param {[Integer]<required>} versions
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -72,7 +78,8 @@
 /**
 * @param {String<required>} token
 * @param {String<required>} name
-* @param {[]Integer<required>} versions
+* @param {[Integer]<required>} versions
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -83,7 +90,8 @@
 /**
 * @param {String<required>} token
 * @param {String<required>} name
-* @param {[]Integer<required>} versions
+* @param {[Integer]<required>} versions
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -94,6 +102,7 @@
 /**
 * @param {String<required>} token
 * @param {String} folder
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```

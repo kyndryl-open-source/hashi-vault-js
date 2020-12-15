@@ -9,9 +9,15 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ## Requirements (MacOS/Windows)
 
-* Node > v10.x (v12.x recommended)
-* npm > v6.x
-* HashiCorp Vault v1.4.x or v1.5.x
+* NodeJs
+  * Minimum: v10.x
+  * Recommended: v12.x
+* npm
+  * v6.x
+* HashiCorp Vault
+  * Minimum: v1.4.x
+  * Tested: v1.5.x
+  * Recommended: v1.6.x
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
@@ -25,15 +31,13 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
-* `0.3.17`
-  * Quick fix on KV v2 Function `listKVSecrets` when folder is defined
+* `0.3.18`
+  * Enhanced promises rejection to follow best practice (Issue#4)
+  * Removed Axios call wrapping with a new promise (Issue#4)
+  * Refactored KV V2 functions to accept a mount point
+  * Updated development environment to Vault `1.6.0`
 
-* `0.3.16`
-  * Changed software license to EPL-2.0
-  * Improved documentation about creating your test environment with HTTPS
-  * Fixed and renamed KV v2 Function `listKVSecrets` to use the proper method
-
-[Older releases](/docs/CHANGELOG.md)
+[Older release notes](/docs/CHANGELOG.md)
 
 ### Class Constructor
 
