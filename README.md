@@ -147,6 +147,8 @@ Update secret version 1 in the Vault:
 const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```
 
+Check below docs for more information on specific function groups.
+
 ### List of functions available
 
 **System Backend API endpoints - General**
