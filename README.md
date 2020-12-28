@@ -32,7 +32,8 @@ This module provides a set of functions to help **JavaScript** Developers workin
 ### Change Log
 
 * `0.3.19`
-  * Fixed bug on `createToken` function related to using logical OR operator with attribution on boolean params, this causes the params to be always true. Also, removed unnecessary `null` conditional attribution to params on `renewToken`, `renewSelfToken`, and `renewAccessor` functions (Issue#5)
+  * Fixed bug on `createToken` function related to using logical OR operator with attribution on boolean params, this causes the params to be always true (Issue#5)
+  * Also, removed unnecessary `null` conditional attribution to params on `renewToken`, `renewSelfToken`, and `renewAccessor` functions (Refactoring)
   * Updated development env to `axios@0.21.1` and `jest@26.6.3`
   * Mentioned Richard (richie765) as contributor
 
