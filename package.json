@@ -1,6 +1,6 @@
 {
   "name": "hashi-vault-js",
-  "version": "0.3.18",
+  "version": "0.3.19",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "main": "Vault.js",
   "scripts": {
@@ -27,17 +27,20 @@
     "async",
     "vault"
   ],
-  "author": "Rod Anami (rod.anami@br.ibm.com)",
+  "author": "Rod Anami <rod.anami@br.ibm.com> (https://github.com/rod4n4m1)",
+  "contributors": [
+    "Richard <richie765@> (https://github.com/Richie765)"
+  ],
   "license": "EPL-2.0",
   "bugs": {
     "url": "https://github.com/rod4n4m1/hashi-vault-js/issues"
   },
   "homepage": "https://github.com/rod4n4m1/hashi-vault-js#readme",
   "dependencies": {
-    "axios": "^0.21.0"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
-    "jest": "^26.6.1"
+    "jest": "^26.6.3"
   },
   "jest": {
     "testEnvironment": "node"

@@ -288,19 +288,19 @@ class Vault {
           "X-Vault-Token": vaultToken
         },
         data: {
-          id: id || null,
-          policies: policies || null,
-          meta: meta || null,
-          no_parent: noParent || false,
-          no_default_policy: noDefaultPolicy || false,
-          renewable: renewable || true,
-          ttl: ttl || null,
+          id: id,
+          policies: policies,
+          meta: meta,
+          no_parent: (typeof(noParent) === undefined)?false:noParent,
+          no_default_policy: (typeof(noDefaultPolicy) === undefined)?false:noDefaultPolicy,
+          renewable: (typeof(renewable) === undefined)?true:renewable,
+          ttl: ttl,
           type: type || 'service',
-          explicit_max_ttl: explicitMaxTtl || null,
+          explicit_max_ttl: explicitMaxTtl,
           display_name: displayName || '',
           num_uses: numUses || 0,
-          period: period || null,
-          entity_alias: entityAlias || null
+          period: period,
+          entity_alias: entityAlias
         }
       };
       if (roleName) {
@@ -462,7 +462,7 @@ class Vault {
       },
       data: {
         token: clientToken,
-        increment: increment || null
+        increment: increment
       }
     };
     const response = await this.instance(Options);
@@ -482,7 +482,7 @@ class Vault {
         "X-Vault-Token": clientToken
       },
       data: {
-        increment: increment || null
+        increment: increment
       }
     };
     const response = await this.instance(Options);

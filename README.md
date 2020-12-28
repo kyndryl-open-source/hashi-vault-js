@@ -11,13 +11,13 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 * NodeJs
   * Minimum: v10.x
-  * Recommended: v12.x
+  * Recommended: **v12.x**
 * npm
-  * v6.x
+  * Tested on: **v6.14.x**
 * HashiCorp Vault
   * Minimum: v1.4.x
-  * Tested: v1.5.x
-  * Recommended: v1.6.x
+  * Accepted: v1.5.x
+  * Recommended: **v1.6.x**
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
@@ -30,6 +30,11 @@ This module provides a set of functions to help **JavaScript** Developers workin
 `npm uninstall hashi-vault-js`
 
 ### Change Log
+
+* `0.3.19`
+  * Fixed bug on `createToken` function related to using logical OR operator with attribution on boolean params, this causes the params to be always true. Also, removed unnecessary `null` conditional attribution to params on `renewToken`, `renewSelfToken`, and `renewAccessor` functions (Issue#5)
+  * Updated development env to `axios@0.21.1` and `jest@26.6.3`
+  * Mentioned Richard (richie765) as contributor
 
 * `0.3.18`
   * Enhanced promises rejection to follow best practice (Issue#4)
@@ -234,6 +239,8 @@ If you want to see new features or enhancements to the current ones, we would lo
 ### Authors
 Written by Rod Anami <rod.anami@br.ibm.com>, June 2020.
 
+### Contributors
+Richard <richie765@>
 
 ### License
 This project is licensed under the [Eclipse Public License 2.0](https://opensource.org/licenses/EPL-2.0).
