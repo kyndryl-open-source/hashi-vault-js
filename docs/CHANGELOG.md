@@ -2,6 +2,12 @@
 
 ## Change Log
 
+* `0.3.18`
+  * Enhanced promises rejection to follow best practice (Issue#4)
+  * Removed Axios call wrapping with a new promise (Issue#4)
+  * Refactored KV V2 functions to accept a mount point
+  * Updated development environment to Vault `1.6.0`
+
 * `0.3.17`
   * Quick fix on KV v2 Function `listKVSecrets` when folder is defined
 

@@ -40,11 +40,6 @@ This module provides a set of functions to help **JavaScript** Developers workin
   * Updated development env to `axios@0.21.1` and `jest@26.6.3`
   * Mentioned Richard (richie765) as contributor
 
-* `0.3.18`
-  * Enhanced promises rejection to follow best practice (Issue#4)
-  * Removed Axios call wrapping with a new promise (Issue#4)
-  * Refactored KV V2 functions to accept a mount point
-  * Updated development environment to Vault `1.6.0`
 
 [Older release notes](/docs/CHANGELOG.md)
 
