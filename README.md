@@ -31,17 +31,11 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.3.22`
+  * Updated development env to Vault server `1.6.1`
+
 * `0.3.21`
   * Re-fixed bug on `createToken` function related to `typeof` never returning `undefined` (Issue#5)
-
-* `0.3.20`
-  * Updated `package.json` to force using `axios@0.21.1` (or higher) due to CVE-2020-28168
-
-* `0.3.19`
-  * Fixed bug on `createToken` function related to using logical OR operator with attribution on boolean params, this causes the params to be always true (Issue#5)
-  * Also, removed unnecessary `null` conditional attribution to params on `renewToken`, `renewSelfToken`, and `renewAccessor` functions (Refactoring)
-  * Updated development env to `axios@0.21.1` and `jest@26.6.3`
-  * Mentioned Richard (richie765) as contributor
 
 
 [Older release notes](/docs/CHANGELOG.md)
