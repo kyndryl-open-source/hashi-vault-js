@@ -31,6 +31,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Change Log
 
+* `0.3.21`
+  * Re-fixed bug on `createToken` function related to `typeof` never returning `undefined` (Issue#5)
+
 * `0.3.20`
   * Updated `package.json` to force using `axios@0.21.1` (or higher) due to CVE-2020-28168
 

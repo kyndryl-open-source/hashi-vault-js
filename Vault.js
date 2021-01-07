@@ -291,9 +291,9 @@ class Vault {
           id: id,
           policies: policies,
           meta: meta,
-          no_parent: (typeof(noParent) === undefined)?false:noParent,
-          no_default_policy: (typeof(noDefaultPolicy) === undefined)?false:noDefaultPolicy,
-          renewable: (typeof(renewable) === undefined)?true:renewable,
+          no_parent: noParent, //default is false
+          no_default_policy: noDefaultPolicy, //default is false
+          renewable: renewable == undefined ? true : renewable, //default is true
           ttl: ttl,
           type: type || 'service',
           explicit_max_ttl: explicitMaxTtl,
