@@ -12,7 +12,7 @@ const Metadata = {
 };
 
 const vault = new Vault( {
-    https: true,
+    // https: true,
     cert: ClientCert,
     key: ClientKey,
     cacert: CACert,
