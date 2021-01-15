@@ -41,8 +41,14 @@ test('lookupToken: the result is detailed information on token', async () => {
 });
 
 test('createToken: the result is a created service token based o knight role', async () => {
-    const data = await vault.createToken(ProvToken, null, 'knight', null, Metadata,
-    false, false, true, '1h', 'service', '', 'app1', 0, '', '');
+    const data = await vault.createToken(ProvToken, {
+        // role_name: 'knight',
+        meta: Metadata,
+        renewable: true,
+        ttl: '1h',
+        type: 'service',
+        display_name: 'app1'
+    });
     //console.log(data);
     sToken = data.client_token;
 	return expect(data).toBeDefined();

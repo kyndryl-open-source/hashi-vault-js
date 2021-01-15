@@ -10,6 +10,7 @@ const axios = require('axios');
 //const _ = require('underscore');
 const https = require('https');
 const fs = require('fs');
+const assert = require('assert');
 
 // Internal function - create new https agent
 const getHttpsAgent = function(certificate, key, cacert) {
@@ -263,51 +264,59 @@ class Vault {
   // Token auth method API endpoints
   /**
   * @param {String} vaultToken
-  * @param {String} roleName
-  * @param {[String]} policies
-  * @param {Object} meta
-  * @param {Boolean} noParent
-  * @param {Boolean} noDefaultPolicy
-  * @param {Boolean} renewable
-  * @param {String} ttl
-  * @param {String} type
-  * @param {String} explicitMaxTtl
-  * @param {String} displayName
-  * @param {Integer} numUses
-  * @param {String} period
-  * @param {String} entityAlias
+  * @param {Object} [params]
+  * @param {String} [params.id]
+  * @param {String} [params.role_name]
+  * @param {String} [params.policies]
+  * @param {Object} [params.meta]
+  * @param {Boolean} [params.no_narent=false]
+  * @param {Boolean} [params.no_default_policy=false]
+  * @param {Boolean} [params.renewable=true]
+  * @param {String} [params.ttl]
+  * @param {String} [params.type=service]
+  * @param {String} [params.explicit_max_ttl]
+  * @param {String} [params.display_name]
+  * @param {Integer} [params.num_uses]
+  * @param {String} [params.period]
+  * @param {String} [params.entity_alias]
   * @returns {Promise<Object>}
   */
-  async createToken(vaultToken, id, roleName, policies, meta, noParent,
-    noDefaultPolicy, renewable, ttl, type, explicitMaxTtl, displayName,
-    numUses, period, entityAlias) {
-      const Options = {
-        url: config.tokenCreate,
-        method: 'post',
-        headers: {
-          "X-Vault-Token": vaultToken
-        },
-        data: {
-          id: id,
-          policies: policies,
-          meta: meta,
-          no_parent: noParent, //default is false
-          no_default_policy: noDefaultPolicy, //default is false
-          renewable: renewable == undefined ? true : renewable, //default is true
-          ttl: ttl,
-          type: type || 'service',
-          explicit_max_ttl: explicitMaxTtl,
-          display_name: displayName || '',
-          num_uses: numUses || 0,
-          period: period,
-          entity_alias: entityAlias
-        }
-      };
-      if (roleName) {
-        Options.url = `${config.tokenCreate}/${roleName}`;
+
+  async createToken(vaultToken, params) {
+    assert(vaultToken, 'createToken: required parameter missing: vaultToken');
+
+    // Defaults - most are probably already defaults from Vault itself
+    params = {
+      no_parent: false,
+      no_default_policy: false,
+      renewable: true,
+      type: 'service',
+      // display_name: '',
+
+      ...params
+    };
+
+    const { id, role_name, policies, meta, no_parent,
+      no_default_policy, renewable, ttl, type, explicit_max_ttl, display_name,
+      num_uses, period, entity_alias } = params;
+
+    const url = role_name ? `${config.tokenCreate}/${role_name}` : config.tokenCreate;
+
+    const Options = {
+      url,
+      method: 'post',
+      headers: {
+        "X-Vault-Token": vaultToken
+      },
+      data: {
+        id, policies, meta, no_parent,
+        no_default_policy, renewable, ttl, type, explicit_max_ttl, display_name,
+        num_uses, period, entity_alias
       }
-      const response = await this.instance(Options);
-      return parseAxiosResponse(response);
+    };
+
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
   }
 
   //createToken encapsulations
