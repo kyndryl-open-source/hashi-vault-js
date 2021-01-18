@@ -4,6 +4,7 @@
 
 * `0.4.0`
   * Refactored `createToken` function to accept an object as parameter (Issue#6)
+  * Merged Pull Request `Make createToken more friendly to use #8`
   * Created a new Vault error handler to streamline error flow (Issue#7)
 
 * `0.3.22`
