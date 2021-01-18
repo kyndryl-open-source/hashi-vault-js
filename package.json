@@ -4,15 +4,15 @@
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "main": "Vault.js",
   "scripts": {
-    "test:approle": "source tests/process.env && jest tests/AppRole.test.js",
-    "test:ldap": "source tests/process.env && jest tests/LDAP.test.js",
-    "test:seal": "source tests/process.env && jest tests/Seal.test.js",
-    "test:sysapi": "source tests/process.env && jest tests/SysApi.test.js",
-    "test:token": "source tests/process.env && jest tests/Token.test.js",
-    "test:userpass": "source tests/process.env && jest tests/Userpass.test.js",
-    "test:pki-gen": "source tests/process.env && jest tests/PKI-gen.test.js",
-    "test:pki-ca": "source tests/process.env && jest tests/PKI-ca.test.js",
-    "test:pki-roles": "source tests/process.env && jest tests/PKI-roles.test.js"
+    "test:approle": "bash -c 'source tests/process.env && jest tests/AppRole.test.js'",
+    "test:ldap": "bash -c 'source tests/process.env && jest tests/LDAP.test.js'",
+    "test:seal": "bash -c 'source tests/process.env && jest tests/Seal.test.js'",
+    "test:sysapi": "bash -c 'source tests/process.env && jest tests/SysApi.test.js'",
+    "test:token": "bash -c 'source tests/process.env && jest tests/Token.test.js'",
+    "test:userpass": "bash -c 'source tests/process.env && jest tests/Userpass.test.js'",
+    "test:pki-gen": "bash -c 'source tests/process.env && jest tests/PKI-gen.test.js'",
+    "test:pki-ca": "bash -c 'source tests/process.env && jest tests/PKI-ca.test.js'",
+    "test:pki-roles": "bash -c 'source tests/process.env && jest tests/PKI-roles.test.js'"
   },
   "repository": {
     "type": "git",
