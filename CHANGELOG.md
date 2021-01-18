@@ -2,6 +2,13 @@
 
 ## Change Log
 
+* `0.3.22`
+  * Updated development env to Vault server `1.6.1`
+  * Moved CHANGELOG to root directory
+
+* `0.3.21`
+  * Re-fixed bug on `createToken` function related to `typeof` never returning `undefined` (Issue#5)
+
 * `0.3.20`
   * Updated `package.json` to force using `axios@0.21.1` (or higher) due to CVE-2020-28168
 

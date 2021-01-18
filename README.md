@@ -29,16 +29,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 `npm uninstall hashi-vault-js`
 
-### Change Log
+### Versions and modifications
 
-* `0.3.22`
-  * Updated development env to Vault server `1.6.1`
-
-* `0.3.21`
-  * Re-fixed bug on `createToken` function related to `typeof` never returning `undefined` (Issue#5)
-
-
-[Older release notes](/docs/CHANGELOG.md)
+[Change log](./CHANGELOG.md)
 
 ### Class Constructor
 
