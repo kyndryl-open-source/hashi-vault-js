@@ -29,7 +29,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 `npm uninstall hashi-vault-js`
 
-### Versions and modifications
+### Release notes and versions
 
 [Change log](./CHANGELOG.md)
 
