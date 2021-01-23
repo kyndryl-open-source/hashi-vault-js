@@ -13,7 +13,7 @@ const Metadata = {
 };
 
 const vault = new Vault( {
-    // https: true,
+    https: true,
     cert: ClientCert,
     key: ClientKey,
     cacert: CACert,
@@ -74,9 +74,9 @@ test('revokeSelfToken: the result is a service token revoked that was created pr
     expect(data).toBeDefined();
 });
 
-test('createToken(batch): the result is a created batch token of knight role', async () => {
+test('createToken(batch)-1: the result is a created batch token of knight role', async () => {
     const data = await vault.createToken(ProvToken, {
-        // role_name: 'knight',
+        role_name: 'knight',
         meta: Metadata,
         ttl: '1h',
         type: 'batch',
@@ -88,12 +88,11 @@ test('createToken(batch): the result is a created batch token of knight role', a
 	expect(data).toMatchObject({ token_type: 'batch' });
 });
 
-test('createOrphanSToken: the result is a created orphan service token with knight-vault policy', async () => {
-    // const data = await vault.createOrphanSToken(ProvToken, ['knight-vault'], true, '1h');
+test('createToken(service): the result is a created orphan service token with knight-vault policy', async () => {
     const data = await vault.createToken(ProvToken, {
         no_parent: true,
         ttl: '1h',
-        policies: 'knight-vault',
+        policies: ['knight-vault'],
     });
     // console.log(data);
     orphanSToken = data.client_token;
@@ -116,12 +115,12 @@ test('revokeToken: the result is an orphan service token revoked that was create
     expect(data).toBeDefined();
 });
 
-test('createOrphanBToken: the result is a created orphan batch token with knight-vault policy', async () => {
+test('createToken(batch)-3: the result is a created orphan batch token with knight-vault policy', async () => {
     const data = await vault.createToken(ProvToken, {
         no_parent: true,
         type: 'batch',
         ttl: '1h',
-        policies: 'knight-vault',
+        policies: ['knight-vault'],
     });
     //console.log(data);
     orphanBtoken = data.client_token;

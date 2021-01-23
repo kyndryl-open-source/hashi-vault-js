@@ -39,122 +39,105 @@ vault.lookupToken(ProvToken, ProvToken).then(function(data){
   console.error('lookupToken error: \n',lookupError);
 });
 
-vault.createToken(ProvToken, null, 'knight', null, Metadata, false, false, true,
-  '1h', 'service', '', 'app1', 0, '', '').then(function(data){
-  console.log('> Token1 - createToken output: \n', data);
+vault.createToken(ProvToken,
+  {
+    role_name: 'knight',
+    meta: Metadata,
+    ttl: '1h',
+    type: 'batch',
+    policies: 'default',
+  }).then(function(data){
+  console.log('> Batch Token - createToken output: \n', data);
   token=data.client_token;
   accessor=data.accessor;
   vault.lookupAccessor(ProvToken, accessor).then(function(data){
-    console.log('>> Token1 - lookupAccessor output: \n', data);
+    console.log('>> Batch Token - lookupAccessor output: \n', data);
     vault.renewAccessor(ProvToken, accessor).then(function(data){
-      console.log('>>> Token1 - renewAccessor output: \n', data);
+      console.log('>>> Batch Token - renewAccessor output: \n', data);
       vault.revokeAccessor(ProvToken, accessor).then(function(data){
-        console.log('>>>> Token1 - revokeAccessor output: \n', data);
+        console.log('>>>> Batch Token - revokeAccessor output: \n', data);
       }).catch(function(revokeError){
-        console.error('>>>> Token1 - revokeAccessor error: \n',revokeError);
+        console.error('>>>> Batch Token - revokeAccessor error: \n',revokeError);
       });
     }).catch(function(renewError){
-      console.error('>>> Token1 - renewAccessor error: \n',renewError);
+      console.error('>>> Batch Token - renewAccessor error: \n',renewError);
     });
   }).catch(function(accessorError){
-    console.error('>> Token1 - lookupAccessor error: \n',accessorError);
+    console.error('>> Batch Token - lookupAccessor error: \n',accessorError);
   });
 }).catch(function(createError){
-  console.error('> Token1 - createToken error: \n',createError);
+  console.error('> Batch Token - createToken error: \n',createError);
 });
 
-vault.createToken(ProvToken, null, 'knight', null, Metadata, false, false, true,
-  '24h', 'batch', '', 'bot2', 0, '', '').then(function(data){
-  console.log('Token - createToken output: \n', data);
+vault.createToken(ProvToken,
+  {
+    role_name: 'knight',
+    meta: Metadata,
+    ttl: '1h',
+    policies: 'default',
+  }).then(function(data){
+  console.log('Service Token - createToken output: \n', data);
   token=data.client_token;
   vault.lookupSelfToken(token).then(function(data){
-    console.log('> Token2 - lookupSelfToken output: \n', data);
+    console.log('> Service Token - lookupSelfToken output: \n', data);
     vault.revokeSelfToken(token).then(function(data){
-      console.log('>> Token2 - revokeSelfToken output: \n', data);
+      console.log('>> Service Token - revokeSelfToken output: \n', data);
     }).catch(function(revokeError){
-      console.error('>>> Token2 - revokeSelfToken error: \n',revokeError);
+      console.error('>>> Service Token - revokeSelfToken error: \n',revokeError);
     });
   }).catch(function(lookupError){
-    console.error('>> Token2 - lookupSelfToken error: \n',lookupError);
+    console.error('>> Service Token - lookupSelfToken error: \n',lookupError);
   });
 }).catch(function(createError){
-  console.error('> Token2 - createToken error: \n',createError);
+  console.error('> Service Token - createToken error: \n',createError);
 });
 
-vault.createSToken(ProvToken, 'knight', ['knight-vault'], true, '12h').then(function(data){
-  console.log('> SToken - createSToken output: \n', data);
+vault.createToken(ProvToken,
+  {
+    no_parent: true,
+    ttl: '1h',
+    policies: ['knight-vault'],
+  }).then(function(data){
+  console.log('> Orphan Service Token - createToken output: \n', data);
   token=data.client_token;
   vault.lookupSelfToken(token).then(function(data){
-    console.log('>> SToken - lookupSelfToken output: \n', data);
-    vault.renewSelfToken(token, '1h').then(function(data){
-      console.log('>>> SToken - renewSelfToken output: \n', data);
-      vault.revokeSelfToken(token).then(function(data){
-        console.log('>>>> SToken - revokeSelfToken output: \n', data);
-      }).catch(function(revokeError){
-        console.error('>>>> SToken - revokeSelfToken error: \n',revokeError);
-      });
-    }).catch(function(renewError){
-      console.error('>>> SToken - renewSelfToken error: \n',renewError);
-    });
-  }).catch(function(lookupError){
-    console.error('>> SToken - lookupSelfToken error: \n',lookupError);
-  });
-}).catch(function(createError){
-  console.error('> SToken - createSToken error: \n',createError);
-});
-
-vault.createBToken(ProvToken, 'knight', null, '24h').then(function(data){
-  console.log('> BToken - createBToken output: \n', data);
-  token=data.client_token;
-  vault.lookupSelfToken(token).then(function(data){
-    console.log('>> BToken - lookupSelfToken output: \n', data);
-    vault.revokeToken(ProvToken, token).then(function(data){
-      console.log('>>> BToken - revokeToken output: \n', data);
-    }).catch(function(revokeError){
-      console.error('>>> BToken - revokeToken error: \n',revokeError);
-    });
-  }).catch(function(lookupError){
-    console.error('>> BToken - lookupSelfToken error: \n',lookupError);
-  });
-}).catch(function(createError){
-  console.error('> BToken - createBToken error: \n',createError);
-});
-
-vault.createOrphanSToken(ProvToken, ['knight-vault'], true, '1h').then(function(data){
-  console.log('> OrphanSToken - createOrphanSToken output: \n', data);
-  token=data.client_token;
-  vault.lookupSelfToken(token).then(function(data){
-    console.log('>> OrphanSToken - lookupSelfToken output: \n', data);
+    console.log('>> Orphan Service Token - lookupSelfToken output: \n', data);
     vault.renewToken(ProvToken, token, '1h').then(function(data){
-      console.log('>>> OrphanSToken - renewToken output: \n', data);
+      console.log('>>> Orphan Service Token - renewToken output: \n', data);
       vault.revokeToken(ProvToken, token).then(function(data){
-        console.log('>>>> OrphanSToken - revokeToken output: \n', data);
+        console.log('>>>> Orphan Service Token - revokeToken output: \n', data);
       }).catch(function(revokeError){
-        console.error('>>>> OrphanSToken - revokeToken error: \n',revokeError);
+        console.error('>>>> Orphan Service Token - revokeToken error: \n',revokeError);
       });
     }).catch(function(renewError){
-      console.error('>>> OrphanSToken - renewToken error: \n',renewError);
+      console.error('>>> Orphan Service Token - renewToken error: \n',renewError);
     });
   }).catch(function(lookupError){
-    console.error('>> OrphanSToken - lookupSelfToken error: \n',lookupError);
+    console.error('>> Orphan Service Token - lookupSelfToken error: \n',lookupError);
   });
 }).catch(function(createError){
-  console.error('> OrphanSToken - createOrphanSToken - error: \n',createError);
+  console.error('> Orphan Service Token - createOrphanSToken - error: \n',createError);
 });
 
-vault.createOrphanBToken(ProvToken, ['knight-vault'], '24h').then(function(data){
-  console.log('> OrphanBToken - createOrphanBToken output: \n', data);
+vault.createToken(ProvToken,
+  {
+    no_parent: true,
+    ttl: '24h',
+    type: 'batch',
+    policies: ['knight-vault'],
+  }).then(function(data){
+  console.log('> Orphan Batch Token - createToken output: \n', data);
   token=data.client_token;
   vault.lookupSelfToken(token).then(function(data){
-    console.log('>> OrphanBToken - lookupSelfToken output: \n', data);
+    console.log('>> Orphan Batch Token - lookupSelfToken output: \n', data);
     vault.revokeToken(ProvToken, token).then(function(data){
-      console.log('>>> OrphanBToken - revokeToken output: \n', data);
+      console.log('>>> Orphan Batch Token - revokeToken output: \n', data);
     }).catch(function(revokeError){
-      console.error('>>> OrphanBToken - revokeToken error: \n',revokeError);
+      console.error('>>> Orphan Batch Token - revokeToken error: \n',revokeError);
     });
   }).catch(function(lookupError){
-    console.error('>> OrphanBToken - lookupSelfToken error: \n',lookupError);
+    console.error('>> Orphan Batch Token - lookupSelfToken error: \n',lookupError);
   });
 }).catch(function(createError){
-  console.error('> OrphanBToken - createOrphanBToken error: \n',createError);
+  console.error('> Orphan Batch Token - createOrphanBToken error: \n',createError);
 });

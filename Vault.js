@@ -54,17 +54,45 @@ const parseAxiosResponse = function(response){
 
 // Internal function - parse axios error
 const parseAxiosError = function(error){
-  let message = {};
-  if (error.response){
-    message['status']= error.response.status;
-    message['data']= error.response.data;
-    message['headers']= error.response.headers;
-  } else if (error.message) {
-    message = error.message;
-  } else {
-    message = error.request;
+  let helpMessage = "";
+  // Fix the stack
+  // passing parseAxiosError as the second param will leave this function out of the trace
+  Error.captureStackTrace(error, parseAxiosError);
+  // Verify if it's a Vault error
+  // https://www.vaultproject.io/api-docs#error-response
+  if (error.response && error.response.status) {
+    error.isVaultError = true;
+    switch(error.response.status){
+        case 400:
+          helpMessage = "Invalid request, missing or invalid data.";
+          break;
+        case 403:
+          helpMessage = "Forbidden, your authentication details are either incorrect, you don't have access to this feature, or - if CORS is enabled - you made a cross-origin request from an origin that is not allowed to make such requests.";
+          break;
+        case 404:
+          helpMessage = "Invalid path. This can both mean that the path truly doesn't exist or that you don't have permission to view a specific path. We use 404 in some cases to avoid state leakage.";
+          break;
+        case 429:
+          helpMessage = "Default return code for health status of standby nodes. This will likely change in the future.";
+          break;
+        case 473:
+          helpMessage = "Default return code for health status of performance standby nodes.";
+          break;
+        case 500:
+          helpMessage = "Internal server error. An internal error has occurred, try again later. If the error persists, report a bug.";
+          break;
+        case 502:
+          helpMessage = "A request to Vault required Vault making a request to a third party; the third party responded with an error of some kind.";
+          break;
+        case 503:
+          helpMessage = "Vault is down for maintenance or is currently sealed. Unseal it or Try again later.";
+          break;
+        default:
+          helpMessage = "Unkown error code or helper is not implemented yet.";
+    }
+    error.vaultHelpMessage = helpMessage;
   }
-  return message;
+  return error;
 }
 
 // main class constructor
@@ -100,8 +128,13 @@ class Vault {
       url: config.sysHealth,
       method: 'get'
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -112,8 +145,13 @@ class Vault {
       url: config.sysSealStatus,
       method: 'get'
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -128,8 +166,13 @@ class Vault {
         "X-Vault-Token": sudoToken
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -150,8 +193,13 @@ class Vault {
         paths: paths
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -170,8 +218,13 @@ class Vault {
         paths: paths
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -189,8 +242,14 @@ class Vault {
           "X-Vault-Token": sudoToken
         }
       };
-      const response = await this.instance(Options);
-      return parseAxiosResponse(response);
+
+      try {
+        const response = await this.instance(Options);
+        return parseAxiosResponse(response);
+      } catch(err) {
+        throw parseAxiosError(err);
+      }
+
     } else {
       message['status']= 400;
       message['statusText'] = 'Bad request: Counter type error';
@@ -217,8 +276,13 @@ class Vault {
     else {
       Options.url= `${config.sysMetrics}`;
     }
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -233,8 +297,13 @@ class Vault {
         "X-Vault-Token": sudoToken
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -257,8 +326,13 @@ class Vault {
         "migrate": migrate
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   // Token auth method API endpoints
@@ -315,8 +389,12 @@ class Vault {
       }
     };
 
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -335,8 +413,13 @@ class Vault {
         token: clientToken
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -351,8 +434,13 @@ class Vault {
         "X-Vault-Token": clientToken
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -371,8 +459,13 @@ class Vault {
         token: clientToken
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -387,8 +480,13 @@ class Vault {
         "X-Vault-Token": clientToken
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -409,8 +507,13 @@ class Vault {
         increment: increment
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -429,8 +532,13 @@ class Vault {
         increment: increment
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -445,8 +553,13 @@ class Vault {
         "X-Vault-Token": sudoToken
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -465,8 +578,13 @@ class Vault {
         accessor: accessor
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -487,8 +605,13 @@ class Vault {
         increment: increment || null
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -507,8 +630,13 @@ class Vault {
         accessor: accessor
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   //
@@ -528,8 +656,13 @@ class Vault {
         password: password
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -551,8 +684,13 @@ class Vault {
         groups: groups
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -583,8 +721,13 @@ class Vault {
         policies: policies
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -610,8 +753,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -627,8 +775,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -643,8 +796,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -659,8 +817,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -676,8 +839,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -693,8 +861,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
 
@@ -715,8 +888,13 @@ class Vault {
         password: password
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -738,8 +916,13 @@ class Vault {
         password: password
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -766,8 +949,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -783,8 +971,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -804,8 +997,13 @@ class Vault {
         password: password
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -825,8 +1023,13 @@ class Vault {
         policies: policies
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -841,8 +1044,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
 
@@ -865,8 +1073,13 @@ class Vault {
         secret_id: secretId
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -886,8 +1099,13 @@ class Vault {
         "metadata": metadata
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -907,8 +1125,13 @@ class Vault {
         "secret_id": secretId
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -928,8 +1151,13 @@ class Vault {
         "secret_id": secretId
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
 
@@ -961,8 +1189,13 @@ class Vault {
       url: url,
       method: config.pkiReadCACert[1]
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -989,8 +1222,13 @@ class Vault {
       url: url,
       method: config.pkiReadCrl[1]
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1010,8 +1248,13 @@ class Vault {
       url: `${rootPath}/${config.pkiReadCAChain[0]}`,
       method: config.pkiReadCAChain[1]
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1032,8 +1275,13 @@ class Vault {
       url: `${rootPath}/${config.pkiReadCert[0]}/${serial}`,
       method: config.pkiReadCert[1]
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
 
@@ -1058,8 +1306,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1087,8 +1340,13 @@ class Vault {
         pem_bundle: pemBundle
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1112,8 +1370,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1143,8 +1406,13 @@ class Vault {
         disable: disable
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1168,8 +1436,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1201,8 +1474,13 @@ class Vault {
         ocsp_servers: oscpServers
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1226,8 +1504,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1302,8 +1585,13 @@ class Vault {
         serial_number: params.serialNumber
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1327,8 +1615,13 @@ class Vault {
         "X-Vault-Token": sudoToken
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
 
@@ -1398,8 +1691,13 @@ class Vault {
         serial_number: params.serialNumber
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1464,8 +1762,13 @@ class Vault {
         serial_number: params.serialNumber
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1493,8 +1796,13 @@ class Vault {
         certificate: certificate
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1539,8 +1847,13 @@ class Vault {
         exclude_cn_from_sans: params.excludeCnFromSans
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1568,8 +1881,13 @@ class Vault {
         serial_number: serialNumber
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1673,8 +1991,13 @@ class Vault {
         not_before_duration: params.notBeforeDuration
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1749,8 +2072,13 @@ class Vault {
         "X-Vault-Token": token
       },
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1775,8 +2103,13 @@ class Vault {
         "X-Vault-Token": token
       },
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1801,8 +2134,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
 
@@ -1831,8 +2169,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1864,8 +2207,13 @@ class Vault {
         data: secrets
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1898,8 +2246,13 @@ class Vault {
         data: secrets
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1926,8 +2279,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1952,8 +2310,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -1982,8 +2345,13 @@ class Vault {
         "versions": versions
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -2012,8 +2380,13 @@ class Vault {
         "versions": versions
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -2042,8 +2415,13 @@ class Vault {
         "versions": versions
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
   /**
@@ -2074,8 +2452,13 @@ class Vault {
         "X-Vault-Token": token
       }
     };
-    const response = await this.instance(Options);
-    return parseAxiosResponse(response);
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
   }
 
 }
