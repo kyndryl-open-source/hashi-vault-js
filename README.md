@@ -49,7 +49,8 @@ This module provides a set of functions to help **JavaScript** Developers workin
   // all paths are relative to this one
   baseUrl: 'https://127.0.0.1:8200/v1',
   // Sets the root path after the base URL, it translates to a
-  // partition inside the Vault where the secret engine was enabled
+  // partition inside the Vault where the secret engine / auth method was enabled
+  // Can be passed individually on each function through mount parameter
   rootPath: 'secret',
   // HTTP request timeout in milliseconds
   timeout: 1000,
@@ -107,7 +108,7 @@ Define a function to return secret engine information from the Vault:
 
 ```javascript
 const secretEngineInfo = function(token) {
-  return vault.readKVEngineConfig(token).then(function(result){
+  vault.readKVEngineConfig(token).then(function(result){
     return result;
   }).catch(function(error){
     return error;
@@ -159,7 +160,7 @@ catch(err) {
   else {
     // Here is still the full Axios error, e.g. err.isAxiosError, err.response, err.request
     // This allows handling of network/ssl related issues
-    // Or just rethrow if you don't care
+    // Or just re-throw if you don't care
     throw err;
   }
 }
