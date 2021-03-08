@@ -1,10 +1,11 @@
 {
   "name": "hashi-vault-js",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "main": "Vault.js",
   "scripts": {
     "test:approle": "bash -c 'source tests/process.env && jest tests/AppRole.test.js'",
+    "test:kv": "bash -c 'source tests/process.env && jest tests/KV.test.js'",
     "test:ldap": "bash -c 'source tests/process.env && jest tests/LDAP.test.js'",
     "test:seal": "bash -c 'source tests/process.env && jest tests/Seal.test.js'",
     "test:sysapi": "bash -c 'source tests/process.env && jest tests/SysApi.test.js'",

@@ -9,7 +9,6 @@ const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
 const VaultUrl = process.env.VAULT_URL;
-const RootPath = process.env.ROOT_PATH;
 const AppRole = process.env.APPROLE;
 const Metadata = {
   tag1: "knight-vault",
@@ -23,7 +22,6 @@ const vault = new Vault( {
     key: ClientKey,
     cacert: CACert,
     baseUrl: VaultUrl,
-    rootPath: RootPath,
     timeout: 1000,
     proxy: false
 });
@@ -33,7 +31,7 @@ let token = null;
 vault.healthCheck().then(function(data) {
   console.log('> healthCheck output: \n',data);
   if (!data.sealed) {
-    vault.loginWithAppRole(RoleId, SecretId).then(function(data){
+    vault.loginWithAppRole(RoleId, SecretId, 'auth/approle').then(function(data){
       token = data.client_token;
       console.log('>> loginWithAppRole output: \n',data);
       vault.readAppRoleSecretId(data.client_token, AppRole, SecretId).then(function(data){

@@ -2,6 +2,16 @@
 
 ## Change Log
 
+* `0.4.1`
+  * Added `mount` optional parameter to auth methods and secret engines that might be mounted on a custom path
+    * LDAP auth method functions
+    * Userpass auth method functions
+    * AppRole auth method functions
+  * Added error handling documentation to README
+  * Updated dev environment to Vault `1.6.3`
+  * Split AppRole and KV test suite into 2 distinct isolated tests
+  * Improved KV v2 secret engine unit test
+
 * `0.4.0`
   * Refactored `createToken` function to accept an object as parameter (Issue#6)
   * Merged Pull Request `Make createToken more friendly to use #8`

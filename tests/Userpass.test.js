@@ -7,7 +7,6 @@ const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
 const VaultUrl = process.env.VAULT_URL;
-const RootPath = process.env.ROOT_PATH;
 const Username = process.env.USERPASS_USER;
 const Password = process.env.USERPASS_PASS;
 
@@ -17,7 +16,6 @@ const vault = new Vault( {
     key: ClientKey,
     cacert: CACert,
     baseUrl: VaultUrl,
-    rootPath: RootPath,
     timeout: 1000,
     proxy: false
 });

@@ -141,6 +141,30 @@ Update secret version 1 in the Vault:
 const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```
 
+### Error handling
+
+This package extends the error stack to differentiate if the exception occurred on the Vault API layer or not. Also, adds a help message from the Vault API docs.
+
+```javascript
+try {
+  vault.function(...);
+}
+// An exception happened and it was thrown
+catch(err) {
+  if(err.isVaultError) {
+    // This an error from Vault API
+    // Check Vault hint on this error
+    console.log(err.vaultHelpMessage);
+  }
+  else {
+    // Here is still the full Axios error, e.g. err.isAxiosError, err.response, err.request
+    // This allows handling of network/ssl related issues
+    // Or just rethrow if you don't care
+    throw err;
+  }
+}
+```
+
 Check below docs for more information on specific function groups.
 
 ### List of functions available

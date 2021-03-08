@@ -6,8 +6,9 @@
 
 ```javascript
 /**
-* @param {String} username
-* @param {String} password
+* @param {String<required>} username
+* @param {String<required>} password
+* @param {String} mount
 * @returns {Object}
 */
 ```
@@ -16,7 +17,8 @@
 
 ```javascript
 /**
-* @param {String} token
+* @param {String<required>} token
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -25,11 +27,12 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
-* @param {[String]} policies
-* @param {String} groups
-* @returns {Promise<Object>}
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {[String]<required>} policies
+* @param {String<required>} groups
+* @param {String} mount
+* @returns {Promise<Oject>}
 */
 ```
 
@@ -37,8 +40,9 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -47,11 +51,12 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
-* @param {[String]} policies
-* @param {String} groups
-* @returns {Promise<Object>}
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {[String]<required>} policies
+* @param {String<required>} groups
+* @param {String} mount
+* @returns {Promise<Oject>}
 */
 ```
 
@@ -61,17 +66,9 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
-* @returns {Promise<Object>}
-*/
-```
-
-* listLdapGroups(token)
-
-```javascript
-/**
-* @param {String} token
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -80,10 +77,11 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} group
-* @param {[String]} policies
-* @returns {Promise<Object>}
+* @param {String<required>} token
+* @param {String<required>} group
+* @param {[String]<required>} policies
+* @param {String} mount
+* @returns {Promise<Oject>}
 */
 ```
 
@@ -91,8 +89,19 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} group
+* @param {String<required>} token
+* @param {String<required>} group
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
+
+* listLdapGroups(token)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -101,10 +110,11 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} group
-* @param {[String]} policies
-* @returns {Promise<Object>}
+* @param {String<required>} token
+* @param {String<required>} group
+* @param {[String]<required>} policies
+* @param {String} mount
+* @returns {Promise<Oject>}
 */
 ```
 
@@ -114,8 +124,9 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} group
+* @param {String<required>} token
+* @param {String<required>} group
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```

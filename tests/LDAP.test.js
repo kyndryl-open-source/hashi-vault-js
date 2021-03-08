@@ -7,10 +7,9 @@ const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
 const VaultUrl = process.env.VAULT_URL;
-const RootPath = process.env.ROOT_PATH;
+const Group = process.env.LDAP_GROUP;
 const Username = process.env.LDAP_USERNAME;
 const Password = process.env.LDAP_PASSWORD;
-const Group = process.env.LDAP_GROUP;
 
 const vault = new Vault( {
     https: true,
@@ -18,7 +17,6 @@ const vault = new Vault( {
     key: ClientKey,
     cacert: CACert,
     baseUrl: VaultUrl,
-    rootPath: RootPath,
     timeout: 3000,
     proxy: false
 });

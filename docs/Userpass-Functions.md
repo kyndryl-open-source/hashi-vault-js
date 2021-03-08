@@ -6,8 +6,9 @@
 
 ```javascript
 /**
-* @param {String} username
-* @param {String} password
+* @param {String<required>} username
+* @param {String<required>} password
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -16,10 +17,11 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
-* @param {String} password
-* @param {[String]} policies
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {String<required>} password
+* @param {[String]<required>} policies
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -28,20 +30,24 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
-* @param {String} password
-* @param {[String]} policies
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {String<required>} password
+* @param {[String]<required>} policies
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
+
+**Note:** This is just an alias to createUserpassUser
 
 * readUserpassUser(token, username)
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -50,8 +56,9 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -60,10 +67,11 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
-* @param {String} password
-* @returns {Promise<Object>}
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {String<required>} password
+* @param {String} mount
+* @returns {Promise<Oject>}
 */
 ```
 
@@ -71,10 +79,11 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} username
-* @param {[String]} policies
-* @returns {Promise<Object>}
+* @param {String<required>} token
+* @param {String<required>} username
+* @param {[String]<required>} policies
+* @param {String} mount
+* @returns {Promise<Oject>}
 */
 ```
 
@@ -82,7 +91,8 @@
 
 ```javascript
 /**
-* @param {String} token
+* @param {String<required>} token
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
