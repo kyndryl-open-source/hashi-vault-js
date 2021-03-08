@@ -6,8 +6,9 @@
 
 ```javascript
 /**
-* @param {String} roleId
-* @param {String} secretId
+* @param {String<required>} roleId
+* @param {String<required>} secretId
+* @param {String} mount
 * @returns {Object}
 */
 ```
@@ -16,9 +17,10 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} appRole
+* @param {String<required>} token
+* @param {String<required>} appRole
 * @param {String} metadata
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -27,9 +29,10 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} appRole
-* @param {String} secretId
+* @param {String<required>} token
+* @param {String<required>} appRole
+* @param {String<required>} secretId
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
@@ -38,9 +41,10 @@
 
 ```javascript
 /**
-* @param {String} token
-* @param {String} appRole
-* @param {String} secretId
+* @param {String<required>} token
+* @param {String<required>} appRole
+* @param {String<required>} secretId
+* @param {String} mount
 * @returns {Promise<Object>}
 */
 ```

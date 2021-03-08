@@ -103,7 +103,7 @@ class Vault {
     this.key = params.key;
     this.cacert = params.cacert;
     this.baseUrl = params.baseUrl || config.baseUrl;
-    this.rootPath = params.rootPath || config.rootPath;
+    this.rootPath = params.rootPath;
     this.timeout = params.timeout || config.timeout;
     this.proxy = params.proxy || config.proxy;
     try {
@@ -335,7 +335,12 @@ class Vault {
     }
   }
 
+
+  //
   // Token auth method API endpoints
+  // The token method is built-in and automatically available at /auth/token.
+  //
+
   /**
   * @param {String} vaultToken
   * @param {Object} [params]
@@ -644,14 +649,23 @@ class Vault {
   //
 
   /**
-  * @param {String} username
-  * @param {String} password
+  * @param {String<required>} username
+  * @param {String<required>} password
+  * @param {String} mount
   * @returns {Object}
   */
-  async loginWithLdap(username, password) {
+  async loginWithLdap(username, password, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapLogin}/${username}`,
-      method: 'post',
+      url: `${rootPath}/${config.ldapLogin[0]}/${username}`,
+      method: config.ldapLogin[1],
       data: {
         password: password
       }
@@ -666,16 +680,25 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
-  * @param {[String]} policies
-  * @param {String} groups
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {[String]<required>} policies
+  * @param {String<required>} groups
+  * @param {String} mount
   * @returns {Promise<Oject>}
   */
-  async createLdapUser(token, username, policies, groups) {
+  async createLdapUser(token, username, policies, groups, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapCreateUser}/${username}`,
-      method: 'post',
+      url: `${rootPath}/${config.ldapCreateUser[0]}/${username}`,
+      method: config.ldapCreateUser[1],
       headers: {
         "X-Vault-Token": token
       },
@@ -694,26 +717,36 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
-  * @param {[String]} policies
-  * @param {String} groups
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {[String]<required>} policies
+  * @param {String<required>} groups
+  * @param {String} mount
   * @returns {Promise<Oject>}
   */
-  async updateLdapUser(token, username, policies, groups) {
-    return await this.createLdapUser(token, username, policies, groups);
+  async updateLdapUser(token, username, policies, groups, mount) {
+    return await this.createLdapUser(token, username, policies, groups, mount);
   }
 
   /**
-  * @param {String} token
-  * @param {String} group
-  * @param {[String]} policies
+  * @param {String<required>} token
+  * @param {String<required>} group
+  * @param {[String]<required>} policies
+  * @param {String} mount
   * @returns {Promise<Oject>}
   */
-  async createLdapGroup(token, group, policies) {
+  async createLdapGroup(token, group, policies, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapCreateGroup}/${group}`,
-      method: 'post',
+      url: `${rootPath}/${config.ldapCreateGroup[0]}/${group}`,
+      method: config.ldapCreateGroup[1],
       headers: {
         "X-Vault-Token": token
       },
@@ -731,24 +764,34 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} group
-  * @param {[String]} policies
+  * @param {String<required>} token
+  * @param {String<required>} group
+  * @param {[String]<required>} policies
+  * @param {String} mount
   * @returns {Promise<Oject>}
   */
-  async updateLdapGroup(token, group, policies) {
-    return await this.createLdapGroup(token, group, policies);
+  async updateLdapGroup(token, group, policies, mount) {
+    return await this.createLdapGroup(token, group, policies, mount);
   }
 
   /**
-  * @param {String} token
-  * @param {String} group
+  * @param {String<required>} token
+  * @param {String<required>} group
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async readLdapGroup(token, group) {
+  async readLdapGroup(token, group, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapReadGroup}/${group}`,
-      method: 'get',
+      url: `${rootPath}/${config.ldapReadGroup[0]}/${group}`,
+      method: config.ldapReadGroup[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -763,14 +806,23 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async readLdapUser(token, username) {
+  async readLdapUser(token, username, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapReadUser}/${username}`,
-      method: 'get',
+      url: `${rootPath}/${config.ldapReadUser[0]}/${username}`,
+      method: config.ldapReadUser[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -785,13 +837,22 @@ class Vault {
   }
 
   /**
-  * @param {String} token
+  * @param {String<required>} token
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async listLdapUsers(token) {
+  async listLdapUsers(token, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapListUsers}`,
-      method: 'list',
+      url: `${rootPath}/${config.ldapListUsers[0]}`,
+      method: config.ldapListUsers[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -806,13 +867,22 @@ class Vault {
   }
 
   /**
-  * @param {String} token
+  * @param {String<required>} token
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async listLdapGroups(token) {
+  async listLdapGroups(token, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapListGroups}`,
-      method: 'list',
+      url: `${rootPath}/${config.ldapListGroups[0]}`,
+      method: config.ldapListGroups[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -827,14 +897,23 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async deleteLdapUser(token, username) {
+  async deleteLdapUser(token, username, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapDeleteUser}/${username}`,
-      method: 'delete',
+      url: `${rootPath}/${config.ldapDeleteUser[0]}/${username}`,
+      method: config.ldapDeleteUser[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -849,14 +928,23 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} group
+  * @param {String<required>} token
+  * @param {String<required>} group
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async deleteLdapGroup(token, group) {
+  async deleteLdapGroup(token, group, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
     const Options = {
-      url: `${config.ldapDeleteGroup}/${group}`,
-      method: 'delete',
+      url: `${rootPath}/${config.ldapDeleteGroup[0]}/${group}`,
+      method: config.ldapDeleteGroup[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -876,14 +964,23 @@ class Vault {
   //
 
   /**
-  * @param {String} username
-  * @param {String} password
+  * @param {String<required>} username
+  * @param {String<required>} password
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async loginWithUserpass(username, password) {
+  async loginWithUserpass(username, password, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.userpassRootPath;
+    }
     const Options = {
-      url: `${config.userpassLogin}/${username}`,
-      method: 'post',
+      url: `${rootPath}/${config.userpassLogin[0]}/${username}`,
+      method: config.userpassLogin[1],
       data: {
         password: password
       }
@@ -898,16 +995,25 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
-  * @param {String} password
-  * @param {[String]} policies
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {String<required>} password
+  * @param {[String]<required>} policies
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async createUserpassUser(token, username, password, policies) {
+  async createUserpassUser(token, username, password, policies, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.userpassRootPath;
+    }
     const Options = {
-      url: `${config.userpassCreateUser}/${username}`,
-      method: 'post',
+      url: `${rootPath}/${config.userpassCreateUser[0]}/${username}`,
+      method: config.userpassCreateUser[1],
       headers: {
         "X-Vault-Token": token
       },
@@ -926,25 +1032,35 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
-  * @param {String} password
-  * @param {[String]} policies
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {String<required>} password
+  * @param {[String]<required>} policies
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async updateUserpassUser(token, username, password, policies) {
-    return await this.createUserpassUser(token, username, password, policies);
+  async updateUserpassUser(token, username, password, policies, mount) {
+    return await this.createUserpassUser(token, username, password, policies, mount);
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async readUserpassUser(token, username) {
+  async readUserpassUser(token, username, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.userpassRootPath;
+    }
     const Options = {
-      url: `${config.userpassReadUser}/${username}`,
-      method: 'get',
+      url: `${rootPath}/${config.userpassReadUser[0]}/${username}`,
+      method: config.userpassReadUser[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -959,14 +1075,23 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async deleteUserpassUser(token, username) {
+  async deleteUserpassUser(token, username, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.userpassRootPath;
+    }
     const Options = {
-      url: `${config.userpassDeleteUser}/${username}`,
-      method: 'delete',
+      url: `${rootPath}/${config.userpassDeleteUser[0]}/${username}`,
+      method: config.userpassDeleteUser[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -981,15 +1106,24 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
-  * @param {String} password
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {String<required>} password
+  * @param {String} mount
   * @returns {Promise<Oject>}
   */
-  async updateUserpassPassword(token, username, password) {
+  async updateUserpassPassword(token, username, password, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.userpassRootPath;
+    }
     const Options = {
-      url: `${config.userpassUpdatePass}/${username}/password`,
-      method: 'post',
+      url: `${rootPath}/${config.userpassUpdatePass[0]}/${username}/password`,
+      method: config.userpassUpdatePass[1],
       headers: {
         "X-Vault-Token": token
       },
@@ -1007,15 +1141,24 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} username
-  * @param {[String]} policies
+  * @param {String<required>} token
+  * @param {String<required>} username
+  * @param {[String]<required>} policies
+  * @param {String} mount
   * @returns {Promise<Oject>}
   */
-  async updateUserpassPolicies(token, username, policies) {
+  async updateUserpassPolicies(token, username, policies, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.userpassRootPath;
+    }
     const Options = {
-      url: `${config.userpassUpdatePass}/${username}/policies`,
-      method: 'post',
+      url: `${rootPath}/${config.userpassUpdatePolicies[0]}/${username}/policies`,
+      method: config.userpassUpdatePolicies[1],
       headers: {
         "X-Vault-Token": token
       },
@@ -1033,13 +1176,22 @@ class Vault {
   }
 
   /**
-  * @param {String} token
+  * @param {String<required>} token
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async listUserpassUsers(token) {
+  async listUserpassUsers(token, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.userpassRootPath;
+    }
     const Options = {
-      url: `${config.userpassListUsers}`,
-      method: 'list',
+      url: `${rootPath}/${config.userpassListUsers[0]}`,
+      method: config.userpassListUsers[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -1060,14 +1212,23 @@ class Vault {
   //
 
   /**
-  * @param {String} roleId
-  * @param {String} secretId
+  * @param {String<required>} roleId
+  * @param {String<required>} secretId
+  * @param {String} mount
   * @returns {Object}
   */
-  async loginWithAppRole(roleId, secretId) {
+  async loginWithAppRole(roleId, secretId, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.appRoleRootPath;
+    }
     const Options = {
-      url: config.appRoleLogin,
-      method: 'post',
+      url: `${rootPath}/${config.appRoleLogin[0]}`,
+      method: config.appRoleLogin[1],
       data: {
         role_id: roleId,
         secret_id: secretId
@@ -1083,20 +1244,29 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} appRole
+  * @param {String<required>} token
+  * @param {String<required>} appRole
   * @param {String} metadata
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async generateAppRoleSecretId(token, appRole, metadata) {
+  async generateAppRoleSecretId(token, appRole, metadata, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.appRoleRootPath;
+    }
     const Options = {
-      url: `${config.appRolePath}/${appRole}/secret-id`,
-      method: 'post',
+      url: `${rootPath}/${config.appRoleCreateSecret[0]}/${appRole}/${config.appRoleCreateSecret[1]}`,
+      method: config.appRoleCreateSecret[2],
       headers: {
         "X-Vault-Token": token
       },
       data: {
-        "metadata": metadata
+        metadata: metadata
       }
     };
 
@@ -1109,20 +1279,29 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} appRole
-  * @param {String} secretId
+  * @param {String<required>} token
+  * @param {String<required>} appRole
+  * @param {String<required>} secretId
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async readAppRoleSecretId(token, appRole, secretId) {
+  async readAppRoleSecretId(token, appRole, secretId, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.appRoleRootPath;
+    }
     const Options = {
-      url: `${config.appRolePath}/${appRole}/secret-id/lookup`,
-      method: 'post',
+      url: `${rootPath}/${config.appRoleReadSecret[0]}/${appRole}/${config.appRoleReadSecret[1]}`,
+      method: config.appRoleReadSecret[2],
       headers: {
         "X-Vault-Token": token
       },
       data: {
-        "secret_id": secretId
+        secret_id: secretId
       }
     };
 
@@ -1135,20 +1314,29 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {String} appRole
-  * @param {String} secretId
+  * @param {String<required>} token
+  * @param {String<required>} appRole
+  * @param {String<required>} secretId
+  * @param {String} mount
   * @returns {Promise<Object>}
   */
-  async destroyAppRoleSecretId(token, appRole, secretId) {
+  async destroyAppRoleSecretId(token, appRole, secretId, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.appRoleRootPath;
+    }
     const Options = {
-      url: `${config.appRolePath}/${appRole}/secret-id/destroy`,
-      method: 'post',
+      url: `${rootPath}/${config.appRoleDestroySecret[0]}/${appRole}/${config.appRoleDestroySecret[1]}`,
+      method: config.appRoleDestroySecret[2],
       headers: {
         "X-Vault-Token": token
       },
       data: {
-        "secret_id": secretId
+        secret_id: secretId
       }
     };
 
@@ -2163,8 +2351,8 @@ class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `/${rootPath}/${config.kvReadEngine}`,
-      method: 'get',
+      url: `${rootPath}/${config.kvReadEngine[0]}`,
+      method: config.kvReadEngine[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -2195,8 +2383,8 @@ class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `/${rootPath}/${config.kvCreateSecret}/${name}`,
-      method: 'post',
+      url: `${rootPath}/${config.kvCreateSecret[0]}/${name}`,
+      method: config.kvCreateSecret[1],
       headers: {
         "X-Vault-Token": token
       },
@@ -2234,14 +2422,14 @@ class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `/${rootPath}/${config.kvUpdateSecret}/${name}`,
-      method: 'post',
+      url: `${rootPath}/${config.kvUpdateSecret[0]}/${name}`,
+      method: config.kvUpdateSecret[1],
       headers: {
         "X-Vault-Token": token
       },
       data: {
         options: {
-          "cas": version
+          cas: version
         },
         data: secrets
       }
@@ -2251,6 +2439,7 @@ class Vault {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
+      console.log(err.response);
       throw parseAxiosError(err);
     }
   }
@@ -2273,8 +2462,8 @@ class Vault {
     }
     const suffix = version ? `?version=${version}` : "";
     const Options = {
-      url: `/${rootPath}/${config.kvReadSecret}/${name}${suffix}`,
-      method: 'get',
+      url: `${rootPath}/${config.kvReadSecret[0]}/${name}${suffix}`,
+      method: config.kvReadSecret[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -2304,8 +2493,8 @@ class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `/${rootPath}/${config.kvDeleteLatestSecret}/${name}`,
-      method: 'delete',
+      url: `${rootPath}/${config.kvDeleteLatestSecret[0]}/${name}`,
+      method: config.kvDeleteLatestSecret[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -2336,13 +2525,13 @@ class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `/${rootPath}/${config.kvDeleteSecret}/${name}`,
-      method: 'post',
+      url: `${rootPath}/${config.kvDeleteSecret[0]}/${name}`,
+      method: config.kvDeleteSecret[1],
       headers: {
         "X-Vault-Token": token
       },
       data: {
-        "versions": versions
+        versions: versions
       }
     };
 
@@ -2371,13 +2560,13 @@ class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `/${rootPath}/${config.kvUndeleteSecret}/${name}`,
-      method: 'post',
+      url: `${rootPath}/${config.kvUndeleteSecret[0]}/${name}`,
+      method: config.kvUndeleteSecret[1],
       headers: {
         "X-Vault-Token": token
       },
       data: {
-        "versions": versions
+        versions: versions
       }
     };
 
@@ -2406,13 +2595,13 @@ class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `/${rootPath}/${config.kvDestroySecret}/${name}`,
-      method: 'post',
+      url: `${rootPath}/${config.kvDestroySecret[0]}/${name}`,
+      method: config.kvDestroySecret[1],
       headers: {
         "X-Vault-Token": token
       },
       data: {
-        "versions": versions
+        versions: versions
       }
     };
 
@@ -2441,13 +2630,13 @@ class Vault {
       rootPath = config.kvRootPath;
     }
     if (folder) {
-      url = `/${rootPath}/${config.kvListSecrets}/${folder}`;
+      url = `${rootPath}/${config.kvListSecrets[0]}/${folder}`;
     } else {
-      url = `/${rootPath}/${config.kvListSecrets}`;
+      url = `${rootPath}/${config.kvListSecrets[0]}`;
     }
     const Options = {
       url: url,
-      method: 'list',
+      method: config.kvListSecrets[1],
       headers: {
         "X-Vault-Token": token
       }
