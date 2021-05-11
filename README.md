@@ -160,7 +160,7 @@ catch(err) {
   else {
     // Here is still the full Axios error, e.g. err.isAxiosError, err.response, err.request
     // This allows handling of network/ssl related issues
-    // Or just re-throw if you don't care
+    // Or just re-kthrow if you don't care
     throw err;
   }
 }

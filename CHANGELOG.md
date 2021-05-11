@@ -2,6 +2,10 @@
 
 ## Change Log
 
+* `0.4.2`
+  * Fixed security vulnerabilities (npm audit fix)
+  * `hosted-git-info` and `lodash` vulnerabilities
+
 * `0.4.1`
   * Added `mount` optional parameter to auth methods and secret engines that might be mounted on a custom path
     * LDAP auth method functions
