@@ -19,6 +19,9 @@ const Metadata = {
   tag1: "development",
   tag2: "unit-test"
 };
+const Config = {
+  max_versions: 5
+};
 
 let token = null;
 let newSecretId = null;
@@ -42,31 +45,36 @@ const vault = new Vault( {
 vault.healthCheck().then(function(data) {
   console.log('1> healthCheck output: \n',data);
   if (!data.sealed) {
-    vault.readKVEngineConfig(Token, RootPath).then(function(data) {
-      console.log('2> readKVEngineConfig output: \n',data);
-      vault.createKVSecret(Token, SecretName , Secrets1, RootPath).then(function(data) {
-        console.log('3> createKVSecret output: \n',data);
-        vault.readKVSecret(Token, SecretName, 1, RootPath).then(function(data) {
-          console.log('4> readKVSecret output: \n',data);
-          vault.updateKVSecret(Token, SecretName, Secrets2, 1, RootPath).then(function(data) {
-            console.log('5> updateKVSecret output: \n',data);
-            vault.updateKVSecret(Token, SecretName, Secrets3, 2, RootPath).then(function(data) {
+    vault.updateKVEngineConfig(Token, Config, RootPath).then(function(data) {
+      console.log('2> updateKVEngineConfig output: \n',data);
+      vault.readKVEngineConfig(Token, RootPath).then(function(data) {
+        console.log('3> readKVEngineConfig output: \n',data);
+        vault.createKVSecret(Token, SecretName , Secrets1, RootPath).then(function(data) {
+          console.log('4> createKVSecret output: \n',data);
+          vault.readKVSecret(Token, SecretName, 1, RootPath).then(function(data) {
+            console.log('5> readKVSecret output: \n',data);
+            vault.updateKVSecret(Token, SecretName, Secrets2, 1, RootPath).then(function(data) {
               console.log('6> updateKVSecret output: \n',data);
+              vault.updateKVSecret(Token, SecretName, Secrets3, 2, RootPath).then(function(data) {
+                console.log('7> updateKVSecret output: \n',data);
 
+              }).catch(function(updateError){
+                console.error('7> updateKVSecret error: \n',updateError);
+              });
             }).catch(function(updateError){
               console.error('6> updateKVSecret error: \n',updateError);
             });
-          }).catch(function(updateError){
-            console.error('5> updateKVSecret error: \n',updateError);
+          }).catch(function(readError){
+            console.error('5> readKVSecret error: \n',readError);
           });
-        }).catch(function(readError){
-          console.error('4> readKVSecret error: \n',readError);
+        }).catch(function(createError){
+          console.error('4> createKVSecret error: \n',createError);
         });
-      }).catch(function(createError){
-        console.error('3> createKVSecret error: \n',createError);
+      }).catch(function(engineError) {
+        console.error('3> readKVEngineConfig error: \n', engineError);
       });
     }).catch(function(engineError){
-      console.error('2> readKVEngineConfig error: \n',engineError);
+      console.error('2> updateKVEngineConfig error: \n',engineError);
     });
   }
 }).catch(function(healthError){

@@ -2,6 +2,17 @@
 
 ## KV v2 Functions List
 
+* updateKVEngineConfig(token)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {Object<required>} data
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
+
 * readKVEngineConfig(token)
 
 ```javascript
