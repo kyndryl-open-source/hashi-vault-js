@@ -17,6 +17,10 @@ const Metadata = {
   tag1: "development",
   tag2: "unit-test"
 };
+const Config = {
+  max_versions: 5
+};
+
 let token = null;
 let version = 1;
 let newSecretId = null;
@@ -41,6 +45,12 @@ const vault = new Vault( {
 //TODO: Automatically delete previous data on KV engine
 //TODO: Automatically clean up /$RootPath mount point
 
+
+test('updateKVEngineConfig: the result is the KV engine config', async () => {
+  const data = await vault.updateKVEngineConfig(Token, Config, RootPath);
+  console.log('updateKVEngineConfig output:\n', data);
+  return expect(data).toBeDefined();
+});
 
 test('readKVEngineConfig: the result is the KV engine config', async () => {
     const data = await vault.readKVEngineConfig(Token, RootPath);
