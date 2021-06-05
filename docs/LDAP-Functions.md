@@ -2,7 +2,7 @@
 
 ## LDAP Functions List
 
-* loginWithLdap(username, password)
+* loginWithLdap(username, password, mount)
 
 ```javascript
 /**
@@ -13,7 +13,7 @@
 */
 ```
 
-* listLdapUsers(token)
+* listLdapUsers(token, mount)
 
 ```javascript
 /**
@@ -23,7 +23,7 @@
 */
 ```
 
-* createLdapUser(token, username, policies, groups)
+* createLdapUser(token, username, policies, groups, mount)
 
 ```javascript
 /**
@@ -36,7 +36,7 @@
 */
 ```
 
-* readLdapUser(token, username)
+* readLdapUser(token, username, mount)
 
 ```javascript
 /**
@@ -47,7 +47,7 @@
 */
 ```
 
-* updateLdapUser(token, username, policies, groups)
+* updateLdapUser(token, username, policies, groups, mount)
 
 ```javascript
 /**
@@ -62,7 +62,7 @@
 
 **Note:** This is just an alias to createLdapUser as they share the same API endpoint.
 
-* deleteLdapUser(token, username)
+* deleteLdapUser(token, username, mount)
 
 ```javascript
 /**
@@ -73,7 +73,7 @@
 */
 ```
 
-* createLdapGroup(token, group, policies)
+* createLdapGroup(token, group, policies, mount)
 
 ```javascript
 /**
@@ -85,7 +85,7 @@
 */
 ```
 
-* readLdapGroup(token, group)
+* readLdapGroup(token, group, mount)
 
 ```javascript
 /**
@@ -96,7 +96,7 @@
 */
 ```
 
-* listLdapGroups(token)
+* listLdapGroups(token, mount)
 
 ```javascript
 /**
@@ -106,7 +106,7 @@
 */
 ```
 
-* updateLdapGroup(token, group, policies)
+* updateLdapGroup(token, group, policies, mount)
 
 ```javascript
 /**
@@ -120,7 +120,7 @@
 
 **Note:** This is just an alias to createLdapGroup as they share the same API endpoint.
 
-* deleteLdapGroup(token, group)
+* deleteLdapGroup(token, group, mount)
 
 ```javascript
 /**
