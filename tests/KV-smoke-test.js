@@ -2,7 +2,7 @@
 const Vault = require('../Vault');
 
 // source process.env
-const SecretName = "Slack104";
+const SecretName = "Slack105";
 const Secrets1 = {
     bot_token1: "xoxb-123456789011-1234567890123-1w1lln0tt3llmys3cr3tatm3",
     bot_token2: "xoxb-123456789011-1234567890124-1w1lln0tt3llmys3cr3tatm3"

@@ -15,9 +15,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
 * npm
   * Tested on: **v6.14.x**
 * HashiCorp Vault
-  * Minimum: v1.4.x
-  * Accepted: v1.5.x
-  * Recommended: **v1.6.x**
+  * Minimum: v1.5.x
+  * Accepted: v1.6.x
+  * Recommended: **v1.7.x**
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
@@ -159,7 +159,7 @@ catch(err) {
   }
   else {
     // Here is still the full Axios error, e.g. err.isAxiosError, err.response, err.request
-    // This allows handling of network/ssl related issues
+    // This allows handling of network/tls related issues
     // Or just re-kthrow if you don't care
     throw err;
   }
@@ -213,7 +213,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 
 | **Method** | **Coverage status** |
 |:-----------|:-----------|
-|  [AppRole](https://www.vaultproject.io/api-docs/auth/approle) | `Partially` |
+| [AppRole](https://www.vaultproject.io/api-docs/auth/approle) | `Partially` |
 | [LDAP](https://www.vaultproject.io/api-docs/auth/ldap) | `Most of them` |
 | [Userpass](https://www.vaultproject.io/api-docs/auth/userpass) | `All endpoints` |
 | [Token](https://www.vaultproject.io/api-docs/auth/token) | `Most of them` |
@@ -251,10 +251,11 @@ If you have found what you believe to be an issue with `hashi-vault-js` please d
 If you want to see new features or enhancements to the current ones, we would love to hear them. Please submit an issue on the GitHub repository [here](https://github.com/rod4n4m1/hashi-vault-js/issues/new?template=new-feature.md).
 
 ### Authors
-Written by Rod Anami <rod.anami@br.ibm.com>, June 2020.
+Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 
 ### Contributors
-Richard <richie765@>
+* Richard <richie765@>
+* Artico Bandurini <articobandurini>
 
 ### License
 This project is licensed under the [Eclipse Public License 2.0](https://opensource.org/licenses/EPL-2.0).

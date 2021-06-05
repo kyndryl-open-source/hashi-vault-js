@@ -1,6 +1,6 @@
 const Vault = require('../Vault');
 
-const SecretName = "Slack73";
+const SecretName = "Slack75";
 const Secrets1 = {
     bot_token1: "xoxb-123456789011-1234567890123-1w1lln0tt3llmys3cr3tatm3",
     bot_token2: "xoxb-123456789011-1234567890124-1w1lln0tt3llmys3cr3tatm3"
