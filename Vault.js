@@ -2337,6 +2337,38 @@ class Vault {
   //
 
   /**
+   * @param {String<required>} token
+   * @param {Object<required>} data
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async updateKVEngineConfig(token, data, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.kvUpdateEngine[0]}`,
+      method: config.kvUpdateEngine[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: data
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
   * @param {String<required>} token
   * @param {String} mount
   * @returns {Promise<Object>}
