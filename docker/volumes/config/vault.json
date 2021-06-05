@@ -1,0 +1,18 @@
+{
+  "backend": {
+    "file": {
+      "path": "/vault/file"
+    }
+  },
+  "listener": {
+    "tcp":{
+      "address": "0.0.0.0:8200",
+      "tls_disable": 0,
+      "tls_cert_file": "/vault/certs/vault.crt",
+      "tls_key_file": "/vault/certs/vault.key"
+    }
+  },
+  "ui": true,
+  "max_lease_ttl": "760h",
+  "default_lease_ttl": "760h"
+}

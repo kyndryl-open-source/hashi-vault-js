@@ -2,6 +2,10 @@
 
 ## Change Log
 
+* `0.4.3`
+  * Merged Pull Request `Add updateKVEngineConfig method`
+  * Upgraded development env to Vault server `1.7.2`
+
 * `0.4.2`
   * Fixed security vulnerabilities (npm audit fix)
   * `hosted-git-info` and `lodash` vulnerabilities
