@@ -2,7 +2,7 @@
 
 ## Userpass Functions List
 
-* loginWithUserpass(username, password)
+* loginWithUserpass(username, password, mount)
 
 ```javascript
 /**
@@ -13,7 +13,7 @@
 */
 ```
 
-* createUserpassUser(token, username, password, policies)
+* createUserpassUser(token, username, password, policies, mount)
 
 ```javascript
 /**
@@ -26,7 +26,7 @@
 */
 ```
 
-* updateUserpassUser(token, username, password, policies)
+* updateUserpassUser(token, username, password, policies, mount)
 
 ```javascript
 /**
@@ -41,7 +41,7 @@
 
 **Note:** This is just an alias to createUserpassUser
 
-* readUserpassUser(token, username)
+* readUserpassUser(token, username, mount)
 
 ```javascript
 /**
@@ -52,7 +52,7 @@
 */
 ```
 
-* deleteUserpassUser(token, username)
+* deleteUserpassUser(token, username, mount)
 
 ```javascript
 /**
@@ -75,7 +75,7 @@
 */
 ```
 
-* updateUserpassPolicies(token, username, policies)
+* updateUserpassPolicies(token, username, policies, mount)
 
 ```javascript
 /**
@@ -87,7 +87,7 @@
 */
 ```
 
-* listUserpassUsers(token)
+* listUserpassUsers(token, mount)
 
 ```javascript
 /**
