@@ -65,3 +65,6 @@ ha/*.env
 
 # next.js build output
 .next
+
+# webstorm files
+.idea/

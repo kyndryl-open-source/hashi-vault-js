@@ -74,6 +74,7 @@ const config = {
   pkiListRoles: ['roles', 'list'],
   pkiDeleteRole: ['roles', 'delete'],
   kvRootPath: 'secret',
+  kvUpdateEngine: ['config', 'post'],
   kvReadEngine: ['config', 'get'],
   kvCreateSecret: ['data', 'post'],
   kvUpdateSecret: ['data', 'post'],
