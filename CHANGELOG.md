@@ -2,6 +2,12 @@
 
 ## Change Log
 
+* `0.4.3`
+  * Added *KV v2 secret engine* function:
+    * `updateKVEngineConfig`
+  * Upgraded development env to Vault server `1.7.2`
+  * Fixed security vulnerability (npm audit fix)
+
 * `0.4.2`
   * Fixed security vulnerabilities (npm audit fix)
   * `hosted-git-info` and `lodash` vulnerabilities
