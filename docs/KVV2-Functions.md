@@ -2,7 +2,7 @@
 
 ## KV v2 Functions List
 
-* updateKVEngineConfig(token)
+* updateKVEngineConfig(token, data, mount)
 
 ```javascript
 /**
@@ -13,7 +13,7 @@
 */
 ```
 
-* readKVEngineConfig(token)
+* readKVEngineConfig(token, mount)
 
 ```javascript
 /**
@@ -23,7 +23,7 @@
 */
 ```
 
-* createKVSecret(token, name, secrets)
+* createKVSecret(token, name, secrets, mount)
 
 ```javascript
 /**
@@ -35,7 +35,7 @@
 */
 ```
 
-* updateKVSecret(token, name, secrets, version)
+* updateKVSecret(token, name, secrets, version, mount)
 
 ```javascript
 /**
@@ -48,7 +48,7 @@
 */
 ```
 
-* readKVSecret(token, name, version)
+* readKVSecret(token, name, version, mount)
 
 ```javascript
 /**
@@ -60,7 +60,7 @@
 */
 ```
 
-* deleteLatestVerKVSecret(token, name)
+* deleteLatestVerKVSecret(token, name, mount)
 
 ```javascript
 /**
@@ -71,19 +71,7 @@
 */
 ```
 
-* deleteVersionsKVSecret(token, name, versions)
-
-```javascript
-/**
-* @param {String<required>} token
-* @param {String<required>} name
-* @param {[Integer]<required>} versions
-* @param {String} mount
-* @returns {Promise<Object>}
-*/
-```
-
-* undeleteVersionsKVSecret(token, name, versions)
+* deleteVersionsKVSecret(token, name, versions, mount)
 
 ```javascript
 /**
@@ -95,7 +83,7 @@
 */
 ```
 
-* destroyVersionsKVSecret(token, name, versions)
+* undeleteVersionsKVSecret(token, name, versions, mount)
 
 ```javascript
 /**
@@ -107,7 +95,19 @@
 */
 ```
 
-* listKVSecrets(token, folder)
+* destroyVersionsKVSecret(token, name, versions, mount)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String<required>} name
+* @param {[Integer]<required>} versions
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
+
+* listKVSecrets(token, folder, mount)
 
 ```javascript
 /**

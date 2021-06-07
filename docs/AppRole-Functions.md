@@ -2,7 +2,7 @@
 
 ## AppRole Functions List
 
-* loginWithAppRole(roleId, secretId)
+* loginWithAppRole(roleId, secretId, mount)
 
 ```javascript
 /**
@@ -13,7 +13,7 @@
 */
 ```
 
-* generateAppRoleSecretId(token, appRole, metadata)
+* generateAppRoleSecretId(token, appRole, metadata, mount)
 
 ```javascript
 /**
@@ -25,7 +25,7 @@
 */
 ```
 
-* readAppRoleSecretId(token, appRole, secretId)
+* readAppRoleSecretId(token, appRole, secretId, mount)
 
 ```javascript
 /**
@@ -37,7 +37,7 @@
 */
 ```
 
-* destroyAppRoleSecretId(token, appRole, secretId)
+* destroyAppRoleSecretId(token, appRole, secretId, mount)
 
 ```javascript
 /**
