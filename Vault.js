@@ -1208,6 +1208,231 @@ class Vault {
 
 
   //
+  // Kubernetes auth method API endpoints
+  //
+
+  /**
+   * @param {String<required>} role
+   * @param {String<required>} jwt
+   * @param {String} mount
+   * @returns {Object}
+   */
+  async loginWithK8s(role, jwt, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.k8sRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.k8sLogin[0]}`,
+      method: config.k8sLogin[1],
+      data: {
+        role: role,
+        jwt: jwt
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {Object<required>} data
+   * @param {String} mount
+   * @returns {Object}
+   */
+  async updateK8sConfig(token, data, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.k8sRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.k8sUpdateConfig[0]}`,
+      method: config.k8sUpdateConfig[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: data
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String} mount
+   * @returns {Object}
+   */
+  async readK8sConfig(token, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.k8sRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.k8sReadConfig[0]}`,
+      method: config.k8sReadConfig[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} role
+   * @param {Object<required>} data
+   * @param {String} mount
+   * @returns {Object}
+   */
+  async createK8sRole(token, role, data, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.k8sRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.k8sCreateRole[0]}/${role}`,
+      method: config.k8sCreateRole[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: data
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} role
+   * @param {String} mount
+   * @returns {Object}
+   */
+  async readK8sRole(token, role, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.k8sRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.k8sReadRole[0]}/${role}`,
+      method: config.k8sReadRole[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String} mount
+   * @returns {Object}
+   */
+  async listK8sRoles(token, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.k8sRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.k8sReadRole[0]}?list=true`,
+      method: config.k8sReadRole[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} role
+   * @param {String} mount
+   * @returns {Object}
+   */
+  async deleteK8sRole(token, role, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.k8sRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.k8sDeleteRole[0]}/${role}`,
+      method: config.k8sDeleteRole[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+
+
+  //
   // AppRole auth method API endpoints
   //
 
