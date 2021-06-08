@@ -123,10 +123,11 @@ class Vault {
   /**
   * @returns {Promise<Object>}
   */
-  async healthCheck(){
+  async healthCheck(params){
     const Options = {
       url: config.sysHealth,
-      method: 'get'
+      method: 'get',
+      params: params
     };
 
     try {
