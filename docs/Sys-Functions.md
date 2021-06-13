@@ -2,10 +2,11 @@
 
 ## System Functions List
 
-* healthCheck()
+* healthCheck(params)
 
 ```javascript
 /**
+* @param {Object} params
 * @returns {Promise<Object>}
 */
 ```
