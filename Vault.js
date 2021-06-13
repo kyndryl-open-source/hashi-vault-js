@@ -1246,11 +1246,11 @@ class Vault {
 
   /**
    * @param {String<required>} token
-   * @param {Object<required>} data
+   * @param {Object<required>} params
    * @param {String} mount
    * @returns {Object}
    */
-  async updateK8sConfig(token, data, mount) {
+  async updateK8sConfig(token, params, mount) {
     let rootPath= "";
     if (mount) {
       rootPath = mount;
@@ -1265,7 +1265,7 @@ class Vault {
       headers: {
         "X-Vault-Token": token
       },
-      data: data
+      data: params
     };
 
     try {
@@ -1309,11 +1309,11 @@ class Vault {
   /**
    * @param {String<required>} token
    * @param {String<required>} role
-   * @param {Object<required>} data
+   * @param {Object<required>} params
    * @param {String} mount
    * @returns {Object}
    */
-  async createK8sRole(token, role, data, mount) {
+  async createK8sRole(token, role, params, mount) {
     let rootPath= "";
     if (mount) {
       rootPath = mount;
@@ -1328,7 +1328,7 @@ class Vault {
       headers: {
         "X-Vault-Token": token
       },
-      data: data
+      data: params
     };
 
     try {

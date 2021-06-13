@@ -2,7 +2,7 @@
 
 ## Kubernetes Functions List
 
-* loginWithK8s(role, jwt)
+* loginWithK8s(role, jwt, mount)
 
 ```javascript
 /**
@@ -13,18 +13,18 @@
 */
 ```
 
-* updateK8sConfig(token, data)
+* updateK8sConfig(token, params, mount)
 
 ```javascript
 /**
 * @param {String<required>} token
-* @param {Object<required>} data
+* @param {Object<required>} params
 * @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
 
-* readK8sConfig(token)
+* readK8sConfig(token, mount)
 
 ```javascript
 /**
@@ -34,30 +34,30 @@
 */
 ```
 
-* createK8sRole(token, role, data)
-
-```javascript
-/**
-* @param {String<required>} token
-* @param {String<required>} role
-* @param {Object<required>} data
-* @param {String} mount
-* @returns {Promise<Object>}
-*/
-```
-
-* readK8sRole(token, role)
+* createK8sRole(token, role, params, mount)
 
 ```javascript
 /**
 * @param {String<required>} token
 * @param {String<required>} role
+* @param {Object<required>} params
 * @param {String} mount
 * @returns {Promise<Object>}
 */
 ```
 
-* listK8sRoles(token)
+* readK8sRole(token, role, mount)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String<required>} role
+* @param {String} mount
+* @returns {Promise<Object>}
+*/
+```
+
+* listK8sRoles(token, mount)
 
 ```javascript
 /**
@@ -67,7 +67,7 @@
 */
 ```
 
-* deleteK8sRole(token, role)
+* deleteK8sRole(token, role, mount)
 
 ```javascript
 /**
