@@ -216,6 +216,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 | [AppRole](https://www.vaultproject.io/api-docs/auth/approle) | `Partially` |
 | [LDAP](https://www.vaultproject.io/api-docs/auth/ldap) | `Most of them` |
 | [Userpass](https://www.vaultproject.io/api-docs/auth/userpass) | `All endpoints` |
+| [Kubernetes](https://www.vaultproject.io/api-docs/auth/kubernetes) | `All endpoints` |
 | [Token](https://www.vaultproject.io/api-docs/auth/token) | `Most of them` |
 | | |
 
