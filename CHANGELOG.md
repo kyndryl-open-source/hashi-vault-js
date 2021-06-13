@@ -2,6 +2,9 @@
 
 ## Change Log
 
+* `0.4.4`
+  * Added *Kubernetes (K8s) auth method* functions
+
 * `0.4.3`
   * Added *KV v2 secret engine* function:
     * `updateKVEngineConfig`

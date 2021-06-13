@@ -170,37 +170,18 @@ Check below docs for more information on specific function groups.
 
 ### List of functions available
 
-**System Backend API endpoints - General**
-
-[Doc file](/docs/Sys-Functions.md)
-
-**System Backend API endpoints - SEAL operations**
-
-[Doc file](/docs/Sys-Seal-Functions.md)
-
-**Token auth method API endpoints - /auth/token**
-
-[Doc file](/docs/Token-Functions.md)
-
-**LDAP auth method API endpoints - /auth/ldap**
-
-[Doc file](/docs/LDAP-Functions.md)
-
-**Userpass auth method API endpoints - /auth/userpass**
-
-[Doc file](/docs/Userpass-Functions.md)
-
-**AppRole auth method API endpoints - /auth/approle**
-
-[Doc file](/docs/AppRole-Functions.md)
-
-**PKI secret engine API endpoints**
-
-[Doc file](/docs/PKI-Functions.md)
-
-**KV v2 secret engine API endpoints**
-
-[Doc file](/docs/KVV2-Functions.md)
+| **Group** | **Link** |
+|:---------------------------------------|:--------------:|
+| **AppRole** auth method API endpoints - /auth/approle | [Doc file](/docs/AppRole-Functions.md) |
+| **LDAP** auth method API endpoints - /auth/ldap | [Doc file](/docs/LDAP-Functions.md) |
+| **Kubernetes** auth method API endpoints - /auth/kubernetes | [Doc file](/docs/Kubernetes-Functions.md) |
+| **KV v2** secret engine API endpoints | [Doc file](/docs/KVV2-Functions.md) |
+| **PKI secret** engine API endpoints | [Doc file](/docs/PKI-Functions.md) |
+| **System Backend** API endpoints - General | [Doc file](/docs/Sys-Functions.md) |
+| **System Backend** API endpoints - SEAL operations | [Doc file](/docs/Sys-Seal-Functions.md) |
+| **Token** auth method API endpoints - /auth/token | [Doc file](/docs/Token-Functions.md) |
+| **Userpass** auth method API endpoints - /auth/userpass | [Doc file](/docs/Userpass-Functions.md) |
+|  |  |
 
 
 ### Coverage and Limitations
