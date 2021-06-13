@@ -194,58 +194,58 @@ services:
   * Create a Vault policy file
 
   ```
-cat <<EOF > my-policy-permissions.hcl
-path "my-role/*" {
-  capabilities = ["create","read","update","delete","list"]
-}
-
-path "my-role/data/*" {
-  capabilities = ["create","read","update","delete"]
-}
-
-path "my-role/delete/*" {
-  capabilities = ["update"]
-}
-
-path "my-role/undelete/*" {
-    capabilities = ["update"]
-}
-
-path "my-role/destroy/*" {
-    capabilities = ["update"]
-}
-
-path "my-role/metadata/*" {
-    capabilities = ["delete","list","read"]
-}
-
-path "/auth/approle/role/my-role" {
-capabilities = ["update"]
-  allowed_parameters = {
-        "token_ttl" = []
+  cat <<EOF > my-policy-permissions.hcl
+  path "my-role/*" {
+    capabilities = ["create","read","update","delete","list"]
   }
-}
 
-path "/auth/approle/role/my-role/secret-id" {
-    capabilities = ["create", "read", "update", "delete", "list"]
-}
+  path "my-role/data/*" {
+    capabilities = ["create","read","update","delete"]
+  }
 
-path "/auth/approle/role/my-role/secret-id/*" {
-    capabilities = ["create", "read", "update", "delete", "list"]
-}
+  path "my-role/delete/*" {
+    capabilities = ["update"]
+  }
 
-path "/auth/approle/role/my-role/secret-id-accessor" {
-    capabilities = ["create", "read", "update", "delete", "list"]
-}
+  path "my-role/undelete/*" {
+      capabilities = ["update"]
+  }
 
-path "/auth/approle/role/my-role/secret-id-accessor/*" {
-    capabilities = ["create", "read", "update", "delete", "list"]
-}
+  path "my-role/destroy/*" {
+      capabilities = ["update"]
+  }
 
-path "secret*" {
-  capabilities = [ "create", "read", "update", "delete", "list" ]
-}
-EOF
+  path "my-role/metadata/*" {
+      capabilities = ["delete","list","read"]
+  }
+
+  path "/auth/approle/role/my-role" {
+  capabilities = ["update"]
+    allowed_parameters = {
+          "token_ttl" = []
+    }
+  }
+
+  path "/auth/approle/role/my-role/secret-id" {
+      capabilities = ["create", "read", "update", "delete", "list"]
+  }
+
+  path "/auth/approle/role/my-role/secret-id/*" {
+      capabilities = ["create", "read", "update", "delete", "list"]
+  }
+
+  path "/auth/approle/role/my-role/secret-id-accessor" {
+      capabilities = ["create", "read", "update", "delete", "list"]
+  }
+
+  path "/auth/approle/role/my-role/secret-id-accessor/*" {
+      capabilities = ["create", "read", "update", "delete", "list"]
+  }
+
+  path "secret*" {
+    capabilities = [ "create", "read", "update", "delete", "list" ]
+  }
+  EOF
   ```
 
   * Create an AppRole with role_id and secret_id
@@ -263,4 +263,38 @@ EOF
 
   # Get the initial secret-id tied to the role-id
   vault write -f auth/approle/role/my-role/secret-id
+  ```
+
+  * Enable kubernetes auth method and create a role
+
+  ```
+  # Enable kubernetes auth method and mount it on default auth/kubernetes
+  vault auth enable kubernetes
+
+  # Get you K8s cluster info
+  kubectl cluster-info
+
+  # Configure a service account for the vault
+  kubectl apply -f ./tests/k8s-service-account.yaml
+
+  # Find out the vault-auth service account token
+  kubectl get secret <secret_name> -o jsonpath={.data.token} | base64 -d
+
+  # Configure Vault K8s auth method
+  vault write auth/kubernetes/config \
+    token_reviewer_jwt="<your reviewer service account JWT>" \
+    kubernetes_host=https://192.168.99.119:8443 \
+    kubernetes_ca_cert=@k8s-ca.crt
+
+  # Create a named role
+  vault write auth/kubernetes/role/my-role \
+    bound_service_account_names=vault-auth \
+    bound_service_account_namespaces=default \
+    policies=default \
+    ttl=1h
+
+  # Test a login using K8s auth method
+  vault write auth/kubernetes/login \
+    role=my-role \
+    jwt="<your reviewer service account JWT>"
   ```
