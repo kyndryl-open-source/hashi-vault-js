@@ -1219,6 +1219,10 @@ class Vault {
    * @returns {Object}
    */
   async loginWithK8s(role, jwt, mount) {
+
+    assert(role, 'loginWithK8s: required parameter missing: role');
+    assert(jwt, 'loginWithK8s: required parameter missing: jwt');
+
     let rootPath= "";
     if (mount) {
       rootPath = mount;
@@ -1247,10 +1251,30 @@ class Vault {
   /**
    * @param {String<required>} token
    * @param {Object<required>} params
+   * @param {String} [params.kubernetes_host]
+   * @param {String} [params.kubernetes_ca_cert]
+   * @param {String} [params.token_reviewer_jwt]
+   * @param {Object} [params.pem_keys]
+   * @param {String} [params.issuer]
+   * @param {Boolean} [params.disable_iss_validation]
+   * @param {Boolean} [params.disable_local_ca_jwt]
    * @param {String} mount
    * @returns {Object}
    */
   async updateK8sConfig(token, params, mount) {
+
+    assert(token, 'updateK8sConfig: required parameter missing: vault token');
+
+    // Defaults - most are probably already defaults from Vault itself
+    params = {
+      disable_iss_validation: false,
+      disable_local_ca_jwt: false,
+      ...params
+    };
+
+    const { kubernetes_host, kubernetes_ca_cert, token_reviewer_jwt, pem_keys, issuer,
+    disable_iss_validation, disable_local_ca_jwt } = params;
+
     let rootPath= "";
     if (mount) {
       rootPath = mount;
@@ -1259,13 +1283,17 @@ class Vault {
     } else {
       rootPath = config.k8sRootPath;
     }
+
     const Options = {
       url: `${rootPath}/${config.k8sUpdateConfig[0]}`,
       method: config.k8sUpdateConfig[1],
       headers: {
         "X-Vault-Token": token
       },
-      data: params
+      data: {
+        kubernetes_host, kubernetes_ca_cert, token_reviewer_jwt, pem_keys, issuer,
+        disable_iss_validation, disable_local_ca_jwt
+      }
     };
 
     try {
@@ -1282,6 +1310,9 @@ class Vault {
    * @returns {Object}
    */
   async readK8sConfig(token, mount) {
+
+    assert(token, 'readK8sConfig: required parameter missing: vault token');
+
     let rootPath= "";
     if (mount) {
       rootPath = mount;
@@ -1310,10 +1341,34 @@ class Vault {
    * @param {String<required>} token
    * @param {String<required>} role
    * @param {Object<required>} params
+   * @param {String} [params.name]
+   * @param {Object} [params.bound_service_account_names]
+   * @param {Object} [params.bound_service_account_namespaces]
+   * @param {String} [params.audience]
+   * @param {Integer} [params.token_ttl]
+   * @param {Integer} [params.token_max_ttl]
+   * @param {Object} [params.token_policies]
+   * @param {Object} [params.token_bound_cidrs]
+   * @param {Integer} [params.token_explicit_max_ttl]
+   * @param {Boolean} [params.token_no_default_policy]
+   * @param {Integer} [params.token_num_uses]
+   * @param {Integer} [params.token_period]
+   * @param {String} [params.token_type]
    * @param {String} mount
    * @returns {Object}
    */
   async createK8sRole(token, role, params, mount) {
+
+    assert(token, 'createK8sRole: required parameter missing: vault token');
+    assert(role, 'createK8sRole: required parameter missing: role');
+
+    // Defaults - most are probably already defaults from Vault itself
+    params = {
+      token_no_default_policy: false,
+      token_num_uses: 0,
+      ...params
+    };
+
     let rootPath= "";
     if (mount) {
       rootPath = mount;
@@ -1328,7 +1383,11 @@ class Vault {
       headers: {
         "X-Vault-Token": token
       },
-      data: params
+      data: {
+        name, bound_service_account_names, bound_service_account_namespaces, audience,
+        token_ttl, token_max_ttl, token_policies, token_bound_cidrs, token_explicit_max_ttl,
+        token_no_default_policy, token_num_uses, token_period, token_type
+      }
     };
 
     try {
@@ -1346,6 +1405,9 @@ class Vault {
    * @returns {Object}
    */
   async readK8sRole(token, role, mount) {
+
+    assert(token, 'readK8sRole: required parameter missing: vault token');
+
     let rootPath= "";
     if (mount) {
       rootPath = mount;
@@ -1376,6 +1438,9 @@ class Vault {
    * @returns {Object}
    */
   async listK8sRoles(token, mount) {
+
+    assert(token, 'listK8sRoles: required parameter missing: vault token');
+
     let rootPath= "";
     if (mount) {
       rootPath = mount;
@@ -1385,8 +1450,8 @@ class Vault {
       rootPath = config.k8sRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.k8sReadRole[0]}?list=true`,
-      method: config.k8sReadRole[1],
+      url: `${rootPath}/${config.k8sListRoles[0]}`,
+      method: config.k8sListRoles[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -1407,6 +1472,9 @@ class Vault {
    * @returns {Object}
    */
   async deleteK8sRole(token, role, mount) {
+
+    assert(token, 'deleteK8sRole: required parameter missing: vault token');
+
     let rootPath= "";
     if (mount) {
       rootPath = mount;
