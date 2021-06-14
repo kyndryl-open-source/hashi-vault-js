@@ -5,6 +5,7 @@
 * `0.4.4`
   * Added *Kubernetes (K8s) auth method* functions
     * `loginWithK8s`, `updateK8sConfig`, `readK8sConfig`, `createK8sRole`, `readK8sRole`, `listK8sRoles`, and `deleteK8sRole`
+  * Improved general documentation
 
 * `0.4.3`
   * Added *KV v2 secret engine* function:
