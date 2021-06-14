@@ -13,7 +13,8 @@
     "test:userpass": "bash -c 'source tests/process.env && jest tests/Userpass.test.js'",
     "test:pki-gen": "bash -c 'source tests/process.env && jest tests/PKI-gen.test.js'",
     "test:pki-ca": "bash -c 'source tests/process.env && jest tests/PKI-ca.test.js'",
-    "test:pki-roles": "bash -c 'source tests/process.env && jest tests/PKI-roles.test.js'"
+    "test:pki-roles": "bash -c 'source tests/process.env && jest tests/PKI-roles.test.js'",
+    "test:k8s": "bash -c 'source tests/process.env && jest tests/K8s.test.js'"
   },
   "repository": {
     "type": "git",
