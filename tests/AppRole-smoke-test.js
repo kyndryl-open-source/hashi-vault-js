@@ -2,7 +2,7 @@
 
 
 // source process.env
-// node AppRole.test.js
+// node AppRole-smoke-test.js
 const RoleId = process.env.ROLE_ID;
 const SecretId = process.env.SECRET_ID;
 const ClientCert = process.env.CLIENT_CERT;
