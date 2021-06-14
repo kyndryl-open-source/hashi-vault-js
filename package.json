@@ -1,6 +1,6 @@
 {
   "name": "hashi-vault-js",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "main": "Vault.js",
   "scripts": {
