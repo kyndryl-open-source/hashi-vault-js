@@ -104,6 +104,12 @@ Perform a login on the Vault with Userpass username/password pair and get a vali
 const token = await vault.loginWithUserpass(Username, Password).client_token;
 ```
 
+Perform a login on the Vault with Kubernetes service accounts token and get a valid client token:
+
+```javascript
+const token = await vault.loginWithK8s(Role, Token).client_token;
+```
+
 Define a function to return secret engine information from the Vault:
 
 ```javascript
@@ -141,6 +147,23 @@ Update secret version 1 in the Vault:
 ```javascript
 const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```
+
+### Mount points
+
+Most of the Vault Server API endpoints can be mounted on non-default path. For that reason, there's a last parameter in the related functions to allow using a custom mount path.
+
+For instance, if you want to enable `KV v2` on a different path, you can do so:
+
+```shell
+vault secrets enable -path=knight kv-v2
+```
+
+Now you call this helper library functions with the correct mount path:
+
+```javascript
+const config = await vault.readKVEngineConfig(token, "knight")
+```
+
 
 ### Error handling
 
