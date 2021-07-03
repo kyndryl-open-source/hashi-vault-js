@@ -42,6 +42,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
   https: true,
   // If https is true, then provide client certificate, client key and
   // the root CA cert
+  // Client cert and key are optional now
   cert: './client.crt',
   key: './client.key',
   cacert: './ca.crt',
@@ -65,6 +66,8 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 **Note:** This package covers some auth methods and KV v2 secret engine. Check `Limitations` section for more details.
 
+**Production**
+
 ```javascript
 const Vault = require('hashi-vault-js');
 
@@ -76,6 +79,21 @@ const vault = new Vault( {
     baseUrl: 'https://127.0.0.1:8200/v1',
     rootPath: 'secret',
     timeout: 2000,
+    proxy: false
+});
+```
+
+**Development**
+
+```javascript
+const Vault = require('hashi-vault-js');
+
+const vault = new Vault( {
+    https: true,
+    cacert: './ca.crt',
+    baseUrl: 'https://127.0.0.1:8200/v1',
+    rootPath: 'secret',
+    timeout: 5000,
     proxy: false
 });
 ```
