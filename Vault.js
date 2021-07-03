@@ -14,6 +14,14 @@ const assert = require('assert');
 
 // Internal function - create new https agent
 const getHttpsAgent = function(certificate, key, cacert) {
+
+  if(!certificate && !key && cacert) {
+    return new https.Agent({
+      // CA cert from Hashicorp Vault PKI
+      ca: fs.readFileSync(cacert)
+    });
+  }
+
   return new https.Agent({
     // Client certificate
     cert: fs.readFileSync(certificate),
