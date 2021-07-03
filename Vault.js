@@ -20,15 +20,15 @@ const getHttpsAgent = function(certificate, key, cacert) {
       // CA cert from Hashicorp Vault PKI
       ca: fs.readFileSync(cacert)
     });
+  } else {
+    return new https.Agent({
+      // Client certificate
+      cert: fs.readFileSync(certificate),
+      key: fs.readFileSync(key),
+      // CA cert from Hashicorp Vault PKI
+      ca: fs.readFileSync(cacert)
+    });
   }
-
-  return new https.Agent({
-    // Client certificate
-    cert: fs.readFileSync(certificate),
-    key: fs.readFileSync(key),
-    // CA cert from Hashicorp Vault PKI
-    ca: fs.readFileSync(cacert)
-  });
 }
 
 // Internal function - creates new axios instance
