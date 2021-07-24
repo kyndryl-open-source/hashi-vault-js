@@ -2,6 +2,17 @@
 
 ## Change Log
 
+* `0.4.6`
+  * Change constructor to allow instantiation without client certificates
+
+* `0.4.5`
+  * Added *Kubernetes (K8s) auth method* functions
+    * `loginWithK8s`, `updateK8sConfig`, `readK8sConfig`, `createK8sRole`, `readK8sRole`, `listK8sRoles`, and `deleteK8sRole`
+    * Improved general documentation
+
+* `0.4.4`
+  * Duplicated
+
 * `0.4.3`
   * Added *KV v2 secret engine* function:
     * `updateKVEngineConfig`

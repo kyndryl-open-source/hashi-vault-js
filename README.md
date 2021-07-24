@@ -42,6 +42,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
   https: true,
   // If https is true, then provide client certificate, client key and
   // the root CA cert
+  // Client cert and key are optional now
   cert: './client.crt',
   key: './client.key',
   cacert: './ca.crt',
@@ -65,6 +66,8 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 **Note:** This package covers some auth methods and KV v2 secret engine. Check `Limitations` section for more details.
 
+**Production**
+
 ```javascript
 const Vault = require('hashi-vault-js');
 
@@ -76,6 +79,21 @@ const vault = new Vault( {
     baseUrl: 'https://127.0.0.1:8200/v1',
     rootPath: 'secret',
     timeout: 2000,
+    proxy: false
+});
+```
+
+**Development**
+
+```javascript
+const Vault = require('hashi-vault-js');
+
+const vault = new Vault( {
+    https: true,
+    cacert: './ca.crt',
+    baseUrl: 'https://127.0.0.1:8200/v1',
+    rootPath: 'secret',
+    timeout: 5000,
     proxy: false
 });
 ```
@@ -102,6 +120,12 @@ Perform a login on the Vault with Userpass username/password pair and get a vali
 
 ```javascript
 const token = await vault.loginWithUserpass(Username, Password).client_token;
+```
+
+Perform a login on the Vault with Kubernetes service accounts token and get a valid client token:
+
+```javascript
+const token = await vault.loginWithK8s(Role, Token).client_token;
 ```
 
 Define a function to return secret engine information from the Vault:
@@ -142,6 +166,23 @@ Update secret version 1 in the Vault:
 const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```
 
+### Mount points
+
+Most of the Vault Server API endpoints can be mounted on non-default path. For that reason, there's a last parameter in the related functions to allow using a custom mount path.
+
+For instance, if you want to enable `KV v2` on a different path, you can do so:
+
+```shell
+vault secrets enable -path=knight kv-v2
+```
+
+Now you call this helper library functions with the correct mount path:
+
+```javascript
+const config = await vault.readKVEngineConfig(token, "knight")
+```
+
+
 ### Error handling
 
 This package extends the error stack to differentiate if the exception occurred on the Vault API layer or not. Also, adds a help message from the Vault API docs.
@@ -170,37 +211,18 @@ Check below docs for more information on specific function groups.
 
 ### List of functions available
 
-**System Backend API endpoints - General**
-
-[Doc file](/docs/Sys-Functions.md)
-
-**System Backend API endpoints - SEAL operations**
-
-[Doc file](/docs/Sys-Seal-Functions.md)
-
-**Token auth method API endpoints - /auth/token**
-
-[Doc file](/docs/Token-Functions.md)
-
-**LDAP auth method API endpoints - /auth/ldap**
-
-[Doc file](/docs/LDAP-Functions.md)
-
-**Userpass auth method API endpoints - /auth/userpass**
-
-[Doc file](/docs/Userpass-Functions.md)
-
-**AppRole auth method API endpoints - /auth/approle**
-
-[Doc file](/docs/AppRole-Functions.md)
-
-**PKI secret engine API endpoints**
-
-[Doc file](/docs/PKI-Functions.md)
-
-**KV v2 secret engine API endpoints**
-
-[Doc file](/docs/KVV2-Functions.md)
+| **Group** | **Link** |
+|:---------------------------------------|:--------------:|
+| **AppRole** auth method API endpoints - /auth/approle | [Doc file](/docs/AppRole-Functions.md) |
+| **LDAP** auth method API endpoints - /auth/ldap | [Doc file](/docs/LDAP-Functions.md) |
+| **Kubernetes** auth method API endpoints - /auth/kubernetes | [Doc file](/docs/Kubernetes-Functions.md) |
+| **KV v2** secret engine API endpoints | [Doc file](/docs/KVV2-Functions.md) |
+| **PKI secret** engine API endpoints | [Doc file](/docs/PKI-Functions.md) |
+| **System Backend** API endpoints - General | [Doc file](/docs/Sys-Functions.md) |
+| **System Backend** API endpoints - SEAL operations | [Doc file](/docs/Sys-Seal-Functions.md) |
+| **Token** auth method API endpoints - /auth/token | [Doc file](/docs/Token-Functions.md) |
+| **Userpass** auth method API endpoints - /auth/userpass | [Doc file](/docs/Userpass-Functions.md) |
+|  |  |
 
 
 ### Coverage and Limitations
