@@ -2,6 +2,9 @@
 
 ## Change Log
 
+* `0.4.7`
+  * Support Namespaces (Enterprise Vault feature)
+
 * `0.4.6`
   * Change constructor to allow instantiation without client certificates
 
