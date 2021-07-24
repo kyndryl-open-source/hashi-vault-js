@@ -58,7 +58,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
   // If should use a proxy or not by the HTTP request
   // Example:
   // proxy: { host: proxy.ip, port: proxy.port }
-  proxy: false
+  proxy: false,
+  // Namespace feature supported by Enterprise Vault
+  namespace: 'admin'
 }
 ```
 

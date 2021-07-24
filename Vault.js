@@ -139,12 +139,16 @@ class Vault {
       method: 'get',
       params: params
     };
+    const xvn = this.instance.defaults.headers['X-Vault-Namespace'];
+    this.instance.defaults.headers['X-Vault-Namespace'] = '';
 
     try {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
       throw parseAxiosError(err);
+    } finally {
+      this.instance.defaults.headers['X-Vault-Namespace'] = xvn;
     }
   }
 
@@ -177,12 +181,16 @@ class Vault {
         "X-Vault-Token": sudoToken
       }
     };
+    const xvn = this.instance.defaults.headers['X-Vault-Namespace'];
+    this.instance.defaults.headers['X-Vault-Namespace'] = '';
 
     try {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
       throw parseAxiosError(err);
+    } finally {
+      this.instance.defaults.headers['X-Vault-Namespace'] = xvn;
     }
   }
 
@@ -287,12 +295,16 @@ class Vault {
     else {
       Options.url= `${config.sysMetrics}`;
     }
+    const xvn = this.instance.defaults.headers['X-Vault-Namespace'];
+    this.instance.defaults.headers['X-Vault-Namespace'] = '';
 
     try {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
       throw parseAxiosError(err);
+    } finally {
+      this.instance.defaults.headers['X-Vault-Namespace'] = xvn;
     }
   }
 
