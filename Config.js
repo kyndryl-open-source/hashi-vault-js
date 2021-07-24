@@ -32,6 +32,7 @@ const config = {
   k8sUpdateConfig: [ 'config', 'post'],
   k8sReadConfig: [ 'config', 'get'],
   k8sCreateRole: [ 'role', 'post'],
+  k8sListRoles: [ 'role', 'list'],
   k8sReadRole: [ 'role', 'get'],
   k8sDeleteRole: [ 'role', 'delete'],
   appRoleRootPath: 'auth/approle',
