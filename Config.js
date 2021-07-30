@@ -89,6 +89,7 @@ const config = {
   kvReadSecret: ['data', 'get'],
   kvDeleteLatestSecret: ['data', 'delete'],
   kvDeleteSecret: ['delete', 'post'],
+  kvEliminateSecret: ['metadata', 'delete'],
   kvUndeleteSecret: ['undelete', 'post'],
   kvDestroySecret: ['destroy', 'post'],
   kvListSecrets: ['metadata', 'list'],

@@ -2,6 +2,9 @@
 
 ## Change Log
 
+* `0.4.8`
+  * Support for eliminateKVSecret()
+
 * `0.4.7`
   * Support Namespaces (Enterprise Vault feature)
 
