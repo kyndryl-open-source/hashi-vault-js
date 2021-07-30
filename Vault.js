@@ -2965,6 +2965,37 @@ class Vault {
   }
 
   /**
+   * @param {String<required>} token
+   * @param {String<required>} name
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async eliminateKVSecret(token, name, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.kvEliminateSecret[0]}/${name}`,
+      method: config.kvEliminateSecret[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
   * @param {String<required>} token
   * @param {String} folder
   * @param {String} mount
