@@ -32,12 +32,13 @@ const getHttpsAgent = function(certificate, key, cacert) {
 }
 
 // Internal function - creates new axios instance
-const getAxiosInstance = function(baseurl, timeout, agent, proxy) {
+const getAxiosInstance = function(baseurl, timeout, agent, proxy, namespace) {
   return axios.create({
       baseURL: baseurl,
       timeout: timeout,
       headers: {
-        'X-Application-Name': config.appName
+        'X-Application-Name': config.appName,
+        'X-Vault-Namespace': namespace,
       },
       httpsAgent: agent,
       proxy: proxy
@@ -114,6 +115,7 @@ class Vault {
     this.rootPath = params.rootPath;
     this.timeout = params.timeout || config.timeout;
     this.proxy = params.proxy || config.proxy;
+    this.namespace = params.namespace || '';
     try {
       if (this.https) {
         this.agent = getHttpsAgent(this.cert, this.key, this.cacert);
@@ -121,7 +123,7 @@ class Vault {
       else {
         this.agent = false;
       }
-      this.instance = getAxiosInstance(this.baseUrl, this.timeout, this.agent, this.proxy);
+      this.instance = getAxiosInstance(this.baseUrl, this.timeout, this.agent, this.proxy, this.namespace);
     } catch (error) {
       console.error('Error initiating Vault class:\n', error);
     }
@@ -137,12 +139,16 @@ class Vault {
       method: 'get',
       params: params
     };
+    const xvn = this.instance.defaults.headers['X-Vault-Namespace'];
+    this.instance.defaults.headers['X-Vault-Namespace'] = '';
 
     try {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
       throw parseAxiosError(err);
+    } finally {
+      this.instance.defaults.headers['X-Vault-Namespace'] = xvn;
     }
   }
 
@@ -175,12 +181,16 @@ class Vault {
         "X-Vault-Token": sudoToken
       }
     };
+    const xvn = this.instance.defaults.headers['X-Vault-Namespace'];
+    this.instance.defaults.headers['X-Vault-Namespace'] = '';
 
     try {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
       throw parseAxiosError(err);
+    } finally {
+      this.instance.defaults.headers['X-Vault-Namespace'] = xvn;
     }
   }
 
@@ -285,12 +295,16 @@ class Vault {
     else {
       Options.url= `${config.sysMetrics}`;
     }
+    const xvn = this.instance.defaults.headers['X-Vault-Namespace'];
+    this.instance.defaults.headers['X-Vault-Namespace'] = '';
 
     try {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
       throw parseAxiosError(err);
+    } finally {
+      this.instance.defaults.headers['X-Vault-Namespace'] = xvn;
     }
   }
 
@@ -2939,6 +2953,37 @@ class Vault {
       },
       data: {
         versions: versions
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} name
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async eliminateKVSecret(token, name, mount) {
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.kvEliminateSecret[0]}/${name}`,
+      method: config.kvEliminateSecret[1],
+      headers: {
+        "X-Vault-Token": token
       }
     };
 
