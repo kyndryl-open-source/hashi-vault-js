@@ -15,9 +15,9 @@ This module provides a set of functions to help **JavaScript** Developers workin
 * npm
   * Tested on: **v6.14.x**
 * HashiCorp Vault
-  * Minimum: v1.5.x
-  * Accepted: v1.6.x
-  * Recommended: **v1.7.x**
+  * Minimum: v1.6.x
+  * Accepted: v1.7.x
+  * Recommended: **v1.8.x**
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
