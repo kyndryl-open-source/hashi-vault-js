@@ -2,7 +2,8 @@
 const Vault = require('../Vault');
 
 // source process.env
-const SecretName = "Slack105";
+const OldSecretName = "Slack105";
+const SecretName = "Slack106";
 const Secrets1 = {
     bot_token1: "xoxb-123456789011-1234567890123-1w1lln0tt3llmys3cr3tatm3",
     bot_token2: "xoxb-123456789011-1234567890124-1w1lln0tt3llmys3cr3tatm3"
@@ -58,6 +59,12 @@ vault.healthCheck().then(function(data) {
               vault.updateKVSecret(Token, SecretName, Secrets3, 2, RootPath).then(function(data) {
                 console.log('7> updateKVSecret output: \n',data);
 
+                vault.eliminateKVSecret(Token, OldSecretName, RootPath).then(function(data) {
+                  console.log('8> eliminateKVSecret output: \n',data);
+
+                }).catch(function(updateError){
+                  console.error('8> eliminateKVSecret error: \n',updateError);
+                });
               }).catch(function(updateError){
                 console.error('7> updateKVSecret error: \n',updateError);
               });

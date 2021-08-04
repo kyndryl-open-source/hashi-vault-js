@@ -2,6 +2,17 @@
 
 ## KV v2 Functions List
 
+* eliminateKVSecret(token, name, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} name
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
 * updateKVEngineConfig(token, data, mount)
 
 ```javascript
