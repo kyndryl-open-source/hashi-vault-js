@@ -1,6 +1,7 @@
 const Vault = require('../Vault');
 
-const SecretName = "Slack75";
+const SecretName = "Slack108";
+const OldSecretName = "Slack107";
 const Secrets1 = {
     bot_token1: "xoxb-123456789011-1234567890123-1w1lln0tt3llmys3cr3tatm3",
     bot_token2: "xoxb-123456789011-1234567890124-1w1lln0tt3llmys3cr3tatm3"
@@ -122,5 +123,11 @@ test('undeleteVersionsKVSecret: the result is the versions (one or more) of KV e
 test('destroyVersionsKVSecret: the result is the versions of KV entry destroyed - HTTP 204', async () => {
     const data = await vault.destroyVersionsKVSecret(Token, SecretName, [ 1 ], RootPath);
     //console.log('destroyVersionsKVSecret output:\n',data);
+	return expect(data).toBeDefined();
+});
+
+test('eliminateKVSecret: the result is the versions of KV secrete eliminated - HTTP 204', async () => {
+    const data = await vault.eliminateKVSecret(Token, OldSecretName, RootPath);
+    //console.log('eliminateKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });

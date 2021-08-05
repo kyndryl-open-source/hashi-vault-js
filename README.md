@@ -13,7 +13,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
   * Minimum: v10.x
   * Recommended: **v12.x**
 * npm
-  * Tested on: **v6.14.x**
+  * Tested on: **v6.20.x**
 * HashiCorp Vault
   * Minimum: v1.6.x
   * Accepted: v1.7.x
@@ -59,7 +59,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
   // Example:
   // proxy: { host: proxy.ip, port: proxy.port }
   proxy: false,
-  // Namespace feature supported by Enterprise Vault
+  // Namespace (multi-tenancy) feature available on all Vault Enterprise versions
   namespace: 'admin'
 }
 ```
@@ -81,7 +81,9 @@ const vault = new Vault( {
     baseUrl: 'https://127.0.0.1:8200/v1',
     rootPath: 'secret',
     timeout: 2000,
-    proxy: false
+    proxy: false,
+    // Only for Vault Enterprise
+    namespace: 'ns1'
 });
 ```
 

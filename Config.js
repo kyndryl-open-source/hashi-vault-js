@@ -3,6 +3,7 @@ const config = {
   baseUrl: 'https://127.0.0.1:8200/v1',
   timeout: 1000,
   proxy: false,
+  namespace: '',
   sysHealth: '/sys/health',
   sysSealStatus: '/sys/seal-status',
   sysHostInfo: '/sys/host-info',

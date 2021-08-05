@@ -2,13 +2,11 @@
 
 ## Change Log
 
-* `0.4.7`
+* `0.4.6`
   * Added support for namespaces (multi-tenancy), a Vault Enterprise feature
   * Added *KV v2 secret engine* function:
     * `eliminateKVSecret`
   * Upgraded development env to Vault server `1.8.0`
-
-* `0.4.6`
   * Change constructor to allow instantiation without client certificates
 
 * `0.4.5`
