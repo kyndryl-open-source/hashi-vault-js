@@ -115,7 +115,7 @@ class Vault {
     this.rootPath = params.rootPath;
     this.timeout = params.timeout || config.timeout;
     this.proxy = params.proxy || config.proxy;
-    this.namespace = params.namespace || '';
+    this.namespace = params.namespace || config.namespace;
     try {
       if (this.https) {
         this.agent = getHttpsAgent(this.cert, this.key, this.cacert);
@@ -137,18 +137,17 @@ class Vault {
     const Options = {
       url: config.sysHealth,
       method: 'get',
-      params: params
+      params: params,
+      headers: {
+        "X-Vault-Namespace": '' // https://www.vaultproject.io/docs/enterprise/namespaces#root-only-api-paths
+      }
     };
-    const xvn = this.instance.defaults.headers['X-Vault-Namespace'];
-    this.instance.defaults.headers['X-Vault-Namespace'] = '';
 
     try {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
       throw parseAxiosError(err);
-    } finally {
-      this.instance.defaults.headers['X-Vault-Namespace'] = xvn;
     }
   }
 
@@ -178,19 +177,16 @@ class Vault {
       url: config.sysHostInfo,
       method: 'get',
       headers: {
-        "X-Vault-Token": sudoToken
+        "X-Vault-Token": sudoToken,
+        "X-Vault-Namespace": '' // https://www.vaultproject.io/docs/enterprise/namespaces#root-only-api-paths
       }
     };
-    const xvn = this.instance.defaults.headers['X-Vault-Namespace'];
-    this.instance.defaults.headers['X-Vault-Namespace'] = '';
 
     try {
       const response = await this.instance(Options);
       return parseAxiosResponse(response);
     } catch(err) {
       throw parseAxiosError(err);
-    } finally {
-      this.instance.defaults.headers['X-Vault-Namespace'] = xvn;
     }
   }
 
@@ -286,7 +282,8 @@ class Vault {
       url: '',
       method: 'get',
       headers: {
-        "X-Vault-Token": sudoToken
+        "X-Vault-Token": sudoToken,
+        "X-Vault-Namespace": '' // https://www.vaultproject.io/docs/enterprise/namespaces#root-only-api-paths
       }
     };
     if (config.sysMetricFormats.includes(format)) {
