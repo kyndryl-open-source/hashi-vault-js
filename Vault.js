@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2020 International Business Machines Corporation and others. All Rights Reserved.
- * The accompanying program is provided under the terms of the IBM public license ("agreement").
- * Written by Rod Anami <rod.anami@br.ibm.com>, June 2020.
+ * The accompanying program is provided under the terms of the Eclipse Public License 2.0 ("agreement").
+ * Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 */
 
 const config = require('./Config.js');
