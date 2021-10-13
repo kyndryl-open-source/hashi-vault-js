@@ -51,6 +51,8 @@ const config = {
   ldapReadGroup: [ 'groups', 'get'],
   ldapListUsers: [ 'users', 'list'],
   ldapListGroups: [ 'groups', 'list'],
+  certRootPath:'auth/cert',
+  certLogin: [ 'login', 'post'],
   userpassRootPath: 'auth/userpass',
   userpassCreateUser: [ 'users', 'post'],
   userpassReadUser: [ 'users', 'get'],
