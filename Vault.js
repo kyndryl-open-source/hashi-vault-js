@@ -976,7 +976,40 @@ class Vault {
       throw parseAxiosError(err);
     }
   }
+  
+  //
+  // cert auth method API endpoints
+  //
 
+  /**
+  * @param {String} mount
+  * @param {String} certName
+  * @returns {Promise<Object>}
+  */
+   async loginWithCert(certName, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.certRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.certLogin[0]}`,
+      method: config.certLogin[1],
+      data: {
+        "name": certName
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
 
   //
   // Userpass auth method API endpoints
