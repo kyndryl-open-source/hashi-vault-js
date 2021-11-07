@@ -108,19 +108,19 @@ Check health status of the Vault server:
 const status = await vault.healthCheck();
 ```
 
-Perform a login on the Vault with role-id/secret-id pair (AppRole login) and get a valid client token:
+Perform a login on the Vault with role-id/secret-id pair, (AppRole login) and get a valid client token:
 
 ```javascript
 const token = await vault.loginWithAppRole(RoleId, SecretId).client_token;
 ```
 
-Perform a login on the Vault with LDAP username/password pair and get a valid client token:
+Perform a login on the Vault with LDAP username/password pair, and get a valid client token:
 
 ```javascript
 const token = await vault.loginWithLdap(Username, Password).client_token;
 ```
 
-Perform a login on the Vault with Userpass username/password pair and get a valid client token:
+Perform a login on the Vault with Userpass username/password pair, and get a valid client token:
 
 ```javascript
 const token = await vault.loginWithUserpass(Username, Password).client_token;
