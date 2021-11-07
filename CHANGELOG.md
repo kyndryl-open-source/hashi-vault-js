@@ -2,6 +2,10 @@
 
 ## Change Log
 
+* `0.4.8`
+  * Fixed security vulnerability (npm audit fix)
+  * Improved documentation
+
 * `0.4.7`
   * Upgraded development env to Vault server `1.8.5`
   * Added *TLS Certificate auth method* function:
