@@ -2,6 +2,11 @@
 
 ## Change Log
 
+* `0.4.7`
+  * Upgraded development env to Vault server `1.8.5`
+  * Added *TLS Certificate auth method* function:
+    * `loginWithCert`
+
 * `0.4.6`
   * Added support for namespaces (multi-tenancy), a Vault Enterprise feature
   * Added *KV v2 secret engine* function:

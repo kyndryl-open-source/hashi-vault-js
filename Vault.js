@@ -976,9 +976,9 @@ class Vault {
       throw parseAxiosError(err);
     }
   }
-  
+
   //
-  // cert auth method API endpoints
+  // TLS Certificate auth method API endpoints
   //
 
   /**
