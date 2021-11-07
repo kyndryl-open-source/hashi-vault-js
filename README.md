@@ -66,7 +66,7 @@ This module provides a set of functions to help **JavaScript** Developers workin
 
 ### Module usage
 
-**Note:** This package covers some auth methods and KV v2 secret engine. Check `Limitations` section for more details.
+**Note:** This package covers some auth methods and secret engines. Check `Limitations` section for more details.
 
 **Production**
 
@@ -224,6 +224,7 @@ Check below docs for more information on specific function groups.
 | **PKI secret** engine API endpoints | [Doc file](/docs/PKI-Functions.md) |
 | **System Backend** API endpoints - General | [Doc file](/docs/Sys-Functions.md) |
 | **System Backend** API endpoints - SEAL operations | [Doc file](/docs/Sys-Seal-Functions.md) |
+| **TLS Certificate** auth method API endpoints - /auth/cert | [Doc file](/docs/TLS-Cert-Functions.md) |
 | **Token** auth method API endpoints - /auth/token | [Doc file](/docs/Token-Functions.md) |
 | **Userpass** auth method API endpoints - /auth/userpass | [Doc file](/docs/Userpass-Functions.md) |
 |  |  |
@@ -243,6 +244,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 | [LDAP](https://www.vaultproject.io/api-docs/auth/ldap) | `Most of them` |
 | [Userpass](https://www.vaultproject.io/api-docs/auth/userpass) | `All endpoints` |
 | [Kubernetes](https://www.vaultproject.io/api-docs/auth/kubernetes) | `All endpoints` |
+| [TLS Cert](https://www.vaultproject.io/docs/auth/cert) | `Partially` |
 | [Token](https://www.vaultproject.io/api-docs/auth/token) | `Most of them` |
 | | |
 
