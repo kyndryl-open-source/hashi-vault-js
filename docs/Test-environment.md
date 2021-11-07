@@ -21,7 +21,7 @@
 version: '3'
 services:
   vault:
-    image: vault:1.5.0
+    image: vault:1.8.5
     container_name: my-vault
     ports:
       - "8200:8200"
@@ -297,4 +297,37 @@ services:
   vault write auth/kubernetes/login \
     role=my-role \
     jwt="<your reviewer service account JWT>"
+  ```
+
+* Enable TLS cert auth method and create a cert
+
+  ```
+  # Enable TLS Certificate auth method
+  vault auth enable cert
+
+  # Create a PKI role to issue certificates
+  vault write pki_int/roles/vault-cert \
+    allow_any_name=true \
+    max_ttl=720h \
+    generate_lease=true
+
+  # Create a policy for the certificates issued
+  vault policy write cert-policy ./policies/cert-policy.hcl
+
+  # Issue a certificate based on the create role
+  vault write -format=json pki_int/issue/vault-cert \
+  common_name=vault-cert | tee \
+  >(jq -r .data.certificate > vault-cert-certificate.pem) \
+  >(jq -r .data.issuing_ca > vault-cert-issuing-ca.pem) \
+  >(jq -r .data.private_key > vault-cert-private-key.pem)
+
+  # Create a cert for authentication
+  vault write auth/cert/certs/vault-cert \
+    display_name=vault-cert \
+    policies=cert \
+    certificate=@vault-cert-certificate.pem
+
+  # Test cert login
+  vault login -method=cert -client-cert=vault-cert-certificate.pem \
+  -client-key=vault-cert-private-key.pem
   ```
