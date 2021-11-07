@@ -126,10 +126,16 @@ Perform a login on the Vault with Userpass username/password pair and get a vali
 const token = await vault.loginWithUserpass(Username, Password).client_token;
 ```
 
-Perform a login on the Vault with Kubernetes service accounts token and get a valid client token:
+Perform a login on the Vault with Kubernetes service accounts token, and get a valid client token:
 
 ```javascript
 const token = await vault.loginWithK8s(Role, Token).client_token;
+```
+
+Perform a login on the Vault with TLS certificate and key, and get a valid client token:
+
+```javascript
+const token = await vault.loginWithCert(certName, Token).client_token;
 ```
 
 Define a function to return secret engine information from the Vault:
