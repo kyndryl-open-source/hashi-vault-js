@@ -1,6 +1,8 @@
 # Private keys
 *.key
 tests/*.key
+*.pem
+tests/*pem
 
 # Logs
 logs
