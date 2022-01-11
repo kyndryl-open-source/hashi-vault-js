@@ -5,6 +5,8 @@
 * `0.4.8`
   * Fixed security vulnerability (npm audit fix)
   * Improved documentation
+  * Upgraded development env to Vault server `1.9.2` and node engine `v16`
+  * Upgraded all dependencies (`Axios` and `Jest`)
 
 * `0.4.7`
   * Upgraded development env to Vault server `1.8.5`
