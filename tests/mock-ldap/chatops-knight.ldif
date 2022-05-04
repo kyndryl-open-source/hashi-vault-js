@@ -1,0 +1,60 @@
+dn: cn=admin, dc=chatopsknight, dc=com
+changetype: add
+cn: admin
+sn: admin
+objectClass: top
+objectclass: person
+
+
+dn: ou=Employee, dc=chatopsknight, dc=com
+changetype: add
+ou: Employee
+description: ChatOps Knight Employees
+objectClass: top
+objectClass: organizationalUnit
+
+dn: uid=jane.doe@chatopsknight.com, ou=Employee, dc=chatopsknight, dc=com
+changetype: add
+cn: Jane Doe
+sn: Doe
+givenName: Jane
+objectClass: extensibleObject
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+ou: Accounting
+ou: Employee
+l: Santa Clara
+st: California
+c: us
+serialNumber: 000601
+uid: jane.doe
+mail: jane.doe@chatopsknight.com
+personalTitle: Sr Accountant
+telephoneNumber: +1-555-999-0000
+roomNumber: 5484
+userPassword: donuts
+
+dn: uid=rod.anami@chatopsknight.com, ou=Employee, dc=chatopsknight, dc=com
+changetype: add
+cn: Rod Anami
+sn: Anami
+givenName: Rod
+objectClass: extensibleObject
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+ou: IT
+ou: Employee
+l: Campinas
+c: br
+st: Sao Paulo
+serialNumber: 000602
+uid: rod.anami
+mail: rod.anami@chatopsknight.com
+personalTitle: Site Reliability Engineer
+telephoneNumber: +55-19-9999-0000
+roomNumber: 5485
+userPassword: cookies
