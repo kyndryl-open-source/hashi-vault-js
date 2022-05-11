@@ -977,6 +977,133 @@ class Vault {
     }
   }
 
+  /**
+  * @param {String<required>} token
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async readLdapConfig(token, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.ldapReadConfig[0]}`,
+      method: config.ldapReadConfig[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+
+  /**
+  * @param {String<required>} token
+  * @param {String} mount
+  * @param {String} params.url
+  * @param {Boolean} params.case_sensitive_names
+  * @param {Integer} params.request_timeout
+  * @param {Boolean} params.starttls
+  * @param {String} params.tls_min_version
+  * @param {String} params.tls_max_version
+  * @param {Boolean} params.insecure_tls
+  * @param {String} params.certificate
+  * @param {String} params.client_tls_cert
+  * @param {String} params.client_tls_key
+  * @param {String} params.binddn
+  * @param {String} params.bindpass
+  * @param {String} params.userdn
+  * @param {String} params.userattr
+  * @param {Boolean} params.discoverdn
+  * @param {Boolean} params.deny_null_bind
+  * @param {String} params.upndomain
+  * @param {String} params.userfilter
+  * @param {Boolean} params.anonymous_group_search
+  * @param {String} params.groupfilter
+  * @param {String} params.groupdn
+  * @param {String} params.groupattr
+  * @param {Boolean} params.username_as_alias
+  * @param {Integer} params.token_ttl
+  * @param {Integer} params.token_max_ttl
+  * @param {[String]} params.token_policies
+  * @param {[String]} params.token_bound_cidrs
+  * @param {Integer} params.token_explicit_max_ttl
+  * @param {Boolean} params.token_no_default_policy
+  * @param {Integer} params.token_num_uses
+  * @param {Integer} params.token_period
+  * @param {String} params.token_type
+  * @returns {Promise<Object>}
+  */
+  async setLdapConfig(token, params, mount) {
+    let rootPath= "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.ldapRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.ldapSetConfig[0]}`,
+      method: config.ldapSetConfig[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        url: params.url,
+        case_sensitive_names: params.case_sensitive_names,
+        request_timeout: params.request_timeout,
+        starttls: params.starttls,
+        tls_min_version: params.tls_min_version,
+        tls_max_version: params.tls_max_version,
+        insecure_tls: params.insecure_tls,
+        certificate: params.certificate,
+        client_tls_cert: params.client_tls_cert,
+        client_tls_key: params.client_tls_key,
+        binddn: params.binddn,
+        bindpass: params.bindpass,
+        userdn: params.userdn,
+        userattr: params.userattr,
+        discoverdn: params.discoverdn,
+        deny_null_bind: params.deny_null_bind,
+        upndomain: params.upndomain,
+        userfilter: params.userfilter,
+        anonymous_group_search: params.anonymous_group_search,
+        groupfilter: params.groupfilter,
+        groupdn: params.groupdn,
+        groupattr: params.groupattr,
+        username_as_alias: params.username_as_alias,
+        token_ttl: params.token_ttl,
+        token_max_ttl: params.token_max_ttl,
+        token_policies: params.token_policies,
+        token_bound_cidrs: params.token_bound_cidrs,
+        token_explicit_max_ttl: params.token_explicit_max_ttl,
+        token_no_default_policy: params.token_no_default_policy,
+        token_num_uses: params.token_num_uses,
+        token_period: params.token_period,
+        token_type: params.token_type
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
   //
   // TLS Certificate auth method API endpoints
   //
