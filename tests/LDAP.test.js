@@ -1,5 +1,7 @@
 const Vault = require('../Vault');
+const fs = require('fs');
 let token = null;
+let ldapCABundle = null;
 
 const RoleId = process.env.ROLE_ID;
 const SecretId = process.env.SECRET_ID;
@@ -21,6 +23,29 @@ const vault = new Vault( {
     proxy: false
 });
 
+try {
+  ldapCABundle = fs.readFileSync('./tests/ldap-server.pem', 'utf-8');
+} catch(error){
+  console.error('FS error: ', error);
+}
+
+const LDAPConfigParams = {
+  deny_null_bind: true,
+  discoverdn: false,
+  groupattr: "cn",
+  groupdn: "ou=Groups,dc=chatopsknight,dc=com",
+  groupfilter: "",
+  insecure_tls: false,
+  starttls: false,
+  tls_max_version: "tls12",
+  tls_min_version: "tls12",
+  url: "ldaps://ldap.chatopsknight.com:636",
+  username_as_alias: true,
+  userattr: "uid",
+  userdn: "ou=Employees,dc=chatopsknight,dc=com",
+  certificate: ldapCABundle
+};
+
 //TODO: Improve expect assertion on all tests
 
 test('loginWithLdap: the result is a new LDAP authentication token', async () => {
@@ -30,6 +55,18 @@ test('loginWithLdap: the result is a new LDAP authentication token', async () =>
 	return expect(data).toBeDefined();
 });
 
+test('setLdapConfig: the result is the LDAP auth method config set  - http code 204', async () => {
+  const data = await vault.setLdapConfig(token, LDAPConfigParams, null);
+    //console.log('setLdapConfig output:\n',data);
+	return expect(data).toBeDefined();
+});
+
+
+test('readLdapConfig: the result is the LDAP auth method config displayed  - http code 204', async () => {
+  const data = await vault.readLdapConfig(token, null);
+    //console.log('readLdapConfig output:\n',data);
+	return expect(data).toBeDefined();
+});
 
 test('createLdapUser: the result is a new LDAP user created  - http code 204', async () => {
   const data = await vault.createLdapUser(token, 'rod.anami', null, Group);

@@ -57,7 +57,7 @@ vault.healthCheck().then(function(data) {
     vault.loginWithLdap(Username, Password, null).then(function(data){
       console.log('>> loginWithLdap output: \n',data);
       token = data.client_token;
-      vault.setLdapConfig(token, Params, null).then(function(data){
+      vault.setLdapConfig(token, LDAPConfigParams, null).then(function(data){
         console.log('>>> setLdapConfig output: \n',data);
         vault.readLdapConfig(token, null).then(function(data){
           console.log('>>> readLdapConfig output: \n',data);
