@@ -12,6 +12,8 @@ const Password = process.env.LDAP_PASSWORD;
 const Group = process.env.LDAP_GROUP;
 
 const Vault = require('../Vault');
+const fs = require('fs');
+
 const vault = new Vault( {
     https: true,
     cert: ClientCert,
@@ -23,13 +25,48 @@ const vault = new Vault( {
 });
 
 let token = null;
+let ldapCABundle = null;
+
+
+try {
+  ldapCABundle = fs.readFileSync('./ldap-server.pem', 'utf-8');
+} catch(error){
+  console.error('FS error: ', error);
+}
+
+const LDAPConfigParams = {
+  deny_null_bind: true,
+  discoverdn: false,
+  groupattr: "cn",
+  groupdn: "ou=Groups,dc=chatopsknight,dc=com",
+  groupfilter: "",
+  insecure_tls: false,
+  starttls: false,
+  tls_max_version: "tls12",
+  tls_min_version: "tls12",
+  url: "ldaps://ldap.chatopsknight.com:636",
+  username_as_alias: true,
+  userattr: "uid",
+  userdn: "ou=Employees,dc=chatopsknight,dc=com",
+  certificate: ldapCABundle
+};
 
 vault.healthCheck().then(function(data) {
   console.log('> healthCheck output: \n',data);
   if (!data.sealed) {
-    vault.loginWithLdap(Username, Password).then(function(data){
+    vault.loginWithLdap(Username, Password, null).then(function(data){
       console.log('>> loginWithLdap output: \n',data);
       token = data.client_token;
+      vault.setLdapConfig(token, Params, null).then(function(data){
+        console.log('>>> setLdapConfig output: \n',data);
+        vault.readLdapConfig(token, null).then(function(data){
+          console.log('>>> readLdapConfig output: \n',data);
+        }).catch(function(configError){
+          console.error('>>> readLdapConfig error: \n',configError);
+        });
+      }).catch(function(configError){
+        console.error('>>> setLdapConfig error: \n',configError);
+      });
       vault.readLdapGroup(token, Group).then(function(data){
         console.log('>>> readLdapGroup output: \n',data);
       }).catch(function(readError){

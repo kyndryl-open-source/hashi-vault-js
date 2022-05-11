@@ -5,15 +5,46 @@ sn: admin
 objectClass: top
 objectclass: person
 
+# disable anon bind
+#dn: cn=config
+#changetype: modify
+#add: olcDisallows
+#olcDisallows: bind_anon
 
-dn: ou=Employee, dc=chatopsknight, dc=com
+#dn: cn=config
+#changetype: modify
+#add: olcRequires
+#olcRequires: authc
+
+#dn: olcDatabase={-1}frontend,cn=config
+#changetype: modify
+#add: olcRequires
+#olcRequires: authc
+
+# OUs
+dn: ou=Employees, dc=chatopsknight, dc=com
 changetype: add
 ou: Employee
 description: ChatOps Knight Employees
 objectClass: top
 objectClass: organizationalUnit
 
-dn: uid=jane.doe@chatopsknight.com, ou=Employee, dc=chatopsknight, dc=com
+dn: ou=Services, dc=chatopsknight, dc=com
+changetype: add
+ou: Service
+objectclass: top
+objectClass: organizationalUnit
+
+
+# Users
+dn: cn=vault,ou=Services, dc=chatopsknight, dc=com
+changetype: add
+cn: vault
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+userPassword: vaultS3cr3T
+
+dn: uid=jane.doe, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
 cn: Jane Doe
 sn: Doe
@@ -25,7 +56,9 @@ objectClass: organizationalPerson
 objectClass: inetOrgPerson
 ou: Accounting
 ou: Employee
-l: Santa Clara
+postalAddress: 900 Elm St
+postalCode: 95.126
+l: San Jose
 st: California
 c: us
 serialNumber: 000601
@@ -34,9 +67,16 @@ mail: jane.doe@chatopsknight.com
 personalTitle: Sr Accountant
 telephoneNumber: +1-555-999-0000
 roomNumber: 5484
-userPassword: donuts
+departmentNumber: ACCT01
+employeeType: Regular
+employeeNumber: 000601
+initials: JJD
+buildingName: Valley Office
+#userPrincipalName: jane.doe@chatopsknight.com
+#sAMAccountName: jane.doe
+userPassword: IL0v3Donuts
 
-dn: uid=rod.anami@chatopsknight.com, ou=Employee, dc=chatopsknight, dc=com
+dn: uid=rod.anami, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
 cn: Rod Anami
 sn: Anami
@@ -48,6 +88,8 @@ objectClass: organizationalPerson
 objectClass: inetOrgPerson
 ou: IT
 ou: Employee
+postalAddress: R. Sem Nome, 1000
+postalCode: 13.087
 l: Campinas
 c: br
 st: Sao Paulo
@@ -56,5 +98,17 @@ uid: rod.anami
 mail: rod.anami@chatopsknight.com
 personalTitle: Site Reliability Engineer
 telephoneNumber: +55-19-9999-0000
-roomNumber: 5485
-userPassword: cookies
+roomNumber: X34
+departmentNumber: ITSRE00
+employeeType: Regular
+employeeNumber: 000602
+initials: RLA
+buildingName: Brazil Office
+#userPrincipalName: rod.anami@chatopsknight.com
+#sAMAccountName: rod.anami
+userPassword: CookiesILik3
+
+# Permissions
+#dn: cn=config
+#changetype: modify
+#access to dn.chidren="ou=Employee,dc=chatopsknight,dc=com" attrs=userPassword by dn.exact="ou=Service,dc=chatopsknight,dc=com" read

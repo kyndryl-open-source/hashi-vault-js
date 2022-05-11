@@ -2,6 +2,12 @@
 
 ## Change Log
 
+* `0.4.9`
+  * Upgraded development env to Vault server `1.10.2`
+  * Added mockup LDAP server to expand LDAP auth method functions
+  * Added *LDAP auth method* functions:
+    *
+
 * `0.4.8`
   * Fixed security vulnerability (npm audit fix)
   * Improved documentation
