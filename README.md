@@ -18,11 +18,11 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
   * Minimum: v12.x
   * Recommended: **v16.x**  
 * npm
-  * Tested on: **v6.20.x**
+  * Tested on: **v8.12.x**
 * HashiCorp Vault
-  * Minimum: v1.8.x
-  * Accepted: v1.9.x
-  * Recommended: **v1.10.x**
+  * Minimum: v1.9.x
+  * Accepted: v1.10.x
+  * Recommended: **v1.11.x**
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 

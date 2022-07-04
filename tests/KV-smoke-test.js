@@ -1,9 +1,11 @@
 //Simple test
 const Vault = require('../Vault');
+const randomWords = require('random-words');
 
 // source process.env
-const OldSecretName = "Slack106";
-const SecretName = "Slack107";
+const RandName = randomWords({ exactly: 1, wordsPerString: 2, separator:'-' });
+const RandNum = Math.floor((Math.random() * 100) + 1);
+const SecretName = `${RandName}-${RandNum}`;
 const Secrets1 = {
     bot_token1: "xoxb-123456789011-1234567890123-1w1lln0tt3llmys3cr3tatm3",
     bot_token2: "xoxb-123456789011-1234567890124-1w1lln0tt3llmys3cr3tatm3"
@@ -59,7 +61,7 @@ vault.healthCheck().then(function(data) {
               vault.updateKVSecret(Token, SecretName, Secrets3, 2, RootPath).then(function(data) {
                 console.log('7> updateKVSecret output: \n',data);
 
-                vault.eliminateKVSecret(Token, OldSecretName, RootPath).then(function(data) {
+                vault.eliminateKVSecret(Token, SecretName, RootPath).then(function(data) {
                   console.log('8> eliminateKVSecret output: \n',data);
 
                 }).catch(function(updateError){

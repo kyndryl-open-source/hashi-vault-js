@@ -1,6 +1,6 @@
 {
   "name": "hashi-vault-js",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "main": "Vault.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "url": "git+https://github.com/rod4n4m1/hashi-vault-js"
   },
   "keywords": [
-    "ibm",
+    "kyndryl",
     "hashicorp",
     "nodejs",
     "promises",
@@ -44,10 +44,11 @@
     "node": ">=12"
   },
   "dependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.27.2"
   },
   "devDependencies": {
-    "jest": "^27.4.7"
+    "jest": "^28.1.2",
+    "random-words": "^1.2.0"
   },
   "jest": {
     "testEnvironment": "node"

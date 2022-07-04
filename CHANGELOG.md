@@ -2,6 +2,11 @@
 
 ## Change Log
 
+* `0.4.10`
+  * Upgraded development env to Vault server `1.11.0`
+  * Upgraded all dependencies (`Axios` and `Jest`)
+  * Improved KV secret engine tests
+
 * `0.4.9`
   * Upgraded development env to Vault server `1.10.2`
   * Added mockup LDAP server to expand LDAP auth method functions
