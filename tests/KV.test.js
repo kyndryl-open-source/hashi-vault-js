@@ -1,7 +1,9 @@
 const Vault = require('../Vault');
+const randomWords = require('random-words');
 
-const SecretName = "Slack108";
-const OldSecretName = "Slack107";
+const RandName = randomWords({ exactly: 1, wordsPerString: 2, separator:'-' });
+const RandNum = Math.floor((Math.random() * 100) + 1);
+const SecretName = `${RandName}-${RandNum}`;
 const Secrets1 = {
     bot_token1: "xoxb-123456789011-1234567890123-1w1lln0tt3llmys3cr3tatm3",
     bot_token2: "xoxb-123456789011-1234567890124-1w1lln0tt3llmys3cr3tatm3"
@@ -87,7 +89,7 @@ test('updateKVSecret: the result is a KV entry updated with new version', () => 
 });
 
 test('updateKVSecret: the result is a KV entry updated with new version', () => {
-	return vault.updateKVSecret(Token, SecretName , Secrets2, 3, RootPath).then(data => {
+	return vault.updateKVSecret(Token, SecretName , Secrets3, 3, RootPath).then(data => {
     //console.log('updateKVSecret output:\n',data);
     expect(data).toBeDefined();
   });
@@ -96,6 +98,12 @@ test('updateKVSecret: the result is a KV entry updated with new version', () => 
 test('listKVSecret: the result is the list of keys for a KV root folder', async () => {
     const data = await vault.listKVSecrets(Token, null, RootPath);
     console.log('listKVSecrets:\n',data);
+	return expect(data).toBeDefined();
+});
+
+test('readKVSecret: the result is a KV entry information', async () => {
+    const data = await vault.readKVSecret(Token, SecretName, null, RootPath);
+    console.log('readKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });
 
@@ -127,7 +135,7 @@ test('destroyVersionsKVSecret: the result is the versions of KV entry destroyed 
 });
 
 test('eliminateKVSecret: the result is the versions of KV secrete eliminated - HTTP 204', async () => {
-    const data = await vault.eliminateKVSecret(Token, OldSecretName, RootPath);
+    const data = await vault.eliminateKVSecret(Token, SecretName, RootPath);
     //console.log('eliminateKVSecret output:\n',data);
 	return expect(data).toBeDefined();
 });

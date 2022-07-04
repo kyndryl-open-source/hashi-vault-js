@@ -21,7 +21,7 @@
 version: '3'
 services:
   vault:
-    image: vault:1.8.5
+    image: vault:1.11.0
     container_name: my-vault
     ports:
       - "8200:8200"
@@ -34,28 +34,26 @@ services:
       - ./volumes/config:/vault/config
     cap_add:
       - IPC_LOCK
-    entrypoint: vault server -config=/vault/config/vault.json
+    entrypoint: vault server -config=/vault/config/vault.hcl
 ```
 
-* Create a Vault server configuration file named: `vault.json`
+* Create a Vault server configuration file named: `vault.hcl`
 
 ```
-{
-  "backend": {
-    "file": {
-      "path": "/vault/file"
-    }
-  },
-  "listener": {
-    "tcp":{
-      "address": "0.0.0.0:8200",
-      "tls_disable": 1
-    }
-  },
-  "ui": true,
-  "max_lease_ttl": "768h",
-  "default_lease_ttl": "12h"
+storage "file" {
+  path = "/vault/file"
 }
+
+listener "tcp" {
+  address     = "0.0.0.0:8200"
+  tls_disable = true
+}
+
+ui = true
+disable_mlock = true
+max_lease_ttl =  "768h"
+default_lease_ttl = "12h"
+api_addr = "http://127.0.0.1:8200"
 ```
 
 * Create volumes and copy any certificate/key that you have
