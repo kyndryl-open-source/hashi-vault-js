@@ -1,7 +1,7 @@
 version: '3'
 services:
   vault:
-    image: vault:1.10.2
+    image: vault:1.11.0
     container_name: my-vault
     ports:
       - "8200:8200"
@@ -15,7 +15,7 @@ services:
       - ./volumes/certs:/vault/certs
     cap_add:
       - IPC_LOCK
-    entrypoint: vault server -config=/vault/config/vault.json
+    entrypoint: vault server -config=/vault/config/vault.hcl
 networks:
     default:
         driver: bridge

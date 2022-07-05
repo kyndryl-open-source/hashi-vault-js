@@ -226,19 +226,20 @@ Check below docs for more information on specific function groups.
 
 ### List of functions available
 
-| **Group** | **Link** |
-|:---------------------------------------|:--------------:|
-| **AppRole** auth method API endpoints - /auth/approle | [Doc file](/docs/AppRole-Functions.md) |
-| **LDAP** auth method API endpoints - /auth/ldap | [Doc file](/docs/LDAP-Functions.md) |
-| **Kubernetes** auth method API endpoints - /auth/kubernetes | [Doc file](/docs/Kubernetes-Functions.md) |
-| **KV v2** secret engine API endpoints | [Doc file](/docs/KVV2-Functions.md) |
-| **PKI secret** engine API endpoints | [Doc file](/docs/PKI-Functions.md) |
-| **System Backend** API endpoints - General | [Doc file](/docs/Sys-Functions.md) |
-| **System Backend** API endpoints - SEAL operations | [Doc file](/docs/Sys-Seal-Functions.md) |
-| **TLS Certificate** auth method API endpoints - /auth/cert | [Doc file](/docs/TLS-Cert-Functions.md) |
-| **Token** auth method API endpoints - /auth/token | [Doc file](/docs/Token-Functions.md) |
-| **Userpass** auth method API endpoints - /auth/userpass | [Doc file](/docs/Userpass-Functions.md) |
-|  |  |
+| **Group** | **Type** | **Default mount point** | **Link** |
+|:------------------|:------------------|:------------------|:--------------:|
+| **Active Directory** (AD) | Secret engine | `/ad` | [Doc file](/docs/AD-Functions.md) |
+| **AppRole** | Auth method | `/auth/approle` | [Doc file](/docs/AppRole-Functions.md) |
+| **LDAP** | Auth method | `/auth/ldap` | [Doc file](/docs/LDAP-Functions.md) |
+| **Kubernetes** | Auth method | `/auth/kubernetes` | [Doc file](/docs/Kubernetes-Functions.md) |
+| **KV v2** | Secret engine | `/kv` | [Doc file](/docs/KVV2-Functions.md) |
+| **PKI** | Secret engine | `/pki` | [Doc file](/docs/PKI-Functions.md) |
+| **System Backend** | System | General operations | [Doc file](/docs/Sys-Functions.md) |
+| **System Backend** | System | SEAL operations | [Doc file](/docs/Sys-Seal-Functions.md) |
+| **TLS Certificate** | Auth method | `/auth/cert` | [Doc file](/docs/TLS-Cert-Functions.md) |
+| **Token** | Auth method | `/auth/token` | [Doc file](/docs/Token-Functions.md) |
+| **Userpass** | Auth method | `/auth/userpass` | [Doc file](/docs/Userpass-Functions.md) |
+|  |  |  |  |
 
 
 ### Coverage and Limitations
@@ -263,6 +264,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 
 | **Engine** | **Coverage status** |
 |:------------|:-----------|
+| [Active Directory (AD)](https://www.vaultproject.io/api-docs/secret/ad) | `Config only` |
 | [KV Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) | `All endpoints` |
 | [PKI](https://www.vaultproject.io/api-docs/secret/pki) | `Most of them` |
 | | |
