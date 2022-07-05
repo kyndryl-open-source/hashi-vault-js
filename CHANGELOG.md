@@ -5,7 +5,12 @@
 * `0.4.10`
   * Upgraded development env to Vault server `1.11.0`
   * Upgraded all dependencies (`Axios` and `Jest`)
-  * Improved KV secret engine tests
+  * Improved KV secret engine assertions
+  * Added *AD secret engine* functions:
+    * `setADConfig`
+    * `readADConfig`
+    * `updateADConfig`
+    * `deleteADConfig`
 
 * `0.4.9`
   * Upgraded development env to Vault server `1.10.2`
