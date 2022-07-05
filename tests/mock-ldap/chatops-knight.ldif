@@ -5,22 +5,6 @@ sn: admin
 objectClass: top
 objectclass: person
 
-# disable anon bind
-#dn: cn=config
-#changetype: modify
-#add: olcDisallows
-#olcDisallows: bind_anon
-
-#dn: cn=config
-#changetype: modify
-#add: olcRequires
-#olcRequires: authc
-
-#dn: olcDatabase={-1}frontend,cn=config
-#changetype: modify
-#add: olcRequires
-#olcRequires: authc
-
 # OUs
 dn: ou=Employees, dc=chatopsknight, dc=com
 changetype: add
@@ -35,9 +19,8 @@ ou: Service
 objectclass: top
 objectClass: organizationalUnit
 
-
 # Users
-dn: cn=vault,ou=Services, dc=chatopsknight, dc=com
+dn: cn=vault, ou=Services, dc=chatopsknight, dc=com
 changetype: add
 cn: vault
 objectClass: simpleSecurityObject
@@ -62,7 +45,7 @@ l: San Jose
 st: California
 c: us
 serialNumber: 000601
-uid: jane.doe
+uid: jane.doe@chatopsknight.com
 mail: jane.doe@chatopsknight.com
 personalTitle: Sr Accountant
 telephoneNumber: +1-555-999-0000
@@ -72,9 +55,41 @@ employeeType: Regular
 employeeNumber: 000601
 initials: JJD
 buildingName: Valley Office
-#userPrincipalName: jane.doe@chatopsknight.com
-#sAMAccountName: jane.doe
+userPrincipalName: jane.doe@chatopsknight.com
+sAMAccountName: JANEDOE
 userPassword: IL0v3Donuts
+
+dn: uid=john.smith, ou=Employees, dc=chatopsknight, dc=com
+changetype: add
+cn: John Smith
+sn: Smith
+givenName: John
+objectClass: extensibleObject
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+ou: IT
+ou: Employee
+postalAddress: 6 Battery Road #39-04
+postalCode: 049.909
+l: Singapore
+st: Singapore
+c: sg
+serialNumber: 000603
+uid: john.smith@chatopsknight.com
+mail: john.smith@chatopsknight.com
+personalTitle: Site Reliability Engineer
+telephoneNumber: +65-6303-5000
+roomNumber: S306
+departmentNumber: ITSRE02
+employeeType: Regular
+employeeNumber: 000603
+initials: JS
+buildingName: Singapore Office
+userPrincipalName: john.smith@chatopsknight.com
+sAMAccountName: JOHNSMITH
+userPassword: CookiesIH@t3
 
 dn: uid=rod.anami, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
@@ -94,7 +109,7 @@ l: Campinas
 c: br
 st: Sao Paulo
 serialNumber: 000602
-uid: rod.anami
+uid: rod.anami@chatopsknight.com
 mail: rod.anami@chatopsknight.com
 personalTitle: Site Reliability Engineer
 telephoneNumber: +55-19-9999-0000
@@ -104,11 +119,6 @@ employeeType: Regular
 employeeNumber: 000602
 initials: RLA
 buildingName: Brazil Office
-#userPrincipalName: rod.anami@chatopsknight.com
-#sAMAccountName: rod.anami
+userPrincipalName: rod.anami@chatopsknight.com
+sAMAccountName: RODANAMI
 userPassword: CookiesILik3
-
-# Permissions
-#dn: cn=config
-#changetype: modify
-#access to dn.chidren="ou=Employee,dc=chatopsknight,dc=com" attrs=userPassword by dn.exact="ou=Service,dc=chatopsknight,dc=com" read

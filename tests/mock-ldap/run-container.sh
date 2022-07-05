@@ -3,7 +3,7 @@
 source ldap.env
 
 docker run -p 389:389 -p 636:636 \
-  --name open-ldap-$LDAP_IMAGE_VERSION \
+  --name ck-ldap \
   --hostname ldap.chatopsknight.com \
   --env LDAP_ORGANISATION="Chatops Knight" \
   --env LDAP_DOMAIN="chatopsknight.com" \

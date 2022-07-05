@@ -1,0 +1,50 @@
+# Microsoft AD olcAttributeTypes
+# https://ldapwiki.com/wiki/UserPrincipalName
+# https://ldapwiki.com/wiki/SAMAccountType
+# https://ldapwiki.com/wiki/UnicodePwd
+dn: cn=schema, cn=config
+changetype: modify
+add: olcAttributeTypes
+olcAttributeTypes: ( 1.2.840.113556.1.4.656
+  NAME 'userPrincipalName'
+  DESC 'MSDN Active Directory UPN'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX '1.3.6.1.4.1.1466.115.121.1.15'
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.2.840.113556.1.4.221
+  NAME 'sAMAccountName'
+  DESC 'MSDN Windows SAM Account Name'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX '1.3.6.1.4.1.1466.115.121.1.15'
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.2.840.113556.1.4.90
+  NAME 'unicodePwd'
+  DESC 'MSDN Active Directory'
+  EQUALITY octetStringMatch
+  SYNTAX '1.3.6.1.4.1.1466.115.121.1.40'
+  SINGLE-VALUE )
+
+# disable anon bind
+dn: cn=config
+changetype: modify
+add: olcDisallows
+olcDisallows: bind_anon
+
+dn: cn=config
+changetype: modify
+add: olcRequires
+olcRequires: authc
+
+dn: olcDatabase={-1}frontend,cn=config
+changetype: modify
+add: olcRequires
+olcRequires: authc
+
+# Permissions
+#dn: cn=config
+#changetype: modify
+#add: olcAccess
+#olcAccess: access to dn.children="ou=Employees,dc=chatopsknight,dc=com" attrs=userPassword
+#  by dn.exact="ou=Services,dc=chatopsknight,dc=com" read
