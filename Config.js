@@ -98,6 +98,25 @@ const config = {
   kvUndeleteSecret: ['undelete', 'post'],
   kvDestroySecret: ['destroy', 'post'],
   kvListSecrets: ['metadata', 'list'],
+  adRootPath: 'ad',
+  adSetConfig: ['config','post'],
+  adReadConfig: [ 'config', 'get'],
+  adDeleteConfig: [ 'config', 'delete'],
+  adListRoles: [],
+  adReadRole: [],
+  adCreateRole: [],
+  adUpdateRole: [],
+  adDeleteRole: [],
+  adGetPass: [],
+  adListLibraries: [],
+  adCreateLibrary: [],
+  adReadLibrary: [],
+  adUpdateLibrary: [],
+  adDeleteLibrary: [],
+  adCheckCredOut: [],
+  adCheckCredIn: [],
+  adGetCredStatus: [],
+  adRotateCred: []
 };
 
 module.exports = config;

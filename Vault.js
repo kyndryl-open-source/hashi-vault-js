@@ -2806,6 +2806,116 @@ class Vault {
     }
   }
 
+  //
+  // Active Directory secret engine API endpoints
+  //
+
+  /**
+   * @param {String<required>} token
+   * @param {Object<required>} data
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async setADConfig(token, data, mount) {
+    assert(token, 'setADConfig: required parameter missing - token');
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adSetConfig[0]}`,
+      method: config.adSetConfig[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: data
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {Object<required>} data
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async updateADConfig(token, data, mount) {
+    assert(token, 'updateADConfig: required parameter missing - token');
+    return await this.setADConfig(token, data, mount);
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async readADConfig(token, mount) {
+    assert(token, 'readADConfig: required parameter missing - token');
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adReadConfig[0]}`,
+      method: config.adReadConfig[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async deleteADConfig(token, mount) {
+    assert(token, 'deleteADConfig: required parameter missing - token');
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adDeleteConfig[0]}`,
+      method: config.adDeleteConfig[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
 
   //
   // KV secret engine API endpoints
@@ -2818,6 +2928,7 @@ class Vault {
    * @returns {Promise<Object>}
    */
   async updateKVEngineConfig(token, data, mount) {
+    assert(token, 'updateKVEngineConfig: required parameter missing - token');
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -2881,6 +2992,7 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async createKVSecret(token, name, secrets, mount) {
+    assert(token, 'createKVSecret: required parameter missing - token');
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -2920,6 +3032,7 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async updateKVSecret(token, name, secrets, version, mount) {
+    assert(token, 'updateKVSecret: required parameter missing - token');
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -2959,6 +3072,7 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async readKVSecret(token, name, version, mount) {
+    assert(token, 'readKVSecret: required parameter missing - token');
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -2991,6 +3105,7 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async deleteLatestVerKVSecret(token, name, mount) {
+    assert(token, 'deleteLatestVerKVSecret: required parameter missing - token');
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -3023,6 +3138,8 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async deleteVersionsKVSecret(token, name, versions, mount) {
+    assert(token, 'deleteVersionsKVSecret: required parameter missing - token');
+    deleteLatestVerKVSecret
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -3058,6 +3175,7 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async undeleteVersionsKVSecret(token, name, versions, mount) {
+    assert(token, 'undeleteVersionsKVSecret: required parameter missing - token');
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -3093,6 +3211,7 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async destroyVersionsKVSecret(token, name, versions, mount) {
+    assert(token, 'destroyVersionsKVSecret: required parameter missing - token');
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -3127,6 +3246,7 @@ class Vault {
    * @returns {Promise<Object>}
    */
   async eliminateKVSecret(token, name, mount) {
+    assert(token, 'eliminateKVSecret: required parameter missing - token');
     let rootPath = "";
     if (mount) {
       rootPath = mount;
@@ -3158,6 +3278,7 @@ class Vault {
   * @returns {Promise<Object>}
   */
   async listKVSecrets(token, folder, mount) {
+    assert(token, 'listKVSecrets: required parameter missing - token');
     let url = "";
     let rootPath = "";
     if (mount) {
