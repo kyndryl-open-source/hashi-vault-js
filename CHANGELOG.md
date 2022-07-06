@@ -2,6 +2,10 @@
 
 ## Change Log
 
+* `0.4.11`
+  * Improved *AD secret engine* functions interfaces
+  
+
 * `0.4.10`
   * Upgraded development env to Vault server `1.11.0`
   * Upgraded all dependencies (`Axios` and `Jest`)

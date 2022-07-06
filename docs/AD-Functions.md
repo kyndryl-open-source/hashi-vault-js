@@ -2,12 +2,26 @@
 
 ## AD Functions List
 
+* Vault document [reference]https://www.vaultproject.io/api-docs/secret/ad)
+
 * setADConfig(token, data, mount)
 
 ```javascript
 /**
  * @param {String<required>} token
- * @param {Object<required>} data
+ * @param {Integer} params.ttl
+ * @param {Integer} params.max_ttl
+ * @param {String} params.password_policy
+ * @param {String} params.url
+ * @param {String} params.request_timeout
+ * @param {Boolean} params.starttls
+ * @param {Boolean} params.insecure_tls
+ * @param {String} params.certificate
+ * @param {String<required>} params.binddn
+ * @param {String<required>} params.bindpass
+ * @param {String} params.userdn
+ * @param {String} params.upndomain
+ * @param {String} params.last_rotation_tolerance
  * @param {String} mount
  * @returns {Promise<Object>}
  */
@@ -18,7 +32,19 @@
 ```javascript
 /**
  * @param {String<required>} token
- * @param {Object<required>} data
+ * @param {Integer} params.ttl
+ * @param {Integer} params.max_ttl
+ * @param {String} params.password_policy
+ * @param {String} params.url
+ * @param {String} params.request_timeout
+ * @param {Boolean} params.starttls
+ * @param {Boolean} params.insecure_tls
+ * @param {String} params.certificate
+ * @param {String<required>} params.binddn
+ * @param {String<required>} params.bindpass
+ * @param {String} params.userdn
+ * @param {String} params.upndomain
+ * @param {String} params.last_rotation_tolerance
  * @param {String} mount
  * @returns {Promise<Object>}
  */
