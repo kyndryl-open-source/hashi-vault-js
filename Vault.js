@@ -2951,6 +2951,37 @@ class Vault {
   }
 
 
+  /**
+   * @param {String<required>} token
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async listADRoles(token, mount) {
+    assert(token, 'listADRoles: required parameter missing - token');
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adListRoles[0]}`,
+      method: config.adListRoles[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
   //
   // KV secret engine API endpoints
   //
