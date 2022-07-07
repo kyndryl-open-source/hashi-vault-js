@@ -58,6 +58,7 @@ buildingName: Valley Office
 userPrincipalName: jane.doe@chatopsknight.com
 sAMAccountName: JANEDOE
 userPassword: IL0v3Donuts
+pwdLastSet: 133016927060000000
 
 dn: uid=john.smith, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
@@ -90,6 +91,7 @@ buildingName: Singapore Office
 userPrincipalName: john.smith@chatopsknight.com
 sAMAccountName: JOHNSMITH
 userPassword: CookiesIH@t3
+pwdLastSet: 133016927060000000
 
 dn: uid=rod.anami, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
@@ -122,3 +124,4 @@ buildingName: Brazil Office
 userPrincipalName: rod.anami@chatopsknight.com
 sAMAccountName: RODANAMI
 userPassword: CookiesILik3
+pwdLastSet: 133016927060000000

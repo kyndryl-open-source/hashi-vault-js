@@ -2,6 +2,7 @@
 # https://ldapwiki.com/wiki/UserPrincipalName
 # https://ldapwiki.com/wiki/SAMAccountType
 # https://ldapwiki.com/wiki/UnicodePwd
+# https://ldapwiki.com/wiki/PwdLastSet
 dn: cn=schema, cn=config
 changetype: modify
 add: olcAttributeTypes
@@ -21,9 +22,38 @@ olcAttributeTypes: ( 1.2.840.113556.1.4.221
   SINGLE-VALUE )
 olcAttributeTypes: ( 1.2.840.113556.1.4.90
   NAME 'unicodePwd'
-  DESC 'MSDN Active Directory'
+  DESC 'MSDN Active Directory unicodePwd'
   EQUALITY octetStringMatch
   SYNTAX '1.3.6.1.4.1.1466.115.121.1.40'
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.2.840.113556.1.4.96
+  NAME 'pwdLastSet'
+  DESC 'MSDN Active Directory pwdLastSet'
+  EQUALITY integerMatch
+  SYNTAX '1.3.6.1.4.1.1466.115.121.1.27'
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.2.840.113556.1.4.750
+  NAME 'groupType'
+  DESC 'MSDN Active Directory groupType'
+  SYNTAX '1.3.6.1.4.1.1466.115.121.1.27'
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.2.840.113556.1.4.52
+  NAME 'lastLogon'
+  DESC 'MSDN Active Directory lastLogon'
+  EQUALITY integerMatch
+  SYNTAX '1.3.6.1.4.1.1466.115.121.1.27'
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.2.840.113556.1.4.159
+  NAME 'accountExpires'
+  DESC 'MSDN Active Directory accountExpires'
+  EQUALITY integerMatch
+  SYNTAX '1.3.6.1.4.1.1466.115.121.1.27'
+  SINGLE-VALUE )
+olcAttributeTypes: ( 1.2.840.113556.1.4.8
+  NAME 'userAccountControl'
+  DESC 'MSDN Active Directory userAccountControl'
+  EQUALITY integerMatch
+  SYNTAX '1.3.6.1.4.1.1466.115.121.1.27'
   SINGLE-VALUE )
 
 # disable anon bind

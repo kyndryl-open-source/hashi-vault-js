@@ -5,8 +5,7 @@
 * `0.4.11`
   * Improved *AD secret engine* config functions interfaces
   * Added *AD secret engine* functions:
-    * `listADRoles`
-
+    * `listADRoles`, `createADRole`, `updateADRole`, `readADRole`, and `deleteADRole`
 
 
 * `0.4.10`

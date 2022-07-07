@@ -20,8 +20,50 @@ const vault = new Vault( {
     proxy: false
 });
 
+const RolePayload1 = {
+  service_account_name: 'rod.anami@chatopsknight.com',
+  ttl: '1h'
+};
+
+const RolePayload2 = {
+  service_account_name: 'rod.anami@chatopsknight.com',
+  ttl: '6h'
+};
+
+const RoleName = "my-application";
+
+test('createADRole: the result is an AD role created - HTTP 204', async () => {
+  const data = await vault.createADRole(RootToken, RoleName, RolePayload1);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('readADRole: the result is an AD role information retrieved', async () => {
+  const data = await vault.readADRole(RootToken, RoleName);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('updateADRole: the result is an AD role updated - HTTP 204', async () => {
+  const data = await vault.updateADRole(RootToken, RoleName, RolePayload2);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('readADRole: the result is an AD role information retrieved', async () => {
+  const data = await vault.readADRole(RootToken, RoleName);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
 test('listADRoles: the result is the AD roles listed', async () => {
   const data = await vault.listADRoles(RootToken);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('deleteADRole: the result is an AD role deleted - HTTP 204', async () => {
+  const data = await vault.deleteADRole(RootToken, RoleName);
     console.log(data);
 	return expect(data).toBeDefined();
 });
