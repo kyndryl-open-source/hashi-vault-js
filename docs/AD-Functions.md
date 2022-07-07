@@ -69,3 +69,61 @@
  * @returns {Promise<Object>}
  */
 ```
+
+* listADRoles(token, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* createADRole(token, roleName, params, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} roleName
+ * @param {String<required>} params.service_account_name
+ * @param {String} params.ttl
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* updateADRole(token, roleName, params, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} roleName
+ * @param {String<required>} params.service_account_name
+ * @param {String} params.ttl
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* readADRole(token, roleName, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} roleName
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* deleteADRole(token, roleName, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} roleName
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```

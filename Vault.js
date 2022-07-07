@@ -2982,6 +2982,132 @@ class Vault {
     }
   }
 
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} roleName
+   * @param {String<required>} params.service_account_name
+   * @param {String} params.ttl
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async createADRole(token, roleName, params, mount) {
+    assert(token, 'createADRole: required parameter missing - token');
+    assert(roleName, 'createADRole: required parameter missing - roleName');
+
+    const { service_account_name, ttl  } = params;
+
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adCreateRole[0]}/${roleName}`,
+      method: config.adCreateRole[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        service_account_name,
+        ttl
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} roleName
+   * @param {String<required>} params.service_account_name
+   * @param {String} params.ttl
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+   async updateADRole(token, roleName, params, mount) {
+     assert(token, 'updateADRole: required parameter missing - token');
+     assert(roleName, 'updateADRole: required parameter missing - roleName');
+     return await this.createADRole(token, roleName, params, mount);
+   }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} roleName
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async readADRole(token, roleName, mount) {
+    assert(token, 'readADRole: required parameter missing - token');
+    assert(roleName, 'readADRole: required parameter missing - roleName');
+
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adReadRole[0]}/${roleName}`,
+      method: config.adReadRole[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} roleName
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async deleteADRole(token, roleName, mount) {
+    assert(token, 'deleteADRole: required parameter missing - token');
+    assert(roleName, 'deleteADRole: required parameter missing - roleName');
+
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adDeleteRole[0]}/${roleName}`,
+      method: config.adDeleteRole[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+
+
   //
   // KV secret engine API endpoints
   //
