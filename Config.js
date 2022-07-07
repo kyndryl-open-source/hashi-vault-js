@@ -102,7 +102,7 @@ const config = {
   adSetConfig: ['config','post'],
   adReadConfig: [ 'config', 'get'],
   adDeleteConfig: [ 'config', 'delete'],
-  adListRoles: [],
+  adListRoles: [ 'roles', 'list' ],
   adReadRole: [],
   adCreateRole: [],
   adUpdateRole: [],

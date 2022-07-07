@@ -3,8 +3,11 @@
 ## Change Log
 
 * `0.4.11`
-  * Improved *AD secret engine* functions interfaces
-  
+  * Improved *AD secret engine* config functions interfaces
+  * Added *AD secret engine* functions:
+    * `listADRoles`
+
+
 
 * `0.4.10`
   * Upgraded development env to Vault server `1.11.0`

@@ -2,7 +2,7 @@
 
 ## AD Functions List
 
-* Vault document [reference]https://www.vaultproject.io/api-docs/secret/ad)
+* Vault document [reference](https://www.vaultproject.io/api-docs/secret/ad)
 
 * setADConfig(token, data, mount)
 
