@@ -2984,17 +2984,17 @@ class Vault {
 
   /**
    * @param {String<required>} token
-   * @param {String<required>} roleName
+   * @param {String<required>} params.name
    * @param {String<required>} params.service_account_name
    * @param {String} params.ttl
    * @param {String} mount
    * @returns {Promise<Object>}
    */
-  async createADRole(token, roleName, params, mount) {
+  async createADRole(token, params, mount) {
     assert(token, 'createADRole: required parameter missing - token');
-    assert(roleName, 'createADRole: required parameter missing - roleName');
+    assert(params, 'createADRole: required parameter missing - params');
 
-    const { service_account_name, ttl  } = params;
+    const { name, service_account_name, ttl  } = params;
 
     let rootPath = "";
     if (mount) {
@@ -3005,7 +3005,7 @@ class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adCreateRole[0]}/${roleName}`,
+      url: `${rootPath}/${config.adCreateRole[0]}/${name}`,
       method: config.adCreateRole[1],
       headers: {
         "X-Vault-Token": token
@@ -3026,16 +3026,16 @@ class Vault {
 
   /**
    * @param {String<required>} token
-   * @param {String<required>} roleName
+   * @param {String<required>} params.name
    * @param {String<required>} params.service_account_name
    * @param {String} params.ttl
    * @param {String} mount
    * @returns {Promise<Object>}
    */
-   async updateADRole(token, roleName, params, mount) {
+   async updateADRole(token, params, mount) {
      assert(token, 'updateADRole: required parameter missing - token');
-     assert(roleName, 'updateADRole: required parameter missing - roleName');
-     return await this.createADRole(token, roleName, params, mount);
+     assert(params, 'updateADRole: required parameter missing - params');
+     return await this.createADRole(token, params, mount);
    }
 
   /**
@@ -3176,6 +3176,168 @@ class Vault {
   }
 
 
+  /**
+   * @param {String<required>} token
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async listADLibraries(token, mount) {
+    assert(token, 'listADLibraries: required parameter missing - token');
+
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adListLibraries[0]}`,
+      method: config.adListLibraries[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} setName
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async readADLibrary(token, setName, mount) {
+    assert(token, 'readADLibrary: required parameter missing - token');
+    assert(setName, 'readADLibrary: required parameter missing - setName');
+
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adReadLibrary[0]}/${setName}`,
+      method: config.adReadLibrary[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} params.name
+   * @param {String[]<required>} params.service_account_names
+   * @param {String} params.ttl
+   * @param {String} params.max_ttl
+   * @param {Boolean} params.disable_check_in_enforcement
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async createADLibrary(token, params, mount) {
+    assert(token, 'createADLibrary: required parameter missing - token');
+    assert(params, 'createADLibrary: required parameter missing - params');
+
+    const { name, service_account_names, ttl, max_ttl, disable_check_in_enforcement  } = params;
+
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adCreateLibrary[0]}/${name}`,
+      method: config.adCreateLibrary[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: {
+        service_account_names,
+        ttl,
+        max_ttl,
+        disable_check_in_enforcement
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} params.name
+   * @param {String[]<required>} params.service_account_names
+   * @param {String} params.ttl
+   * @param {String} params.max_ttl
+   * @param {Boolean} params.disable_check_in_enforcement
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+   async updateADLibrary(token, params, mount) {
+     assert(token, 'updateADLibrary: required parameter missing - token');
+     assert(params, 'updateADLibrary: required parameter missing - params');
+     return await this.createADLibrary(token, params, mount);
+   }
+
+   /**
+    * @param {String<required>} token
+    * @param {String<required>} setName
+    * @param {String} mount
+    * @returns {Promise<Object>}
+    */
+   async deleteADLibrary(token, setName, mount) {
+     assert(token, 'deleteADLibrary: required parameter missing - token');
+     assert(setName, 'deleteADLibrary: required parameter missing - setName');
+
+     let rootPath = "";
+     if (mount) {
+       rootPath = mount;
+     } else if (this.rootPath) {
+       rootPath = this.rootPath;
+     } else {
+       rootPath = config.adRootPath;
+     }
+     const Options = {
+       url: `${rootPath}/${config.adDeleteLibrary[0]}/${setName}`,
+       method: config.adDeleteLibrary[1],
+       headers: {
+         "X-Vault-Token": token
+       }
+     };
+
+     try {
+       const response = await this.instance(Options);
+       return parseAxiosResponse(response);
+     } catch(err) {
+       throw parseAxiosError(err);
+     }
+   }
 
 
   //
