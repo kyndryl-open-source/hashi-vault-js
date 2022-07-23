@@ -80,12 +80,12 @@
  */
 ```
 
-* createADRole(token, roleName, params, mount)
+* createADRole(token, params, mount)
 
 ```javascript
 /**
  * @param {String<required>} token
- * @param {String<required>} roleName
+ * @param {String<required>} params.name
  * @param {String<required>} params.service_account_name
  * @param {String} params.ttl
  * @param {String} mount
@@ -93,12 +93,12 @@
  */
 ```
 
-* updateADRole(token, roleName, params, mount)
+* updateADRole(token, params, mount)
 
 ```javascript
 /**
  * @param {String<required>} token
- * @param {String<required>} roleName
+ * @param {String<required>} params.name
  * @param {String<required>} params.service_account_name
  * @param {String} params.ttl
  * @param {String} mount
@@ -145,6 +145,94 @@
 /**
  * @param {String<required>} token
  * @param {String<required>} roleName
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* createADLibrary(token, params, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} params.name
+ * @param {String[]<required>} params.service_account_names
+ * @param {String} params.ttl
+ * @param {String} params.max_ttl
+ * @param {Boolean} params.disable_check_in_enforcement
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* updateADLibrary(token, params, mount)
+
+```javascript
+/**
+* @param {String<required>} token
+* @param {String<required>} params.name
+* @param {String[]<required>} params.service_account_names
+* @param {String} params.ttl
+* @param {String} params.max_ttl
+* @param {Boolean} params.disable_check_in_enforcement
+* @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* readADLibrary(token, setName, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} setName
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* deleteADLibrary(token, setName, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} setName
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* checkADCredOut(token, params, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} params.name
+ * @param {String} params.ttl
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* checkADCredIn(token, params, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} params.name
+ * @param {String[]} params.service_account_names
+ * @param {Boolean} forceMode
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
+
+* getADCredSatus(token, setName, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} setName
  * @param {String} mount
  * @returns {Promise<Object>}
  */

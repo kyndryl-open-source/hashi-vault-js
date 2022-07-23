@@ -24,7 +24,7 @@ const SetName = "sre-team";
 
 const LibraryPayload1 = {
   name: SetName,
-  service_account_names: ['rod.anami@chatopsknight.com'],
+  service_account_names: ['nathan.hale@chatopsknight.com'],
   ttl: '1h',
   max_ttl: '2h',
   disable_check_in_enforcement: false
@@ -32,12 +32,26 @@ const LibraryPayload1 = {
 
 const LibraryPayload2 = {
   name: SetName,
-  service_account_names: ['rod.anami@chatopsknight.com', 'john.smith@chatopsknight.com'],
+  service_account_names: ['nathan.hale@chatopsknight.com', 'john.kane@chatopsknight.com'],
   ttl: '6h',
   max_ttl: '12h',
   disable_check_in_enforcement: false
 };
 
+const CredCheckOut = {
+  name: SetName,
+  ttl: '30m'
+}
+
+const CredCheckIn1 = {
+  name: SetName,
+  service_account_names: ['nathan.hale@chatopsknight.com']
+}
+
+const CredCheckIn2 = {
+  name: SetName,
+  service_account_names: ['john.kane@chatopsknight.com']
+}
 
 test('createADLibrary: the result is an AD library created - HTTP 204', async () => {
   const data = await vault.createADLibrary(RootToken, LibraryPayload1);
@@ -59,6 +73,42 @@ test('updateADLibrary: the result is an AD library updated - HTTP 204', async ()
 
 test('readADLibrary: the result is an AD library information retrieved', async () => {
   const data = await vault.readADLibrary(RootToken, SetName);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('checkADCredOut: the result is the first service account credential in the AD library checked out', async () => {
+  const data = await vault.checkADCredOut(RootToken, CredCheckOut);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('checkADCredOut: the result is the second service account credential in the AD library checked out', async () => {
+  const data = await vault.checkADCredOut(RootToken, CredCheckOut);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('getADCredSatus: the result is an AD library credential status', async () => {
+  const data = await vault.getADCredSatus(RootToken, SetName);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('checkADCredIn: the result is the first service account credential in the AD library checked in', async () => {
+  const data = await vault.checkADCredIn(RootToken, CredCheckIn1, false);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('checkADCredIn: the result is the second service account credential in the AD library checked in', async () => {
+  const data = await vault.checkADCredIn(RootToken, CredCheckIn2, true);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('getADCredSatus: the result is an AD library credential status', async () => {
+  const data = await vault.getADCredSatus(RootToken, SetName);
     console.log(data);
 	return expect(data).toBeDefined();
 });

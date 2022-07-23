@@ -3339,6 +3339,123 @@ class Vault {
      }
    }
 
+   /**
+    * @param {String<required>} token
+    * @param {String<required>} params.name
+    * @param {String} params.ttl
+    * @param {String} mount
+    * @returns {Promise<Object>}
+    */
+   async checkADCredOut(token, params, mount) {
+     assert(token, 'checkADCredOut: required parameter missing - token');
+     assert(params, 'checkADCredOut: required parameter missing - params');
+
+     const { name, ttl } = params;
+
+     let rootPath = "";
+     if (mount) {
+       rootPath = mount;
+     } else if (this.rootPath) {
+       rootPath = this.rootPath;
+     } else {
+       rootPath = config.adRootPath;
+     }
+     const Options = {
+       url: `${rootPath}/${config.adCheckCredOut[0]}/${name}/${config.adCheckCredOut[1]}`,
+       method: config.adCheckCredOut[2],
+       headers: {
+         "X-Vault-Token": token
+       },
+       data: {
+         ttl
+       }
+     };
+
+     try {
+       const response = await this.instance(Options);
+       return parseAxiosResponse(response);
+     } catch(err) {
+       throw parseAxiosError(err);
+     }
+   }
+
+   /**
+    * @param {String<required>} token
+    * @param {String<required>} params.name
+    * @param {String[]} params.service_account_names
+    * @param {Boolean} forceMode
+    * @param {String} mount
+    * @returns {Promise<Object>}
+    */
+   async checkADCredIn(token, params, forceMode, mount) {
+     assert(token, 'checkADCredIn: required parameter missing - token');
+     assert(params, 'checkADCredIn: required parameter missing - params');
+
+     const { name, service_account_names } = params;
+
+     let rootPath = "";
+     if (mount) {
+       rootPath = mount;
+     } else if (this.rootPath) {
+       rootPath = this.rootPath;
+     } else {
+       rootPath = config.adRootPath;
+     }
+     const Mode = forceMode ? `manage/${name}` : `${name}`;
+     const Options = {
+       url: `${rootPath}/${config.adCheckCredIn[0]}/${Mode}/${config.adCheckCredIn[1]}`,
+       method: config.adCheckCredIn[2],
+       headers: {
+         "X-Vault-Token": token
+       },
+       data: {
+         service_account_names
+       }
+     };
+
+     try {
+       const response = await this.instance(Options);
+       return parseAxiosResponse(response);
+     } catch(err) {
+       throw parseAxiosError(err);
+     }
+   }
+
+
+   /**
+    * @param {String<required>} token
+    * @param {String<required>} setName
+    * @param {String} mount
+    * @returns {Promise<Object>}
+    */
+   async getADCredSatus(token, setName, mount) {
+     assert(token, 'getADCredSatus: required parameter missing - token');
+     assert(setName, 'getADCredSatus: required parameter missing - setName');
+
+     let rootPath = "";
+     if (mount) {
+       rootPath = mount;
+     } else if (this.rootPath) {
+       rootPath = this.rootPath;
+     } else {
+       rootPath = config.adRootPath;
+     }
+     const Options = {
+       url: `${rootPath}/${config.adGetCredStatus[0]}/${setName}/${config.adGetCredStatus[1]}`,
+       method: config.adGetCredStatus[2],
+       headers: {
+         "X-Vault-Token": token
+       }
+     };
+
+     try {
+       const response = await this.instance(Options);
+       return parseAxiosResponse(response);
+     } catch(err) {
+       throw parseAxiosError(err);
+     }
+   }
+
 
   //
   // KV secret engine API endpoints

@@ -2,13 +2,12 @@
 
 ## Change Log
 
-* `0.4.11`
+* `0.4.11` (**latest**)
   * Improved *AD secret engine* config functions interfaces
   * Added *AD secret engine - Role* functions:
     * `listADRoles`, `createADRole`, `updateADRole`, `readADRole`, `deleteADRole`, `getADRoleCred`, and `rotateADRoleCred`
   * Added *AD secret engine - Library* functions:
-    * `listADLibraries`, `createADLibrary`, `updateADLibrary`, `readADLibrary`, `deleteADLibrary`
-
+    * `listADLibraries`, `createADLibrary`, `updateADLibrary`, `readADLibrary`, `deleteADLibrary`, `checkADCredOut`, `checkADCredIn`, and `getADCredSatus`
 
 * `0.4.10`
   * Upgraded development env to Vault server `1.11.0`
