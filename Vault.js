@@ -3107,6 +3107,41 @@ class Vault {
   }
 
 
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} roleName
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async getADRoleCred(token, roleName, mount) {
+    assert(token, 'getADRoleCred: required parameter missing - token');
+    assert(roleName, 'getADRoleCred: required parameter missing - roleName');
+
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adGetCreds[0]}/${roleName}`,
+      method: config.adGetCreds[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+
 
   //
   // KV secret engine API endpoints

@@ -106,7 +106,7 @@ const config = {
   adReadRole: ['roles', 'get'],
   adCreateRole: ['roles', 'post'],
   adDeleteRole: ['roles', 'delete'],
-  adGetPass: [],
+  adGetCreds: ['creds', 'get'],
   adListLibraries: [],
   adCreateLibrary: [],
   adReadLibrary: [],
