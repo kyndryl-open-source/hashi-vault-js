@@ -3126,8 +3126,8 @@ class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adGetCreds[0]}/${roleName}`,
-      method: config.adGetCreds[1],
+      url: `${rootPath}/${config.adGetCred[0]}/${roleName}`,
+      method: config.adGetCred[1],
       headers: {
         "X-Vault-Token": token
       }
@@ -3140,6 +3140,41 @@ class Vault {
       throw parseAxiosError(err);
     }
   }
+
+  /**
+   * @param {String<required>} token
+   * @param {String<required>} roleName
+   * @param {String} mount
+   * @returns {Promise<Object>}
+   */
+  async rotateADRoleCred(token, roleName, mount) {
+    assert(token, 'rotateADRoleCred: required parameter missing - token');
+    assert(roleName, 'rotateADRoleCred: required parameter missing - roleName');
+
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.adRootPath;
+    }
+    const Options = {
+      url: `${rootPath}/${config.adRotateCred[0]}/${roleName}`,
+      method: config.adRotateCred[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
 
 
 
