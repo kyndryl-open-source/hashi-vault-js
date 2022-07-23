@@ -111,9 +111,9 @@ const config = {
   adCreateLibrary: ['library', 'post'],
   adReadLibrary: ['library', 'get'],
   adDeleteLibrary: ['library', 'delete'],
-  adCheckCredOut: [],
-  adCheckCredIn: [],
-  adGetCredStatus: [],
+  adCheckCredOut: ['library', 'check-out', 'post'],
+  adCheckCredIn: ['library', 'check-in', 'post'],
+  adGetCredStatus: ['library', 'status', 'get'],
   adRotateCred: ['rotate-role', 'post']
 };
 

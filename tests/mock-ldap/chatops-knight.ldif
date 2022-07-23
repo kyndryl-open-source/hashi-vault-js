@@ -60,11 +60,11 @@ sAMAccountName: JANEDOE
 userPassword: IL0v3Donuts
 pwdLastSet: 133016927060000000
 
-dn: uid=john.smith, ou=Employees, dc=chatopsknight, dc=com
+dn: uid=nathan.hale, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
-cn: John Smith
-sn: Smith
-givenName: John
+cn: Nathan Hale
+sn: Hale
+givenName: Nathan
 objectClass: extensibleObject
 objectClass: top
 objectClass: person
@@ -78,26 +78,26 @@ l: Singapore
 st: Singapore
 c: sg
 serialNumber: 000603
-uid: john.smith@chatopsknight.com
-mail: john.smith@chatopsknight.com
+uid: nathan.hale@chatopsknight.com
+mail: nathan.hale@chatopsknight.com
 personalTitle: Site Reliability Engineer
 telephoneNumber: +65-6303-5000
 roomNumber: S306
 departmentNumber: ITSRE02
 employeeType: Regular
 employeeNumber: 000603
-initials: JS
+initials: NLH
 buildingName: Singapore Office
-userPrincipalName: john.smith@chatopsknight.com
-sAMAccountName: JOHNSMITH
+userPrincipalName: nathan.hale@chatopsknight.com
+sAMAccountName: NATHANHALE
 userPassword: CookiesIH@t3
 pwdLastSet: 133016927060000000
 
-dn: uid=rod.anami, ou=Employees, dc=chatopsknight, dc=com
+dn: uid=john.kane, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
-cn: Rod Anami
-sn: Anami
-givenName: Rod
+cn: John Kane
+sn: Kane
+givenName: John
 objectClass: extensibleObject
 objectClass: top
 objectClass: person
@@ -111,17 +111,17 @@ l: Campinas
 c: br
 st: Sao Paulo
 serialNumber: 000602
-uid: rod.anami@chatopsknight.com
-mail: rod.anami@chatopsknight.com
+uid: john.kane@chatopsknight.com
+mail: john.kane@chatopsknight.com
 personalTitle: Site Reliability Engineer
 telephoneNumber: +55-19-9999-0000
 roomNumber: X34
 departmentNumber: ITSRE00
 employeeType: Regular
 employeeNumber: 000602
-initials: RLA
+initials: JFK
 buildingName: Brazil Office
-userPrincipalName: rod.anami@chatopsknight.com
-sAMAccountName: RODANAMI
+userPrincipalName: john.kane@chatopsknight.com
+sAMAccountName: JOHNKANE
 userPassword: CookiesILik3
 pwdLastSet: 133016927060000000
