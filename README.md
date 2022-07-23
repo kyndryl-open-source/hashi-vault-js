@@ -264,7 +264,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 
 | **Engine** | **Coverage status** |
 |:------------|:-----------|
-| [Active Directory (AD)](https://www.vaultproject.io/api-docs/secret/ad) | `Config only` |
+| [Active Directory (AD)](https://www.vaultproject.io/api-docs/secret/ad) | `Most of them` |
 | [KV Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) | `All endpoints` |
 | [PKI](https://www.vaultproject.io/api-docs/secret/pki) | `Most of them` |
 | | |

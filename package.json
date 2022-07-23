@@ -16,7 +16,8 @@
     "test:pki-roles": "bash -c 'source tests/process.env && jest tests/PKI-roles.test.js'",
     "test:k8s": "bash -c 'source tests/process.env && jest tests/K8s.test.js'",
     "test:ad-config": "bash -c 'source tests/process.env && jest tests/AD-config.test.js'",
-    "test:ad-roles": "bash -c 'source tests/process.env && jest tests/AD-roles.test.js'"
+    "test:ad-roles": "bash -c 'source tests/process.env && jest tests/AD-roles.test.js'",
+    "test:ad-libraries": "bash -c 'source tests/process.env && jest tests/AD-libraries.test.js'"
   },
   "repository": {
     "type": "git",

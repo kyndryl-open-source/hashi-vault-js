@@ -20,20 +20,24 @@ const vault = new Vault( {
     proxy: false
 });
 
+const RoleName = "my-application";
+
 const RolePayload1 = {
+  name: RoleName,
   service_account_name: 'rod.anami@chatopsknight.com',
   ttl: '1h'
 };
 
 const RolePayload2 = {
+  name: RoleName,
   service_account_name: 'rod.anami@chatopsknight.com',
   ttl: '6h'
 };
 
-const RoleName = "my-application";
+
 
 test('createADRole: the result is an AD role created - HTTP 204', async () => {
-  const data = await vault.createADRole(RootToken, RoleName, RolePayload1);
+  const data = await vault.createADRole(RootToken, RolePayload1);
     console.log(data);
 	return expect(data).toBeDefined();
 });
@@ -45,7 +49,7 @@ test('readADRole: the result is an AD role information retrieved', async () => {
 });
 
 test('updateADRole: the result is an AD role updated - HTTP 204', async () => {
-  const data = await vault.updateADRole(RootToken, RoleName, RolePayload2);
+  const data = await vault.updateADRole(RootToken, RolePayload2);
     console.log(data);
 	return expect(data).toBeDefined();
 });
