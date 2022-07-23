@@ -106,7 +106,7 @@ const config = {
   adReadRole: ['roles', 'get'],
   adCreateRole: ['roles', 'post'],
   adDeleteRole: ['roles', 'delete'],
-  adGetCreds: ['creds', 'get'],
+  adGetCred: ['creds', 'get'],
   adListLibraries: [],
   adCreateLibrary: [],
   adReadLibrary: [],
@@ -115,7 +115,7 @@ const config = {
   adCheckCredOut: [],
   adCheckCredIn: [],
   adGetCredStatus: [],
-  adRotateCred: []
+  adRotateCred: ['rotate-role', 'post']
 };
 
 module.exports = config;
