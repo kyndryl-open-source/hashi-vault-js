@@ -56,6 +56,12 @@ test('readADRole: the result is an AD role information retrieved', async () => {
 	return expect(data).toBeDefined();
 });
 
+test('getADRoleCred: the result is an AD role credential information retrieved', async () => {
+  const data = await vault.getADRoleCred(RootToken, RoleName);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
 test('listADRoles: the result is the AD roles listed', async () => {
   const data = await vault.listADRoles(RootToken);
     console.log(data);

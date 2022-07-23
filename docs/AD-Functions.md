@@ -127,3 +127,14 @@
  * @returns {Promise<Object>}
  */
 ```
+
+* getADRoleCred(token, roleName, mount)
+
+```javascript
+/**
+ * @param {String<required>} token
+ * @param {String<required>} roleName
+ * @param {String} mount
+ * @returns {Promise<Object>}
+ */
+```
