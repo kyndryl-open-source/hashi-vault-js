@@ -3,6 +3,7 @@
   "version": "0.4.11",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "main": "Vault.js",
+  "types": "Vault.d.ts",
   "scripts": {
     "test:approle": "bash -c 'source tests/process.env && jest tests/AppRole.test.js'",
     "test:kv": "bash -c 'source tests/process.env && jest tests/KV.test.js'",
@@ -50,8 +51,10 @@
     "axios": "^0.27.2"
   },
   "devDependencies": {
+    "@types/node": "^18.6.1",
     "jest": "^28.1.2",
-    "random-words": "^1.2.0"
+    "random-words": "^1.2.0",
+    "typescript": "^4.7.4"
   },
   "jest": {
     "testEnvironment": "node"
