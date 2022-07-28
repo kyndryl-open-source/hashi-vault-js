@@ -3,7 +3,6 @@
 // Definitions by: Osama Adil <https://github.com/phr3nzy/>
 
 /// <reference types="node" />
-/// <reference types="typescript" />
 
 import type { Axios, AxiosProxyConfig } from "axios"
 import type { Agent } from "https";
