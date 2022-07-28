@@ -1,4 +1,4 @@
-// Type definitions for hash-vault-js
+// Type definitions for hashi-vault-js
 // Project: https://github.com/rod4n4m1/hashi-vault-js
 // Definitions by: Osama Adil <https://github.com/phr3nzy/>
 
