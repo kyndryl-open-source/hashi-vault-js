@@ -33,6 +33,104 @@ export type ErrorResponse = {
 	}
 };
 
+interface Cpu {
+  cpu: number;
+  vendorId: string;
+  family: string;
+  model: string;
+  stepping: number;
+  physicalId: string;
+  coreId: string;
+  cores: number;
+  modelName: string;
+  mhz: number;
+  cacheSize: number;
+	flags: string[];
+  microcode: string;
+}
+
+interface CpuTime {
+  cpu: string;
+  user: number;
+  system: number;
+  idle: number;
+  nice: number;
+  iowait: number;
+  irq: number;
+  softirq: number;
+  steal: number;
+  guest: number;
+  guestNice: number;
+}
+
+interface Disk {
+  path: string;
+  fstype: string;
+  total: number;
+  free: number;
+  used: number;
+  usedPercent: number;
+  inodesTotal: number;
+  inodesUsed: number;
+  inodesFree: number;
+  inodesUsedPercent: number;
+}
+
+interface Host {
+  hostname: string;
+  uptime: number;
+  bootTime: number;
+  procs: number;
+  os: string;
+  platform: string;
+  platformFamily: string;
+  platformVersion: string;
+  kernelVersion: string;
+  kernelArch: string;
+  virtualizationSystem: string;
+  virtualizationRole: string;
+  hostid: string;
+}
+
+interface Memory {
+  total: number;
+  available: number;
+  used: number;
+  usedPercent: number;
+  free: number;
+  active: number;
+  inactive: number;
+  wired: number;
+  laundry: number;
+  buffers: number;
+  cached: number;
+  writeback: number;
+  dirty: number;
+  writebacktmp: number;
+  shared: number;
+  slab: number;
+  sreclaimable: number;
+  sunreclaim: number;
+  pagetables: number;
+  swapcached: number;
+  commitlimit: number;
+  committedas: number;
+  hightotal: number;
+  highfree: number;
+  lowtotal: number;
+  lowfree: number;
+  swaptotal: number;
+  swapfree: number;
+  mapped: number;
+  vmalloctotal: number;
+  vmallocused: number;
+  vmallocchunk: number;
+  hugepagestotal: number;
+  hugepagesfree: number;
+  hugepagesize: number;
+}
+
+
 export type HealthCheckParams = {
 	standbyok?: boolean;
 	perfstandbyok?: boolean;
@@ -72,36 +170,11 @@ export type SealStatusResponse = {
 	storage_type: string;
 } | ErrorResponse;
 export type SysHostInfoResponse = {
-	cpu: {
-		cpu: number;
-		vendorId: string;
-		family: string;
-		model: string;
-	}[];
-	cpu_times: {
-		cpu: string;
-		user: number;
-		system: number;
-		idle: number;
-	}[];
-	disk: {
-		path: string;
-		fstype: string;
-		total: number;
-		free: number;
-		used: number;
-	}[];
-	host: {
-		hostname: string;
-		uptime: number;
-		bootTime: number;
-		procs: number;
-	}
-	memory: {
-		total: number;
-		available: number;
-		used: number;
-	}
+	cpu: Cpu[];
+	cpu_times: CpuTime[];
+	disk: Disk[];
+	host: Host;
+	memory: Memory;
 	timestamp: string;
 } | ErrorResponse;
 export type SysCapabilitiesResponse = {
