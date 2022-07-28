@@ -1038,7 +1038,5 @@ declare module "hashi-vault-js" {
 		listKVSecrets(token: string, folder?: string, mount?: string): Promise<ListKVSecretsResponse>;
 	}
 
-	namespace Vault {}
-
-	export default Vault;
+	export = Vault;
 }
