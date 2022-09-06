@@ -3,6 +3,7 @@
 ## Change Log
 
 * `0.4.11` (**latest**)
+  * Added support to `TypeScript` (contribution from @phr3nzy)
   * Improved *AD secret engine* config functions interfaces
   * Added *AD secret engine - Role* functions:
     * `listADRoles`, `createADRole`, `updateADRole`, `readADRole`, `deleteADRole`, `getADRoleCred`, and `rotateADRoleCred`

@@ -26,6 +26,27 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
+## Table of Contents
+
+* [Install](#Install)
+* [Uninstall](#Uninstall)
+* [Release notes and versions](#Release notes and versions)
+* [Class Constructor](#Class Constructor)
+* [Module usage](#Module usage)
+* [TypeScript](#TypeScript)
+* [Mount points](#Mount points)
+* [Error handling](#Error handling)
+* [List of functions available](#List of functions available)
+* [Coverage and limitations](#Coverage and limitations)
+* [Creating your test environment](#Creating your test environment)
+* [References](#References)
+* [Contributing](#Contributing)
+* [Reporting an issue](#Reporting an issue)
+* [Suggesting a new feature](#Suggesting a new feature)
+* [Authors](#Authors)
+* [Contributors](#Contributors)
+* [License](#License)
+
 ### Install
 
 `npm install hashi-vault-js --save`
@@ -181,6 +202,13 @@ Update secret version 1 in the Vault:
 const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 ```
 
+### TypeScript
+
+`hashi-vault-js` includes TypeScript definitions.
+
+
+
+
 ### Mount points
 
 Most of the Vault Server API endpoints can be mounted on non-default path. For that reason, there's a last parameter in the related functions to allow using a custom mount path.
@@ -242,7 +270,7 @@ Check below docs for more information on specific function groups.
 |  |  |  |  |
 
 
-### Coverage and Limitations
+### Coverage and limitations
 
 The following HashiCorp Vault API endpoints are currently covered:
 
@@ -299,6 +327,7 @@ Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 * Richard <richie765@>
 * Artico Bandurini <articobandurini@>
 * Ordinary IT9 <hkgnobody@>
+* Osama Adil <adilosama47@gmail.com>
 
 ### License
 This project is licensed under the [Eclipse Public License 2.0](https://opensource.org/licenses/EPL-2.0).
