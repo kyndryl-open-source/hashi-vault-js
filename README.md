@@ -204,10 +204,15 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 ### TypeScript
 
-`hashi-vault-js` includes TypeScript definitions.
+`hashi-vault-js` includes TypeScript definitions in the `Vault.d.ts`.
 
-
-
+```javascript
+let response: ReadKVSecretResponse = null;
+try {
+  const { data } = await vault.readKVSecret(token, Item.name);
+  response = data;
+}
+```
 
 ### Mount points
 
