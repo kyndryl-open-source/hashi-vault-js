@@ -28,24 +28,24 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 
 ## Table of Contents
 
-* [Install](#Install)
-* [Uninstall](#Uninstall)
+* [Install](#install)
+* [Uninstall](#uninstall)
 * [Release notes and versions](#release-notes-and-versions)
 * [Class Constructor](#class-constructor)
-* [Module usage](#Module usage)
-* [TypeScript](#TypeScript)
-* [Mount points](#Mount points)
-* [Error handling](#Error handling)
-* [List of functions available](#List of functions available)
-* [Coverage and limitations](#Coverage and limitations)
-* [Creating your test environment](#Creating your test environment)
-* [References](#References)
-* [Contributing](#Contributing)
-* [Reporting an issue](#Reporting an issue)
-* [Suggesting a new feature](#Suggesting a new feature)
-* [Authors](#Authors)
-* [Contributors](#Contributors)
-* [License](#License)
+* [Module usage](#module-usage)
+* [TypeScript](#typeScript)
+* [Mount points](#mount-points)
+* [Error handling](#error-handling)
+* [Available functions](#available-functions)
+* [Coverage and limitations](#coverage-and-limitations)
+* [Test environment](#test-environment)
+* [References](#references)
+* [Contributing](#contributing)
+* [Reporting an issue](#reporting-an-issue)
+* [Suggesting a new feature](#suggesting-a-new-feature)
+* [Authors](#authors)
+* [Contributors](#contributors)
+* [License](#license)
 
 ### Install
 
@@ -252,7 +252,7 @@ catch(err) {
 
 Check below docs for more information on specific function groups.
 
-### List of functions available
+### Available functions
 
 | **Group** | **Type** | **Default mount point** | **Link** |
 |:------------------|:------------------|:------------------|:--------------:|
@@ -298,7 +298,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 | | |
 
 
-### Creating your test environment (with HTTPS)
+### Test environment
 
 Follow the detailed instructions from this [doc](/docs/Test-environment.md)
 
