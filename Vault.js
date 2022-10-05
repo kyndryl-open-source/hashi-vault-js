@@ -13,21 +13,17 @@ const assert = require('assert');
 
 // Internal function - create new https agent
 const getHttpsAgent = function(certificate, key, cacert) {
-
-  if(!certificate && !key && cacert) {
-    return new https.Agent({
-      // CA cert from Hashicorp Vault PKI
-      ca: fs.readFileSync(cacert)
-    });
-  } else {
-    return new https.Agent({
-      // Client certificate
-      cert: fs.readFileSync(certificate),
-      key: fs.readFileSync(key),
-      // CA cert from Hashicorp Vault PKI
-      ca: fs.readFileSync(cacert)
-    });
+  const options = {}
+  if(cacert) {
+    // CA cert from Hashicorp Vault PKI
+    options.ca = fs.readFileSync(cacert)
   }
+  if(certificate || key) {
+    // Client certificate
+    options.cert = fs.readFileSync(certificate)
+    options.key = fs.readFileSync(key)
+  }
+  return new https.Agent(options);
 }
 
 // Internal function - creates new axios instance
