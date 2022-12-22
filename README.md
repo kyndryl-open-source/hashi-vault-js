@@ -15,14 +15,14 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 ## Requirements (MacOS/Windows)
 
 * NodeJs
-  * Minimum: v12.x
+  * Minimum: v14.x
   * Recommended: **v16.x**  
 * npm
   * Tested on: **v8.12.x**
 * HashiCorp Vault
-  * Minimum: v1.9.x
-  * Accepted: v1.10.x
-  * Recommended: **v1.11.x**
+  * Minimum: v1.10.x
+  * Accepted: v1.11.x
+  * Recommended: **v1.12.x**
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
@@ -33,7 +33,7 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 * [Release notes and versions](#release-notes-and-versions)
 * [Class Constructor](#class-constructor)
 * [Module usage](#module-usage)
-* [TypeScript](#typeScript)
+* [TypeScript](#typescript)
 * [Mount points](#mount-points)
 * [Error handling](#error-handling)
 * [Available functions](#available-functions)
@@ -94,7 +94,7 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 
 **Note:** This package covers some auth methods and secret engines. Check `Limitations` section for more details.
 
-**Production**
+* **Production**
 
 ```javascript
 const Vault = require('hashi-vault-js');
@@ -113,14 +113,13 @@ const vault = new Vault( {
 });
 ```
 
-**Development**
+* **Development**
 
 ```javascript
 const Vault = require('hashi-vault-js');
 
 const vault = new Vault( {
     https: true,
-    cacert: './ca.crt',
     baseUrl: 'https://127.0.0.1:8200/v1',
     rootPath: 'secret',
     timeout: 5000,
@@ -274,7 +273,6 @@ Check below docs for more information on specific function groups.
 | **Userpass** | Auth method | `/auth/userpass` | [Doc file](/docs/Userpass-Functions.md) |
 |  |  |  |  |
 
-
 ### Coverage and limitations
 
 The following HashiCorp Vault API endpoints are currently covered:
@@ -315,26 +313,32 @@ Follow the detailed instructions from this [doc](/docs/Test-environment.md)
 
   * Ruan Bekker's Blog [post](https://blog.ruanbekker.com/blog/2019/05/06/setup-hashicorp-vault-server-on-docker-and-cli-guide/)
 
-
 ### Contributing
+
 If you want to contribute to the module and make it better, your help is very welcome. You can do so submitting a **Pull Request**. It will be reviewed and merged to main branch if accepted.
 
 ### Reporting an issue
+
 If you have found what you believe to be an issue with `hashi-vault-js` please do not hesitate to file an issue on the GitHub repository [here](https://github.com/rod4n4m1/hashi-vault-js/issues/new?template=bug-report.md).
 
 ### Suggesting a new feature
+
 If you want to see new features or enhancements to the current ones, we would love to hear them. Please submit an issue on the GitHub repository [here](https://github.com/rod4n4m1/hashi-vault-js/issues/new?template=new-feature.md).
 
 ### Authors
+
 Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 
 ### Contributors
+
 * Richard <richie765@>
 * Artico Bandurini <articobandurini@>
 * Ordinary IT9 <hkgnobody@>
 * Osama Adil <adilosama47@gmail.com>
+* Jose <josedev-union@>
 
 ### License
-This project is licensed under the [Eclipse Public License 2.0](https://opensource.org/licenses/EPL-2.0).
+
+This project is licensed under the [MIT](https://opensource.org/licenses/MIT) license.
 
 HashiCorp Vault open source is licensed under the [Mozilla Public License 2.0](https://github.com/HashiCorp/vault/blob/master/LICENSE).
