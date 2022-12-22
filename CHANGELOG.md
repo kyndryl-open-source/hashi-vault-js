@@ -2,7 +2,14 @@
 
 ## Change Log
 
-* `0.4.11` (**latest**)
+* `0.4.12` (**latest**)
+  * Turned CA certificate optional (contribution from @josedev-union)
+  * Upgraded all dependencies (`Axios`, `Jest`, `random-words`, and `@type/node`)
+  * Upgraded development env to Vault server `1.12.2`
+  * Changed licence from `EPL-2.0` to `MIT`
+  * Added workflow for releasing and publishing
+
+* `0.4.11`
   * Added support to `TypeScript` (contribution from @phr3nzy)
   * Improved *AD secret engine* config functions interfaces
   * Added *AD secret engine - Role* functions:

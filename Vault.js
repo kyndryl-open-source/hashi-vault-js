@@ -1,5 +1,5 @@
 /*
- * The accompanying program is provided under the terms of the Eclipse Public License 2.0 ("agreement").
+ * The accompanying program is provided under the terms of the MIT license ("agreement").
  * Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 */
 
