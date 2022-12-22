@@ -1,4 +1,5 @@
 # Hashi Vault JS
+
 ![GitHub issues](https://img.shields.io/github/issues/rod4n4m1/hashi-vault-js)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/rod4n4m1/hashi-vault-js)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/rod4n4m1/hashi-vault-js)
@@ -300,18 +301,17 @@ The following HashiCorp Vault API endpoints are currently covered:
 | [PKI](https://www.vaultproject.io/api-docs/secret/pki) | `Most of them` |
 | | |
 
-
 ### Test environment
 
 Follow the detailed instructions from this [doc](/docs/Test-environment.md)
 
 ### References
 
-  * HashiCorp Vault Using KV engine [doc](https://learn.HashiCorp.com/vault/secrets-management/sm-versioned-kv)
+* HashiCorp Vault Using KV engine [doc](https://learn.HashiCorp.com/vault/secrets-management/sm-versioned-kv)
 
-  * HashiCorp Vault Docker Hub [page](https://hub.docker.com/_/vault)
+* HashiCorp Vault Docker Hub [page](https://hub.docker.com/_/vault)
 
-  * Ruan Bekker's Blog [post](https://blog.ruanbekker.com/blog/2019/05/06/setup-hashicorp-vault-server-on-docker-and-cli-guide/)
+* Ruan Bekker's Blog [post](https://blog.ruanbekker.com/blog/2019/05/06/setup-hashicorp-vault-server-on-docker-and-cli-guide/)
 
 ### Contributing
 

@@ -1,5 +1,5 @@
 /*
- * The accompanying program is provided under the terms of the MIT license ("agreement").
+ * The accompanying program is provided under the terms of the MIT li ("agreement").
  * Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 */
 
@@ -3675,7 +3675,6 @@ class Vault {
   */
   async deleteVersionsKVSecret(token, name, versions, mount) {
     assert(token, 'deleteVersionsKVSecret: required parameter missing - token');
-    deleteLatestVerKVSecret
     let rootPath = "";
     if (mount) {
       rootPath = mount;
