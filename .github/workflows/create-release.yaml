@@ -16,7 +16,7 @@ jobs:
       - name: Read CHANGELOG
         id: change-log
         run: |
-          echo "::set-output name=body::$(cat CHANGELOG.md)"
+          echo "BODY=$(head -10 CHANGELOG.md)" >> $GITHUB_OUTPUT
       - name: Create Release
         id: create-release
         uses: actions/create-release@v1
@@ -25,6 +25,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{ steps.change-log.outputs.body }}
+          body: ${{ steps.change-log.outputs.BODY }}
           draft: false
           prerelease: false
