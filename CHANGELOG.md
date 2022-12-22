@@ -8,6 +8,7 @@
   * Upgraded development env to Vault server `1.12.2`
   * Changed licence from `EPL-2.0` to `MIT`
   * Added workflow for releasing and publishing
+  * Fixed bug on `deleteLatestVerKVSecret`
 
 * `0.4.11`
   * Added support to `TypeScript` (contribution from @phr3nzy)
