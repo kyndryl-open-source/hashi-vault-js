@@ -332,7 +332,6 @@ Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 ### Contributors
 
 * Richard <richie765@>
-* Artico Bandurini <articobandurini@>
 * Ordinary IT9 <hkgnobody@>
 * Osama Adil <adilosama47@gmail.com>
 * Jose <josedev-union@>
