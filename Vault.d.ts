@@ -253,7 +253,7 @@ export type CreateTokenParams = {
 	id?: string;
 	role_name?: string;
 	policies?: string;
-	meta?: Record<string, any>;
+	meta?: Record<string, unknown>;
 	no_parent?: boolean;
 	no_default_policy?: boolean;
 	renewable?: boolean;
@@ -533,13 +533,13 @@ export type ReadK8sConfigResponse = {
 	disable_local_ca_jwt: boolean;
 } | ErrorResponse;
 export type CreateK8sRoleParams = {
-	bound_service_account_names?: Record<string, any>;
-	bound_service_account_namespaces?: Record<string, any>;
+	bound_service_account_names?: Record<string, unknown>;
+	bound_service_account_namespaces?: Record<string, unknown>;
 	audience?: string;
 	token_ttl?: string | number;
 	token_max_ttl?: string | number;
-	token_policies?: Record<string, any>;
-	token_bound_cidrs?: Record<string, any>;
+	token_policies?: Record<string, unknown>;
+	token_bound_cidrs?: Record<string, unknown>;
 	token_explicit_max_ttl?: string | number;
 	token_no_default_policy?: boolean;
 	token_num_uses?: number;
@@ -563,7 +563,7 @@ export type LoginWithAppRoleResponse = {
 	client_token: string;
 	accessor: string;
 	token_policies: string[];
-	metadata: Record<string, any> | null;
+	metadata: Record<string, unknown> | null;
 	lease_duration: number;
 	renewable: boolean;
 } | ErrorResponse;
@@ -930,14 +930,14 @@ export type ReadKVEngineConfigResponse = {
 } | ErrorResponse;
 export type CreateKVSecretResponse = {
 	created_time: string;
-	custom_metadata: Record<string, any>;
+	custom_metadata: Record<string, unknown>;
 	deletion_time: string;
 	destroyed: boolean;
 	version: number;
 } | ErrorResponse;
 export type UpdateKVSecretResponse = {
 	created_time: string;
-	custom_metadata: Record<string, any>;
+	custom_metadata: Record<string, unknown>;
 	deletion_time: string;
 	destroyed: boolean;
 	version: number;
@@ -951,7 +951,6 @@ export type EliminateKVSecretResponse = {} | ErrorResponse;
 export type ListKVSecretsResponse = {
 	keys: string[];
 } | ErrorResponse;
-
 
 declare module "hashi-vault-js" {
 	class Vault {
@@ -1063,10 +1062,10 @@ declare module "hashi-vault-js" {
 		checkADCredOut(token: string, params: CheckADCredOutParams, mount?: string): Promise<CheckADCredOutResponse>;
 		checkADCredInt(token: string, params: CheckADCredInParams, forceMode: boolean, mount?: string): Promise<CheckADCredInResponse>;
 		getADCredSatus(token: string, setName: string, mount?: string): Promise<GetADCredSatusResponse>;
-		updateKVEngineConfig(token: string, data: Record<string, any>, mount?: string): Promise<UpdateKVEngineConfigResponse>;
+		updateKVEngineConfig(token: string, data: Record<string, unknown>, mount?: string): Promise<UpdateKVEngineConfigResponse>;
 		readKVEngineConfig(token: string, mount?: string): Promise<ReadKVEngineConfigResponse>;
-		createKVSecret(token: string, name: string, secrets: Record<string, any>, mount?: string): Promise<CreateKVSecretResponse>;
-		updateKVSecret(token: string, name: string, secrets: Record<string, any>, version: number, mount?: string): Promise<UpdateKVSecretResponse>;
+		createKVSecret(token: string, name: string, secrets: Record<string, unknown>, mount?: string): Promise<CreateKVSecretResponse>;
+		updateKVSecret(token: string, name: string, secrets: Record<string, unknown>, version: number, mount?: string): Promise<UpdateKVSecretResponse>;
 		readKVSecret(token: string, name: string, version?: number, mount?: string): Promise<ReadKVSecretResponse>;
 		deleteLatestVerKVSecret(token: string, name: string, mount?: string): Promise<DeleteLatestVerKVSecretResponse>;
 		deleteVersionsKVSecret(token: string, name: string, versions: number[], mount?: string): Promise<DeleteVersionsKVSecretResponse>;
