@@ -942,7 +942,16 @@ export type UpdateKVSecretResponse = {
 	destroyed: boolean;
 	version: number;
 } | ErrorResponse;
-export type ReadKVSecretResponse = {} | ErrorResponse;
+export type ReadKVSecretResponse = {
+	data: Record<string, unknown>;
+	metadata: {
+		created_time: string;
+		custom_metadata: Record<string, unknown> | null;
+		deletion_time: string;
+		destroyed: boolean;
+		version: number;
+	}
+} | ErrorResponse;
 export type DeleteLatestVerKVSecretResponse = {} | ErrorResponse;
 export type DeleteVersionsKVSecretResponse = {} | ErrorResponse;
 export type UndeleteVersionsKVSecretResponse = {} | ErrorResponse;
