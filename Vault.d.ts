@@ -170,14 +170,14 @@ interface Memory {
 
 
 export type HealthCheckParams = {
-	standbyok?: boolean;
-	perfstandbyok?: boolean;
-	activecode?: number;
-	standbycode?: number;
-	drsecondarycode?: number;
-	performancestandbycode?: number;
-	sealedcode?: number;
-	uninitcode?: number;
+	standbyok: boolean;
+	perfstandbyok: boolean;
+	activecode: number;
+	standbycode: number;
+	drsecondarycode: number;
+	performancestandbycode: number;
+	sealedcode: number;
+	uninitcode: number;
 };
 export type HealthCheckResponse = {
 	initialized: boolean;
@@ -967,7 +967,7 @@ declare module "hashi-vault-js" {
 		private agent: Agent | boolean;
 
 		constructor(params: VaultConfig)
-		healthCheck(params: HealthCheckParams): Promise<HealthCheckResponse>;
+		healthCheck(params?: Partial<HealthCheckParams>): Promise<HealthCheckResponse>;
 		sealStatus(): Promise<SealStatusResponse>;
 		sysHostInfo(sudoToken: string): Promise<SysHostInfoResponse>;
 		sysCapabilities(sudoToken: string, token: string, paths: string[]): Promise<SysCapabilitiesResponse>;
