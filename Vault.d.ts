@@ -7,12 +7,7 @@
 import type { Axios, AxiosProxyConfig } from "axios";
 import type { Agent } from "https";
 
-export type VaultConfig = {
-	/**
-	 * Indicates if the HTTP request to the Vault server should use
-	 * HTTPS (secure) or HTTP (non-secure) protocol
-	 */
-	https?: boolean;
+export type CertConfig = {
 	/**
 	 * If https is true, then provide client certificate, client key and
 	 * the root CA cert.
@@ -28,6 +23,14 @@ export type VaultConfig = {
 	 * @example './path/to/your/cacert.crt
 	 */
 	cacert: string;
+};
+
+export type VaultConfig = {
+	/**
+	 * Indicates if the HTTP request to the Vault server should use
+	 * HTTPS (secure) or HTTP (non-secure) protocol
+	 */
+	https?: boolean;
 	/**
 	 * Indicate the server name/IP, port and API version for the Vault instance,
 	 * all paths are relative to this one
@@ -53,7 +56,7 @@ export type VaultConfig = {
 	 * Namespace (multi-tenancy) feature available on all Vault Enterprise versions
 	 */
 	namespace?: string;
-}
+} & Partial<CertConfig>;
 
 export type CertificateFormat = "der" | "pem";
 export type KeyType = "rsa" | "ec";
