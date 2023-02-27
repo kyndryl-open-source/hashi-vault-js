@@ -15,8 +15,8 @@ export type VaultConfig = {
 	https?: boolean;
 	/**
 	 * If https is true, then provide client certificate, client key and
-   * the root CA cert.
-   * Client cert and key are optional now.
+	 * the root CA cert.
+	 * Client cert and key are optional now.
 	 * @example './path/to/your/cert.crt'
 	 */
 	cert: string;
@@ -30,13 +30,13 @@ export type VaultConfig = {
 	cacert: string;
 	/**
 	 * Indicate the server name/IP, port and API version for the Vault instance,
-   * all paths are relative to this one
+	 * all paths are relative to this one
 	 */
 	baseUrl?: string;
 	/**
 	 * Sets the root path after the base URL, it translates to a
-   * partition inside the Vault where the secret engine / auth method was enabled.
-   * Can be passed individually on each function through mount parameter
+	 * partition inside the Vault where the secret engine / auth method was enabled.
+	 * Can be passed individually on each function through mount parameter
 	 */
 	rootPath: string;
 	/**
@@ -45,8 +45,8 @@ export type VaultConfig = {
 	timeout: number;
 	/**
 	 * If should use a proxy or not by the HTTP request
-   * Example:
-   * proxy: { host: proxy.ip, port: proxy.port }
+	 * Example:
+	 * proxy: { host: proxy.ip, port: proxy.port }
 	 */
 	proxy?: AxiosProxyConfig | boolean;
 	/**
@@ -69,100 +69,100 @@ export type ErrorResponse = {
 };
 
 interface Cpu {
-  cpu: number;
-  vendorId: string;
-  family: string;
-  model: string;
-  stepping: number;
-  physicalId: string;
-  coreId: string;
-  cores: number;
-  modelName: string;
-  mhz: number;
-  cacheSize: number;
+	cpu: number;
+	vendorId: string;
+	family: string;
+	model: string;
+	stepping: number;
+	physicalId: string;
+	coreId: string;
+	cores: number;
+	modelName: string;
+	mhz: number;
+	cacheSize: number;
 	flags: string[];
-  microcode: string;
+	microcode: string;
 }
 
 interface CpuTime {
-  cpu: string;
-  user: number;
-  system: number;
-  idle: number;
-  nice: number;
-  iowait: number;
-  irq: number;
-  softirq: number;
-  steal: number;
-  guest: number;
-  guestNice: number;
+	cpu: string;
+	user: number;
+	system: number;
+	idle: number;
+	nice: number;
+	iowait: number;
+	irq: number;
+	softirq: number;
+	steal: number;
+	guest: number;
+	guestNice: number;
 }
 
 interface Disk {
-  path: string;
-  fstype: string;
-  total: number;
-  free: number;
-  used: number;
-  usedPercent: number;
-  inodesTotal: number;
-  inodesUsed: number;
-  inodesFree: number;
-  inodesUsedPercent: number;
+	path: string;
+	fstype: string;
+	total: number;
+	free: number;
+	used: number;
+	usedPercent: number;
+	inodesTotal: number;
+	inodesUsed: number;
+	inodesFree: number;
+	inodesUsedPercent: number;
 }
 
 interface Host {
-  hostname: string;
-  uptime: number;
-  bootTime: number;
-  procs: number;
-  os: string;
-  platform: string;
-  platformFamily: string;
-  platformVersion: string;
-  kernelVersion: string;
-  kernelArch: string;
-  virtualizationSystem: string;
-  virtualizationRole: string;
-  hostid: string;
+	hostname: string;
+	uptime: number;
+	bootTime: number;
+	procs: number;
+	os: string;
+	platform: string;
+	platformFamily: string;
+	platformVersion: string;
+	kernelVersion: string;
+	kernelArch: string;
+	virtualizationSystem: string;
+	virtualizationRole: string;
+	hostid: string;
 }
 
 interface Memory {
-  total: number;
-  available: number;
-  used: number;
-  usedPercent: number;
-  free: number;
-  active: number;
-  inactive: number;
-  wired: number;
-  laundry: number;
-  buffers: number;
-  cached: number;
-  writeback: number;
-  dirty: number;
-  writebacktmp: number;
-  shared: number;
-  slab: number;
-  sreclaimable: number;
-  sunreclaim: number;
-  pagetables: number;
-  swapcached: number;
-  commitlimit: number;
-  committedas: number;
-  hightotal: number;
-  highfree: number;
-  lowtotal: number;
-  lowfree: number;
-  swaptotal: number;
-  swapfree: number;
-  mapped: number;
-  vmalloctotal: number;
-  vmallocused: number;
-  vmallocchunk: number;
-  hugepagestotal: number;
-  hugepagesfree: number;
-  hugepagesize: number;
+	total: number;
+	available: number;
+	used: number;
+	usedPercent: number;
+	free: number;
+	active: number;
+	inactive: number;
+	wired: number;
+	laundry: number;
+	buffers: number;
+	cached: number;
+	writeback: number;
+	dirty: number;
+	writebacktmp: number;
+	shared: number;
+	slab: number;
+	sreclaimable: number;
+	sunreclaim: number;
+	pagetables: number;
+	swapcached: number;
+	commitlimit: number;
+	committedas: number;
+	hightotal: number;
+	highfree: number;
+	lowtotal: number;
+	lowfree: number;
+	swaptotal: number;
+	swapfree: number;
+	mapped: number;
+	vmalloctotal: number;
+	vmallocused: number;
+	vmallocchunk: number;
+	hugepagestotal: number;
+	hugepagesfree: number;
+	hugepagesize: number;
 }
 
 
@@ -177,31 +177,31 @@ export type HealthCheckParams = {
 	uninitcode?: number;
 };
 export type HealthCheckResponse = {
-  initialized: boolean;
-  sealed: boolean;
-  standby: boolean;
-  performance_standby: boolean;
-  replication_performance_mode: string;
-  replication_dr_mode: string;
-  server_time_utc: number;
-  version: string;
-  cluster_name: string;
+	initialized: boolean;
+	sealed: boolean;
+	standby: boolean;
+	performance_standby: boolean;
+	replication_performance_mode: string;
+	replication_dr_mode: string;
+	server_time_utc: number;
+	version: string;
+	cluster_name: string;
 	cluster_id: string;
 } | ErrorResponse;
 export type SealStatusResponse = {
-  type: string;
-  initialized: boolean;
-  sealed: boolean;
-  t: number;
-  n: number;
-  progress: number;
-  nonce: string;
-  version: string;
-  build_date: string;
+	type: string;
+	initialized: boolean;
+	sealed: boolean;
+	t: number;
+	n: number;
+	progress: number;
+	nonce: string;
+	version: string;
+	build_date: string;
 	migration: boolean;
 	cluster_name?: string;
 	cluster_id?: string;
-  recovery_seal: boolean;
+	recovery_seal: boolean;
 	storage_type: string;
 } | ErrorResponse;
 export type SysHostInfoResponse = {
@@ -221,9 +221,9 @@ export type SysCapabilitiesSelfResponse = {
 } | ErrorResponse;
 export type SysInternalCountersResponse = {
 	request_id: string;
-  lease_id: string;
-  renewable: boolean;
-  lease_duration: number;
+	lease_id: string;
+	renewable: boolean;
+	lease_duration: number;
 	data: {
 		counters: {
 			entities: {
@@ -231,17 +231,17 @@ export type SysInternalCountersResponse = {
 			};
 		};
 	};
-  wrap_info: string | null;
-  warnings: string | null;
+	wrap_info: string | null;
+	warnings: string | null;
 	auth: string | null;
 } | ErrorResponse;
 export type SysMetricsResponse = {} | ErrorResponse;
 export type SysSealResponse = {} | ErrorResponse;
 export type SysUnsealResponse = {
 	sealed: boolean;
-  t: number;
-  n: number;
-  progress: number;
+	t: number;
+	n: number;
+	progress: number;
 	version: number;
 	cluster_name?: string;
 	cluster_version?: string;
@@ -455,19 +455,19 @@ export type SetLdapConfigParams = {
 	token_type?: string;
 };
 export type SetLdapConfigResponse = {
-  binddn: string;
+	binddn: string;
 	deny_null_bind: boolean;
-  discoverdn: boolean;
-  groupattr: string;
-  groupdn: string;
-  groupfilter: string;
-  insecure_tls: boolean;
-  starttls: boolean;
-  tls_max_version: string;
-  tls_min_version: string;
-  url: string;
-  username_as_alias: boolean;
-  userattr: string;
+	discoverdn: boolean;
+	groupattr: string;
+	groupdn: string;
+	groupfilter: string;
+	insecure_tls: boolean;
+	starttls: boolean;
+	tls_max_version: string;
+	tls_min_version: string;
+	url: string;
+	username_as_alias: boolean;
+	userattr: string;
 	userdn: string;
 } | ErrorResponse;
 export type LoginWithCertResponse = {
