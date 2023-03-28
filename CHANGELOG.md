@@ -2,7 +2,15 @@
 
 ## Change Log
 
-* `0.4.12` (**latest**)
+* `0.4.13` (**latest**)
+  * Added SBOM generator script
+  * Upgraded all dependencies to the latest
+  * Refactored TypeScript types to get them linted and verified - issue [#35](https://github.com/rod4n4m1/hashi-vault-js/issues/35)
+  * Fixed `package.json` to accept node engine `v14` - issue [#32](https://github.com/rod4n4m1/hashi-vault-js/issues/32)
+  * Fixed TypeScript types to match main code and allow contructor without certificates - issue [#31](https://github.com/rod4n4m1/hashi-vault-js/issues/31)
+  * Upgraded development env to Vault server `1.13.0` and `podman`
+
+* `0.4.12`
   * Turned CA certificate optional (contribution from @josedev-union)
   * Upgraded all dependencies (`Axios`, `Jest`, `random-words`, and `@type/node`)
   * Upgraded development env to Vault server `1.12.2`
