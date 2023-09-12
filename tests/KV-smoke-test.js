@@ -19,8 +19,23 @@ const Secrets3 = {
     bot_token2: "xoxb-123456789033-1234567890128-1w1lln0tt3llmys3cr3tatm3"
 };
 const Metadata = {
-  tag1: "development",
-  tag2: "unit-test"
+  max_versions: 5,
+  cas_required: false,
+  delete_version_after: "3h25m19s",
+  custom_metadata: {
+    tag1: "development",
+    tag2: "unit-test"
+  }
+};
+const Metadata2 = {
+  max_versions: 7,
+  cas_required: false,
+  delete_version_after: "200h20m20s",
+  custom_metadata: {
+    tag1: "development",
+    tag2: "unit-test",
+    tag3: "smoke-test"
+  }
 };
 const Config = {
   max_versions: 5
@@ -63,6 +78,29 @@ vault.healthCheck().then(function(data) {
 
                 vault.eliminateKVSecret(Token, SecretName, RootPath).then(function(data) {
                   console.log('8> eliminateKVSecret output: \n',data);
+
+
+                  vault.createKVSecretMeta(Token, SecretName, Metadata, RootPath).then(function(data) {
+                    console.log('9> createKVSecretMeta output: \n',data);
+
+                    vault.readKVSecretMeta(Token, SecretName, RootPath).then(function(data) {
+                      console.log('10> readKVSecretMeta output: \n',data);
+
+                      vault.updateKVSecretMeta(Token, SecretName, Metadata2, RootPath).then(function(data) {
+                        console.log('11> updateKVSecretMeta output: \n',data);
+  
+                      }).catch(function(updateError){
+                        console.error('11> readKVSecretMeta error: \n',updateError);
+                      });
+                    }).catch(function(readError){
+                      console.error('10> readKVSecretMeta error: \n',readError);
+                    });
+
+                  }).catch(function(createError){
+                    console.error('9> createKVSecretMeta error: \n',createError);
+                    console.error('9> createKVSecretMeta error: \n',createError.response.data);
+                  });
+                  
 
                 }).catch(function(updateError){
                   console.error('8> eliminateKVSecret error: \n',updateError);

@@ -3844,6 +3844,89 @@ class Vault {
     }
   }
 
+  /**
+  * @param {String<required>} token
+  * @param {String} path
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async readKVSecretMeta(token, path, mount) {
+    assert(token, 'readKVSecretMeta: required parameter missing - token');
+    assert(path, 'readKVSecretMeta: required parameter missing - path');
+    let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    url = `${rootPath}/${config.kvReadSecretMeta[0]}/${path}`;
+    const Options = {
+      url: url,
+      method: config.kvReadSecretMeta[1],
+      headers: {
+        "X-Vault-Token": token
+      }
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String} path
+  * @param {String} metadata 
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async createKVSecretMeta(token, path, metadata, mount) {
+    assert(token, 'createKVSecretMeta: required parameter missing - token');
+    assert(path, 'createKVSecretMeta: required parameter missing - path');
+    let url = "";
+    let rootPath = "";
+    if (mount) {
+      rootPath = mount;
+    } else if (this.rootPath) {
+      rootPath = this.rootPath;
+    } else {
+      rootPath = config.kvRootPath;
+    }
+    url = `${rootPath}/${config.kvCreateSecretMeta[0]}/${path}`;
+    const Options = {
+      url: url,
+      method: config.kvCreateSecretMeta[1],
+      headers: {
+        "X-Vault-Token": token
+      },
+      data: metadata
+    };
+
+    try {
+      const response = await this.instance(Options);
+      return parseAxiosResponse(response);
+    } catch(err) {
+      throw parseAxiosError(err);
+    }
+  }
+
+  /**
+  * @param {String<required>} token
+  * @param {String} path
+  * @param {String} metadata 
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+  async updateKVSecretMeta(token, path, metadata, mount) {
+    return await this.createKVSecretMeta(token, path, metadata, mount);
+  }
+
 }
 
 module.exports = Vault;
