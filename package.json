@@ -1,10 +1,11 @@
 {
   "name": "hashi-vault-js",
-  "version": "0.4.13",
+  "version": "0.4.14",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "main": "Vault.js",
-  "types": "Vault.d.ts",
+  "types": "dist/Vault.d.ts",
   "scripts": {
+    "compile": "npx tsc",
     "test:approle": "bash -c 'source tests/process.env && jest tests/AppRole.test.js'",
     "test:kv": "bash -c 'source tests/process.env && jest tests/KV.test.js'",
     "test:ldap": "bash -c 'source tests/process.env && jest tests/LDAP.test.js'",
@@ -46,10 +47,10 @@
   },
   "homepage": "https://github.com/rod4n4m1/hashi-vault-js#readme",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "dependencies": {
-    "axios": "^1.3.4"
+    "axios": "^1.5.0"
   },
   "devDependencies": {
     "@types/node": "^18.15.10",
