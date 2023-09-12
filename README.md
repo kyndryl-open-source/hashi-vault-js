@@ -316,6 +316,8 @@ Follow the detailed instructions from this [doc](/docs/Test-environment.md)
 
 If you want to contribute to the module and make it better, your help is very welcome. You can do so submitting a **Pull Request**. It will be reviewed and merged to main branch if accepted.
 
+By contributing to this public repository, you fully agree with the following Developer's Certificate of Origin [document](CONTRIBUTING.md).
+
 ### Reporting an issue
 
 If you have found what you believe to be an issue with `hashi-vault-js` please do not hesitate to file an issue on the GitHub repository [here](https://github.com/rod4n4m1/hashi-vault-js/issues/new?template=bug-report.md).
