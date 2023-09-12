@@ -82,6 +82,41 @@
 */
 ```
 
+* createKVSecretMeta(token, path, metadata, mount)
+
+```javascript
+/**
+  * @param {String<required>} token
+  * @param {String} path
+  * @param {String} metadata 
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+```
+
+* updateKVSecretMeta(token, path, metadata, mount)
+
+```javascript
+/**
+  * @param {String<required>} token
+  * @param {String} path
+  * @param {String} metadata 
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+```
+
+* readKVSecretMeta
+
+```javascript
+/**
+  * @param {String<required>} token
+  * @param {String} path
+  * @param {String} mount
+  * @returns {Promise<Object>}
+  */
+```
+
 * deleteVersionsKVSecret(token, name, versions, mount)
 
 ```javascript

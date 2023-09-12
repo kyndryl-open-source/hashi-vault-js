@@ -7,6 +7,8 @@
   * Upgraded all dependencies to the latest
   * Upgraded development env to Vault server `1.14.2`
   * Refactored TypeScript types to generate .d.ts files using JSDoc syntax - issue [#40]
+  * Added *KV secret engine - metadata* functions - issue [#42]:
+    * `createKVSecretMeta`, `updateKVSecretMeta`, and `readKVSecretMeta`
 
 * `0.4.13`
   * Added SBOM generator script
