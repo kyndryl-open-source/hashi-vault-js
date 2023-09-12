@@ -12,7 +12,7 @@ const AdminToken = process.env.VAULT_ADMIN_TOKEN;
 
 const RoleParams = {
   bound_service_account_names: [ 'service-account' ],
-  bound_service_account_namespaces: [ 'dedault' ],
+  bound_service_account_namespaces: [ 'default' ],
   audience: "test",
   token_ttl: "72h",
   token_max_ttl: "",

@@ -125,3 +125,69 @@ userPrincipalName: john.kane@chatopsknight.com
 sAMAccountName: JOHNKANE
 userPassword: CookiesILik3
 pwdLastSet: 133016927060000000
+
+dn: uid=mathias.thulmann, ou=Employees, dc=chatopsknight, dc=com
+changetype: add
+cn: Mathias Thulmann
+sn: Thulmann
+givenName: Mathias
+objectClass: extensibleObject
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+ou: IT
+ou: Employee
+postalAddress: Tyk, 22-a, Podol
+postalCode: 04.070
+l: Kyiv
+c: ua
+st: Kyiv
+serialNumber: 000605
+uid: mathias.thulmann@chatopsknight.com
+mail: mathias.thulmann@chatopsknight.com
+personalTitle: Site Reliability Engineer
+telephoneNumber: +380-44-339-9861
+roomNumber: U40
+departmentNumber: ITSRE00
+employeeType: Regular
+employeeNumber: 000605
+initials: MTH
+buildingName: Ukraine Office
+userPrincipalName: mathias.thulmann@chatopsknight.com
+sAMAccountName: MATHIAST
+userPassword: WarHamm3r40k
+pwdLastSet: 133016927060000000
+
+dn: uid=triss.merigold, ou=Employees, dc=chatopsknight, dc=com
+changetype: add
+cn: Triss Merigold
+sn: Merigold
+givenName: Triss
+objectClass: extensibleObject
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+ou: IT
+ou: Employee
+postalAddress: Main street
+postalCode: 99.991
+l: Novigrad
+c: sk
+st: Redania
+serialNumber: 000606
+uid: triss.merigold@chatopsknight.com
+mail: triss.merigold@chatopsknight.com
+personalTitle: Site Reliability Engineer
+telephoneNumber: +99-555-4567
+roomNumber: N44
+departmentNumber: ITSRE00
+employeeType: Regular
+employeeNumber: 000606
+initials: TME
+buildingName: Novigrad Office
+userPrincipalName: triss.merigold@chatopsknight.com
+sAMAccountName: TRISSMERI
+userPassword: Th3Witch3r
+pwdLastSet: 133016927060000000

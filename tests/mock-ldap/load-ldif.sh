@@ -3,8 +3,8 @@
 source ldap.env
 
 # Configure schema with AD attributes
-cat config-schema.ldif | docker exec -i ck-ldap ldapmodify -Y EXTERNAL -H ldapi:///
-docker exec -i ck-ldap ldapsearch -Y EXTERNAL -Q -H ldapi:/// -LLL -o ldif-wrap=no -b cn=config '(olcAttributeTypes=*)' | grep MSDN
+cat config-schema.ldif | podman exec -i ck-ldap ldapmodify -Y EXTERNAL -H ldapi:///
+podman exec -i ck-ldap ldapsearch -Y EXTERNAL -Q -H ldapi:/// -LLL -o ldif-wrap=no -b cn=config '(olcAttributeTypes=*)' | grep MSDN
 # Check anonymous connection
 ldapwhoami -H $LDAP_URL -x
 # Add dummy entities for testing
