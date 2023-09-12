@@ -14,74 +14,74 @@ declare class Vault {
     agent: boolean | https.Agent;
     instance: any;
     /**
-    * @returns {Promise<Object>}
+    * @returns {PromiseLike<Object>}
     */
-    healthCheck(params: any): Promise<any>;
+    healthCheck(params: any): PromiseLike<any>;
     /**
-    * @returns {Promise<Object>}
+    * @returns {PromiseLike<Object>}
     */
-    sealStatus(): Promise<any>;
+    sealStatus(): PromiseLike<any>;
     /**
-    * @param {String} sudoToken
-    * @returns {Promise<Object>}
+    * @param {string} sudoToken
+    * @returns {PromiseLike<Object>}
     */
-    sysHostInfo(sudoToken: string): Promise<any>;
+    sysHostInfo(sudoToken: string): PromiseLike<any>;
     /**
-    * @param {String} sudoToken
-    * @param {String} token
-    * @param {[String]} paths
-    * @returns {Promise<Object>}
+    * @param {string} sudoToken
+    * @param {string} token
+    * @param {string[]} paths
+    * @returns {PromiseLike<Object>}
     */
-    sysCapabilities(sudoToken: string, token: string, paths: [string]): Promise<any>;
+    sysCapabilities(sudoToken: string, token: string, paths: string[]): PromiseLike<any>;
     /**
-    * @param {String} token
-    * @param {[String]} paths
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string[]} paths
+    * @returns {PromiseLike<Object>}
     */
-    sysCapabilitiesSelf(token: string, paths: [string]): Promise<any>;
+    sysCapabilitiesSelf(token: string, paths: string[]): PromiseLike<any>;
     /**
-    * @param {String} sudoToken
-    * @param {Const} type
-    * @returns {Promise<Object>}
+    * @param {string} sudoToken
+    * @param {string} type
+    * @returns {PromiseLike<Object>}
     */
-    sysInternalCounters(sudoToken: string, type: Const): Promise<any>;
+    sysInternalCounters(sudoToken: string, type: string): PromiseLike<any>;
     /**
-    * @param {String} sudoToken
-    * @param {Const} type
-    * @returns {Promise<Object>}
+    * @param {string} sudoToken
+    * @param {string} [format]
+    * @returns {PromiseLike<Object>}
     */
-    sysMetrics(sudoToken: string, format: any): Promise<any>;
+    sysMetrics(sudoToken: string, format?: string): PromiseLike<any>;
     /**
-    * @param {String} sudoToken
-    * @returns {Promise<Object>}
+    * @param {string} sudoToken
+    * @returns {PromiseLike<Object>}
     */
-    sysSeal(sudoToken: string): Promise<any>;
+    sysSeal(sudoToken: string): PromiseLike<any>;
     /**
-    * @param {String} sudoToken
-    * @param {String} key
-    * @param {Boolean} reset
-    * @param {Boolean} migrate
-    * @returns {Promise<Object>}
+    * @param {string} sudoToken
+    * @param {string} key
+    * @param {boolean} reset
+    * @param {boolean} migrate
+    * @returns {PromiseLike<Object>}
     */
-    sysUnseal(sudoToken: string, key: string, reset: boolean, migrate: boolean): Promise<any>;
+    sysUnseal(sudoToken: string, key: string, reset: boolean, migrate: boolean): PromiseLike<any>;
     /**
-    * @param {String} vaultToken
+    * @param {string} vaultToken
     * @param {Object} [params]
-    * @param {String} [params.id]
-    * @param {String} [params.role_name]
-    * @param {String} [params.policies]
+    * @param {string} [params.id]
+    * @param {string} [params.role_name]
+    * @param {string} [params.policies]
     * @param {Object} [params.meta]
-    * @param {Boolean} [params.no_narent=false]
-    * @param {Boolean} [params.no_default_policy=false]
-    * @param {Boolean} [params.renewable=true]
-    * @param {String} [params.ttl]
-    * @param {String} [params.type=service]
-    * @param {String} [params.explicit_max_ttl]
-    * @param {String} [params.display_name]
-    * @param {Integer} [params.num_uses]
-    * @param {String} [params.period]
-    * @param {String} [params.entity_alias]
-    * @returns {Promise<Object>}
+    * @param {boolean} [params.no_narent=false]
+    * @param {boolean} [params.no_default_policy=false]
+    * @param {boolean} [params.renewable=true]
+    * @param {string} [params.ttl]
+    * @param {string} [params.type=service]
+    * @param {string} [params.explicit_max_ttl]
+    * @param {string} [params.display_name]
+    * @param {number} [params.num_uses]
+    * @param {string} [params.period]
+    * @param {string} [params.entity_alias]
+    * @returns {PromiseLike<Object>}
     */
     createToken(vaultToken: string, params?: {
         id?: string;
@@ -95,906 +95,1206 @@ declare class Vault {
         type?: string;
         explicit_max_ttl?: string;
         display_name?: string;
-        num_uses?: Integer;
+        num_uses?: number;
         period?: string;
         entity_alias?: string;
-    }): Promise<any>;
+    }): PromiseLike<any>;
     /**
-    * @param {String} vaultToken
-    * @param {String} clientToken
-    * @returns {Promise<Object>}
+    * @param {string} vaultToken
+    * @param {string} clientToken
+    * @returns {PromiseLike<Object>}
     */
-    revokeToken(vaultToken: string, clientToken: string): Promise<any>;
+    revokeToken(vaultToken: string, clientToken: string): PromiseLike<any>;
     /**
-    * @param {String} clientToken
-    * @returns {Promise<Object>}
+    * @param {string} clientToken
+    * @returns {PromiseLike<Object>}
     */
-    revokeSelfToken(clientToken: string): Promise<any>;
+    revokeSelfToken(clientToken: string): PromiseLike<any>;
     /**
-    * @param {String} vaultToken
-    * @param {String} clientToken
-    * @returns {Promise<Object>}
+    * @param {string} vaultToken
+    * @param {string} clientToken
+    * @returns {PromiseLike<Object>}
     */
-    lookupToken(vaultToken: string, clientToken: string): Promise<any>;
+    lookupToken(vaultToken: string, clientToken: string): PromiseLike<any>;
     /**
-    * @param {String} clientToken
-    * @returns {Promise<Object>}
+    * @param {string} clientToken
+    * @returns {PromiseLike<Object>}
     */
-    lookupSelfToken(clientToken: string): Promise<any>;
+    lookupSelfToken(clientToken: string): PromiseLike<any>;
     /**
-    * @param {String} vaultToken
-    * @param {String} clientToken
-    * @param {String} increment
-    * @returns {Promise<Object>}
+    * @param {string} vaultToken
+    * @param {string} clientToken
+    * @param {string} increment
+    * @returns {PromiseLike<Object>}
     */
-    renewToken(vaultToken: string, clientToken: string, increment: string): Promise<any>;
+    renewToken(vaultToken: string, clientToken: string, increment: string): PromiseLike<any>;
     /**
-    * @param {String} clientToken
-    * @param {String} increment
-    * @returns {Promise<Object>}
+    * @param {string} clientToken
+    * @param {string} increment
+    * @returns {PromiseLike<Object>}
     */
-    renewSelfToken(clientToken: string, increment: string): Promise<any>;
+    renewSelfToken(clientToken: string, increment: string): PromiseLike<any>;
     /**
-    * @param {String} sudoToken
-    * @returns {Promise<Object>}
+    * @param {string} sudoToken
+    * @returns {PromiseLike<Object>}
     */
-    listAccessors(sudoToken: string): Promise<any>;
+    listAccessors(sudoToken: string): PromiseLike<any>;
     /**
-    * @param {String} vaultToken
-    * @param {String} accessor
-    * @returns {Promise<Object>}
+    * @param {string} vaultToken
+    * @param {string} accessor
+    * @returns {PromiseLike<Object>}
     */
-    lookupAccessor(vaultToken: string, accessor: string): Promise<any>;
+    lookupAccessor(vaultToken: string, accessor: string): PromiseLike<any>;
     /**
-    * @param {String} vaultToken
-    * @param {String} accessor
-    * @param {String} increment
-    * @returns {Promise<Object>}
+    * @param {string} vaultToken
+    * @param {string} accessor
+    * @param {string} increment
+    * @returns {PromiseLike<Object>}
     */
-    renewAccessor(vaultToken: string, accessor: string, increment: string): Promise<any>;
+    renewAccessor(vaultToken: string, accessor: string, increment: string): PromiseLike<any>;
     /**
-    * @param {String} vaultToken
-    * @param {String} accessor
-    * @returns {Promise<Object>}
+    * @param {string} vaultToken
+    * @param {string} accessor
+    * @returns {PromiseLike<Object>}
     */
-    revokeAccessor(vaultToken: string, accessor: string): Promise<any>;
+    revokeAccessor(vaultToken: string, accessor: string): PromiseLike<any>;
     /**
-    * @param {String<required>} username
-    * @param {String<required>} password
-    * @param {String} mount
+    * @param {string} username
+    * @param {string} password
+    * @param {string} [mount]
     * @returns {Object}
     */
-    loginWithLdap(username: string, password: string, mount: string): any;
+    loginWithLdap(username: string, password: string, mount?: string): any;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {[String]<required>} policies
-    * @param {String<required>} groups
-    * @param {String} mount
-    * @returns {Promise<Oject>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string[]} policies
+    * @param {string} groups
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    createLdapUser(token: string, username: string, policies: any, groups: string, mount: string): Promise<Oject>;
+    createLdapUser(token: string, username: string, policies: string[], groups: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {[String]<required>} policies
-    * @param {String<required>} groups
-    * @param {String} mount
-    * @returns {Promise<Oject>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string[]} policies
+    * @param {string} groups
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    updateLdapUser(token: string, username: string, policies: any, groups: string, mount: string): Promise<Oject>;
+    updateLdapUser(token: string, username: string, policies: string[], groups: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} group
-    * @param {[String]<required>} policies
-    * @param {String} mount
-    * @returns {Promise<Oject>}
+    * @param {string} token
+    * @param {string} group
+    * @param {string[]} policies
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    createLdapGroup(token: string, group: string, policies: any, mount: string): Promise<Oject>;
+    createLdapGroup(token: string, group: string, policies: string[], mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} group
-    * @param {[String]<required>} policies
-    * @param {String} mount
-    * @returns {Promise<Oject>}
+    * @param {string} token
+    * @param {string} group
+    * @param {string[]} policies
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    updateLdapGroup(token: string, group: string, policies: any, mount: string): Promise<Oject>;
+    updateLdapGroup(token: string, group: string, policies: string[], mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} group
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} group
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readLdapGroup(token: string, group: string, mount: string): Promise<any>;
+    readLdapGroup(token: string, group: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readLdapUser(token: string, username: string, mount: string): Promise<any>;
+    readLdapUser(token: string, username: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    listLdapUsers(token: string, mount: string): Promise<any>;
+    listLdapUsers(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    listLdapGroups(token: string, mount: string): Promise<any>;
+    listLdapGroups(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    deleteLdapUser(token: string, username: string, mount: string): Promise<any>;
+    deleteLdapUser(token: string, username: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} group
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} group
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    deleteLdapGroup(token: string, group: string, mount: string): Promise<any>;
+    deleteLdapGroup(token: string, group: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readLdapConfig(token: string, mount: string): Promise<any>;
+    readLdapConfig(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @param {String} params.url
-    * @param {Boolean} params.case_sensitive_names
-    * @param {Integer} params.request_timeout
-    * @param {Boolean} params.starttls
-    * @param {String} params.tls_min_version
-    * @param {String} params.tls_max_version
-    * @param {Boolean} params.insecure_tls
-    * @param {String} params.certificate
-    * @param {String} params.client_tls_cert
-    * @param {String} params.client_tls_key
-    * @param {String} params.binddn
-    * @param {String} params.bindpass
-    * @param {String} params.userdn
-    * @param {String} params.userattr
-    * @param {Boolean} params.discoverdn
-    * @param {Boolean} params.deny_null_bind
-    * @param {String} params.upndomain
-    * @param {String} params.userfilter
-    * @param {Boolean} params.anonymous_group_search
-    * @param {String} params.groupfilter
-    * @param {String} params.groupdn
-    * @param {String} params.groupattr
-    * @param {Boolean} params.username_as_alias
-    * @param {Integer} params.token_ttl
-    * @param {Integer} params.token_max_ttl
-    * @param {[String]} params.token_policies
-    * @param {[String]} params.token_bound_cidrs
-    * @param {Integer} params.token_explicit_max_ttl
-    * @param {Boolean} params.token_no_default_policy
-    * @param {Integer} params.token_num_uses
-    * @param {Integer} params.token_period
-    * @param {String} params.token_type
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @param {Object} [params]
+    * @param {string} params.url
+    * @param {boolean} params.case_sensitive_names
+    * @param {number} params.request_timeout
+    * @param {boolean} params.starttls
+    * @param {string} params.tls_min_version
+    * @param {string} params.tls_max_version
+    * @param {boolean} params.insecure_tls
+    * @param {string} params.certificate
+    * @param {string} params.client_tls_cert
+    * @param {string} params.client_tls_key
+    * @param {string} params.binddn
+    * @param {string} params.bindpass
+    * @param {string} params.userdn
+    * @param {string} params.userattr
+    * @param {boolean} params.discoverdn
+    * @param {boolean} params.deny_null_bind
+    * @param {string} params.upndomain
+    * @param {string} params.userfilter
+    * @param {boolean} params.anonymous_group_search
+    * @param {string} params.groupfilter
+    * @param {string} params.groupdn
+    * @param {string} params.groupattr
+    * @param {boolean} params.username_as_alias
+    * @param {number} params.token_ttl
+    * @param {number} params.token_max_ttl
+    * @param {string[]} params.token_policies
+    * @param {string[]} params.token_bound_cidrs
+    * @param {number} params.token_explicit_max_ttl
+    * @param {boolean} params.token_no_default_policy
+    * @param {number} params.token_num_uses
+    * @param {number} params.token_period
+    * @param {string} params.token_type
+    * @returns {PromiseLike<Object>}
     */
-    setLdapConfig(token: string, params: any, mount: string): Promise<any>;
+    setLdapConfig(token: string, params?: {
+        url: string;
+        case_sensitive_names: boolean;
+        request_timeout: number;
+        starttls: boolean;
+        tls_min_version: string;
+        tls_max_version: string;
+        insecure_tls: boolean;
+        certificate: string;
+        client_tls_cert: string;
+        client_tls_key: string;
+        binddn: string;
+        bindpass: string;
+        userdn: string;
+        userattr: string;
+        discoverdn: boolean;
+        deny_null_bind: boolean;
+        upndomain: string;
+        userfilter: string;
+        anonymous_group_search: boolean;
+        groupfilter: string;
+        groupdn: string;
+        groupattr: string;
+        username_as_alias: boolean;
+        token_ttl: number;
+        token_max_ttl: number;
+        token_policies: string[];
+        token_bound_cidrs: string[];
+        token_explicit_max_ttl: number;
+        token_no_default_policy: boolean;
+        token_num_uses: number;
+        token_period: number;
+        token_type: string;
+    }, mount?: string): PromiseLike<any>;
     /**
-    * @param {String} mount
-    * @param {String} certName
-    * @returns {Promise<Object>}
+    * @param {string} [mount]
+    * @param {string} certName
+    * @returns {PromiseLike<Object>}
     */
-    loginWithCert(certName: string, mount: string): Promise<any>;
+    loginWithCert(certName: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} username
-    * @param {String<required>} password
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} username
+    * @param {string} password
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    loginWithUserpass(username: string, password: string, mount: string): Promise<any>;
+    loginWithUserpass(username: string, password: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {String<required>} password
-    * @param {[String]<required>} policies
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string} password
+    * @param {string[]} policies
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    createUserpassUser(token: string, username: string, password: string, policies: any, mount: string): Promise<any>;
+    createUserpassUser(token: string, username: string, password: string, policies: string[], mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {String<required>} password
-    * @param {[String]<required>} policies
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string} password
+    * @param {string[]} policies
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    updateUserpassUser(token: string, username: string, password: string, policies: any, mount: string): Promise<any>;
+    updateUserpassUser(token: string, username: string, password: string, policies: string[], mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readUserpassUser(token: string, username: string, mount: string): Promise<any>;
+    readUserpassUser(token: string, username: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    deleteUserpassUser(token: string, username: string, mount: string): Promise<any>;
+    deleteUserpassUser(token: string, username: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {String<required>} password
-    * @param {String} mount
-    * @returns {Promise<Oject>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string} password
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    updateUserpassPassword(token: string, username: string, password: string, mount: string): Promise<Oject>;
+    updateUserpassPassword(token: string, username: string, password: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} username
-    * @param {[String]<required>} policies
-    * @param {String} mount
-    * @returns {Promise<Oject>}
+    * @param {string} token
+    * @param {string} username
+    * @param {string[]} policies
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    updateUserpassPolicies(token: string, username: string, policies: any, mount: string): Promise<Oject>;
+    updateUserpassPolicies(token: string, username: string, policies: string[], mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    listUserpassUsers(token: string, mount: string): Promise<any>;
+    listUserpassUsers(token: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} role
-     * @param {String<required>} jwt
-     * @param {String} mount
+     * @param {string} role
+     * @param {string} jwt
+     * @param {string} [mount]
      * @returns {Object}
      */
-    loginWithK8s(role: string, jwt: string, mount: string): any;
+    loginWithK8s(role: string, jwt: string, mount?: string): any;
     /**
-     * @param {String<required>} token
-     * @param {Object<required>} params
-     * @param {String} params.kubernetes_host
-     * @param {String} params.kubernetes_ca_cert
-     * @param {String} params.token_reviewer_jwt
+     * @param {string} token
+     * @param {Object} params
+     * @param {string} params.kubernetes_host
+     * @param {string} params.kubernetes_ca_cert
+     * @param {string} params.token_reviewer_jwt
      * @param {Object} [params.pem_keys]
-     * @param {String} params.issuer
-     * @param {Boolean} params.disable_iss_validation
-     * @param {Boolean} params.disable_local_ca_jwt
-     * @param {String} mount
+     * @param {string} params.issuer
+     * @param {boolean} params.disable_iss_validation
+     * @param {boolean} params.disable_local_ca_jwt
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
+     */
+    updateK8sConfig(token: string, params: {
+        kubernetes_host: string;
+        kubernetes_ca_cert: string;
+        token_reviewer_jwt: string;
+        pem_keys?: any;
+        issuer: string;
+        disable_iss_validation: boolean;
+        disable_local_ca_jwt: boolean;
+    }, mount?: string): PromiseLike<any>;
+    /**
+     * @param {string} token
+     * @param {string} [mount]
      * @returns {Object}
      */
-    updateK8sConfig(token: string, params: any, mount: string): any;
+    readK8sConfig(token: string, mount?: string): any;
     /**
-     * @param {String<required>} token
-     * @param {String} mount
-     * @returns {Object}
-     */
-    readK8sConfig(token: string, mount: string): any;
-    /**
-     * @param {String<required>} token
-     * @param {String<required>} role
-     * @param {Object<required>} params
+     * @param {string} token
+     * @param {string} role
+     * @param {Object} params
      * @param {Object} [params.bound_service_account_names]
      * @param {Object} [params.bound_service_account_namespaces]
-     * @param {String} params.audience
-     * @param {Integer or String} params.token_ttl
-     * @param {Integer or String} params.token_max_ttl
+     * @param {string} params.audience
+     * @param {number | string} params.token_ttl
+     * @param {number | string} params.token_max_ttl
      * @param {Object} [params.token_policies]
      * @param {Object} [params.token_bound_cidrs]
-     * @param {Integer or String} params.token_explicit_max_ttl
-     * @param {Boolean} params.token_no_default_policy
-     * @param {Integer} params.token_num_uses
-     * @param {Integer or String} params.token_period
-     * @param {String} params.token_type
-     * @param {String} mount
+     * @param {number | string} params.token_explicit_max_ttl
+     * @param {boolean} params.token_no_default_policy
+     * @param {number} params.token_num_uses
+     * @param {number | string} params.token_period
+     * @param {string} params.token_type
+     * @param {string} [mount]
      * @returns {Object}
      */
-    createK8sRole(token: string, role: string, params: any, mount: string): any;
+    createK8sRole(token: string, role: string, params: {
+        bound_service_account_names?: any;
+        bound_service_account_namespaces?: any;
+        audience: string;
+        token_ttl: number | string;
+        token_max_ttl: number | string;
+        token_policies?: any;
+        token_bound_cidrs?: any;
+        token_explicit_max_ttl: number | string;
+        token_no_default_policy: boolean;
+        token_num_uses: number;
+        token_period: number | string;
+        token_type: string;
+    }, mount?: string): any;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} role
-     * @param {String} mount
+     * @param {string} token
+     * @param {string} role
+     * @param {string} [mount]
      * @returns {Object}
      */
-    readK8sRole(token: string, role: string, mount: string): any;
+    readK8sRole(token: string, role: string, mount?: string): any;
     /**
-     * @param {String<required>} token
-     * @param {String} mount
+     * @param {string} token
+     * @param {string} [mount]
      * @returns {Object}
      */
-    listK8sRoles(token: string, mount: string): any;
+    listK8sRoles(token: string, mount?: string): any;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} role
-     * @param {String} mount
+     * @param {string} token
+     * @param {string} role
+     * @param {string} [mount]
      * @returns {Object}
      */
-    deleteK8sRole(token: string, role: string, mount: string): any;
+    deleteK8sRole(token: string, role: string, mount?: string): any;
     /**
-    * @param {String<required>} roleId
-    * @param {String<required>} secretId
-    * @param {String} mount
+    * @param {string} roleId
+    * @param {string} secretId
+    * @param {string} [mount]
     * @returns {Object}
     */
-    loginWithAppRole(roleId: string, secretId: string, mount: string): any;
+    loginWithAppRole(roleId: string, secretId: string, mount?: string): any;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} appRole
-    * @param {String} metadata
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} appRole
+    * @param {string} [metadata]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    generateAppRoleSecretId(token: string, appRole: string, metadata: string, mount: string): Promise<any>;
+    generateAppRoleSecretId(token: string, appRole: string, metadata?: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} appRole
-    * @param {String<required>} secretId
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} appRole
+    * @param {string} secretId
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readAppRoleSecretId(token: string, appRole: string, secretId: string, mount: string): Promise<any>;
+    readAppRoleSecretId(token: string, appRole: string, secretId: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} appRole
-    * @param {String<required>} secretId
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} appRole
+    * @param {string} secretId
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    destroyAppRoleSecretId(token: string, appRole: string, secretId: string, mount: string): Promise<any>;
+    destroyAppRoleSecretId(token: string, appRole: string, secretId: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String: 'der', 'pem'} format
-    * @param {String} mount
-    * @returns {Promise<String>}
+    * @param {string} format - certificate format either 'der' or 'pem'
+    * @param {string} [mount]
+    * @returns {PromiseLike<string>}
     */
-    readCACertificate(format: any, mount: string): Promise<string>;
+    readCACertificate(format: string, mount?: string): PromiseLike<string>;
     /**
-    * @param {String: 'der', 'pem'} format
-    * @param {String} mount
-    * @returns {Promise<String>}
+    * @param {string} format - certificate format either 'der' or 'pem'
+    * @param {string} [mount]
+    * @returns {PromiseLike<string>}
     */
-    readPkiCrl(format: any, mount: string): Promise<string>;
+    readPkiCrl(format: string, mount?: string): PromiseLike<string>;
     /**
-    * @param {String} mount
-    * @returns {Promise<String>}
+    * @param {string} [mount]
+    * @returns {PromiseLike<string>}
     */
-    readCAChain(mount: string): Promise<string>;
+    readCAChain(mount?: string): PromiseLike<string>;
     /**
-    * @param {String<required>} serial
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} serial
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readCertificate(serial: string, mount: string): Promise<any>;
+    readCertificate(serial: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    listCertificates(token: string, mount: string): Promise<any>;
+    listCertificates(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} pemBundle
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} pemBundle
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    setCACertificate(token: string, pemBundle: string, mount: string): Promise<any>;
+    setCACertificate(token: string, pemBundle: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readCrlConfig(token: string, mount: string): Promise<any>;
+    readCrlConfig(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} expiry
-    * @param {Boolean} disable
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [expiry]
+    * @param {boolean} [disable]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    setCrlConfig(token: string, expiry: string, disable: boolean, mount: string): Promise<any>;
+    setCrlConfig(token: string, expiry?: string, disable?: boolean, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readPkiUrls(token: string, mount: string): Promise<any>;
+    readPkiUrls(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {[String]} issuingCertificates
-    * @param {[String]} crlDistributionPoints
-    * @param {[String]} oscpServers
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string[]} [issuingCertificates]
+    * @param {string[]} [crlDistributionPoints]
+    * @param {string[]} [oscpServers]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    setPkiUrls(token: string, issuingCertificates: [string], crlDistributionPoints: [string], oscpServers: [string], mount: string): Promise<any>;
+    setPkiUrls(token: string, issuingCertificates?: string[], crlDistributionPoints?: string[], oscpServers?: string[], mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    rotatePkiCrl(token: string, mount: string): Promise<any>;
+    rotatePkiCrl(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} sudoToken
-    * @param {String<required>: 'internal', 'exported'} params.type
-    * @param {String<required>} params.commonName
-    * @param {String} params.altNames
-    * @param {String} params.ipSans
-    * @param {String} params.uriSans
-    * @param {String} params.otherSans
-    * @param {String} params.ttl
-    * @param {String: 'der', 'pem', 'pem_bundle'} params.format
-    * @param {String: 'der', 'pkcs8'} params.pkFormat
-    * @param {String: 'rsa', 'ec'} params.keyType
-    * @param {Integer} params.keyBits
-    * @param {Boolean} params.excludeCnFromSans
-    * @param {Integer} params.maxPathLength
-    * @param {String} params.permittedDnsDomains
-    * @param {String} params.ou
-    * @param {String} params.organization
-    * @param {String} params.country
-    * @param {String} params.locality
-    * @param {String} params.province
-    * @param {String} params.streetAddress
-    * @param {String} params.postalCode
-    * @param {String} params.serialNumber
-    * @param {String} mount
-    * @returns {Promise<String>}
+    * @param {string} sudoToken
+    * @param {Object} params
+    * @param {string} params.type - root CA type either 'internal' or 'exported'
+    * @param {string} params.commonName
+    * @param {string} params.altNames
+    * @param {string} params.ipSans
+    * @param {string} params.uriSans
+    * @param {string} params.otherSans
+    * @param {string} params.ttl
+    * @param {string} params.format - certificate format either 'der', 'pem' or 'pem_bundle'
+    * @param {string} params.pkFormat - private key format either 'der' or 'pkcs8'
+    * @param {string} params.keyType - key type either 'rsa' or 'ec'
+    * @param {number} params.keyBits
+    * @param {boolean} params.excludeCnFromSans
+    * @param {number} params.maxPathLength
+    * @param {string} params.permittedDnsDomains
+    * @param {string} params.ou
+    * @param {string} params.organization
+    * @param {string} params.country
+    * @param {string} params.locality
+    * @param {string} params.province
+    * @param {string} params.streetAddress
+    * @param {string} params.postalCode
+    * @param {string} params.serialNumber
+    * @param {string} [mount]
+    * @returns {PromiseLike<string>}
     */
-    generateRootCA(sudoToken: string, params: any, mount: string): Promise<string>;
+    generateRootCA(sudoToken: string, params: {
+        type: string;
+        commonName: string;
+        altNames: string;
+        ipSans: string;
+        uriSans: string;
+        otherSans: string;
+        ttl: string;
+        format: string;
+        pkFormat: string;
+        keyType: string;
+        keyBits: number;
+        excludeCnFromSans: boolean;
+        maxPathLength: number;
+        permittedDnsDomains: string;
+        ou: string;
+        organization: string;
+        country: string;
+        locality: string;
+        province: string;
+        streetAddress: string;
+        postalCode: string;
+        serialNumber: string;
+    }, mount?: string): PromiseLike<string>;
     /**
-    * @param {String<required>} sudoToken
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} sudoToken
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    deleteRootCA(sudoToken: string, mount: string): Promise<any>;
+    deleteRootCA(sudoToken: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>: 'internal', 'exported'} params.type
-    * @param {String<required>} params.commonName
-    * @param {String} params.altNames
-    * @param {String} params.ipSans
-    * @param {String} params.uriSans
-    * @param {String} params.otherSans
-    * @param {String: 'der', 'pem', 'pem_bundle'} params.format
-    * @param {String: 'der', 'pkcs8'} params.pkFormat
-    * @param {String: 'rsa', 'ec'} params.keyType
-    * @param {Integer} params.keyBits
-    * @param {Boolean} params.excludeCnFromSans
-    * @param {String} params.ou
-    * @param {String} params.organization
-    * @param {String} params.country
-    * @param {String} params.locality
-    * @param {String} params.province
-    * @param {String} params.streetAddress
-    * @param {String} params.postalCode
-    * @param {String} params.serialNumber
-    * @param {String} mount
-    * @returns {Promise<String>}
+    * @param {string} token
+    * @param {string} params.type - intermediate CA type either 'internal' or 'exported'
+    * @param {Object} params
+    * @param {string} params.commonName
+    * @param {string} [params.altNames]
+    * @param {string} [params.ipSans]
+    * @param {string} [params.uriSans]
+    * @param {string} [params.otherSans]
+    * @param {string} [params.format] - certificate format either 'der', 'pem' or 'pem_bundle'
+    * @param {string} [params.pkFormat] - private key format either 'der' or 'pkcs8'
+    * @param {string} [params.keyType] - key type either 'rsa' or 'ec'
+    * @param {number} [params.keyBits]
+    * @param {boolean} [params.excludeCnFromSans]
+    * @param {string} [params.ou]
+    * @param {string} [params.organization]
+    * @param {string} [params.country]
+    * @param {string} [params.locality]
+    * @param {string} [params.province]
+    * @param {string} [params.streetAddress]
+    * @param {string} [params.postalCode]
+    * @param {string} [params.serialNumber]
+    * @param {string} [mount]
+    * @returns {PromiseLike<string>}
     */
-    genIntermediateCA(token: string, params: any, mount: string): Promise<string>;
+    genIntermediateCA(token: string, params: {
+        commonName: string;
+        altNames?: string;
+        ipSans?: string;
+        uriSans?: string;
+        otherSans?: string;
+        format?: string;
+        pkFormat?: string;
+        keyType?: string;
+        keyBits?: number;
+        excludeCnFromSans?: boolean;
+        ou?: string;
+        organization?: string;
+        country?: string;
+        locality?: string;
+        province?: string;
+        streetAddress?: string;
+        postalCode?: string;
+        serialNumber?: string;
+    }, mount?: string): PromiseLike<string>;
     /**
-    * @param {String<required>} sudoToken
-    * @param {String<required>} params.csr
-    * @param {String<required>} params.commonName
-    * @param {String} params.altNames
-    * @param {String} params.ipSans
-    * @param {String} params.uriSans
-    * @param {String} params.otherSans
-    * @param {String} params.ttl
-    * @param {String: 'der', 'pem', 'pem_bundle'} params.format
-    * @param {Integer} params.maxPathLength
-    * @param {Boolean} params.excludeCnFromSans
-    * @param {Boolean} params.useCsrValues
-    * @param {String} params.permittedDnsDomains
-    * @param {String} params.ou
-    * @param {String} params.organization
-    * @param {String} params.country
-    * @param {String} params.locality
-    * @param {String} params.province
-    * @param {String} params.streetAddress
-    * @param {String} params.postalCode
-    * @param {String} params.serialNumber
-    * @param {String} mount
-    * @returns {Promise<String>}
+    * @param {string} sudoToken
+    * @param {Object} params
+    * @param {string} params.csr
+    * @param {string} params.commonName
+    * @param {string} [params.altNames]
+    * @param {string} [params.ipSans]
+    * @param {string} [params.uriSans]
+    * @param {string} [params.otherSans]
+    * @param {string} [params.ttl]
+    * @param {string} [params.format] - certificate format either 'der', 'pem' or 'pem_bundle'
+    * @param {number} [params.maxPathLength]
+    * @param {boolean} [params.excludeCnFromSans]
+    * @param {boolean} [params.useCsrValues]
+    * @param {string} [params.permittedDnsDomains]
+    * @param {string} [params.ou]
+    * @param {string} [params.organization]
+    * @param {string} [params.country]
+    * @param {string} [params.locality]
+    * @param {string} [params.province]
+    * @param {string} [params.streetAddress]
+    * @param {string} [params.postalCode]
+    * @param {string} [params.serialNumber]
+    * @param {string} [mount]
+    * @returns {PromiseLike<string>}
     */
-    signIntermediateCA(sudoToken: string, params: any, mount: string): Promise<string>;
+    signIntermediateCA(sudoToken: string, params: {
+        csr: string;
+        commonName: string;
+        altNames?: string;
+        ipSans?: string;
+        uriSans?: string;
+        otherSans?: string;
+        ttl?: string;
+        format?: string;
+        maxPathLength?: number;
+        excludeCnFromSans?: boolean;
+        useCsrValues?: boolean;
+        permittedDnsDomains?: string;
+        ou?: string;
+        organization?: string;
+        country?: string;
+        locality?: string;
+        province?: string;
+        streetAddress?: string;
+        postalCode?: string;
+        serialNumber?: string;
+    }, mount?: string): PromiseLike<string>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} certificate
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} certificate
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    setIntermediateCA(token: string, certificate: string, mount: string): Promise<any>;
+    setIntermediateCA(token: string, certificate: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>: 'internal', 'exported'} params.role
-    * @param {String<required>} params.commonName
-    * @param {String} params.altNames
-    * @param {String} params.ipSans
-    * @param {String} params.uriSans
-    * @param {String} params.otherSans
-    * @param {String} params.ttl
-    * @param {String: 'der', 'pem', 'pem_bundle'} params.format
-    * @param {String: 'der', 'pkcs8'} params.pkFormat
-    * @param {Boolean} params.excludeCnFromSans
-    * @param {String} mount
-    * @returns {Promise<String>}
+    * @param {string} token
+    * @param {Object} params
+    * @param {string} params.role - intermediate CA role type either 'internal' or 'exported'
+    * @param {string} params.commonName
+    * @param {string} [params.altNames]
+    * @param {string} [params.ipSans]
+    * @param {string} [params.uriSans]
+    * @param {string} [params.otherSans]
+    * @param {string} [params.ttl]
+    * @param {string} params.format - certificate format either 'der', 'pem' or 'pem_bundle'
+    * @param {string} [params.pkFormat] - private key format either 'der' or 'pkcs8'
+    * @param {boolean} [params.excludeCnFromSans]
+    * @param {string} [mount]
+    * @returns {PromiseLike<string>}
     */
-    genPkiCertificate(token: string, params: any, mount: string): Promise<string>;
+    genPkiCertificate(token: string, params: {
+        role: string;
+        commonName: string;
+        altNames?: string;
+        ipSans?: string;
+        uriSans?: string;
+        otherSans?: string;
+        ttl?: string;
+        format: string;
+        pkFormat?: string;
+        excludeCnFromSans?: boolean;
+    }, mount?: string): PromiseLike<string>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} serialNumber
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} serialNumber
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    revokePkiCertificate(token: string, serialNumber: string, mount: string): Promise<any>;
+    revokePkiCertificate(token: string, serialNumber: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} params.name
-    * @param {String} params.ttl
-    * @param {String} params.maxTtl
-    * @param {Boolean} params.allowLocalhost
-    * @param {[String]} params.allowedDomains
-    * @param {Boolean} params.allowedDomainsTemplate
-    * @param {Boolean} params.allowBareDomains
-    * @param {Boolean} params.allowSubdomains
-    * @param {Boolean} params.allowGlobDomains
-    * @param {Boolean} params.allowAnyName
-    * @param {Boolean} params.enforceHostnames
-    * @param {String} params.allowIpSans
-    * @param {String} params.allowedUriSans
-    * @param {String} params.allowedOtherSans
-    * @param {Boolean} params.serverFlag
-    * @param {Boolean} params.clientFlag
-    * @param {Boolean} params.codeSigningFlag
-    * @param {Boolean} params.emailProtectionFlag
-    * @param {String: 'rsa', 'ec'} params.keyType
-    * @param {Integer} params.keyBits
-    * @param {[String]} params.keyUsage
-    * @param {[String]} params.externalKeyUsage
-    * @param {String} params.extKeyUsageOids
-    * @param {Boolean} params.useCsrCommonName
-    * @param {Boolean} params.useCsrSans
-    * @param {String} params.ou
-    * @param {String} params.organization
-    * @param {String} params.country
-    * @param {String} params.locality
-    * @param {String} params.province
-    * @param {String} params.streetAddress
-    * @param {String} params.postalCode
-    * @param {String} params.serialNumber
-    * @param {Boolean} params.generateLease
-    * @param {Boolean} params.noStore
-    * @param {Boolean} params.requireCn
-    * @param {[String]} params.policyIdentifiers
-    * @param {Boolean} params.basicConstraintsValidForNonCa
-    * @param {String} params.notBeforeDuration
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {Object} params
+    * @param {string} params.name
+    * @param {string} [params.ttl]
+    * @param {string} [params.maxTtl]
+    * @param {boolean} [params.allowLocalhost]
+    * @param {string[]} [params.allowedDomains]
+    * @param {boolean} [params.allowedDomainsTemplate]
+    * @param {boolean} [params.allowBareDomains]
+    * @param {boolean} [params.allowSubdomains]
+    * @param {boolean} [params.allowGlobDomains]
+    * @param {boolean} [params.allowAnyName]
+    * @param {boolean} [params.enforceHostnames]
+    * @param {string} [params.allowIpSans]
+    * @param {string} [params.allowedUriSans]
+    * @param {string} [params.allowedOtherSans]
+    * @param {boolean} [params.serverFlag]
+    * @param {boolean} [params.clientFlag]
+    * @param {boolean} [params.codeSigningFlag]
+    * @param {boolean} [params.emailProtectionFlag]
+    * @param {string} [params.keyType] - key type either 'rsa' or 'ec'
+    * @param {number} [params.keyBits]
+    * @param {string[]} [params.keyUsage]
+    * @param {string[]} [params.externalKeyUsage]
+    * @param {string} [params.extKeyUsageOids]
+    * @param {boolean} [params.useCsrCommonName]
+    * @param {boolean} [params.useCsrSans]
+    * @param {string} [params.ou]
+    * @param {string} [params.organization]
+    * @param {string} [params.country]
+    * @param {string} [params.locality]
+    * @param {string} [params.province]
+    * @param {string} [params.streetAddress]
+    * @param {string} [params.postalCode]
+    * @param {string} [params.serialNumber]
+    * @param {boolean} [params.generateLease]
+    * @param {boolean} [params.noStore]
+    * @param {boolean} [params.requireCn]
+    * @param {string[]} [params.policyIdentifiers]
+    * @param {boolean} [params.basicConstraintsValidForNonCa]
+    * @param {string} [params.notBeforeDuration]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    createPkiRole(token: string, params: any, mount: string): Promise<any>;
+    createPkiRole(token: string, params: {
+        name: string;
+        ttl?: string;
+        maxTtl?: string;
+        allowLocalhost?: boolean;
+        allowedDomains?: string[];
+        allowedDomainsTemplate?: boolean;
+        allowBareDomains?: boolean;
+        allowSubdomains?: boolean;
+        allowGlobDomains?: boolean;
+        allowAnyName?: boolean;
+        enforceHostnames?: boolean;
+        allowIpSans?: string;
+        allowedUriSans?: string;
+        allowedOtherSans?: string;
+        serverFlag?: boolean;
+        clientFlag?: boolean;
+        codeSigningFlag?: boolean;
+        emailProtectionFlag?: boolean;
+        keyType?: string;
+        keyBits?: number;
+        keyUsage?: string[];
+        externalKeyUsage?: string[];
+        extKeyUsageOids?: string;
+        useCsrCommonName?: boolean;
+        useCsrSans?: boolean;
+        ou?: string;
+        organization?: string;
+        country?: string;
+        locality?: string;
+        province?: string;
+        streetAddress?: string;
+        postalCode?: string;
+        serialNumber?: string;
+        generateLease?: boolean;
+        noStore?: boolean;
+        requireCn?: boolean;
+        policyIdentifiers?: string[];
+        basicConstraintsValidForNonCa?: boolean;
+        notBeforeDuration?: string;
+    }, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} params.name
-    * @param {String} params.ttl
-    * @param {String} params.maxTtl
-    * @param {Boolean} params.allowLocalhost
-    * @param {[String]} params.allowedDomains
-    * @param {Boolean} params.allowedDomainsTemplate
-    * @param {Boolean} params.allowBareDomains
-    * @param {Boolean} params.allowSubdomains
-    * @param {Boolean} params.allowGlobDomains
-    * @param {Boolean} params.allowAnyName
-    * @param {Boolean} params.enforceHostnames
-    * @param {String} params.allowIpSans
-    * @param {String} params.allowedUriSans
-    * @param {String} params.allowedOtherSans
-    * @param {Boolean} params.serverFlag
-    * @param {Boolean} params.clientFlag
-    * @param {Boolean} params.codeSigningFlag
-    * @param {Boolean} params.emailProtectionFlag
-    * @param {String: 'rsa', 'ec'} params.keyType
-    * @param {Integer} params.keyBits
-    * @param {[String]} params.keyUsage
-    * @param {[String]} params.externalKeyUsage
-    * @param {String} params.extKeyUsageOids
-    * @param {Boolean} params.useCsrCommonName
-    * @param {Boolean} params.useCsrSans
-    * @param {String} params.ou
-    * @param {String} params.organization
-    * @param {String} params.country
-    * @param {String} params.locality
-    * @param {String} params.province
-    * @param {String} params.streetAddress
-    * @param {String} params.postalCode
-    * @param {String} params.serialNumber
-    * @param {Boolean} params.generateLease
-    * @param {Boolean} params.noStore
-    * @param {Boolean} params.requireCn
-    * @param {[String]} params.policyIdentifiers
-    * @param {Boolean} params.basicConstraintsValidForNonCa
-    * @param {String} params.notBeforeDuration
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {Object} params
+    * @param {string} params.name
+    * @param {string} [params.ttl]
+    * @param {string} [params.maxTtl]
+    * @param {boolean} [params.allowLocalhost]
+    * @param {string[]} [params.allowedDomains]
+    * @param {boolean} [params.allowedDomainsTemplate]
+    * @param {boolean} [params.allowBareDomains]
+    * @param {boolean} [params.allowSubdomains]
+    * @param {boolean} [params.allowGlobDomains]
+    * @param {boolean} [params.allowAnyName]
+    * @param {boolean} [params.enforceHostnames]
+    * @param {string} [params.allowIpSans]
+    * @param {string} [params.allowedUriSans]
+    * @param {string} [params.allowedOtherSans]
+    * @param {boolean} [params.serverFlag]
+    * @param {boolean} [params.clientFlag]
+    * @param {boolean} [params.codeSigningFlag]
+    * @param {boolean} [params.emailProtectionFlag]
+    * @param {string} [params.keyType] - The type of key to generate. Can be either "rsa" or "ec".
+    * @param {number} [params.keyBits]
+    * @param {string[]} [params.keyUsage]
+    * @param {string[]} [params.externalKeyUsage]
+    * @param {string} [params.extKeyUsageOids]
+    * @param {boolean} [params.useCsrCommonName]
+    * @param {boolean} [params.useCsrSans]
+    * @param {string} [params.ou]
+    * @param {string} [params.organization]
+    * @param {string} [params.country]
+    * @param {string} [params.locality]
+    * @param {string} [params.province]
+    * @param {string} [params.streetAddress]
+    * @param {string} [params.postalCode]
+    * @param {string} [params.serialNumber]
+    * @param {boolean} [params.generateLease]
+    * @param {boolean} [params.noStore]
+    * @param {boolean} [params.requireCn]
+    * @param {string[]} [params.policyIdentifiers]
+    * @param {boolean} [params.basicConstraintsValidForNonCa]
+    * @param {string} [params.notBeforeDuration]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    updatePkiRole(token: string, params: any, mount: string): Promise<any>;
+    updatePkiRole(token: string, params: {
+        name: string;
+        ttl?: string;
+        maxTtl?: string;
+        allowLocalhost?: boolean;
+        allowedDomains?: string[];
+        allowedDomainsTemplate?: boolean;
+        allowBareDomains?: boolean;
+        allowSubdomains?: boolean;
+        allowGlobDomains?: boolean;
+        allowAnyName?: boolean;
+        enforceHostnames?: boolean;
+        allowIpSans?: string;
+        allowedUriSans?: string;
+        allowedOtherSans?: string;
+        serverFlag?: boolean;
+        clientFlag?: boolean;
+        codeSigningFlag?: boolean;
+        emailProtectionFlag?: boolean;
+        keyType?: string;
+        keyBits?: number;
+        keyUsage?: string[];
+        externalKeyUsage?: string[];
+        extKeyUsageOids?: string;
+        useCsrCommonName?: boolean;
+        useCsrSans?: boolean;
+        ou?: string;
+        organization?: string;
+        country?: string;
+        locality?: string;
+        province?: string;
+        streetAddress?: string;
+        postalCode?: string;
+        serialNumber?: string;
+        generateLease?: boolean;
+        noStore?: boolean;
+        requireCn?: boolean;
+        policyIdentifiers?: string[];
+        basicConstraintsValidForNonCa?: boolean;
+        notBeforeDuration?: string;
+    }, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readPkiRole(token: string, name: string, mount: string): Promise<any>;
+    readPkiRole(token: string, name: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    listPkiRoles(token: string, mount: string): Promise<any>;
+    listPkiRoles(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    deletePkiRole(token: string, name: string, mount: string): Promise<any>;
+    deletePkiRole(token: string, name: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {Integer} params.ttl
-     * @param {Integer} params.max_ttl
-     * @param {String} params.password_policy
-     * @param {String} params.url
-     * @param {String} params.request_timeout
-     * @param {Boolean} params.starttls
-     * @param {Boolean} params.insecure_tls
-     * @param {String} params.certificate
-     * @param {String<required>} params.binddn
-     * @param {String<required>} params.bindpass
-     * @param {String} params.userdn
-     * @param {String} params.upndomain
-     * @param {String} params.last_rotation_tolerance
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} params
+     * @param {number} [params.ttl]
+     * @param {number} [params.max_ttl]
+     * @param {string} [params.password_policy]
+     * @param {string} [params.url]
+     * @param {string} [params.request_timeout]
+     * @param {boolean} [params.starttls]
+     * @param {boolean} [params.insecure_tls]
+     * @param {string} [params.certificate]
+     * @param {string} params.binddn
+     * @param {string} params.bindpass
+     * @param {string} [params.userdn]
+     * @param {string} [params.upndomain]
+     * @param {string} [params.last_rotation_tolerance]
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    setADConfig(token: string, params: any, mount: string): Promise<any>;
+    setADConfig(token: string, params: {
+        ttl?: number;
+        max_ttl?: number;
+        password_policy?: string;
+        url?: string;
+        request_timeout?: string;
+        starttls?: boolean;
+        insecure_tls?: boolean;
+        certificate?: string;
+        binddn: string;
+        bindpass: string;
+        userdn?: string;
+        upndomain?: string;
+        last_rotation_tolerance?: string;
+    }, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {Integer} params.ttl
-     * @param {Integer} params.max_ttl
-     * @param {String} params.password_policy
-     * @param {String} params.url
-     * @param {String} params.request_timeout
-     * @param {Boolean} params.starttls
-     * @param {Boolean} params.insecure_tls
-     * @param {String} params.certificate
-     * @param {String<required>} params.binddn
-     * @param {String<required>} params.bindpass
-     * @param {String} params.userdn
-     * @param {String} params.upndomain
-     * @param {String} params.last_rotation_tolerance
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} params
+     * @param {number} [params.ttl]
+     * @param {number} [params.max_ttl]
+     * @param {string} [params.password_policy]
+     * @param {string} [params.url]
+     * @param {string} [params.request_timeout]
+     * @param {boolean} [params.starttls]
+     * @param {boolean} [params.insecure_tls]
+     * @param {string} [params.certificate]
+     * @param {string} params.binddn
+     * @param {string} params.bindpass
+     * @param {string} [params.userdn]
+     * @param {string} [params.upndomain]
+     * @param {string} [params.last_rotation_tolerance]
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    updateADConfig(token: string, params: any, mount: string): Promise<any>;
+    updateADConfig(token: string, params: {
+        ttl?: number;
+        max_ttl?: number;
+        password_policy?: string;
+        url?: string;
+        request_timeout?: string;
+        starttls?: boolean;
+        insecure_tls?: boolean;
+        certificate?: string;
+        binddn: string;
+        bindpass: string;
+        userdn?: string;
+        upndomain?: string;
+        last_rotation_tolerance?: string;
+    }, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    readADConfig(token: string, mount: string): Promise<any>;
+    readADConfig(token: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    deleteADConfig(token: string, mount: string): Promise<any>;
+    deleteADConfig(token: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    listADRoles(token: string, mount: string): Promise<any>;
+    listADRoles(token: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} params.name
-     * @param {String<required>} params.service_account_name
-     * @param {String} params.ttl
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} params
+     * @param {string} params.name
+     * @param {string} params.service_account_name
+     * @param {string} [params.ttl]
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    createADRole(token: string, params: any, mount: string): Promise<any>;
+    createADRole(token: string, params: {
+        name: string;
+        service_account_name: string;
+        ttl?: string;
+    }, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} params.name
-     * @param {String<required>} params.service_account_name
-     * @param {String} params.ttl
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} params
+     * @param {string} params.name
+     * @param {string} params.service_account_name
+     * @param {string} [params.ttl]
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    updateADRole(token: string, params: any, mount: string): Promise<any>;
+    updateADRole(token: string, params: {
+        name: string;
+        service_account_name: string;
+        ttl?: string;
+    }, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} roleName
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} roleName
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    readADRole(token: string, roleName: string, mount: string): Promise<any>;
+    readADRole(token: string, roleName: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} roleName
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} roleName
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    deleteADRole(token: string, roleName: string, mount: string): Promise<any>;
+    deleteADRole(token: string, roleName: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} roleName
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} roleName
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    getADRoleCred(token: string, roleName: string, mount: string): Promise<any>;
+    getADRoleCred(token: string, roleName: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} roleName
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} roleName
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    rotateADRoleCred(token: string, roleName: string, mount: string): Promise<any>;
+    rotateADRoleCred(token: string, roleName: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    listADLibraries(token: string, mount: string): Promise<any>;
+    listADLibraries(token: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} setName
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} setName
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    readADLibrary(token: string, setName: string, mount: string): Promise<any>;
+    readADLibrary(token: string, setName: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} params.name
-     * @param {String[]<required>} params.service_account_names
-     * @param {String} params.ttl
-     * @param {String} params.max_ttl
-     * @param {Boolean} params.disable_check_in_enforcement
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} params
+     * @param {string} params.name
+     * @param {string[]} params.service_account_names
+     * @param {string} [params.ttl]
+     * @param {string} [params.max_ttl]
+     * @param {boolean} [params.disable_check_in_enforcement]
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    createADLibrary(token: string, params: any, mount: string): Promise<any>;
+    createADLibrary(token: string, params: {
+        name: string;
+        service_account_names: string[];
+        ttl?: string;
+        max_ttl?: string;
+        disable_check_in_enforcement?: boolean;
+    }, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} params.name
-     * @param {String[]<required>} params.service_account_names
-     * @param {String} params.ttl
-     * @param {String} params.max_ttl
-     * @param {Boolean} params.disable_check_in_enforcement
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} params
+     * @param {string} params.name
+     * @param {string[]} params.service_account_names
+     * @param {string} [params.ttl]
+     * @param {string} [params.max_ttl]
+     * @param {boolean} [params.disable_check_in_enforcement]
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    updateADLibrary(token: string, params: any, mount: string): Promise<any>;
+    updateADLibrary(token: string, params: {
+        name: string;
+        service_account_names: string[];
+        ttl?: string;
+        max_ttl?: string;
+        disable_check_in_enforcement?: boolean;
+    }, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} setName
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} setName
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    deleteADLibrary(token: string, setName: string, mount: string): Promise<any>;
+    deleteADLibrary(token: string, setName: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} params.name
-     * @param {String} params.ttl
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} params
+     * @param {string} params.name
+     * @param {string} [params.ttl]
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    checkADCredOut(token: string, params: any, mount: string): Promise<any>;
+    checkADCredOut(token: string, params: {
+        name: string;
+        ttl?: string;
+    }, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} params.name
-     * @param {String[]} params.service_account_names
-     * @param {Boolean} forceMode
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} params
+     * @param {string} params.name
+     * @param {string[]} [params.service_account_names]
+     * @param {boolean} [forceMode]
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    checkADCredIn(token: string, params: any, forceMode: boolean, mount: string): Promise<any>;
+    checkADCredIn(token: string, params: {
+        name: string;
+        service_account_names?: string[];
+    }, forceMode?: boolean, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} setName
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} setName
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    getADCredSatus(token: string, setName: string, mount: string): Promise<any>;
+    getADCredSatus(token: string, setName: string, mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {Object<required>} data
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {Object} data
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    updateKVEngineConfig(token: string, data: any, mount: string): Promise<any>;
+    updateKVEngineConfig(token: string, data: any, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readKVEngineConfig(token: string, mount: string): Promise<any>;
+    readKVEngineConfig(token: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {Object<required>} secrets
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {Object} secrets
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    createKVSecret(token: string, name: string, secrets: any, mount: string): Promise<any>;
+    createKVSecret(token: string, name: string, secrets: any, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {Object<required>} secrets
-    * @param {Integer<required>} version
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {Object} secrets
+    * @param {number} version
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    updateKVSecret(token: string, name: string, secrets: any, version: Integer<required>, mount: string): Promise<any>;
+    updateKVSecret(token: string, name: string, secrets: any, version: number, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {Integer} version
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {number} [version]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    readKVSecret(token: string, name: string, version: Integer, mount: string): Promise<any>;
+    readKVSecret(token: string, name: string, version?: number, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    deleteLatestVerKVSecret(token: string, name: string, mount: string): Promise<any>;
+    deleteLatestVerKVSecret(token: string, name: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {[Integer]<required>} versions
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {number[]} versions
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    deleteVersionsKVSecret(token: string, name: string, versions: any, mount: string): Promise<any>;
+    deleteVersionsKVSecret(token: string, name: string, versions: number[], mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {[Integer]<required>} versions
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {number[]} versions
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    undeleteVersionsKVSecret(token: string, name: string, versions: any, mount: string): Promise<any>;
+    undeleteVersionsKVSecret(token: string, name: string, versions: number[], mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String<required>} name
-    * @param {[Integer]<required>} versions
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} name
+    * @param {number[]} versions
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    destroyVersionsKVSecret(token: string, name: string, versions: any, mount: string): Promise<any>;
+    destroyVersionsKVSecret(token: string, name: string, versions: number[], mount?: string): PromiseLike<any>;
     /**
-     * @param {String<required>} token
-     * @param {String<required>} name
-     * @param {String} mount
-     * @returns {Promise<Object>}
+     * @param {string} token
+     * @param {string} name
+     * @param {string} [mount]
+     * @returns {PromiseLike<Object>}
      */
-    eliminateKVSecret(token: string, name: string, mount: string): Promise<any>;
+    eliminateKVSecret(token: string, name: string, mount?: string): PromiseLike<any>;
     /**
-    * @param {String<required>} token
-    * @param {String} folder
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} [folder]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
-    listKVSecrets(token: string, folder: string, mount: string): Promise<any>;
+    listKVSecrets(token: string, folder?: string, mount?: string): PromiseLike<any>;
+    /**
+    * @param {string} token
+    * @param {string} [path]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
+    */
+    readKVSecretMeta(token: string, path?: string, mount?: string): PromiseLike<any>;
+    /**
+    * @param {string} token
+    * @param {string} path
+    * @param {string} metadata
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
+    */
+    createKVSecretMeta(token: string, path: string, metadata: string, mount?: string): PromiseLike<any>;
+    /**
+    * @param {string} token
+    * @param {string} path
+    * @param {string} metadata
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
+    */
+    updateKVSecretMeta(token: string, path: string, metadata: string, mount?: string): PromiseLike<any>;
 }
 import https = require("https");
 //# sourceMappingURL=Vault.d.ts.map

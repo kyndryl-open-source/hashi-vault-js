@@ -126,7 +126,7 @@ class Vault {
 
   // /sys API endpoints
   /**
-  * @returns {Promise<Object>}
+  * @returns {PromiseLike<Object>}
   */
   async healthCheck(params){
     const Options = {
@@ -147,7 +147,7 @@ class Vault {
   }
 
   /**
-  * @returns {Promise<Object>}
+  * @returns {PromiseLike<Object>}
   */
   async sealStatus(){
     const Options = {
@@ -164,8 +164,8 @@ class Vault {
   }
 
   /**
-  * @param {String} sudoToken
-  * @returns {Promise<Object>}
+  * @param {string} sudoToken
+  * @returns {PromiseLike<Object>}
   */
   async sysHostInfo(sudoToken){
     const Options = {
@@ -186,10 +186,10 @@ class Vault {
   }
 
   /**
-  * @param {String} sudoToken
-  * @param {String} token
-  * @param {[String]} paths
-  * @returns {Promise<Object>}
+  * @param {string} sudoToken
+  * @param {string} token
+  * @param {string[]} paths
+  * @returns {PromiseLike<Object>}
   */
   async sysCapabilities(sudoToken, token, paths){
     const Options = {
@@ -213,9 +213,9 @@ class Vault {
   }
 
   /**
-  * @param {String} token
-  * @param {[String]} paths
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string[]} paths
+  * @returns {PromiseLike<Object>}
   */
   async sysCapabilitiesSelf(token, paths){
     const Options = {
@@ -238,9 +238,9 @@ class Vault {
   }
 
   /**
-  * @param {String} sudoToken
-  * @param {Const} type
-  * @returns {Promise<Object>}
+  * @param {string} sudoToken
+  * @param {string} type
+  * @returns {PromiseLike<Object>}
   */
   async sysInternalCounters(sudoToken, type) {
     let message = {};
@@ -268,9 +268,9 @@ class Vault {
   }
 
   /**
-  * @param {String} sudoToken
-  * @param {Const} type
-  * @returns {Promise<Object>}
+  * @param {string} sudoToken
+  * @param {string} [format]
+  * @returns {PromiseLike<Object>}
   */
   async sysMetrics(sudoToken, format){
     const Options = {
@@ -301,8 +301,8 @@ class Vault {
   }
 
   /**
-  * @param {String} sudoToken
-  * @returns {Promise<Object>}
+  * @param {string} sudoToken
+  * @returns {PromiseLike<Object>}
   */
   async sysSeal(sudoToken){
     const Options = {
@@ -322,11 +322,11 @@ class Vault {
   }
 
   /**
-  * @param {String} sudoToken
-  * @param {String} key
-  * @param {Boolean} reset
-  * @param {Boolean} migrate
-  * @returns {Promise<Object>}
+  * @param {string} sudoToken
+  * @param {string} key
+  * @param {boolean} reset
+  * @param {boolean} migrate
+  * @returns {PromiseLike<Object>}
   */
   async sysUnseal(sudoToken, key, reset, migrate){
     const Options = {
@@ -357,23 +357,23 @@ class Vault {
   //
 
   /**
-  * @param {String} vaultToken
+  * @param {string} vaultToken
   * @param {Object} [params]
-  * @param {String} [params.id]
-  * @param {String} [params.role_name]
-  * @param {String} [params.policies]
+  * @param {string} [params.id]
+  * @param {string} [params.role_name]
+  * @param {string} [params.policies]
   * @param {Object} [params.meta]
-  * @param {Boolean} [params.no_narent=false]
-  * @param {Boolean} [params.no_default_policy=false]
-  * @param {Boolean} [params.renewable=true]
-  * @param {String} [params.ttl]
-  * @param {String} [params.type=service]
-  * @param {String} [params.explicit_max_ttl]
-  * @param {String} [params.display_name]
-  * @param {Integer} [params.num_uses]
-  * @param {String} [params.period]
-  * @param {String} [params.entity_alias]
-  * @returns {Promise<Object>}
+  * @param {boolean} [params.no_narent=false]
+  * @param {boolean} [params.no_default_policy=false]
+  * @param {boolean} [params.renewable=true]
+  * @param {string} [params.ttl]
+  * @param {string} [params.type=service]
+  * @param {string} [params.explicit_max_ttl]
+  * @param {string} [params.display_name]
+  * @param {number} [params.num_uses]
+  * @param {string} [params.period]
+  * @param {string} [params.entity_alias]
+  * @returns {PromiseLike<Object>}
   */
 
   async createToken(vaultToken, params) {
@@ -418,9 +418,9 @@ class Vault {
   }
 
   /**
-  * @param {String} vaultToken
-  * @param {String} clientToken
-  * @returns {Promise<Object>}
+  * @param {string} vaultToken
+  * @param {string} clientToken
+  * @returns {PromiseLike<Object>}
   */
   async revokeToken(vaultToken, clientToken) {
     const Options = {
@@ -443,8 +443,8 @@ class Vault {
   }
 
   /**
-  * @param {String} clientToken
-  * @returns {Promise<Object>}
+  * @param {string} clientToken
+  * @returns {PromiseLike<Object>}
   */
   async revokeSelfToken(clientToken) {
     const Options = {
@@ -464,9 +464,9 @@ class Vault {
   }
 
   /**
-  * @param {String} vaultToken
-  * @param {String} clientToken
-  * @returns {Promise<Object>}
+  * @param {string} vaultToken
+  * @param {string} clientToken
+  * @returns {PromiseLike<Object>}
   */
   async lookupToken(vaultToken, clientToken) {
     const Options = {
@@ -489,8 +489,8 @@ class Vault {
   }
 
   /**
-  * @param {String} clientToken
-  * @returns {Promise<Object>}
+  * @param {string} clientToken
+  * @returns {PromiseLike<Object>}
   */
   async lookupSelfToken(clientToken) {
     const Options = {
@@ -510,10 +510,10 @@ class Vault {
   }
 
   /**
-  * @param {String} vaultToken
-  * @param {String} clientToken
-  * @param {String} increment
-  * @returns {Promise<Object>}
+  * @param {string} vaultToken
+  * @param {string} clientToken
+  * @param {string} increment
+  * @returns {PromiseLike<Object>}
   */
   async renewToken(vaultToken, clientToken, increment) {
     const Options = {
@@ -537,9 +537,9 @@ class Vault {
   }
 
   /**
-  * @param {String} clientToken
-  * @param {String} increment
-  * @returns {Promise<Object>}
+  * @param {string} clientToken
+  * @param {string} increment
+  * @returns {PromiseLike<Object>}
   */
   async renewSelfToken(clientToken, increment) {
     const Options = {
@@ -562,8 +562,8 @@ class Vault {
   }
 
   /**
-  * @param {String} sudoToken
-  * @returns {Promise<Object>}
+  * @param {string} sudoToken
+  * @returns {PromiseLike<Object>}
   */
   async listAccessors(sudoToken) {
     const Options = {
@@ -583,9 +583,9 @@ class Vault {
   }
 
   /**
-  * @param {String} vaultToken
-  * @param {String} accessor
-  * @returns {Promise<Object>}
+  * @param {string} vaultToken
+  * @param {string} accessor
+  * @returns {PromiseLike<Object>}
   */
   async lookupAccessor(vaultToken, accessor) {
     const Options = {
@@ -608,10 +608,10 @@ class Vault {
   }
 
   /**
-  * @param {String} vaultToken
-  * @param {String} accessor
-  * @param {String} increment
-  * @returns {Promise<Object>}
+  * @param {string} vaultToken
+  * @param {string} accessor
+  * @param {string} increment
+  * @returns {PromiseLike<Object>}
   */
   async renewAccessor(vaultToken, accessor, increment) {
     const Options = {
@@ -635,9 +635,9 @@ class Vault {
   }
 
   /**
-  * @param {String} vaultToken
-  * @param {String} accessor
-  * @returns {Promise<Object>}
+  * @param {string} vaultToken
+  * @param {string} accessor
+  * @returns {PromiseLike<Object>}
   */
   async revokeAccessor(vaultToken, accessor) {
     const Options = {
@@ -664,9 +664,9 @@ class Vault {
   //
 
   /**
-  * @param {String<required>} username
-  * @param {String<required>} password
-  * @param {String} mount
+  * @param {string} username
+  * @param {string} password
+  * @param {string} [mount]
   * @returns {Object}
   */
   async loginWithLdap(username, password, mount) {
@@ -695,12 +695,12 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {[String]<required>} policies
-  * @param {String<required>} groups
-  * @param {String} mount
-  * @returns {Promise<Oject>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string[]} policies
+  * @param {string} groups
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async createLdapUser(token, username, policies, groups, mount) {
     let rootPath= "";
@@ -732,23 +732,23 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {[String]<required>} policies
-  * @param {String<required>} groups
-  * @param {String} mount
-  * @returns {Promise<Oject>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string[]} policies
+  * @param {string} groups
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async updateLdapUser(token, username, policies, groups, mount) {
     return await this.createLdapUser(token, username, policies, groups, mount);
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} group
-  * @param {[String]<required>} policies
-  * @param {String} mount
-  * @returns {Promise<Oject>}
+  * @param {string} token
+  * @param {string} group
+  * @param {string[]} policies
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async createLdapGroup(token, group, policies, mount) {
     let rootPath= "";
@@ -779,21 +779,21 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} group
-  * @param {[String]<required>} policies
-  * @param {String} mount
-  * @returns {Promise<Oject>}
+  * @param {string} token
+  * @param {string} group
+  * @param {string[]} policies
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async updateLdapGroup(token, group, policies, mount) {
     return await this.createLdapGroup(token, group, policies, mount);
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} group
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} group
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readLdapGroup(token, group, mount) {
     let rootPath= "";
@@ -821,10 +821,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readLdapUser(token, username, mount) {
     let rootPath= "";
@@ -852,9 +852,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async listLdapUsers(token, mount) {
     let rootPath= "";
@@ -882,9 +882,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async listLdapGroups(token, mount) {
     let rootPath= "";
@@ -912,10 +912,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async deleteLdapUser(token, username, mount) {
     let rootPath= "";
@@ -943,10 +943,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} group
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} group
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async deleteLdapGroup(token, group, mount) {
     let rootPath= "";
@@ -974,9 +974,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readLdapConfig(token, mount) {
     let rootPath= "";
@@ -1005,41 +1005,42 @@ class Vault {
 
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @param {String} params.url
-  * @param {Boolean} params.case_sensitive_names
-  * @param {Integer} params.request_timeout
-  * @param {Boolean} params.starttls
-  * @param {String} params.tls_min_version
-  * @param {String} params.tls_max_version
-  * @param {Boolean} params.insecure_tls
-  * @param {String} params.certificate
-  * @param {String} params.client_tls_cert
-  * @param {String} params.client_tls_key
-  * @param {String} params.binddn
-  * @param {String} params.bindpass
-  * @param {String} params.userdn
-  * @param {String} params.userattr
-  * @param {Boolean} params.discoverdn
-  * @param {Boolean} params.deny_null_bind
-  * @param {String} params.upndomain
-  * @param {String} params.userfilter
-  * @param {Boolean} params.anonymous_group_search
-  * @param {String} params.groupfilter
-  * @param {String} params.groupdn
-  * @param {String} params.groupattr
-  * @param {Boolean} params.username_as_alias
-  * @param {Integer} params.token_ttl
-  * @param {Integer} params.token_max_ttl
-  * @param {[String]} params.token_policies
-  * @param {[String]} params.token_bound_cidrs
-  * @param {Integer} params.token_explicit_max_ttl
-  * @param {Boolean} params.token_no_default_policy
-  * @param {Integer} params.token_num_uses
-  * @param {Integer} params.token_period
-  * @param {String} params.token_type
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @param {Object} [params]
+  * @param {string} params.url
+  * @param {boolean} params.case_sensitive_names
+  * @param {number} params.request_timeout
+  * @param {boolean} params.starttls
+  * @param {string} params.tls_min_version
+  * @param {string} params.tls_max_version
+  * @param {boolean} params.insecure_tls
+  * @param {string} params.certificate
+  * @param {string} params.client_tls_cert
+  * @param {string} params.client_tls_key
+  * @param {string} params.binddn
+  * @param {string} params.bindpass
+  * @param {string} params.userdn
+  * @param {string} params.userattr
+  * @param {boolean} params.discoverdn
+  * @param {boolean} params.deny_null_bind
+  * @param {string} params.upndomain
+  * @param {string} params.userfilter
+  * @param {boolean} params.anonymous_group_search
+  * @param {string} params.groupfilter
+  * @param {string} params.groupdn
+  * @param {string} params.groupattr
+  * @param {boolean} params.username_as_alias
+  * @param {number} params.token_ttl
+  * @param {number} params.token_max_ttl
+  * @param {string[]} params.token_policies
+  * @param {string[]} params.token_bound_cidrs
+  * @param {number} params.token_explicit_max_ttl
+  * @param {boolean} params.token_no_default_policy
+  * @param {number} params.token_num_uses
+  * @param {number} params.token_period
+  * @param {string} params.token_type
+  * @returns {PromiseLike<Object>}
   */
   async setLdapConfig(token, params, mount) {
     let rootPath= "";
@@ -1105,9 +1106,9 @@ class Vault {
   //
 
   /**
-  * @param {String} mount
-  * @param {String} certName
-  * @returns {Promise<Object>}
+  * @param {string} [mount]
+  * @param {string} certName
+  * @returns {PromiseLike<Object>}
   */
    async loginWithCert(certName, mount) {
     let rootPath= "";
@@ -1139,10 +1140,10 @@ class Vault {
   //
 
   /**
-  * @param {String<required>} username
-  * @param {String<required>} password
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} username
+  * @param {string} password
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async loginWithUserpass(username, password, mount) {
     let rootPath= "";
@@ -1170,12 +1171,12 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {String<required>} password
-  * @param {[String]<required>} policies
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string} password
+  * @param {string[]} policies
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async createUserpassUser(token, username, password, policies, mount) {
     let rootPath= "";
@@ -1207,22 +1208,22 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {String<required>} password
-  * @param {[String]<required>} policies
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string} password
+  * @param {string[]} policies
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async updateUserpassUser(token, username, password, policies, mount) {
     return await this.createUserpassUser(token, username, password, policies, mount);
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readUserpassUser(token, username, mount) {
     let rootPath= "";
@@ -1250,10 +1251,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async deleteUserpassUser(token, username, mount) {
     let rootPath= "";
@@ -1281,11 +1282,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {String<required>} password
-  * @param {String} mount
-  * @returns {Promise<Oject>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string} password
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async updateUserpassPassword(token, username, password, mount) {
     let rootPath= "";
@@ -1316,11 +1317,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} username
-  * @param {[String]<required>} policies
-  * @param {String} mount
-  * @returns {Promise<Oject>}
+  * @param {string} token
+  * @param {string} username
+  * @param {string[]} policies
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async updateUserpassPolicies(token, username, policies, mount) {
     let rootPath= "";
@@ -1351,9 +1352,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async listUserpassUsers(token, mount) {
     let rootPath= "";
@@ -1387,9 +1388,9 @@ class Vault {
   //
 
   /**
-   * @param {String<required>} role
-   * @param {String<required>} jwt
-   * @param {String} mount
+   * @param {string} role
+   * @param {string} jwt
+   * @param {string} [mount]
    * @returns {Object}
    */
   async loginWithK8s(role, jwt, mount) {
@@ -1423,17 +1424,17 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {Object<required>} params
-   * @param {String} params.kubernetes_host
-   * @param {String} params.kubernetes_ca_cert
-   * @param {String} params.token_reviewer_jwt
+   * @param {string} token
+   * @param {Object} params
+   * @param {string} params.kubernetes_host
+   * @param {string} params.kubernetes_ca_cert
+   * @param {string} params.token_reviewer_jwt
    * @param {Object} [params.pem_keys]
-   * @param {String} params.issuer
-   * @param {Boolean} params.disable_iss_validation
-   * @param {Boolean} params.disable_local_ca_jwt
-   * @param {String} mount
-   * @returns {Object}
+   * @param {string} params.issuer
+   * @param {boolean} params.disable_iss_validation
+   * @param {boolean} params.disable_local_ca_jwt
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async updateK8sConfig(token, params, mount) {
 
@@ -1479,8 +1480,8 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String} mount
+   * @param {string} token
+   * @param {string} [mount]
    * @returns {Object}
    */
   async readK8sConfig(token, mount) {
@@ -1512,22 +1513,22 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} role
-   * @param {Object<required>} params
+   * @param {string} token
+   * @param {string} role
+   * @param {Object} params
    * @param {Object} [params.bound_service_account_names]
    * @param {Object} [params.bound_service_account_namespaces]
-   * @param {String} params.audience
-   * @param {Integer or String} params.token_ttl
-   * @param {Integer or String} params.token_max_ttl
+   * @param {string} params.audience
+   * @param {number | string} params.token_ttl
+   * @param {number | string} params.token_max_ttl
    * @param {Object} [params.token_policies]
    * @param {Object} [params.token_bound_cidrs]
-   * @param {Integer or String} params.token_explicit_max_ttl
-   * @param {Boolean} params.token_no_default_policy
-   * @param {Integer} params.token_num_uses
-   * @param {Integer or String} params.token_period
-   * @param {String} params.token_type
-   * @param {String} mount
+   * @param {number | string} params.token_explicit_max_ttl
+   * @param {boolean} params.token_no_default_policy
+   * @param {number} params.token_num_uses
+   * @param {number | string} params.token_period
+   * @param {string} params.token_type
+   * @param {string} [mount]
    * @returns {Object}
    */
   async createK8sRole(token, role, params, mount) {
@@ -1576,9 +1577,9 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} role
-   * @param {String} mount
+   * @param {string} token
+   * @param {string} role
+   * @param {string} [mount]
    * @returns {Object}
    */
   async readK8sRole(token, role, mount) {
@@ -1610,8 +1611,8 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String} mount
+   * @param {string} token
+   * @param {string} [mount]
    * @returns {Object}
    */
   async listK8sRoles(token, mount) {
@@ -1643,9 +1644,9 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} role
-   * @param {String} mount
+   * @param {string} token
+   * @param {string} role
+   * @param {string} [mount]
    * @returns {Object}
    */
   async deleteK8sRole(token, role, mount) {
@@ -1683,9 +1684,9 @@ class Vault {
   //
 
   /**
-  * @param {String<required>} roleId
-  * @param {String<required>} secretId
-  * @param {String} mount
+  * @param {string} roleId
+  * @param {string} secretId
+  * @param {string} [mount]
   * @returns {Object}
   */
   async loginWithAppRole(roleId, secretId, mount) {
@@ -1715,11 +1716,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} appRole
-  * @param {String} metadata
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} appRole
+  * @param {string} [metadata]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async generateAppRoleSecretId(token, appRole, metadata, mount) {
     let rootPath= "";
@@ -1750,11 +1751,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} appRole
-  * @param {String<required>} secretId
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} appRole
+  * @param {string} secretId
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readAppRoleSecretId(token, appRole, secretId, mount) {
     let rootPath= "";
@@ -1785,11 +1786,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} appRole
-  * @param {String<required>} secretId
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} appRole
+  * @param {string} secretId
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async destroyAppRoleSecretId(token, appRole, secretId, mount) {
     let rootPath= "";
@@ -1825,9 +1826,9 @@ class Vault {
   //
 
   /**
-  * @param {String: 'der', 'pem'} format
-  * @param {String} mount
-  * @returns {Promise<String>}
+  * @param {string} format - certificate format either 'der' or 'pem'
+  * @param {string} [mount]
+  * @returns {PromiseLike<string>}
   */
   async readCACertificate(format, mount) {
     let url = "";
@@ -1858,9 +1859,9 @@ class Vault {
   }
 
   /**
-  * @param {String: 'der', 'pem'} format
-  * @param {String} mount
-  * @returns {Promise<String>}
+  * @param {string} format - certificate format either 'der' or 'pem'
+  * @param {string} [mount]
+  * @returns {PromiseLike<string>}
   */
   async readPkiCrl(format, mount) {
     let url = "";
@@ -1891,8 +1892,8 @@ class Vault {
   }
 
   /**
-  * @param {String} mount
-  * @returns {Promise<String>}
+  * @param {string} [mount]
+  * @returns {PromiseLike<string>}
   */
   async readCAChain(mount) {
     let rootPath = "";
@@ -1917,9 +1918,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} serial
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} serial
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readCertificate(serial, mount) {
     let rootPath = "";
@@ -1945,9 +1946,9 @@ class Vault {
 
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async listCertificates(token, mount) {
     let rootPath = "";
@@ -1975,10 +1976,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} pemBundle
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} pemBundle
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async setCACertificate(token, pemBundle, mount) {
     let rootPath = "";
@@ -2009,9 +2010,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readCrlConfig(token, mount) {
     let rootPath = "";
@@ -2039,11 +2040,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} expiry
-  * @param {Boolean} disable
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [expiry]
+  * @param {boolean} [disable]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async setCrlConfig(token, expiry, disable, mount) {
     let rootPath = "";
@@ -2075,9 +2076,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readPkiUrls(token, mount) {
     let rootPath = "";
@@ -2105,12 +2106,12 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {[String]} issuingCertificates
-  * @param {[String]} crlDistributionPoints
-  * @param {[String]} oscpServers
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string[]} [issuingCertificates]
+  * @param {string[]} [crlDistributionPoints]
+  * @param {string[]} [oscpServers]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async setPkiUrls(token, issuingCertificates, crlDistributionPoints, oscpServers, mount) {
     let rootPath = "";
@@ -2143,9 +2144,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async rotatePkiCrl(token, mount) {
     let rootPath = "";
@@ -2173,31 +2174,32 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} sudoToken
-  * @param {String<required>: 'internal', 'exported'} params.type
-  * @param {String<required>} params.commonName
-  * @param {String} params.altNames
-  * @param {String} params.ipSans
-  * @param {String} params.uriSans
-  * @param {String} params.otherSans
-  * @param {String} params.ttl
-  * @param {String: 'der', 'pem', 'pem_bundle'} params.format
-  * @param {String: 'der', 'pkcs8'} params.pkFormat
-  * @param {String: 'rsa', 'ec'} params.keyType
-  * @param {Integer} params.keyBits
-  * @param {Boolean} params.excludeCnFromSans
-  * @param {Integer} params.maxPathLength
-  * @param {String} params.permittedDnsDomains
-  * @param {String} params.ou
-  * @param {String} params.organization
-  * @param {String} params.country
-  * @param {String} params.locality
-  * @param {String} params.province
-  * @param {String} params.streetAddress
-  * @param {String} params.postalCode
-  * @param {String} params.serialNumber
-  * @param {String} mount
-  * @returns {Promise<String>}
+  * @param {string} sudoToken
+  * @param {Object} params
+  * @param {string} params.type - root CA type either 'internal' or 'exported'
+  * @param {string} params.commonName
+  * @param {string} params.altNames
+  * @param {string} params.ipSans
+  * @param {string} params.uriSans
+  * @param {string} params.otherSans
+  * @param {string} params.ttl
+  * @param {string} params.format - certificate format either 'der', 'pem' or 'pem_bundle'
+  * @param {string} params.pkFormat - private key format either 'der' or 'pkcs8'
+  * @param {string} params.keyType - key type either 'rsa' or 'ec'
+  * @param {number} params.keyBits
+  * @param {boolean} params.excludeCnFromSans
+  * @param {number} params.maxPathLength
+  * @param {string} params.permittedDnsDomains
+  * @param {string} params.ou
+  * @param {string} params.organization
+  * @param {string} params.country
+  * @param {string} params.locality
+  * @param {string} params.province
+  * @param {string} params.streetAddress
+  * @param {string} params.postalCode
+  * @param {string} params.serialNumber
+  * @param {string} [mount]
+  * @returns {PromiseLike<string>}
   */
   async generateRootCA(sudoToken, params, mount) {
     let url = "";
@@ -2254,9 +2256,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} sudoToken
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} sudoToken
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async deleteRootCA(sudoToken, mount) {
     let rootPath = "";
@@ -2285,28 +2287,29 @@ class Vault {
 
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>: 'internal', 'exported'} params.type
-  * @param {String<required>} params.commonName
-  * @param {String} params.altNames
-  * @param {String} params.ipSans
-  * @param {String} params.uriSans
-  * @param {String} params.otherSans
-  * @param {String: 'der', 'pem', 'pem_bundle'} params.format
-  * @param {String: 'der', 'pkcs8'} params.pkFormat
-  * @param {String: 'rsa', 'ec'} params.keyType
-  * @param {Integer} params.keyBits
-  * @param {Boolean} params.excludeCnFromSans
-  * @param {String} params.ou
-  * @param {String} params.organization
-  * @param {String} params.country
-  * @param {String} params.locality
-  * @param {String} params.province
-  * @param {String} params.streetAddress
-  * @param {String} params.postalCode
-  * @param {String} params.serialNumber
-  * @param {String} mount
-  * @returns {Promise<String>}
+  * @param {string} token
+  * @param {string} params.type - intermediate CA type either 'internal' or 'exported'
+  * @param {Object} params
+  * @param {string} params.commonName
+  * @param {string} [params.altNames]
+  * @param {string} [params.ipSans]
+  * @param {string} [params.uriSans]
+  * @param {string} [params.otherSans]
+  * @param {string} [params.format] - certificate format either 'der', 'pem' or 'pem_bundle'
+  * @param {string} [params.pkFormat] - private key format either 'der' or 'pkcs8'
+  * @param {string} [params.keyType] - key type either 'rsa' or 'ec'
+  * @param {number} [params.keyBits]
+  * @param {boolean} [params.excludeCnFromSans]
+  * @param {string} [params.ou]
+  * @param {string} [params.organization]
+  * @param {string} [params.country]
+  * @param {string} [params.locality]
+  * @param {string} [params.province]
+  * @param {string} [params.streetAddress]
+  * @param {string} [params.postalCode]
+  * @param {string} [params.serialNumber]
+  * @param {string} [mount]
+  * @returns {PromiseLike<string>}
   */
   async genIntermediateCA(token, params, mount) {
     let url = "";
@@ -2360,29 +2363,30 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} sudoToken
-  * @param {String<required>} params.csr
-  * @param {String<required>} params.commonName
-  * @param {String} params.altNames
-  * @param {String} params.ipSans
-  * @param {String} params.uriSans
-  * @param {String} params.otherSans
-  * @param {String} params.ttl
-  * @param {String: 'der', 'pem', 'pem_bundle'} params.format
-  * @param {Integer} params.maxPathLength
-  * @param {Boolean} params.excludeCnFromSans
-  * @param {Boolean} params.useCsrValues
-  * @param {String} params.permittedDnsDomains
-  * @param {String} params.ou
-  * @param {String} params.organization
-  * @param {String} params.country
-  * @param {String} params.locality
-  * @param {String} params.province
-  * @param {String} params.streetAddress
-  * @param {String} params.postalCode
-  * @param {String} params.serialNumber
-  * @param {String} mount
-  * @returns {Promise<String>}
+  * @param {string} sudoToken
+  * @param {Object} params
+  * @param {string} params.csr
+  * @param {string} params.commonName
+  * @param {string} [params.altNames]
+  * @param {string} [params.ipSans]
+  * @param {string} [params.uriSans]
+  * @param {string} [params.otherSans]
+  * @param {string} [params.ttl]
+  * @param {string} [params.format] - certificate format either 'der', 'pem' or 'pem_bundle'
+  * @param {number} [params.maxPathLength]
+  * @param {boolean} [params.excludeCnFromSans]
+  * @param {boolean} [params.useCsrValues]
+  * @param {string} [params.permittedDnsDomains]
+  * @param {string} [params.ou]
+  * @param {string} [params.organization]
+  * @param {string} [params.country]
+  * @param {string} [params.locality]
+  * @param {string} [params.province]
+  * @param {string} [params.streetAddress]
+  * @param {string} [params.postalCode]
+  * @param {string} [params.serialNumber]
+  * @param {string} [mount]
+  * @returns {PromiseLike<string>}
   */
   async signIntermediateCA(sudoToken, params, mount) {
     let rootPath = "";
@@ -2431,10 +2435,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} certificate
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} certificate
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async setIntermediateCA(token, certificate, mount) {
     let rootPath = "";
@@ -2465,19 +2469,20 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>: 'internal', 'exported'} params.role
-  * @param {String<required>} params.commonName
-  * @param {String} params.altNames
-  * @param {String} params.ipSans
-  * @param {String} params.uriSans
-  * @param {String} params.otherSans
-  * @param {String} params.ttl
-  * @param {String: 'der', 'pem', 'pem_bundle'} params.format
-  * @param {String: 'der', 'pkcs8'} params.pkFormat
-  * @param {Boolean} params.excludeCnFromSans
-  * @param {String} mount
-  * @returns {Promise<String>}
+  * @param {string} token
+  * @param {Object} params
+  * @param {string} params.role - intermediate CA role type either 'internal' or 'exported'
+  * @param {string} params.commonName
+  * @param {string} [params.altNames]
+  * @param {string} [params.ipSans]
+  * @param {string} [params.uriSans]
+  * @param {string} [params.otherSans]
+  * @param {string} [params.ttl]
+  * @param {string} params.format - certificate format either 'der', 'pem' or 'pem_bundle'
+  * @param {string} [params.pkFormat] - private key format either 'der' or 'pkcs8'
+  * @param {boolean} [params.excludeCnFromSans]
+  * @param {string} [mount]
+  * @returns {PromiseLike<string>}
   */
   async genPkiCertificate(token, params, mount) {
     let rootPath = "";
@@ -2516,10 +2521,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} serialNumber
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} serialNumber
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async revokePkiCertificate(token, serialNumber, mount) {
     let rootPath = "";
@@ -2550,48 +2555,49 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} params.name
-  * @param {String} params.ttl
-  * @param {String} params.maxTtl
-  * @param {Boolean} params.allowLocalhost
-  * @param {[String]} params.allowedDomains
-  * @param {Boolean} params.allowedDomainsTemplate
-  * @param {Boolean} params.allowBareDomains
-  * @param {Boolean} params.allowSubdomains
-  * @param {Boolean} params.allowGlobDomains
-  * @param {Boolean} params.allowAnyName
-  * @param {Boolean} params.enforceHostnames
-  * @param {String} params.allowIpSans
-  * @param {String} params.allowedUriSans
-  * @param {String} params.allowedOtherSans
-  * @param {Boolean} params.serverFlag
-  * @param {Boolean} params.clientFlag
-  * @param {Boolean} params.codeSigningFlag
-  * @param {Boolean} params.emailProtectionFlag
-  * @param {String: 'rsa', 'ec'} params.keyType
-  * @param {Integer} params.keyBits
-  * @param {[String]} params.keyUsage
-  * @param {[String]} params.externalKeyUsage
-  * @param {String} params.extKeyUsageOids
-  * @param {Boolean} params.useCsrCommonName
-  * @param {Boolean} params.useCsrSans
-  * @param {String} params.ou
-  * @param {String} params.organization
-  * @param {String} params.country
-  * @param {String} params.locality
-  * @param {String} params.province
-  * @param {String} params.streetAddress
-  * @param {String} params.postalCode
-  * @param {String} params.serialNumber
-  * @param {Boolean} params.generateLease
-  * @param {Boolean} params.noStore
-  * @param {Boolean} params.requireCn
-  * @param {[String]} params.policyIdentifiers
-  * @param {Boolean} params.basicConstraintsValidForNonCa
-  * @param {String} params.notBeforeDuration
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {Object} params
+  * @param {string} params.name
+  * @param {string} [params.ttl]
+  * @param {string} [params.maxTtl]
+  * @param {boolean} [params.allowLocalhost]
+  * @param {string[]} [params.allowedDomains]
+  * @param {boolean} [params.allowedDomainsTemplate]
+  * @param {boolean} [params.allowBareDomains]
+  * @param {boolean} [params.allowSubdomains]
+  * @param {boolean} [params.allowGlobDomains]
+  * @param {boolean} [params.allowAnyName]
+  * @param {boolean} [params.enforceHostnames]
+  * @param {string} [params.allowIpSans]
+  * @param {string} [params.allowedUriSans]
+  * @param {string} [params.allowedOtherSans]
+  * @param {boolean} [params.serverFlag]
+  * @param {boolean} [params.clientFlag]
+  * @param {boolean} [params.codeSigningFlag]
+  * @param {boolean} [params.emailProtectionFlag]
+  * @param {string} [params.keyType] - key type either 'rsa' or 'ec'
+  * @param {number} [params.keyBits]
+  * @param {string[]} [params.keyUsage]
+  * @param {string[]} [params.externalKeyUsage]
+  * @param {string} [params.extKeyUsageOids]
+  * @param {boolean} [params.useCsrCommonName]
+  * @param {boolean} [params.useCsrSans]
+  * @param {string} [params.ou]
+  * @param {string} [params.organization]
+  * @param {string} [params.country]
+  * @param {string} [params.locality]
+  * @param {string} [params.province]
+  * @param {string} [params.streetAddress]
+  * @param {string} [params.postalCode]
+  * @param {string} [params.serialNumber]
+  * @param {boolean} [params.generateLease]
+  * @param {boolean} [params.noStore]
+  * @param {boolean} [params.requireCn]
+  * @param {string[]} [params.policyIdentifiers]
+  * @param {boolean} [params.basicConstraintsValidForNonCa]
+  * @param {string} [params.notBeforeDuration]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async createPkiRole(token, params, mount) {
     let url = "";
@@ -2660,48 +2666,49 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} params.name
-  * @param {String} params.ttl
-  * @param {String} params.maxTtl
-  * @param {Boolean} params.allowLocalhost
-  * @param {[String]} params.allowedDomains
-  * @param {Boolean} params.allowedDomainsTemplate
-  * @param {Boolean} params.allowBareDomains
-  * @param {Boolean} params.allowSubdomains
-  * @param {Boolean} params.allowGlobDomains
-  * @param {Boolean} params.allowAnyName
-  * @param {Boolean} params.enforceHostnames
-  * @param {String} params.allowIpSans
-  * @param {String} params.allowedUriSans
-  * @param {String} params.allowedOtherSans
-  * @param {Boolean} params.serverFlag
-  * @param {Boolean} params.clientFlag
-  * @param {Boolean} params.codeSigningFlag
-  * @param {Boolean} params.emailProtectionFlag
-  * @param {String: 'rsa', 'ec'} params.keyType
-  * @param {Integer} params.keyBits
-  * @param {[String]} params.keyUsage
-  * @param {[String]} params.externalKeyUsage
-  * @param {String} params.extKeyUsageOids
-  * @param {Boolean} params.useCsrCommonName
-  * @param {Boolean} params.useCsrSans
-  * @param {String} params.ou
-  * @param {String} params.organization
-  * @param {String} params.country
-  * @param {String} params.locality
-  * @param {String} params.province
-  * @param {String} params.streetAddress
-  * @param {String} params.postalCode
-  * @param {String} params.serialNumber
-  * @param {Boolean} params.generateLease
-  * @param {Boolean} params.noStore
-  * @param {Boolean} params.requireCn
-  * @param {[String]} params.policyIdentifiers
-  * @param {Boolean} params.basicConstraintsValidForNonCa
-  * @param {String} params.notBeforeDuration
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {Object} params
+  * @param {string} params.name
+  * @param {string} [params.ttl]
+  * @param {string} [params.maxTtl]
+  * @param {boolean} [params.allowLocalhost]
+  * @param {string[]} [params.allowedDomains]
+  * @param {boolean} [params.allowedDomainsTemplate]
+  * @param {boolean} [params.allowBareDomains]
+  * @param {boolean} [params.allowSubdomains]
+  * @param {boolean} [params.allowGlobDomains]
+  * @param {boolean} [params.allowAnyName]
+  * @param {boolean} [params.enforceHostnames]
+  * @param {string} [params.allowIpSans]
+  * @param {string} [params.allowedUriSans]
+  * @param {string} [params.allowedOtherSans]
+  * @param {boolean} [params.serverFlag]
+  * @param {boolean} [params.clientFlag]
+  * @param {boolean} [params.codeSigningFlag]
+  * @param {boolean} [params.emailProtectionFlag]
+  * @param {string} [params.keyType] - The type of key to generate. Can be either "rsa" or "ec".
+  * @param {number} [params.keyBits]
+  * @param {string[]} [params.keyUsage]
+  * @param {string[]} [params.externalKeyUsage]
+  * @param {string} [params.extKeyUsageOids]
+  * @param {boolean} [params.useCsrCommonName]
+  * @param {boolean} [params.useCsrSans]
+  * @param {string} [params.ou]
+  * @param {string} [params.organization]
+  * @param {string} [params.country]
+  * @param {string} [params.locality]
+  * @param {string} [params.province]
+  * @param {string} [params.streetAddress]
+  * @param {string} [params.postalCode]
+  * @param {string} [params.serialNumber]
+  * @param {boolean} [params.generateLease]
+  * @param {boolean} [params.noStore]
+  * @param {boolean} [params.requireCn]
+  * @param {string[]} [params.policyIdentifiers]
+  * @param {boolean} [params.basicConstraintsValidForNonCa]
+  * @param {string} [params.notBeforeDuration]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async updatePkiRole(token, params, mount) {
     return await this.createPkiRole(token, params, mount);
@@ -2709,10 +2716,10 @@ class Vault {
 
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readPkiRole(token, name, mount) {
     let url = "";
@@ -2741,9 +2748,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async listPkiRoles(token, mount) {
     let url = "";
@@ -2772,10 +2779,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async deletePkiRole(token, name, mount) {
     let rootPath = "";
@@ -2807,22 +2814,23 @@ class Vault {
   //
 
   /**
-   * @param {String<required>} token
-   * @param {Integer} params.ttl
-   * @param {Integer} params.max_ttl
-   * @param {String} params.password_policy
-   * @param {String} params.url
-   * @param {String} params.request_timeout
-   * @param {Boolean} params.starttls
-   * @param {Boolean} params.insecure_tls
-   * @param {String} params.certificate
-   * @param {String<required>} params.binddn
-   * @param {String<required>} params.bindpass
-   * @param {String} params.userdn
-   * @param {String} params.upndomain
-   * @param {String} params.last_rotation_tolerance
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {Object} params
+   * @param {number} [params.ttl]
+   * @param {number} [params.max_ttl]
+   * @param {string} [params.password_policy]
+   * @param {string} [params.url]
+   * @param {string} [params.request_timeout]
+   * @param {boolean} [params.starttls]
+   * @param {boolean} [params.insecure_tls]
+   * @param {string} [params.certificate]
+   * @param {string} params.binddn
+   * @param {string} params.bindpass
+   * @param {string} [params.userdn]
+   * @param {string} [params.upndomain]
+   * @param {string} [params.last_rotation_tolerance]
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async setADConfig(token, params, mount) {
     assert(token, 'setADConfig: required parameter missing - token');
@@ -2862,22 +2870,23 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {Integer} params.ttl
-   * @param {Integer} params.max_ttl
-   * @param {String} params.password_policy
-   * @param {String} params.url
-   * @param {String} params.request_timeout
-   * @param {Boolean} params.starttls
-   * @param {Boolean} params.insecure_tls
-   * @param {String} params.certificate
-   * @param {String<required>} params.binddn
-   * @param {String<required>} params.bindpass
-   * @param {String} params.userdn
-   * @param {String} params.upndomain
-   * @param {String} params.last_rotation_tolerance
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {Object} params
+   * @param {number} [params.ttl]
+   * @param {number} [params.max_ttl]
+   * @param {string} [params.password_policy]
+   * @param {string} [params.url]
+   * @param {string} [params.request_timeout]
+   * @param {boolean} [params.starttls]
+   * @param {boolean} [params.insecure_tls]
+   * @param {string} [params.certificate]
+   * @param {string} params.binddn
+   * @param {string} params.bindpass
+   * @param {string} [params.userdn]
+   * @param {string} [params.upndomain]
+   * @param {string} [params.last_rotation_tolerance]
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async updateADConfig(token, params, mount) {
     assert(token, 'updateADConfig: required parameter missing - token');
@@ -2885,9 +2894,9 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async readADConfig(token, mount) {
     assert(token, 'readADConfig: required parameter missing - token');
@@ -2916,9 +2925,9 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async deleteADConfig(token, mount) {
     assert(token, 'deleteADConfig: required parameter missing - token');
@@ -2948,9 +2957,9 @@ class Vault {
 
 
   /**
-   * @param {String<required>} token
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async listADRoles(token, mount) {
     assert(token, 'listADRoles: required parameter missing - token');
@@ -2979,12 +2988,13 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} params.name
-   * @param {String<required>} params.service_account_name
-   * @param {String} params.ttl
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {Object} params 
+   * @param {string} params.name
+   * @param {string} params.service_account_name
+   * @param {string} [params.ttl]
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async createADRole(token, params, mount) {
     assert(token, 'createADRole: required parameter missing - token');
@@ -3021,12 +3031,13 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} params.name
-   * @param {String<required>} params.service_account_name
-   * @param {String} params.ttl
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {Object} params
+   * @param {string} params.name
+   * @param {string} params.service_account_name
+   * @param {string} [params.ttl]
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
    async updateADRole(token, params, mount) {
      assert(token, 'updateADRole: required parameter missing - token');
@@ -3035,10 +3046,10 @@ class Vault {
    }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} roleName
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} roleName
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async readADRole(token, roleName, mount) {
     assert(token, 'readADRole: required parameter missing - token');
@@ -3069,10 +3080,10 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} roleName
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} roleName
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async deleteADRole(token, roleName, mount) {
     assert(token, 'deleteADRole: required parameter missing - token');
@@ -3104,10 +3115,10 @@ class Vault {
 
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} roleName
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} roleName
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async getADRoleCred(token, roleName, mount) {
     assert(token, 'getADRoleCred: required parameter missing - token');
@@ -3138,10 +3149,10 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} roleName
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} roleName
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async rotateADRoleCred(token, roleName, mount) {
     assert(token, 'rotateADRoleCred: required parameter missing - token');
@@ -3173,9 +3184,9 @@ class Vault {
 
 
   /**
-   * @param {String<required>} token
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async listADLibraries(token, mount) {
     assert(token, 'listADLibraries: required parameter missing - token');
@@ -3206,10 +3217,10 @@ class Vault {
 
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} setName
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} setName
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async readADLibrary(token, setName, mount) {
     assert(token, 'readADLibrary: required parameter missing - token');
@@ -3240,14 +3251,15 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} params.name
-   * @param {String[]<required>} params.service_account_names
-   * @param {String} params.ttl
-   * @param {String} params.max_ttl
-   * @param {Boolean} params.disable_check_in_enforcement
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {Object} params
+   * @param {string} params.name
+   * @param {string[]} params.service_account_names
+   * @param {string} [params.ttl]
+   * @param {string} [params.max_ttl]
+   * @param {boolean} [params.disable_check_in_enforcement]
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async createADLibrary(token, params, mount) {
     assert(token, 'createADLibrary: required parameter missing - token');
@@ -3286,14 +3298,15 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} params.name
-   * @param {String[]<required>} params.service_account_names
-   * @param {String} params.ttl
-   * @param {String} params.max_ttl
-   * @param {Boolean} params.disable_check_in_enforcement
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {Object} params 
+   * @param {string} params.name
+   * @param {string[]} params.service_account_names
+   * @param {string} [params.ttl]
+   * @param {string} [params.max_ttl]
+   * @param {boolean} [params.disable_check_in_enforcement]
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
    async updateADLibrary(token, params, mount) {
      assert(token, 'updateADLibrary: required parameter missing - token');
@@ -3302,10 +3315,10 @@ class Vault {
    }
 
    /**
-    * @param {String<required>} token
-    * @param {String<required>} setName
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} setName
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
    async deleteADLibrary(token, setName, mount) {
      assert(token, 'deleteADLibrary: required parameter missing - token');
@@ -3336,11 +3349,12 @@ class Vault {
    }
 
    /**
-    * @param {String<required>} token
-    * @param {String<required>} params.name
-    * @param {String} params.ttl
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {Object} params 
+    * @param {string} params.name
+    * @param {string} [params.ttl]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
    async checkADCredOut(token, params, mount) {
      assert(token, 'checkADCredOut: required parameter missing - token');
@@ -3376,12 +3390,13 @@ class Vault {
    }
 
    /**
-    * @param {String<required>} token
-    * @param {String<required>} params.name
-    * @param {String[]} params.service_account_names
-    * @param {Boolean} forceMode
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {Object} params
+    * @param {string} params.name
+    * @param {string[]} [params.service_account_names]
+    * @param {boolean} [forceMode]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
    async checkADCredIn(token, params, forceMode, mount) {
      assert(token, 'checkADCredIn: required parameter missing - token');
@@ -3419,10 +3434,10 @@ class Vault {
 
 
    /**
-    * @param {String<required>} token
-    * @param {String<required>} setName
-    * @param {String} mount
-    * @returns {Promise<Object>}
+    * @param {string} token
+    * @param {string} setName
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
     */
    async getADCredSatus(token, setName, mount) {
      assert(token, 'getADCredSatus: required parameter missing - token');
@@ -3458,10 +3473,10 @@ class Vault {
   //
 
   /**
-   * @param {String<required>} token
-   * @param {Object<required>} data
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {Object} data
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async updateKVEngineConfig(token, data, mount) {
     assert(token, 'updateKVEngineConfig: required parameter missing - token');
@@ -3491,9 +3506,9 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readKVEngineConfig(token, mount) {
     let rootPath = "";
@@ -3521,11 +3536,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {Object<required>} secrets
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {Object} secrets
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async createKVSecret(token, name, secrets, mount) {
     assert(token, 'createKVSecret: required parameter missing - token');
@@ -3560,12 +3575,12 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {Object<required>} secrets
-  * @param {Integer<required>} version
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {Object} secrets
+  * @param {number} version
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async updateKVSecret(token, name, secrets, version, mount) {
     assert(token, 'updateKVSecret: required parameter missing - token');
@@ -3601,11 +3616,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {Integer} version
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {number} [version]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readKVSecret(token, name, version, mount) {
     assert(token, 'readKVSecret: required parameter missing - token');
@@ -3635,10 +3650,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async deleteLatestVerKVSecret(token, name, mount) {
     assert(token, 'deleteLatestVerKVSecret: required parameter missing - token');
@@ -3667,11 +3682,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {[Integer]<required>} versions
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {number[]} versions
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async deleteVersionsKVSecret(token, name, versions, mount) {
     assert(token, 'deleteVersionsKVSecret: required parameter missing - token');
@@ -3703,11 +3718,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {[Integer]<required>} versions
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {number[]} versions
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async undeleteVersionsKVSecret(token, name, versions, mount) {
     assert(token, 'undeleteVersionsKVSecret: required parameter missing - token');
@@ -3739,11 +3754,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String<required>} name
-  * @param {[Integer]<required>} versions
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} name
+  * @param {number[]} versions
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async destroyVersionsKVSecret(token, name, versions, mount) {
     assert(token, 'destroyVersionsKVSecret: required parameter missing - token');
@@ -3775,10 +3790,10 @@ class Vault {
   }
 
   /**
-   * @param {String<required>} token
-   * @param {String<required>} name
-   * @param {String} mount
-   * @returns {Promise<Object>}
+   * @param {string} token
+   * @param {string} name
+   * @param {string} [mount]
+   * @returns {PromiseLike<Object>}
    */
   async eliminateKVSecret(token, name, mount) {
     assert(token, 'eliminateKVSecret: required parameter missing - token');
@@ -3807,10 +3822,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} folder
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [folder]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async listKVSecrets(token, folder, mount) {
     assert(token, 'listKVSecrets: required parameter missing - token');
@@ -3845,10 +3860,10 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} path
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} [path]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async readKVSecretMeta(token, path, mount) {
     assert(token, 'readKVSecretMeta: required parameter missing - token');
@@ -3880,11 +3895,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} path
-  * @param {String} metadata 
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} path
+  * @param {string} metadata 
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async createKVSecretMeta(token, path, metadata, mount) {
     assert(token, 'createKVSecretMeta: required parameter missing - token');
@@ -3917,11 +3932,11 @@ class Vault {
   }
 
   /**
-  * @param {String<required>} token
-  * @param {String} path
-  * @param {String} metadata 
-  * @param {String} mount
-  * @returns {Promise<Object>}
+  * @param {string} token
+  * @param {string} path
+  * @param {string} metadata 
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
   */
   async updateKVSecretMeta(token, path, metadata, mount) {
     return await this.createKVSecretMeta(token, path, metadata, mount);

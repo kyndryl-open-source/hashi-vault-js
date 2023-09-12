@@ -17,8 +17,23 @@ const Secrets3 = {
     bot_token6: "xoxb-123456789033-1234567890128-1w1lln0tt3llmys3cr3tatm3"
 };
 const Metadata = {
-  tag1: "development",
-  tag2: "unit-test"
+  max_versions: 3,
+  cas_required: false,
+  delete_version_after: "3h25m19s",
+  custom_metadata: {
+    tag1: "development",
+    tag2: "unit-test"
+  }
+};
+const Metadata2 = {
+  max_versions: 5,
+  cas_required: false,
+  delete_version_after: "200h20m20s",
+  custom_metadata: {
+    tag1: "development",
+    tag2: "unit-test",
+    tag3: "smoke-test"
+  }
 };
 const Config = {
   max_versions: 5
@@ -105,6 +120,24 @@ test('readKVSecret: the result is a KV entry information', async () => {
     const data = await vault.readKVSecret(Token, SecretName, null, RootPath);
     console.log('readKVSecret output:\n',data);
 	return expect(data).toBeDefined();
+});
+
+test('createKVSecretMeta: the result is a KV metadata created', async () => {
+  const data = await vault.createKVSecretMeta(Token, SecretName, Metadata, RootPath);
+  console.log('createKVSecretMeta output:\n',data);
+return expect(data).toBeDefined();
+});
+
+test('updateKVSecretMeta: the result is a KV metadata updated', async () => {
+  const data = await vault.updateKVSecretMeta(Token, SecretName, Metadata2, RootPath);
+  console.log('updateKVSecretMeta output:\n',data);
+return expect(data).toBeDefined();
+});
+
+test('readKVSecretMeta: the result is a KV metadata information', async () => {
+  const data = await vault.readKVSecretMeta(Token, SecretName, RootPath);
+  console.log('readKVSecretMeta output:\n',data);
+return expect(data).toBeDefined();
 });
 
 test('deleteLatestVerKVSecret: the result is the latest version (one version) of KV entry deleted - HTTP 204', () => {
