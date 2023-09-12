@@ -16,14 +16,14 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 ## Requirements (MacOS/Windows)
 
 * NodeJs
-  * Minimum: v14.x
-  * Recommended: **v16.x**  
+  * Minimum: v16.x
+  * Recommended: **v18.x**  
 * npm
   * Tested on: **v9.2.x**
 * HashiCorp Vault
-  * Minimum: v1.11.x
-  * Accepted: v1.12.x
-  * Recommended: **v1.13.x**
+  * Minimum: v1.12.x
+  * Accepted: v1.13.x
+  * Recommended: **v1.14.x**
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 
@@ -339,4 +339,4 @@ Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 
 This project is licensed under the [MIT](https://opensource.org/licenses/MIT) license.
 
-HashiCorp Vault open source is licensed under the [Mozilla Public License 2.0](https://github.com/HashiCorp/vault/blob/master/LICENSE).
+HashiCorp Vault is licensed under the [Business Source License 1.1](https://github.com/HashiCorp/vault/blob/master/LICENSE).

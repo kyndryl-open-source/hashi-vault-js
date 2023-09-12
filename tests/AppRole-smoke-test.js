@@ -52,6 +52,7 @@ vault.healthCheck().then(function(data) {
       });
     }).catch(function(loginError){
         console.error('>> loginWithAppRole error: \n',loginError);
+        console.error('>> loginWithAppRole error: \n',loginError.response.data);
     });
   }
 }).catch(function(healthError){

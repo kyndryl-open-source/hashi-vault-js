@@ -2,7 +2,13 @@
 
 ## Change Log
 
-* `0.4.13` (**latest**)
+* `0.4.14` (**latest**)
+  * Updated HashiCorp Vault license
+  * Upgraded all dependencies to the latest
+  * Upgraded development env to Vault server `1.14.2`
+  * Refactored TypeScript types to generate .d.ts files using JSDoc syntax - issue [#40]
+
+* `0.4.13`
   * Added SBOM generator script
   * Upgraded all dependencies to the latest
   * Refactored TypeScript types to get them linted and verified - issue [#35](https://github.com/rod4n4m1/hashi-vault-js/issues/35)
