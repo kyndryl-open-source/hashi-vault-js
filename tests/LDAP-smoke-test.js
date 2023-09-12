@@ -52,75 +52,76 @@ const LDAPConfigParams = {
 };
 
 vault.healthCheck().then(function(data) {
-  console.log('> healthCheck output: \n',data);
+  console.log('1> healthCheck output: \n',data);
   if (!data.sealed) {
     vault.loginWithLdap(Username, Password, null).then(function(data){
-      console.log('>> loginWithLdap output: \n',data);
+      console.log('2> loginWithLdap output: \n',data);
       token = data.client_token;
       vault.setLdapConfig(token, LDAPConfigParams, null).then(function(data){
-        console.log('>>> setLdapConfig output: \n',data);
+        console.log('3a> setLdapConfig output: \n',data);
         vault.readLdapConfig(token, null).then(function(data){
-          console.log('>>> readLdapConfig output: \n',data);
+          console.log('4> readLdapConfig output: \n',data);
         }).catch(function(configError){
-          console.error('>>> readLdapConfig error: \n',configError);
+          console.error('4> readLdapConfig error: \n',configError);
         });
       }).catch(function(configError){
-        console.error('>>> setLdapConfig error: \n',configError);
+        console.error('3a> setLdapConfig error: \n',configError);
       });
       vault.readLdapGroup(token, Group).then(function(data){
-        console.log('>>> readLdapGroup output: \n',data);
+        console.log('3b> readLdapGroup output: \n',data);
       }).catch(function(readError){
-        console.error('>>> readLdapGroup error: \n',readError);
+        console.error('3b> readLdapGroup error: \n',readError);
       });
       vault.listLdapGroups(token).then(function(data){
-        console.log('>>> listLdapGroups output: \n',data);
+        console.log('3c> listLdapGroups output: \n',data);
       }).catch(function(listError){
-        console.error('>>> listLdapGroups error: \n',listError);
+        console.error('3c> listLdapGroups error: \n',listError);
       });
       vault.readLdapUser(token, Username).then(function(data){
-        console.log('>>> readLdapUser output: \n',data);
+        console.log('3d> readLdapUser output: \n',data);
       }).catch(function(readError){
-        console.error('>>> readLdapUser error: \n',readError);
+        console.error('3d> readLdapUser error: \n',readError);
       });
       vault.listLdapUsers(token).then(function(data){
-        console.log('>>> listLdapUsers output: \n',data);
+        console.log('3e> listLdapUsers output: \n',data);
       }).catch(function(listError){
-        console.error('>>> listLdapUsers error: \n',listError);
+        console.error('3e> listLdapUsers error: \n',listError);
       });
       vault.createLdapGroup(token, 'engineers', Group).then(function(data){
-        console.log('>>> createUpdateLdapGroup output: \n',data);
+        console.log('3f> createUpdateLdapGroup output: \n',data);
         vault.updateLdapGroup(token, 'engineers', 'admins2').then(function(data){
-          console.log('>>>> updateLdapGroup output: \n',data);
+          console.log('4> updateLdapGroup output: \n',data);
           vault.deleteLdapGroup(token, 'engineers').then(function(data){
-            console.log('>>>>> deleteLdapGroup output: \n',data);
+            console.log('5> deleteLdapGroup output: \n',data);
           }).catch(function(deleteError){
-            console.error('>>>>> deleteLdapGroup error: \n',deleteError);
+            console.error('5> deleteLdapGroup error: \n',deleteError);
           });
         }).catch(function(updateError){
-          console.error('>>>> updateLdapGroup error: \n',deleteError);
+          console.error('4> updateLdapGroup error: \n',updateError);
         });
       }).catch(function(createError){
-        console.error('>>> createLdapGroup error: \n',createError);
+        console.error('3f> createLdapGroup error: \n',createError);
       });
       vault.createLdapUser(token, 'rod.anami', null, Group).then(function(data){
-        console.log('>>> createLdapUser output: \n',data);
+        console.log('3g> createLdapUser output: \n',data);
         vault.updateLdapUser(token, 'rod.anami', 'fake-policy', 'admins2').then(function(data){
-          console.log('>>>> updateLdapUser output: \n',data);
+          console.log('4> updateLdapUser output: \n',data);
           vault.deleteLdapUser(token, 'rod.anami').then(function(data){
-            console.log('>>>>> deleteLdapUser output: \n',data);
+            console.log('5> deleteLdapUser output: \n',data);
           }).catch(function(deleteError){
-            console.error('>>>>> deleteLdapUser error: \n',deleteError);
+            console.error('5> deleteLdapUser error: \n',deleteError);
           });
         }).catch(function(updateError){
-          console.error('>>>> updateLdapUser error: \n',deleteError);
+          console.error('4> updateLdapUser error: \n',updateError);
         });
       }).catch(function(createError){
-        console.error('>>>> createLdapUser error: \n',createError);
+        console.error('3g> createLdapUser error: \n',createError);
       });
     }).catch(function(loginError){
-      console.error('>> loginWithLdap error: \n',loginError);
+      console.error('2> loginWithLdap error: \n',loginError);
+      console.error('2> loginWithLdap error: \n',loginError.response.data);
     });
   }
 }).catch(function(healthError){
-  console.error('> healthCheck error: \n',healthError);
+  console.error('1> healthCheck error: \n',healthError);
 });

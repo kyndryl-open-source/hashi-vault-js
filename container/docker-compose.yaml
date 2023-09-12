@@ -1,7 +1,8 @@
 version: '3'
 services:
   vault:
-    image: vault:1.14.2
+    image: hashicorp/vault:1.14.2
+    network_mode: bridge
     container_name: my-vault
     ports:
       - "8200:8200"
@@ -16,6 +17,6 @@ services:
     cap_add:
       - IPC_LOCK
     entrypoint: vault server -config=/vault/config/vault.hcl
-networks:
-    default:
-        driver: bridge
+    extra_hosts:
+      - "ldap.chatopsknight.com:10.88.0.4"
+

@@ -1,8 +1,5 @@
 const Vault = require('../Vault');
 
-const BindDN = process.env.LDAP_BIND_DN;
-const BindPass = process.env.LDAP_BIND_PASS;
-const LdapUrl = process.env.LDAP_SECURE_URL;
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
@@ -24,7 +21,7 @@ const SetName = "sre-team";
 
 const LibraryPayload1 = {
   name: SetName,
-  service_account_names: ['nathan.hale@chatopsknight.com'],
+  service_account_names: ['mathias.thulmann@chatopsknight.com'],
   ttl: '1h',
   max_ttl: '2h',
   disable_check_in_enforcement: false
@@ -32,7 +29,7 @@ const LibraryPayload1 = {
 
 const LibraryPayload2 = {
   name: SetName,
-  service_account_names: ['nathan.hale@chatopsknight.com', 'john.kane@chatopsknight.com'],
+  service_account_names: ['mathias.thulmann@chatopsknight.com', 'triss.merigold@chatopsknight.com'],
   ttl: '6h',
   max_ttl: '12h',
   disable_check_in_enforcement: false
@@ -45,12 +42,12 @@ const CredCheckOut = {
 
 const CredCheckIn1 = {
   name: SetName,
-  service_account_names: ['nathan.hale@chatopsknight.com']
+  service_account_names: ['mathias.thulmann@chatopsknight.com']
 }
 
 const CredCheckIn2 = {
   name: SetName,
-  service_account_names: ['john.kane@chatopsknight.com']
+  service_account_names: ['triss.merigold@chatopsknight.com']
 }
 
 test('createADLibrary: the result is an AD library created - HTTP 204', async () => {
