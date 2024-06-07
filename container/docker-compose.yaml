@@ -10,13 +10,13 @@ services:
     environment:
       VAULT_ADDR: "https://127.0.0.1:8200"
     volumes:
-      - /usr/local/mnt/vault/logs:/vault/logs
-      - /usr/local/mnt/vault/file:/vault/file
-      - /usr/local/mnt/vault/config:/vault/config
-      - /usr/local/mnt/vault/certs:/vault/certs
+      - ~/mnt/vault/logs:/vault/logs
+      - ~/mnt/vault/file:/vault/file
+      - ~/mnt/vault/config:/vault/config
+      - ~/mnt/vault/certs:/vault/certs
     cap_add:
       - IPC_LOCK
     entrypoint: vault server -config=/vault/config/vault.hcl
     extra_hosts:
-      - "ldap.chatopsknight.com:10.88.0.4"
+      - "ldap.chatopsknight.com:10.88.0.10"
 
