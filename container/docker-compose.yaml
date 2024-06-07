@@ -1,19 +1,19 @@
 version: '3'
 services:
   vault:
-    image: hashicorp/vault:1.14.2
+    image: hashicorp/vault:1.16.3
     network_mode: bridge
-    container_name: my-vault
+    container_name: ck-vault
     ports:
       - "8200:8200"
     restart: always
     environment:
       VAULT_ADDR: "https://127.0.0.1:8200"
     volumes:
-      - ./volumes/logs:/vault/logs
-      - ./volumes/file:/vault/file
-      - ./volumes/config:/vault/config
-      - ./volumes/certs:/vault/certs
+      - /usr/local/mnt/vault/logs:/vault/logs
+      - /usr/local/mnt/vault/file:/vault/file
+      - /usr/local/mnt/vault/config:/vault/config
+      - /usr/local/mnt/vault/certs:/vault/certs
     cap_add:
       - IPC_LOCK
     entrypoint: vault server -config=/vault/config/vault.hcl

@@ -1,6 +1,6 @@
 {
   "name": "hashi-vault-js",
-  "version": "0.4.15",
+  "version": "0.4.16",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "main": "Vault.js",
   "types": "dist/Vault.d.ts",
@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/rod4n4m1/hashi-vault-js#readme",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "dependencies": {
     "axios": "^1.5.0"
