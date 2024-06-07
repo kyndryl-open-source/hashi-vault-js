@@ -2,7 +2,7 @@
 
 source ldap.env
 
-podman run -p 389:389 -p 636:636 \
+podman run -p 8389:389 -p 8636:636 \
   --name ck-ldap \
   --hostname ldap.chatopsknight.com \
   --env LDAP_ORGANISATION="Chatops Knight" \

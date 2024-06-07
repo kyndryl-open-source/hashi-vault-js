@@ -17,11 +17,11 @@
 
 * Modify Docker compose configuration on this file: `docker-compose.yaml`
 
-```
+```yaml
 version: '3'
 services:
   vault:
-    image: vault:1.11.0
+    image: vault:1.16.3
     container_name: my-vault
     ports:
       - "8200:8200"
@@ -39,7 +39,7 @@ services:
 
 * Create a Vault server configuration file named: `vault.hcl`
 
-```
+```hcl
 storage "file" {
   path = "/vault/file"
 }
@@ -58,7 +58,7 @@ api_addr = "http://127.0.0.1:8200"
 
 * Create volumes and copy any certificate/key that you have
 
-  ```
+  ```shell
   # Create volumes on your local filesystem, for cloud environments you'll need a private volume
   mkdir ./volumes
   mkdir ./volumes/config
@@ -70,7 +70,7 @@ api_addr = "http://127.0.0.1:8200"
 
   ```
 
-* Spin up the container on your environment `docker-compose up --build -d`
+* Spin up the container on your environment `podman-compose up --build -d`
 
 * Initiate your Vault with the following command: `vault operator init -key-shares=6 -key-threshold=3`
 
@@ -78,7 +78,7 @@ api_addr = "http://127.0.0.1:8200"
 
 * Unseal your Vault by providing at least 3 keys out of 6
 
-  ```
+  ```shell
   vault operator unseal $VAULT_UNSEAL_KEY1
   vault operator unseal $VAULT_UNSEAL_KEY2
   vault operator unseal $VAULT_UNSEAL_KEY3
@@ -90,7 +90,7 @@ api_addr = "http://127.0.0.1:8200"
 
 * Log into the Vault with a privileged account
 
-  ```
+  ```shell
   # Using the root token is only recommended for test environments
   vault login $VAULT_ROOT_TOKEN
   ```
@@ -99,14 +99,14 @@ api_addr = "http://127.0.0.1:8200"
 
   * Enable the AppRole auth method and the KV v2 secret engine
 
-  ```
+  ```shell
   vault secrets enable -path=secrets kv-v2
   vault auth enable approle
   ```
 
   * Create Root CA, Intermediate CA and Vault certificates
 
-  ```
+  ```shell
   mkdir certs
   cd certs
 
@@ -156,7 +156,7 @@ api_addr = "http://127.0.0.1:8200"
 
   * Copy Vault server certificate and private key to the Docker volume
 
-  ```
+  ```shell
   cp vault.crt ./volumes/certs/
   cp vault.key ./volumes/certs/
   ```
@@ -182,7 +182,7 @@ api_addr = "http://127.0.0.1:8200"
 
   * Reconfigure Vault CLI env
 
-  ```
+  ```shell
   export VAULT_ADDR="https://127.0.0.1:8200"
   export VAULT_CACERT=./certs/ca.crt
   ```
@@ -191,7 +191,7 @@ api_addr = "http://127.0.0.1:8200"
 
   * Create a Vault policy file
 
-  ```
+  ```shell
   cat <<EOF > my-policy-permissions.hcl
   path "my-role/*" {
     capabilities = ["create","read","update","delete","list"]
@@ -248,7 +248,7 @@ api_addr = "http://127.0.0.1:8200"
 
   * Create an AppRole with role_id and secret_id
 
-  ```
+  ```shell
   # Policy indicates the permissions and scopes an AppRole will have
   vault policy write my-policy my-policy-permissions.hcl
 
@@ -265,7 +265,7 @@ api_addr = "http://127.0.0.1:8200"
 
   * Enable kubernetes auth method and create a role
 
-  ```
+  ```shell
   # Enable kubernetes auth method and mount it on default auth/kubernetes
   vault auth enable kubernetes
 
@@ -299,7 +299,7 @@ api_addr = "http://127.0.0.1:8200"
 
 * Enable TLS cert auth method and create a cert
 
-  ```
+  ```shell
   # Enable TLS Certificate auth method
   vault auth enable cert
 
