@@ -6,13 +6,13 @@
 
 * Configure your Vault CLI environment
 
-  ```
+  ```shell
   # Should match the Vault listener configuration
   export VAULT_ADDR="http://127.0.0.1:8200"
   # Root CA certificate for HTTPS protocol
-  export VAULT_CACERT=/path/ca.crt
+  export VAULT_CACERT=/path/to/ca.crt
   # Location of the vault command
-  export PATH=$PATH:/path/vault
+  export PATH=$PATH:/path/to/vault
   ```
 
 * Modify Docker compose configuration on this file: `docker-compose.yaml`
@@ -163,7 +163,7 @@ api_addr = "http://127.0.0.1:8200"
 
   * Modify `vault.json` to enable TLS and copy it to the Docker volume
 
-  ```
+  ```json
   {
     ...
     "listener": {
