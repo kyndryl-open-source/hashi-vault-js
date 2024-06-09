@@ -2,7 +2,12 @@
 
 ## Change Log
 
-* `0.4.14` (**latest**)
+* `0.4.15`(**latest**)
+  * Upgraded development env to Vault server `1.16.3`
+  * Improved AD secret management documentation
+  * Upgraded all dependencies to the latest
+
+* `0.4.14`
   * Updated HashiCorp Vault license
   * Upgraded all dependencies to the latest
   * Upgraded development env to Vault server `1.14.2`
