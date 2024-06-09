@@ -1,22 +1,45 @@
-/// <reference types="node" />
 export = Vault;
+/**
+* @constructor
+* @param {boolean} [params.https=false]
+* @param {string} [params.cert]
+* @param {string} [params.key]
+* @param {string} [params.cacert]
+* @param {string} [params.baseUrl]
+* @param {string} [params.rootPath]
+* @param {number} [params.timeout=1000]
+* @param {boolean} [params.proxy=false]
+* @param {string} [params.namespace]
+*/
 declare class Vault {
     constructor(params: any);
-    https: any;
-    cert: any;
-    key: any;
-    cacert: any;
-    baseUrl: any;
-    rootPath: any;
-    timeout: any;
+    /** @type {boolean} */
+    https: boolean;
+    /** @type {string} */
+    cert: string;
+    /** @type {string} */
+    key: string;
+    /** @type {string} */
+    cacert: string;
+    /** @type {string} */
+    baseUrl: string;
+    /** @type {string} */
+    rootPath: string;
+    /** @type {number} */
+    timeout: number;
+    /** @type {Object} */
     proxy: any;
-    namespace: any;
-    agent: boolean | https.Agent;
+    /** @type {string} */
+    namespace: string;
+    /** @type {Object | boolean} */
+    agent: any | boolean;
+    /** @type {Object} */
     instance: any;
     /**
+    * @param {Object} [params]
     * @returns {PromiseLike<Object>}
     */
-    healthCheck(params: any): PromiseLike<any>;
+    healthCheck(params?: any): PromiseLike<any>;
     /**
     * @returns {PromiseLike<Object>}
     */
@@ -1295,6 +1318,38 @@ declare class Vault {
     * @returns {PromiseLike<Object>}
     */
     updateKVSecretMeta(token: string, path: string, metadata: string, mount?: string): PromiseLike<any>;
+    /**
+    * @param {string} token
+    * @param {string} name
+    * @param {Object} params
+    * @param {boolean} params.generate
+    * @param {boolean} [params.exported]
+    * @param {number} [params.key_size=20]
+    * @param {string} [params.key_url]
+    * @param {string} [params.key]
+    * @param {string} [params.issuer]
+    * @param {string} [params.account_name]
+    * @param {number} [params.period]
+    * @param {string} [params.algorithm]
+    * @param {number} [params.digits]
+    * @param {number} [params.skew]
+    * @param {number} [params.gr_size]
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
+    */
+    createTOTPKey(token: string, name: string, params: {
+        generate: boolean;
+        exported?: boolean;
+        key_size?: number;
+        key_url?: string;
+        key?: string;
+        issuer?: string;
+        account_name?: string;
+        period?: number;
+        algorithm?: string;
+        digits?: number;
+        skew?: number;
+        gr_size?: number;
+    }, mount?: string): PromiseLike<any>;
 }
-import https = require("https");
 //# sourceMappingURL=Vault.d.ts.map

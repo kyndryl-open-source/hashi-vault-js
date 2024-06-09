@@ -117,4 +117,11 @@ export let adCheckCredOut: string[];
 export let adCheckCredIn: string[];
 export let adGetCredStatus: string[];
 export let adRotateCred: string[];
+export let totpRootPath: string;
+export let totpCreateKey: string[];
+export let totpReadKey: string[];
+export let totpListKeys: string[];
+export let totpDeleteKey: string[];
+export let totpGenerateCode: string[];
+export let totpValidateCode: string[];
 //# sourceMappingURL=Config.d.ts.map

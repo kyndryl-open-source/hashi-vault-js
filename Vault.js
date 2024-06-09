@@ -100,24 +100,47 @@ const parseAxiosError = function(error){
 }
 
 // main class constructor
+/**
+* @constructor
+* @param {boolean} [params.https=false]
+* @param {string} [params.cert]
+* @param {string} [params.key]
+* @param {string} [params.cacert]
+* @param {string} [params.baseUrl]
+* @param {string} [params.rootPath]
+* @param {number} [params.timeout=1000]
+* @param {boolean} [params.proxy=false]
+* @param {string} [params.namespace]
+*/
 class Vault {
   constructor(params) {
+    /** @type {boolean} */
     this.https = params.https || false;
+    /** @type {string} */
     this.cert = params.cert;
+    /** @type {string} */
     this.key = params.key;
+    /** @type {string} */
     this.cacert = params.cacert;
+    /** @type {string} */
     this.baseUrl = params.baseUrl || config.baseUrl;
+    /** @type {string} */
     this.rootPath = params.rootPath;
+    /** @type {number} */
     this.timeout = params.timeout || config.timeout;
+    /** @type {Object} */
     this.proxy = params.proxy || config.proxy;
+    /** @type {string} */
     this.namespace = params.namespace || config.namespace;
     try {
       if (this.https) {
+        /** @type {Object | boolean} */
         this.agent = getHttpsAgent(this.cert, this.key, this.cacert);
       }
       else {
         this.agent = false;
       }
+      /** @type {Object} */
       this.instance = getAxiosInstance(this.baseUrl, this.timeout, this.agent, this.proxy, this.namespace);
     } catch (error) {
       console.error('Error initiating Vault class:\n', error);
@@ -126,6 +149,7 @@ class Vault {
 
   // /sys API endpoints
   /**
+  * @param {Object} [params] 
   * @returns {PromiseLike<Object>}
   */
   async healthCheck(params){
@@ -1123,7 +1147,7 @@ class Vault {
       url: `${rootPath}/${config.certLogin[0]}`,
       method: config.certLogin[1],
       data: {
-        "name": certName
+        name: certName
       }
     };
 
@@ -3941,6 +3965,80 @@ class Vault {
   async updateKVSecretMeta(token, path, metadata, mount) {
     return await this.createKVSecretMeta(token, path, metadata, mount);
   }
+
+  /**
+  * @param {string} token
+  * @param {string} name
+  * @param {Object} params
+  * @param {boolean} params.generate
+  * @param {boolean} [params.exported]
+  * @param {number} [params.key_size=20]
+  * @param {string} [params.key_url]
+  * @param {string} [params.key]
+  * @param {string} [params.issuer]
+  * @param {string} [params.account_name]
+  * @param {number} [params.period]
+  * @param {string} [params.algorithm]
+  * @param {number} [params.digits]
+  * @param {number} [params.skew]
+  * @param {number} [params.gr_size]
+  * @param {string} [mount]
+  * @returns {PromiseLike<Object>}
+  */
+ async createTOTPKey(token, name, params, mount) {
+  assert(token, 'createTOTPKey: required parameter missing - token');
+  assert(name, 'createTOTPKey: required parameter missing - name');
+  let url = "";
+  let rootPath = "";
+  if (mount) {
+    rootPath = mount;
+  } else if (this.rootPath) {
+    rootPath = this.rootPath;
+  } else {
+    rootPath = config.totpRootPath;
+  }
+
+  // Defaults - most are probably already defaults from Vault itself
+  params = {
+    generate: true,
+    account_name: "Vault",
+    issuer: "Vault",
+    ...params
+  };
+
+  const { generate, exported, key_size, key_url, key, issuer, account_name, 
+    period, algorithm, digits, skew, gr_size } = params;
+  
+  url = `${rootPath}/${config.totpCreateKey[0]}/${name}`;
+  const Options = {
+    url: url,
+    method: config.totpCreateKey[1],
+    headers: {
+      "X-Vault-Token": token
+    },
+    data: {
+      generate: params.generate,
+      exported: params.exported,
+      key_size: params.key_size,
+      url: params.key_url,
+      key: params.key,
+      issuer: params.issuer,
+      account_name: params.account_name,
+      period: params.period,
+      algorithm: params.algorithm,
+      digits: params.digits,
+      skew: params.skew,
+      gr_size: params.gr_size
+    }
+  };
+
+  try {
+    const response = await this.instance(Options);
+    return parseAxiosResponse(response);
+  } catch(err) {
+    throw parseAxiosError(err);
+  }
+ }
 
 }
 

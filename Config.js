@@ -117,7 +117,14 @@ const config = {
   adCheckCredOut: ['library', 'check-out', 'post'],
   adCheckCredIn: ['library', 'check-in', 'post'],
   adGetCredStatus: ['library', 'status', 'get'],
-  adRotateCred: ['rotate-role', 'post']
+  adRotateCred: ['rotate-role', 'post'],
+  totpRootPath: 'totp',
+  totpCreateKey: ['keys', 'post'],
+  totpReadKey: ['keys', 'get'],
+  totpListKeys: ['keys', 'list'],
+  totpDeleteKey: ['keys', 'delete'],
+  totpGenerateCode: ['code', 'get'],
+  totpValidateCode: ['code', 'post']
 };
 
 module.exports = config;
