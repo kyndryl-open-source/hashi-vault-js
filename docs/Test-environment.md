@@ -15,7 +15,7 @@
   export PATH=$PATH:/path/to/vault
   ```
 
-* Modify Docker compose configuration on this file: `docker-compose.yaml`
+### Modify Docker compose configuration on this file: `docker-compose.yaml`
 
 ```yaml
 version: '3'
@@ -37,7 +37,7 @@ services:
     entrypoint: vault server -config=/vault/config/vault.hcl
 ```
 
-* Create a Vault server configuration file named: `vault.hcl`
+### Create a Vault server configuration file named: `vault.hcl`
 
 ```hcl
 storage "file" {
@@ -56,7 +56,7 @@ default_lease_ttl = "12h"
 api_addr = "http://127.0.0.1:8200"
 ```
 
-* Create volumes and copy any certificate/key that you have
+### Create volumes and copy any certificate/key that you have
 
   ```shell
   # Create volumes on your local filesystem, for cloud environments you'll need a private volume
@@ -246,86 +246,98 @@ api_addr = "http://127.0.0.1:8200"
   EOF
   ```
 
-  * Create an AppRole with role_id and secret_id
+## Create an AppRole with role_id and secret_id
 
-  ```shell
-  # Policy indicates the permissions and scopes an AppRole will have
-  vault policy write my-policy my-policy-permissions.hcl
+```shell
+# Policy indicates the permissions and scopes an AppRole will have
+vault policy write my-policy my-policy-permissions.hcl
 
-  # Create an AppRole, usually one per application
-  vault write auth/approle/role/my-role secret_id_ttl="720h"  token_ttl="12h"\
-  token_max_tll="12h"  policies="my-policy"
+# Create an AppRole, usually one per application
+vault write auth/approle/role/my-role secret_id_ttl="720h"  token_ttl="12h"\
+token_max_tll="12h"  policies="my-policy"
 
-  # Get the AppRole role-id
-  vault read auth/approle/role/my-role/role-id
+# Get the AppRole role-id
+vault read auth/approle/role/my-role/role-id
 
-  # Get the initial secret-id tied to the role-id
-  vault write -f auth/approle/role/my-role/secret-id
+# Get the initial secret-id tied to the role-id
+vault write -f auth/approle/role/my-role/secret-id
   ```
 
-  * Enable kubernetes auth method and create a role
+## Enable kubernetes auth method and create a role
 
-  ```shell
-  # Enable kubernetes auth method and mount it on default auth/kubernetes
-  vault auth enable kubernetes
+```shell
+# Enable kubernetes auth method and mount it on default auth/kubernetes
+vault auth enable kubernetes
 
-  # Get you K8s cluster info
-  kubectl cluster-info
+# Get you K8s cluster info
+kubectl cluster-info
 
-  # Configure a service account for the vault
-  kubectl apply -f ./tests/k8s-service-account.yaml
+# Configure a service account for the vault
+kubectl apply -f ./tests/k8s-service-account.yaml
 
-  # Find out the vault-auth service account token
-  kubectl get secret <secret_name> -o jsonpath={.data.token} | base64 -d
+# Find out the vault-auth service account token
+kubectl get secret <secret_name> -o jsonpath={.data.token} | base64 -d
 
-  # Configure Vault K8s auth method
-  vault write auth/kubernetes/config \
-    token_reviewer_jwt="<your reviewer service account JWT>" \
-    kubernetes_host=https://192.168.99.119:8443 \
-    kubernetes_ca_cert=@k8s-ca.crt
+# Configure Vault K8s auth method
+vault write auth/kubernetes/config \
+  token_reviewer_jwt="<your reviewer service account JWT>" \
+  kubernetes_host=https://192.168.99.119:8443 \
+  kubernetes_ca_cert=@k8s-ca.crt
 
-  # Create a named role
-  vault write auth/kubernetes/role/my-role \
-    bound_service_account_names=vault-auth \
-    bound_service_account_namespaces=default \
-    policies=default \
-    ttl=1h
+# Create a named role
+vault write auth/kubernetes/role/my-role \
+  bound_service_account_names=vault-auth \
+  bound_service_account_namespaces=default \
+  policies=default \
+  ttl=1h
 
-  # Test a login using K8s auth method
-  vault write auth/kubernetes/login \
-    role=my-role \
-    jwt="<your reviewer service account JWT>"
-  ```
+# Test a login using K8s auth method
+vault write auth/kubernetes/login \
+  role=my-role \
+  jwt="<your reviewer service account JWT>"
+```
 
-* Enable TLS cert auth method and create a cert
+## Enable TLS cert auth method and create a cert
 
-  ```shell
-  # Enable TLS Certificate auth method
-  vault auth enable cert
+```shell
+# Enable TLS Certificate auth method
+vault auth enable cert
 
-  # Create a PKI role to issue certificates
-  vault write pki_int/roles/vault-cert \
-    allow_any_name=true \
-    max_ttl=720h \
-    generate_lease=true
+# Create a PKI role to issue certificates
+vault write pki_int/roles/vault-cert \
+  allow_any_name=true \
+  max_ttl=720h \
+  generate_lease=true
 
-  # Create a policy for the certificates issued
-  vault policy write cert-policy ./policies/cert-policy.hcl
+# Create a policy for the certificates issued
+vault policy write cert-policy ./policies/cert-policy.hcl
 
-  # Issue a certificate based on the create role
-  vault write -format=json pki_int/issue/vault-cert \
-  common_name=vault-cert | tee \
-  >(jq -r .data.certificate > vault-cert-certificate.pem) \
-  >(jq -r .data.issuing_ca > vault-cert-issuing-ca.pem) \
-  >(jq -r .data.private_key > vault-cert-private-key.pem)
+# Issue a certificate based on the create role
+vault write -format=json pki_int/issue/vault-cert \
+common_name=vault-cert | tee \
+>(jq -r .data.certificate > vault-cert-certificate.pem) \
+>(jq -r .data.issuing_ca > vault-cert-issuing-ca.pem) \
+>(jq -r .data.private_key > vault-cert-private-key.pem)
 
-  # Create a cert for authentication
-  vault write auth/cert/certs/vault-cert \
-    display_name=vault-cert \
-    policies=cert \
-    certificate=@vault-cert-certificate.pem
+# Create a cert for authentication
+vault write auth/cert/certs/vault-cert \
+  display_name=vault-cert \
+  policies=cert \
+  certificate=@vault-cert-certificate.pem
 
-  # Test cert login
-  vault login -method=cert -client-cert=vault-cert-certificate.pem \
-  -client-key=vault-cert-private-key.pem
-  ```
+# Test cert login
+vault login -method=cert -client-cert=vault-cert-certificate.pem \
+-client-key=vault-cert-private-key.pem
+```
+
+## Enable AD secret engine and configure it
+
+```shell
+vault write ad/config \
+    binddn="cn=admin,dc=chatopsknight,dc=com" \
+    bindpass=$LDAP_ADMIN_PASSWORD \
+    url=ldaps://ldap.chatopsknight.com \
+    userdn="dc=chatopsknight,dc=com" \
+    certificate=@ldap-server.pem \
+    insecure_tls=false
+```

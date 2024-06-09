@@ -1,5 +1,9 @@
 # Hashi Vault JS
 
+## Important Notice
+
+The Active Directory (AD) secrets engine has been deprecated as of the Vault v1.13 release. HashiCorp will continue to support the AD secrets engine in maintenance mode for six major Vault releases, meaning up to v1.19.
+
 ## AD Functions List
 
 * Vault document [reference](https://www.vaultproject.io/api-docs/secret/ad)
