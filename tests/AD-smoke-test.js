@@ -16,7 +16,7 @@ const vault = new Vault( {
     cacert: CACert,
     baseUrl: VaultUrl,
     rootPath: 'ad',
-    timeout: 3000,
+    timeout: 5000,
     proxy: false
 });
 
@@ -38,14 +38,14 @@ const SetName = "sre-team";
 
 const LibraryPayload1 = {
   name: SetName,
-  service_account_names: ['mathias.thulmann@chatopsknight.com'],
+  service_account_names: ['john.kane@chatopsknight.com'],
   ttl: '1h',
   max_ttl: '2h',
   disable_check_in_enforcement: false
 };
 const LibraryPayload2 = {
   name: SetName,
-  service_account_names: ['mathias.thulmann@chatopsknight.com', 'triss.merigold@chatopsknight.com'],
+  service_account_names: ['john.kane@chatopsknight.com', 'triss.merigold@chatopsknight.com'],
   ttl: '6h',
   max_ttl: '12h',
   disable_check_in_enforcement: false
@@ -58,7 +58,7 @@ const CredCheckOut = {
 
 const CredCheckIn1 = {
   name: SetName,
-  service_account_names: ['mathias.thulmann@chatopsknight.com']
+  service_account_names: ['john.kane@chatopsknight.com']
 }
 
 const CredCheckIn2 = {
@@ -106,10 +106,12 @@ vault.createADLibrary(RootToken, LibraryPayload1).then(function(data){
     console.error('2> updateADLibrary error:\n',updateError.response.data);
   });
 }).catch(function(createError){
-  console.error('3> createADLibrary error:\n',createError);
-  console.error('3> createADLibrary error:\n',createError.response.data);
+  console.error('1> createADLibrary error:\n',createError);
+  console.error('1> createADLibrary error:\n',createError.response.data);
 });
 
 // Forcing the credential checkin manually
 // vault write ad/library/sre-team/check-in service_account_names=triss.merigold@chatopsknight.com
 // vault write ad/library/sre-team/check-in service_account_names=mathias.thulmann@chatopsknight.com
+// Cleaning up the AD library
+// vault lease revoke -prefix -force ad/library/sre-team/check-out/
