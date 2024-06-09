@@ -1,8 +1,10 @@
 //Simple test
-
-
 // source process.env
 // node AppRole-smoke-test.js
+// # Check role-id
+// vault read auth/approle/role/knight/role-id
+// # Create new secret-id
+// vault write -f auth/approle/role/knight/secret-id
 const RoleId = process.env.ROLE_ID;
 const SecretId = process.env.SECRET_ID;
 const ClientCert = process.env.CLIENT_CERT;
