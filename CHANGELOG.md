@@ -6,6 +6,8 @@
   * Upgraded development env to Vault server `1.16.3`
   * Improved AD secret management documentation
   * Upgraded all dependencies to the latest
+  * Added *TOTP secret engine* functions:
+    * 
 
 * `0.4.14`
   * Updated HashiCorp Vault license
