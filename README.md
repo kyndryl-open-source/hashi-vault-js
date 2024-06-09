@@ -260,7 +260,7 @@ Check below docs for more information on specific function groups.
 
 | **Group** | **Type** | **Default mount point** | **Link** |
 |:------------------|:------------------|:------------------|:--------------:|
-| **Active Directory** (AD) | Secret engine | `/ad` | [Doc file](/docs/AD-Functions.md) |
+| **Active Directory** (AD) - deprectated | Secret engine | `/ad` | [Doc file](/docs/AD-Functions.md) |
 | **AppRole** | Auth method | `/auth/approle` | [Doc file](/docs/AppRole-Functions.md) |
 | **LDAP** | Auth method | `/auth/ldap` | [Doc file](/docs/LDAP-Functions.md) |
 | **Kubernetes** | Auth method | `/auth/kubernetes` | [Doc file](/docs/Kubernetes-Functions.md) |
@@ -270,6 +270,7 @@ Check below docs for more information on specific function groups.
 | **System Backend** | System | SEAL operations | [Doc file](/docs/Sys-Seal-Functions.md) |
 | **TLS Certificate** | Auth method | `/auth/cert` | [Doc file](/docs/TLS-Cert-Functions.md) |
 | **Token** | Auth method | `/auth/token` | [Doc file](/docs/Token-Functions.md) |
+| **TOTP** | Secret engine | `totp` | [Doc file](/docs/TOTP-Functions.md) |
 | **Userpass** | Auth method | `/auth/userpass` | [Doc file](/docs/Userpass-Functions.md) |
 |  |  |  |  |
 
@@ -295,7 +296,7 @@ The following HashiCorp Vault API endpoints are currently covered:
 
 | **Engine** | **Coverage status** |
 |:------------|:-----------|
-| [Active Directory (AD)](https://www.vaultproject.io/api-docs/secret/ad) | `Most of them` |
+| [Active Directory (AD)](https://www.vaultproject.io/api-docs/secret/ad) | `Most of them, currently in deprecation notice` |
 | [KV Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) | `All endpoints` |
 | [PKI](https://www.vaultproject.io/api-docs/secret/pki) | `Most of them` |
 | | |
