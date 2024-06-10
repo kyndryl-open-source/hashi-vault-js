@@ -1,4 +1,3 @@
-// Test: TOTP-smoke-test.js
 const Vault = require('../Vault');
 
 const ClientCert = process.env.CLIENT_CERT;
@@ -14,13 +13,13 @@ const vault = new Vault( {
     cacert: CACert,
     baseUrl: VaultUrl,
     rootPath: 'totp',
-    timeout: 5000,
+    timeout: 3000,
     proxy: false
 });
 
-const name = "my-totp-key";
+const KeyName = "my-totp-key";
 
-const params = {
+const KeyParams = {
   generate: true,
   exported: true,
   issuer: "hashi-vault-js",
@@ -32,14 +31,14 @@ const params = {
   qr_size: 400
 };
 
-vault.createTOTPKey(RootToken, name, params).then(function(data){
-    console.log('1> createTOTPKey output:\n',data);
-    vault.readTOTPKey(RootToken, name).then(function(data){
-        console.log('2> readTOTPKey output:\n',data);
-    }).catch(function(readError){
-        console.error('2> readTOTPKey error:\n',readError);
-    });
-}).catch(function(createError){
-    console.error('1> createTOTPKey error:\n',createError);
-    console.error('1> createTOTPKey error:\n',createError.response.data);
+test('createTOTPKey: the result is a TOTP key created - HTTP 200', async () => {
+  const data = await vault.createTOTPKey(RootToken, KeyName, KeyParams);
+    console.log(data);
+	return expect(data).toBeDefined();
+});
+
+test('readTOTPKey: the result is a TOTP key information retrieved', async () => {
+  const data = await vault.readTOTPKey(RootToken, KeyName);
+    console.log(data);
+	return expect(data).toBeDefined();
 });
