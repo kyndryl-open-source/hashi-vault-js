@@ -246,7 +246,7 @@ api_addr = "http://127.0.0.1:8200"
   EOF
   ```
 
-## Create an AppRole with role_id and secret_id
+### Create an AppRole with role_id and secret_id
 
 ```shell
 # Policy indicates the permissions and scopes an AppRole will have
@@ -333,6 +333,7 @@ vault login -method=cert -client-cert=vault-cert-certificate.pem \
 ## Enable AD secret engine and configure it
 
 ```shell
+vault secrets enable ad
 vault write ad/config \
     binddn="cn=admin,dc=chatopsknight,dc=com" \
     bindpass=$LDAP_ADMIN_PASSWORD \
@@ -341,3 +342,11 @@ vault write ad/config \
     certificate=@ldap-server.pem \
     insecure_tls=false
 ```
+
+## Enable TOTP secret engine
+
+```shell
+vault secrets enable totp
+```
+
+## End
