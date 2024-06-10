@@ -278,32 +278,33 @@ Check below docs for more information on specific function groups.
 
 The following HashiCorp Vault API endpoints are currently covered:
 
-* [System Backend](https://www.vaultproject.io/api-docs/system) - Partially
+* [System Backend](https://developer.hashicorp.com/vault/api-docs/system) - Partially
 
 * Auth methods:
 
 | **Method** | **Coverage status** |
 |:-----------|:-----------|
-| [AppRole](https://www.vaultproject.io/api-docs/auth/approle) | `Partially` |
-| [LDAP](https://www.vaultproject.io/api-docs/auth/ldap) | `All endpoints` |
-| [Userpass](https://www.vaultproject.io/api-docs/auth/userpass) | `All endpoints` |
-| [Kubernetes](https://www.vaultproject.io/api-docs/auth/kubernetes) | `All endpoints` |
-| [TLS Cert](https://www.vaultproject.io/docs/auth/cert) | `Partially` |
-| [Token](https://www.vaultproject.io/api-docs/auth/token) | `Most of them` |
+| [AppRole](https://developer.hashicorp.com/vault/api-docs/auth/approle) | `Partially` |
+| [LDAP](https://developer.hashicorp.com/vault/api-docs/auth/ldap) | `All endpoints` |
+| [Userpass](https://developer.hashicorp.com/vault/api-docs/auth/userpass) | `All endpoints` |
+| [Kubernetes](https://developer.hashicorp.com/vault/api-docs/auth/kubernetes) | `All endpoints` |
+| [TLS Cert](https://developer.hashicorp.com/vault/docs/auth/cert) | `Partially` |
+| [Token](https://developer.hashicorp.com/vault/api-docs/auth/token) | `Most of them` |
 | | |
 
 * Secret engines:
 
 | **Engine** | **Coverage status** |
 |:------------|:-----------|
-| [Active Directory (AD)](https://www.vaultproject.io/api-docs/secret/ad) | `Most of them, currently in deprecation notice` |
-| [KV Version 2](https://www.vaultproject.io/api-docs/secret/kv/kv-v2) | `All endpoints` |
-| [PKI](https://www.vaultproject.io/api-docs/secret/pki) | `Most of them` |
+| [Active Directory (AD)](https://developer.hashicorp.com/vault/api-docs/secret/ad) | `Most of them, currently in deprecation notice` |
+| [KV Version 2](https://developer.hashicorp.com/vault/api-docs/secret/kv/kv-v2) | `All endpoints` |
+| [PKI](https://developer.hashicorp.com/vault/api-docs/secret/pki) | `Most of them` |
+| [TOTP](https://developer.hashicorp.com/vault/api-docs/secret/totp) | `Few of them`|
 | | |
 
 ### Test environment
 
-Follow the detailed instructions from this [doc](/docs/Test-environment.md)
+* Follow the detailed instructions from this [doc](/docs/Test-environment.md)
 
 ### References
 
