@@ -1,7 +1,9 @@
 const Vault = require('../Vault');
-const randomWords = require('random-words');
 
-const RandName = randomWords({ exactly: 1, wordsPerString: 2, separator:'-' });
+const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+const RandName = Array(10).join().split(',').map(function() { 
+  return ABC.charAt(Math.floor(Math.random() * ABC.length) + 1); 
+}).join('');
 const RandNum = Math.floor((Math.random() * 100) + 1);
 const SecretName = `${RandName}-${RandNum}`;
 const Secrets1 = {

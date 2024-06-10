@@ -74,6 +74,9 @@
     "transform": {
       "^.+\\.ts?$": "ts-jest"
     },
+    "transformIgnorePatterns": [
+      "node_modules/(?!variables/.*)"
+    ],
     "testRegex": "/tests/.*\\.(test|spec)?\\.(js|ts|tsx)$",
     "moduleFileExtensions": [
       "ts",
