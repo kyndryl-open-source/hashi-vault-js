@@ -9,7 +9,7 @@
 ## 
 
 export VAULT_ADDR=https://vault.chatopsknight.ibm.com:8200
-export VAULT_CACERT=ca.crt
+export VAULT_CACERT="/Users/rodanami/github/public/hashi-vault-js/tests/ca-vault.crt"
 
 source vault-seals.env
 

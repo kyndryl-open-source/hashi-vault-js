@@ -335,11 +335,11 @@ vault login -method=cert -client-cert=vault-cert-certificate.pem \
 ```shell
 vault secrets enable ad
 vault write ad/config \
-    binddn="cn=admin,dc=chatopsknight,dc=com" \
-    bindpass=$LDAP_ADMIN_PASSWORD \
+    binddn=$LDAP_BIND_DN \
+    bindpass=$LDAP_BIND_PASS \
     url=ldaps://ldap.chatopsknight.com \
     userdn="dc=chatopsknight,dc=com" \
-    certificate=@ldap-server.pem \
+    certificate=@tests/ldap-server.pem \
     insecure_tls=false
 ```
 
