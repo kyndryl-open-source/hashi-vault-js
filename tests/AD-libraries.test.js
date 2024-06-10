@@ -17,7 +17,7 @@ const vault = new Vault( {
     proxy: false
 });
 
-const SetName = "sre-team";
+const SetName = "swe-team";
 
 const LibraryPayload1 = {
   name: SetName,
@@ -29,7 +29,7 @@ const LibraryPayload1 = {
 
 const LibraryPayload2 = {
   name: SetName,
-  service_account_names: ['mathias.thulmann@chatopsknight.com', 'triss.merigold@chatopsknight.com'],
+  service_account_names: ['mathias.thulmann@chatopsknight.com', 'nathan.hale@chatopsknight.com'],
   ttl: '6h',
   max_ttl: '12h',
   disable_check_in_enforcement: false
@@ -47,7 +47,7 @@ const CredCheckIn1 = {
 
 const CredCheckIn2 = {
   name: SetName,
-  service_account_names: ['triss.merigold@chatopsknight.com']
+  service_account_names: ['nathan.hale@chatopsknight.com']
 }
 
 test('createADLibrary: the result is an AD library created - HTTP 204', async () => {
