@@ -25,15 +25,16 @@
 * @returns {Promise<Object>}
 */
 ```
+
 **Note:** vaultToken is a Vault token that has _create_ capability on the `auth/token/create` path.
 
-* createSToken - *WITHDRAW*
+* createSToken - _WITHDRAW_
 
-* createBToken - *WITHDRAW*
+* createBToken - _WITHDRAW_
 
-* createOrphanSToken - *WITHDRAW*
+* createOrphanSToken - _WITHDRAW_
 
-* createOrphanBToken - *WITHDRAW*
+* createOrphanBToken - _WITHDRAW_
 
 * revokeToken(vaultToken, clientToken)
 
@@ -133,3 +134,5 @@
 * @returns {Promise<Object>}
 */
 ```
+
+## End

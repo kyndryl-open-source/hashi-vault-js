@@ -70,3 +70,8 @@ ha/*.env
 
 # webstorm files
 .idea/
+
+# Mac files
+.DS_Store
+*/.DS_Store
+*/.AppleDouble
