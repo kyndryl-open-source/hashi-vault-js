@@ -6,6 +6,7 @@
   "types": "dist/Vault.d.ts",
   "scripts": {
     "compile": "npx tsc",
+    "test": "bash -c 'source tests/process.env && jest tests/*.test.js'",
     "test:approle": "bash -c 'source tests/process.env && jest tests/AppRole.test.js'",
     "test-ts:approle": "bash -c 'source tests/process.env && jest tests/AppRole.test.ts'",
     "test:kv": "bash -c 'source tests/process.env && jest tests/KV.test.js'",
@@ -20,7 +21,8 @@
     "test:k8s": "bash -c 'source tests/process.env && jest tests/K8s.test.js'",
     "test:ad-config": "bash -c 'source tests/process.env && jest tests/AD-config.test.js'",
     "test:ad-roles": "bash -c 'source tests/process.env && jest tests/AD-roles.test.js'",
-    "test:ad-libraries": "bash -c 'source tests/process.env && jest tests/AD-libraries.test.js'"
+    "test:ad-libraries": "bash -c 'source tests/process.env && jest tests/AD-libraries.test.js'",
+    "test:totp": "bash -c 'source tests/process.env && jest tests/TOTP.test.js'"
   },
   "repository": {
     "type": "git",
@@ -57,16 +59,29 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.2",
     "jest": "^29.7.0",
+    "jest-config": "^29.7.0",
+    "jest-environment-node": "^29.7.0",
     "random-words": "^2.0.1",
     "ts-jest": "^29.1.4",
     "typescript": "^5.4.5"
   },
   "jest": {
+    "verbose": true,
     "testEnvironment": "node",
+    "testEnvironmentOptions": {
+      "NODE_ENV": "test"
+    },
     "transform": {
       "^.+\\.ts?$": "ts-jest"
     },
-    "testRegex": "/tests/.*\\.(test|spec)?\\.(ts|tsx)$",
-    "moduleFileExtensions": [ "ts", "tsx", "js", "jsx", "json", "node" ]
+    "testRegex": "/tests/.*\\.(test|spec)?\\.(js|ts|tsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

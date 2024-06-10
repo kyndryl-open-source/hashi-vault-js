@@ -270,7 +270,7 @@ Check below docs for more information on specific function groups.
 | **System Backend** | System | SEAL operations | [Doc file](/docs/Sys-Seal-Functions.md) |
 | **TLS Certificate** | Auth method | `/auth/cert` | [Doc file](/docs/TLS-Cert-Functions.md) |
 | **Token** | Auth method | `/auth/token` | [Doc file](/docs/Token-Functions.md) |
-| **TOTP** | Secret engine | `totp` | [Doc file](/docs/TOTP-Functions.md) |
+| **TOTP** | Secret engine | `/totp` | [Doc file](/docs/TOTP-Functions.md) |
 | **Userpass** | Auth method | `/auth/userpass` | [Doc file](/docs/Userpass-Functions.md) |
 |  |  |  |  |
 

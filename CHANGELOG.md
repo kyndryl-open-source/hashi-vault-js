@@ -7,7 +7,7 @@
   * Improved AD secret management documentation
   * Upgraded all dependencies to the latest
   * Added *TOTP secret engine* functions:
-    * 
+    * `createTOTPKey` and `readTOTPKey`
 
 * `0.4.14`
   * Updated HashiCorp Vault license
