@@ -2,7 +2,7 @@
 
 ## Change Log
 
-* `0.4.5a` (**latest**)
+* `0.4.16` (**latest**)
   * Updated Axios dependency to `1.7.4` [#51](CVE-2024-39338)
   * Upgraded development env to Vault server `1.17.3`
 
