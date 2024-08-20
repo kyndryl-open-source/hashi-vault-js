@@ -2,7 +2,11 @@
 
 ## Change Log
 
-* `0.4.15`(**latest**)
+* `0.4.5a` (**latest**)
+  * Updated Axios dependency to `1.7.4` (CVE-2024-39338)
+  * Upgraded development env to Vault server `1.17.3`
+
+* `0.4.15`
   * Upgraded development env to Vault server `1.16.3`
   * Improved AD secret management documentation
   * Upgraded all dependencies to the latest
