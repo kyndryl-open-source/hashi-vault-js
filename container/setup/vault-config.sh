@@ -64,10 +64,10 @@ max_ttl="87600h"
 vault write pki_int/issue/chatopsknight common_name="vault.chatopsknight.kyndryl.net" ttl="87500h"
 
 # Create a policy
-vault policy write knight-vault ./policies/chatops-knight-vault.hcl
+vault policy write knight-vault ./policies/knight-vault.hcl
 
 # Apply policy to role for AppRole auth method
-vault write auth/approle/role/knight secret_id_ttl="720h"  token_ttl="12h"  token_max_tll="12h"  policies="knight-vault"
+vault write auth/approle/role/knight secret_id_ttl="720h"  token_ttl="12h"  token_max_tll="12h"  policies="knight-policy"
 
 # Apply policy to role for Token auth method
 vault write auth/token/roles/knight token_explicit_max_ttl=43200  allowed_policies="knight-vault"
@@ -79,7 +79,7 @@ vault read auth/approle/role/knight/role-id
 vault write -f auth/approle/role/knight/secret-id
 
 # Check if pair role-id and secret-id are working
-vault write auth/approle/login -field=token role_id=${ROLE_ID} secret_id=${SECRET_ID}
+vault write auth/approle/login role_id=${ROLE_ID} secret_id=${SECRET_ID} -field=token
 
 # Update issuing and clr points to use https
 vault write pki/config/urls \
