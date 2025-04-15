@@ -1,3 +1,9 @@
+/*
+ * The accompanying program is provided under the terms of the MIT license ("agreement").
+ * Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
+*/
+// Go to strict mode to be safer
+"use strict";
 export const config = {
   appName: 'hashi-vault-js',
   baseUrl: 'https://127.0.0.1:8200/v1',

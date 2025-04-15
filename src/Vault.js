@@ -1,8 +1,9 @@
 /*
- * The accompanying program is provided under the terms of the MIT li ("agreement").
+ * The accompanying program is provided under the terms of the MIT license ("agreement").
  * Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 */
-
+// Go to strict mode to be safer
+"use strict";
 import { config } from './Config.js';
 // I personally prefer request, but it's deprecated now
 import axios from 'axios';

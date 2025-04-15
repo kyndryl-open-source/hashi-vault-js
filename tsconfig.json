@@ -18,6 +18,8 @@
       // "Go to Definition" in VSCode
       "declarationMap": true,
       // https://blogs.msdn.microsoft.com/typescript/2018/01/31/announcing-typescript-2-7/#easier-ecmascript-module-interoperability
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#es-module-interoperability
+      "module": "node16"
     }
   }

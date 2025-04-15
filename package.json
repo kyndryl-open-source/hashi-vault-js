@@ -2,7 +2,7 @@
   "name": "hashi-vault-js",
   "version": "0.5.0",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
-  "main": "src/Vault.js",
+  "exports": "./src/Vault.js",
   "type": "module",
   "types": "dist/Vault.d.ts",
   "scripts": {
@@ -68,12 +68,31 @@
   },
   "jest": {
     "verbose": true,
+    "testTimeout": 30000,
+    "preset": "ts-jest/presets/js-with-ts-esm",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!**/node_modules/**",
+      "!**/dist/**",
+      "!**/tests/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/tests/"
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "coverageDirectory": "coverage",
     "testEnvironment": "node",
     "testEnvironmentOptions": {
       "NODE_ENV": "test"
     },
     "transform": {
-      "^.+\\.ts?$": "ts-jest"
+      "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!variables/.*)"
