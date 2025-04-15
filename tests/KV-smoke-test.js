@@ -1,9 +1,10 @@
-//Simple test
-const Vault = require('../Vault');
-const randomWords = require('random-words');
+//Simple smoke test for the KV secret engine
+// This test will create a new secret engine, create a secret, read the secret, update the secret, delete the secret, and then delete the secret engine.
+import Vault from '../src/Vault.js';
+import { generate } from 'random-words';
 
 // source process.env
-const RandName = randomWords({ exactly: 1, wordsPerString: 2, separator:'-' });
+const RandName = generate({ exactly: 1, wordsPerString: 2, separator:'-' });
 const RandNum = Math.floor((Math.random() * 100) + 1);
 const SecretName = `${RandName}-${RandNum}`;
 const Secrets1 = {

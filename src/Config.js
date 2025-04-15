@@ -1,4 +1,4 @@
-const config = {
+export const config = {
   appName: 'hashi-vault-js',
   baseUrl: 'https://127.0.0.1:8200/v1',
   timeout: 1000,
@@ -126,5 +126,3 @@ const config = {
   totpGenerateCode: ['code', 'get'],
   totpValidateCode: ['code', 'post']
 };
-
-module.exports = config;

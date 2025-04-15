@@ -1,4 +1,4 @@
-const Vault = require('../Vault');
+import Vault from '../src/Vault.js';
 
 const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const RandName = Array(10).join().split(',').map(function() { 

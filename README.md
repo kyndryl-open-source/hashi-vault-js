@@ -9,21 +9,21 @@
 ![npm](https://img.shields.io/npm/dm/hashi-vault-js)
 ![NPM](https://img.shields.io/npm/l/hashi-vault-js)
 
-This module provides a set of functions to help **JavaScript** Developers working with HashiCorp Vault to authenticate and access API endpoints using **JavaScript** _promises_.
+This ES6 module provides a set of functions to help **JavaScript** Developers working with HashiCorp Vault to authenticate and access API endpoints using **JavaScript** _promises_.
 
 This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) vulnerability!
 
 ## Requirements (MacOS/Windows)
 
 * NodeJs
-  * Minimum: v18.x
-  * Recommended: **v20.x**  
+  * Minimum: v20.x
+  * Recommended: **v22.x**  
 * npm
   * Tested on: **v10.8.x**
 * HashiCorp Vault
-  * Minimum: v1.15.x
-  * Accepted: v1.16.x
-  * Recommended: **v1.17.x**
+  * Minimum: v1.16.x
+  * Accepted: v1.17.x
+  * Recommended: **v1.18.x**
 
 **Note:** Depending on your Windows setup [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) may need to be installed first. Also, for MacOS users, you should have **xcode-select** or entire Xcode App installed.
 

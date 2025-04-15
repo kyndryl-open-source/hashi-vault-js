@@ -3,13 +3,13 @@
  * Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 */
 
-const config = require('./Config.js');
+import { config } from './Config.js';
 // I personally prefer request, but it's deprecated now
-const axios = require('axios');
+import axios from 'axios';
 //const _ = require('underscore');
-const https = require('https');
-const fs = require('fs');
-const assert = require('assert');
+import https from 'https';
+import fs from 'fs';
+import assert from 'assert';
 
 // Internal function - create new https agent
 const getHttpsAgent = function(certificate, key, cacert) {
@@ -112,7 +112,7 @@ const parseAxiosError = function(error){
 * @param {boolean} [params.proxy=false]
 * @param {string} [params.namespace]
 */
-class Vault {
+export default class Vault {
   constructor(params) {
     /** @type {boolean} */
     this.https = params.https || false;
@@ -4077,5 +4077,3 @@ class Vault {
    }
 
 }
-
-module.exports = Vault;

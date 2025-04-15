@@ -2,6 +2,11 @@
 
 ## Change Log
 
+* `0.5.0` (**latest**)
+  * Upgraded all dependencies to the latest
+  * Upgraded development env to Vault server `1.18.5`
+  * Converted to modules to CommonJS module for Node v20 compability
+
 * `0.4.16` (**latest**)
   * Updated Axios dependency to `1.7.4` [#51](CVE-2024-39338)
   * Upgraded development env to Vault server `1.17.3`

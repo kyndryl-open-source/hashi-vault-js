@@ -1,8 +1,9 @@
 {
   "name": "hashi-vault-js",
-  "version": "0.4.16",
+  "version": "0.5.0",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
-  "main": "Vault.js",
+  "main": "src/Vault.js",
+  "type": "module",
   "types": "dist/Vault.d.ts",
   "scripts": {
     "compile": "npx tsc",
@@ -26,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rod4n4m1/hashi-vault-js"
+    "url": "git+https://github.com/kyndryl-open-source/hashi-vault-js"
   },
   "keywords": [
     "kyndryl",
@@ -46,14 +47,14 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rod4n4m1/hashi-vault-js/issues"
+    "url": "https://github.com/kyndryl-open-source/hashi-vault-js/issues"
   },
-  "homepage": "https://github.com/rod4n4m1/hashi-vault-js#readme",
+  "homepage": "https://github.com/kyndryl-open-source/hashi-vault-js#readme",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
-    "axios": "^1.7.0"
+    "axios": ">=1.8.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
