@@ -1,3 +1,6 @@
+// Jest unit test for Vault.js typescript
+// This test suite is designed to test the AppRole authentication method of the Vault.js library.
+// It includes tests for loginWithAppRole, createSecret, readSecret, updateSecret, deleteSecret, and listSecrets methods.
 import Vault from '../dist/Vault';
 
 const SECRET1: { name: string, secrets: { [key: string]: string } } = {

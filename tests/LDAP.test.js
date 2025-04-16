@@ -1,5 +1,9 @@
-const Vault = require('../Vault');
-const fs = require('fs');
+// Jest unit test for Vault.js
+// LDAP secret engine
+// This test will create a new LDAP user, update it, and delete it.
+import Vault from '../src/Vault.js';
+import fs from 'fs';
+
 let token = null;
 let ldapCABundle = null;
 

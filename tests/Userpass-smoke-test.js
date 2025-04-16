@@ -1,8 +1,10 @@
-//Simple test
-
-
+//Simple smoke test
+// Userpass auth method
+// This test will login to the Userpass auth method using a username and password.
 // source process.env
-// node LDAP-smoke-test.js
+// node Userpass-smoke-test.js
+import Vault from '../src/Vault.js';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
@@ -10,7 +12,6 @@ const VaultUrl = process.env.VAULT_URL;
 const Username = process.env.USERPASS_USER;
 const Password = process.env.USERPASS_PASS;
 
-const Vault = require('../Vault');
 const vault = new Vault( {
     https: true,
     cert: ClientCert,

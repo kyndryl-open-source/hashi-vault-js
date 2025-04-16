@@ -1,7 +1,11 @@
-//Simple test
-
+//Simple smoke test
+// K8s auth method
+// This test will create a new K8s role, read the role, update the role, delete the role, and then delete the K8s config.
 // source process.env
 // node K8S-smoke-test.js
+import Vault from '../src/Vault.js';
+import fs from 'fs';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
@@ -25,7 +29,6 @@ const RoleParams = {
   token_type: "service"
 };
 
-const fs =require('fs');
 let k8sCA = "";
 let k8sJWT = "";
 
@@ -43,7 +46,6 @@ const K8sConfig = {
   issuer: "kubernetes/serviceaccount"
 }
 
-const Vault = require('../Vault');
 const vault = new Vault( {
     https: true,
     cert: ClientCert,

@@ -1,5 +1,7 @@
+// Jest unit test for Vault.js
+// AD secret engine -- libraries
+// This test will create a new AD library, check out and check in service account credentials, and delete the AD library.
 import Vault from '../src/Vault.js';
-
 
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;

@@ -1,16 +1,16 @@
-//Simple test
-
-
+//Simple smoke test
+// PKI secret engine -- CA
+// This test will set the CA certificate, generate a root CA, generate an intermediate CA, sign the intermediate CA, and set the intermediate CA.
 // source process.env
-// node PKI-smoke-test.js
+// node PKI-CA-smoke-test.js
+import Vault from '../src/Vault.js';
+import fs from 'fs';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
 const VaultUrl = process.env.VAULT_URL;
 const RootToken = process.env.VAULT_ROOT_TOKEN;
-
-const Vault = require('../Vault');
-const fs = require('fs');
 
 const vault = new Vault( {
     https: true,

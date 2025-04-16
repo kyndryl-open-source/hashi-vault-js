@@ -1,4 +1,7 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// AD secret engine -- roles
+// This test will create a new AD role, update it, retrieve its credentials, and delete the AD role.
+import Vault from '../src/Vault.js';
 
 const BindDN = process.env.LDAP_BIND_DN;
 const BindPass = process.env.LDAP_BIND_PASS;

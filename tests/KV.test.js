@@ -1,3 +1,5 @@
+// Jest unit test for Vault.js
+// KV secret engine
 import Vault from '../src/Vault.js';
 
 const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';

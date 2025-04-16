@@ -1,4 +1,8 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// Vault System API
+// This test will check the System API endpoints.
+// npm run test:sys-api
+import Vault from '../src/Vault.js';
 
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;

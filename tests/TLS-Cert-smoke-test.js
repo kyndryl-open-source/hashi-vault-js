@@ -1,8 +1,9 @@
-//Simple test
-
-
+//Simple smoke test
+// TLS-Cert auth method
+// This test will login to the TLS-Cert auth method using a certificate.
 // source process.env
 // node TLS-Cert-smoke-test.js
+import Vault from '../src/Vault.js';
 
 const CACert = process.env.CA_CERT;
 const VaultUrl = process.env.VAULT_URL;
@@ -10,8 +11,6 @@ const RootToken = process.env.VAULT_ROOT_TOKEN;
 const TLSCertName = process.env.TLS_CERT_NAME;
 const TLSCertCertificate = process.env.TLS_CERT_CERTIFICATE;
 const TLSCertPrivKey = process.env.TLS_CERT_PRIV_KEY;
-
-const Vault = require('../Vault');
 
 const vault = new Vault( {
     https: true,

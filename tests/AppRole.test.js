@@ -1,4 +1,4 @@
-const Vault = require('../Vault');
+import Vault from '../src/Vault.js';
 
 const SECRET1={
   name: "slack5",

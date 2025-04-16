@@ -1,4 +1,10 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// PKI secret engine
+// This test will set the CRL configuration, set the PKI URLs, read the CA certificate, read the CA chain, read the CRL configuration, and list the certificates.
+// npm run test:pki
+import Vault from '../src/Vault.js';
+import fs from 'fs';
+
 let key = null;
 
 const RoleId = process.env.ROLE_ID;
@@ -10,7 +16,6 @@ const VaultUrl = process.env.VAULT_URL;
 const RootPath = process.env.ROOT_PATH;
 const RootToken = process.env.VAULT_ROOT_TOKEN;
 
-const fs =require('fs');
 let caBundle = "";
 
 try {

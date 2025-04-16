@@ -1,3 +1,5 @@
+// Jest unit test for Vault.js
+// AD secret engine -- configuration
 import Vault from '../src/Vault.js';
 import fs from 'fs';
 

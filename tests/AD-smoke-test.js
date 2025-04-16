@@ -1,4 +1,9 @@
-const Vault = require('../Vault');
+//Simple smoke test
+// AD secret engine
+// This test will create a new AD role, create a new AD library, check out a credential, check in a credential, and then delete the AD library.
+// source process.env
+// node K8S-smoke-test.js
+import Vault from '../src/Vault.js';
 
 const BindDN = process.env.LDAP_BIND_DN;
 const BindPass = process.env.LDAP_BIND_PASS;

@@ -1,8 +1,11 @@
-//Simple test
-
-
+//Simple smoke test
+// LDAP secret engine
+// This test will create a new LDAP group, create a new LDAP user, read the LDAP group, read the LDAP user, update the LDAP group, update the LDAP user, delete the LDAP group, and delete the LDAP user.
 // source process.env
 // node LDAP-smoke-test.js
+import Vault from '../src/Vault.js';
+import fs from 'fs';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
@@ -10,9 +13,6 @@ const VaultUrl = process.env.VAULT_URL;
 const Username = process.env.LDAP_USERNAME;
 const Password = process.env.LDAP_PASSWORD;
 const Group = process.env.LDAP_GROUP;
-
-const Vault = require('../Vault');
-const fs = require('fs');
 
 const vault = new Vault( {
     https: true,

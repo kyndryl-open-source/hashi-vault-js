@@ -1,8 +1,11 @@
-//Simple test
-
-
+//Simple smoke test
+// PKI secret engine
+// This test will set the CRL configuration, set the PKI URLs, read the CA certificate, read the CA chain, read the CRL configuration, and list the certificates.
 // source process.env
 // node PKI-smoke-test.js
+import Vault from '../src/Vault.js';
+import fs from 'fs';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
@@ -10,8 +13,6 @@ const VaultUrl = process.env.VAULT_URL;
 const RootPath = process.env.ROOT_PATH;
 const RootToken = process.env.VAULT_ROOT_TOKEN;
 
-const Vault = require('../Vault');
-const fs =require('fs');
 let caBundle = "";
 
 try {

@@ -1,4 +1,9 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// Token auth method
+// This test will login to the Token auth method using a token.
+// This test will create a new token, lookup the token, renew the token, and then revoke the token.
+// npm run test:token
+import Vault from '../src/Vault.js';
 
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
