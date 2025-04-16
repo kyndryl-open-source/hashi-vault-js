@@ -1,4 +1,6 @@
-import Vault from '../dist/Vault';
+// Jest unit test for Vault.js typescript
+// This test suite is designed to test the AppRole authentication method of the Vault.js library.
+import Vault from '../src/Vault';
 
 const SECRET1: { name: string, secrets: { [key: string]: string } } = {
   name: "slack5",

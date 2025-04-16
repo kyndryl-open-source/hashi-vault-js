@@ -1,4 +1,8 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// Vault seal/unseal
+// This test will check the seal status of the Vault server, unseal it if it is sealed, and seal it again.
+// npm run test:sys-seal
+import Vault from '../src/Vault.js';
 
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;

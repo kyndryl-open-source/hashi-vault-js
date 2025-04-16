@@ -1,10 +1,15 @@
-//Simple test
+//Simple smoke test
+// AppRole auth method
+// This test will login to the AppRole auth method using a role-id and secret-id.
+// This test will create a new AppRole role, create a new AppRole secret-id, read the secret-id, and then destroy the secret-id.
 // source process.env
 // node AppRole-smoke-test.js
 // # Check role-id
 // vault read auth/approle/role/knight/role-id
 // # Create new secret-id
 // vault write -f auth/approle/role/knight/secret-id
+import Vault from '../src/Vault.js';
+
 const RoleId = process.env.ROLE_ID;
 const SecretId = process.env.SECRET_ID;
 const ClientCert = process.env.CLIENT_CERT;
@@ -17,7 +22,6 @@ const Metadata = {
   tag2: "smoke-test"
 };
 
-const Vault = require('../Vault');
 const vault = new Vault( {
     https: true,
     cert: ClientCert,

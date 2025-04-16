@@ -1,15 +1,15 @@
-//Simple test
-
-
+//Simple smoke test
+// PKI secret engine -- generate
+// This test will generate a new certificate.
 // source process.env
-// node PKI-smoke-test.js
+// node PKI-gen-smoke-test.js
+import Vault from '../src/Vault.js';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
 const VaultUrl = process.env.VAULT_URL;
 const RootToken = process.env.VAULT_ROOT_TOKEN;
-
-const Vault = require('../Vault');
 
 const vault = new Vault( {
     https: true,

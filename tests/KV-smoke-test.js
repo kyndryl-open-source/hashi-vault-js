@@ -1,5 +1,8 @@
-//Simple smoke test for the KV secret engine
+//Simple smoke test
+// KV secret engine
 // This test will create a new secret engine, create a secret, read the secret, update the secret, delete the secret, and then delete the secret engine.
+// source process.env
+// node KV-smoke-test.js
 import Vault from '../src/Vault.js';
 import { generate } from 'random-words';
 

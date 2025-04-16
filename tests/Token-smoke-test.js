@@ -1,7 +1,11 @@
-//Simple test
-
+//Simple smoke test
+// Token auth method
+// This test will login to the Token auth method using a token.
+// This test will create a new token, lookup the token, renew the token, and then revoke the token.
 // source process.env
 // node Token-smoke-test.js
+import Vault from '../src/Vault.js';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;

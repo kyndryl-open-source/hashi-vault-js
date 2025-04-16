@@ -1,4 +1,8 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// TOTP secret engine
+// This test will create a new TOTP key, read the TOTP key, and delete the TOTP key.
+// npm run test:totp
+import Vault from '../src/Vault.js';
 
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;

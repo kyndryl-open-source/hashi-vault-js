@@ -98,7 +98,7 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 * **Production**
 
 ```javascript
-const Vault = require('hashi-vault-js');
+import Vault from 'hashi-vault-js';
 
 const vault = new Vault( {
     https: true,
@@ -117,7 +117,7 @@ const vault = new Vault( {
 * **Development**
 
 ```javascript
-const Vault = require('hashi-vault-js');
+import Vault from 'hashi-vault-js';
 
 const vault = new Vault( {
     https: true,
@@ -206,7 +206,9 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 `hashi-vault-js` includes TypeScript definitions in the `Vault.d.ts`.
 
-```javascript
+```typescript
+import Vault from 'hashi-vault-js';
+
 let response: ReadKVSecretResponse = null;
 try {
   const { data } = await vault.readKVSecret(token, Item.name);

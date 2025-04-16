@@ -1,4 +1,9 @@
-const Vault = require('../Vault');
+// Jest test for Vault.js
+// Userpass auth method
+// This test will login to the Userpass auth method using a username and password.
+// npm run test:userpass
+import Vault from '../src/Vault.js';
+
 let token = null;
 
 const RoleId = process.env.ROLE_ID;

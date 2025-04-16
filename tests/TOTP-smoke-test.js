@@ -1,5 +1,9 @@
-// Test: TOTP-smoke-test.js
-const Vault = require('../Vault');
+//Simple smoke test
+// TOTP secret engine
+// This test will create a new TOTP key, read the TOTP key, and delete the TOTP key.
+// source process.env
+// node TOTP-smoke-test.js
+import Vault from '../src/Vault.js';
 
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;

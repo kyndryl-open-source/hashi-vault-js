@@ -1,4 +1,11 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// K8s auth method
+// This test will login to the K8s auth method using a service account token.
+// This test will create a new K8s role, read the role, update the role, and then delete the role.
+// This test will update the K8s auth configuration and read the K8s auth configuration.
+// npm run test:k8s
+import Vault from '../src/Vault.js';
+import fs from 'fs';
 
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
@@ -23,7 +30,6 @@ const RoleParams = {
   token_type: "service"
 };
 
-const fs =require('fs');
 let k8sCA = "";
 let k8sJWT = "";
 

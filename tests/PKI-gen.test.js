@@ -1,4 +1,9 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// PKI secret engine -- Generate
+// This test will create a new PKI root CA, generate a new intermediate CA, sign it, and set it.
+// npm run test:pki-gen
+import Vault from '../src/Vault.js';
+
 let key = null;
 
 const RoleId = process.env.ROLE_ID;

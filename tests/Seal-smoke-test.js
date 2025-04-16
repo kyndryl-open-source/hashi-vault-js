@@ -1,7 +1,10 @@
-//Simple test
-
+//Simple smoke test
+// Seal and unseal Vault server
+// This test will check the seal status of the Vault server, unseal it if it is sealed, and seal it again.
 // source process.env
 // node Seal-smoke-test.js
+import Vault from '../src/Vault.js';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
@@ -17,7 +20,6 @@ const Metadata = {
 };
 const Paths = ["/sys/host-info", "/sys/capabilities", "/sys/init" ];
 
-const Vault = require('../Vault');
 const vault = new Vault( {
     https: true,
     cert: ClientCert,

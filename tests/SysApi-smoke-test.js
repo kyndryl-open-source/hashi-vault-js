@@ -1,7 +1,10 @@
-//Simple test
-
+//Simple smoke test
+// System API
+// This test will check the System API endpoints.
 // source process.env
 // node SysApi.test.js
+import Vault from '../src/Vault.js';
+
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
 const CACert = process.env.CA_CERT;
@@ -15,7 +18,6 @@ const Metadata = {
 };
 const Paths = ["/sys/host-info", "/sys/capabilities", "/sys/init" ];
 
-const Vault = require('../Vault');
 const vault = new Vault( {
     https: true,
     cert: ClientCert,

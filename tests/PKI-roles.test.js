@@ -1,4 +1,8 @@
-const Vault = require('../Vault');
+// Jest unit test for Vault.js
+// PKI secret engine -- roles
+// This test will create a new PKI role, update it, retrieve its parameters, and delete the PKI role.
+// npm run test:pki-roles
+import Vault from '../src/Vault.js';
 
 const RoleId = process.env.ROLE_ID;
 const SecretId = process.env.SECRET_ID;
