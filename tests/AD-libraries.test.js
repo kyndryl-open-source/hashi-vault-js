@@ -1,4 +1,5 @@
-const Vault = require('../Vault');
+import Vault from '../src/Vault.js';
+
 
 const ClientCert = process.env.CLIENT_CERT;
 const ClientKey = process.env.CLIENT_KEY;
@@ -16,12 +17,15 @@ const vault = new Vault( {
     timeout: 3000,
     proxy: false
 });
-
-const SetName = "swe-team";
-
+const ABC = 'abcdefghijklmnopqrstuvwxyz';
+const RandName = Array(3).join().split(',').map(function() { 
+  return ABC.charAt(Math.floor(Math.random() * ABC.length) + 1); 
+}).join('');
+const RandNum = Math.floor((Math.random() * 100) + 1);
+const SetName = `${RandName}${RandNum}-team`;
 const LibraryPayload1 = {
   name: SetName,
-  service_account_names: ['mathias.thulmann@chatopsknight.com'],
+  service_account_names: ['hela.odinson@chatopsknight.com'],
   ttl: '1h',
   max_ttl: '2h',
   disable_check_in_enforcement: false
@@ -29,7 +33,7 @@ const LibraryPayload1 = {
 
 const LibraryPayload2 = {
   name: SetName,
-  service_account_names: ['mathias.thulmann@chatopsknight.com', 'nathan.hale@chatopsknight.com'],
+  service_account_names: ['hela.odinson@chatopsknight.com', 'thor.odinson@chatopsknight.com'],
   ttl: '6h',
   max_ttl: '12h',
   disable_check_in_enforcement: false
@@ -42,12 +46,12 @@ const CredCheckOut = {
 
 const CredCheckIn1 = {
   name: SetName,
-  service_account_names: ['mathias.thulmann@chatopsknight.com']
+  service_account_names: ['hela.odinson@chatopsknight.com']
 }
 
 const CredCheckIn2 = {
   name: SetName,
-  service_account_names: ['nathan.hale@chatopsknight.com']
+  service_account_names: ['thor.odinson@chatopsknight.com']
 }
 
 test('createADLibrary: the result is an AD library created - HTTP 204', async () => {

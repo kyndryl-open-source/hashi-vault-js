@@ -1,5 +1,5 @@
-const Vault = require('../Vault');
-const fs = require('fs');
+import Vault from '../src/Vault.js';
+import fs from 'fs';
 
 const BindDN = process.env.LDAP_BIND_DN;
 const BindPass = process.env.LDAP_BIND_PASS;

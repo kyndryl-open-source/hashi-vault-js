@@ -58,7 +58,7 @@ buildingName: Valley Office
 userPrincipalName: jane.doe@chatopsknight.com
 sAMAccountName: JANEDOE
 userPassword: IL0v3Donuts
-pwdLastSet: 133016927060000000
+pwdLastSet: 133892380730000000
 
 dn: uid=nathan.hale, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
@@ -91,7 +91,7 @@ buildingName: Singapore Office
 userPrincipalName: nathan.hale@chatopsknight.com
 sAMAccountName: NATHANHALE
 userPassword: CookiesIH@t3
-pwdLastSet: 133016927060000000
+pwdLastSet: 133892380730000000
 
 dn: uid=john.kane, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
@@ -124,7 +124,7 @@ buildingName: Brazil Office
 userPrincipalName: john.kane@chatopsknight.com
 sAMAccountName: JOHNKANE
 userPassword: CookiesILik3
-pwdLastSet: 133016927060000000
+pwdLastSet: 133892380730000000
 
 dn: uid=mathias.thulmann, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
@@ -157,7 +157,7 @@ buildingName: Ukraine Office
 userPrincipalName: mathias.thulmann@chatopsknight.com
 sAMAccountName: MATHIAST
 userPassword: WarHamm3r40k
-pwdLastSet: 133016927060000000
+pwdLastSet: 133892380730000000
 
 dn: uid=triss.merigold, ou=Employees, dc=chatopsknight, dc=com
 changetype: add
@@ -190,4 +190,103 @@ buildingName: Novigrad Office
 userPrincipalName: triss.merigold@chatopsknight.com
 sAMAccountName: TRISSMERI
 userPassword: Th3Witch3r
-pwdLastSet: 133016927060000000
+pwdLastSet: 133892380730000000
+
+dn: uid=loki.odinson, ou=Employees, dc=chatopsknight, dc=com
+changetype: add
+cn: Loki Odinson
+sn: Odin
+givenName: Loki
+objectClass: extensibleObject
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+ou: IT
+ou: Employee
+postalAddress: Fake street
+postalCode: 99.991
+l: Marvel
+c: us
+st: MCU
+serialNumber: 000607
+uid: loki.odinson@chatopsknight.com
+mail: loki.odison@chatopsknight.com
+personalTitle: Trickster God
+telephoneNumber: +99-666-0002
+roomNumber: N45
+departmentNumber: MARVEL00
+employeeType: Regular
+employeeNumber: 000607
+initials: LOS
+buildingName: TVA
+userPrincipalName: loki.odinson@chatopsknight.com
+sAMAccountName: LOKIODIN
+userPassword: IamGOD123
+pwdLastSet: 133892380730000000
+
+dn: uid=thor.odinson, ou=Employees, dc=chatopsknight, dc=com
+changetype: add
+cn: Thor Odinson
+sn: Odin
+givenName: Thor
+objectClass: extensibleObject
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+ou: IT
+ou: Employee
+postalAddress: Fake street
+postalCode: 99.991
+l: Marvel
+c: us
+st: MCU
+serialNumber: 000608
+uid: thor.odinson@chatopsknight.com
+mail: thor.odinson@chatopsknight.com
+personalTitle: God of Thunder
+telephoneNumber: +99-555-6789
+roomNumber: N46
+departmentNumber: MARVEL00
+employeeType: Regular
+employeeNumber: 000608
+initials: TOS
+buildingName: Stark Tower
+userPrincipalName: thor.odinson@chatopsknight.com
+sAMAccountName: THORODIN
+userPassword: Thunder123
+pwdLastSet: 133892380730000000
+
+dn: uid=hela.odinson, ou=Employees, dc=chatopsknight, dc=com
+changetype: add
+cn: Hela Odinson
+sn: Odinson
+givenName: Hela
+objectClass: extensibleObject
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+ou: IT
+ou: Employee
+postalAddress: Fake street
+postalCode: 99.991
+l: Marvel
+c: us
+st: MCU
+serialNumber: 000608
+uid: hela.odinson@chatopsknight.com
+mail: hela.odinson@chatopsknight.com
+personalTitle: Goddess of Death
+telephoneNumber: +99-666-0001
+roomNumber: N46
+departmentNumber: MARVEL00
+employeeType: Regular
+employeeNumber: 000608
+initials: HOS
+buildingName: Asgard Hel
+userPrincipalName: hela.odinson@chatopsknight.com
+sAMAccountName: HELAODIN
+userPassword: DieOdin123
+pwdLastSet: 133892380730000000
