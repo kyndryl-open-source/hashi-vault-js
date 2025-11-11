@@ -2,9 +2,19 @@
   "name": "hashi-vault-js",
   "version": "0.5.0",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
-  "exports": "./src/Vault.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/Vault.js"
+    },
+    "./config": {
+      "types": "./dist/Config.d.ts",
+      "default": "./src/Config.js"
+    }
+  },
+  "main": "./src/Vault.js",
   "type": "module",
-  "types": "dist/Vault.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "compile": "npx tsc",
     "test": "bash -c 'source tests/process.env && jest tests/*.test.js'",
