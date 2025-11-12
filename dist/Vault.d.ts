@@ -27,57 +27,57 @@ export default class Vault {
     /** @type {number} */
     timeout: number;
     /** @type {Object} */
-    proxy: any;
+    proxy: Object;
     /** @type {string} */
     namespace: string;
     /** @type {Object | boolean} */
-    agent: any | boolean;
+    agent: Object | boolean;
     /** @type {Object} */
-    instance: any;
+    instance: Object;
     /**
     * @param {Object} [params]
     * @returns {PromiseLike<Object>}
     */
-    healthCheck(params?: any): PromiseLike<any>;
+    healthCheck(params?: Object | undefined): PromiseLike<Object>;
     /**
     * @returns {PromiseLike<Object>}
     */
-    sealStatus(): PromiseLike<any>;
+    sealStatus(): PromiseLike<Object>;
     /**
     * @param {string} sudoToken
     * @returns {PromiseLike<Object>}
     */
-    sysHostInfo(sudoToken: string): PromiseLike<any>;
+    sysHostInfo(sudoToken: string): PromiseLike<Object>;
     /**
     * @param {string} sudoToken
     * @param {string} token
     * @param {string[]} paths
     * @returns {PromiseLike<Object>}
     */
-    sysCapabilities(sudoToken: string, token: string, paths: string[]): PromiseLike<any>;
+    sysCapabilities(sudoToken: string, token: string, paths: string[]): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string[]} paths
     * @returns {PromiseLike<Object>}
     */
-    sysCapabilitiesSelf(token: string, paths: string[]): PromiseLike<any>;
+    sysCapabilitiesSelf(token: string, paths: string[]): PromiseLike<Object>;
     /**
     * @param {string} sudoToken
     * @param {string} type
     * @returns {PromiseLike<Object>}
     */
-    sysInternalCounters(sudoToken: string, type: string): PromiseLike<any>;
+    sysInternalCounters(sudoToken: string, type: string): PromiseLike<Object>;
     /**
     * @param {string} sudoToken
     * @param {string} [format]
     * @returns {PromiseLike<Object>}
     */
-    sysMetrics(sudoToken: string, format?: string): PromiseLike<any>;
+    sysMetrics(sudoToken: string, format?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} sudoToken
     * @returns {PromiseLike<Object>}
     */
-    sysSeal(sudoToken: string): PromiseLike<any>;
+    sysSeal(sudoToken: string): PromiseLike<Object>;
     /**
     * @param {string} sudoToken
     * @param {string} key
@@ -85,7 +85,7 @@ export default class Vault {
     * @param {boolean} migrate
     * @returns {PromiseLike<Object>}
     */
-    sysUnseal(sudoToken: string, key: string, reset: boolean, migrate: boolean): PromiseLike<any>;
+    sysUnseal(sudoToken: string, key: string, reset: boolean, migrate: boolean): PromiseLike<Object>;
     /**
     * @param {string} vaultToken
     * @param {Object} [params]
@@ -106,87 +106,87 @@ export default class Vault {
     * @returns {PromiseLike<Object>}
     */
     createToken(vaultToken: string, params?: {
-        id?: string;
-        role_name?: string;
-        policies?: string;
-        meta?: any;
-        no_narent?: boolean;
-        no_default_policy?: boolean;
-        renewable?: boolean;
-        ttl?: string;
-        type?: string;
-        explicit_max_ttl?: string;
-        display_name?: string;
-        num_uses?: number;
-        period?: string;
-        entity_alias?: string;
-    }): PromiseLike<any>;
+        id?: string | undefined;
+        role_name?: string | undefined;
+        policies?: string | undefined;
+        meta?: Object | undefined;
+        no_narent?: boolean | undefined;
+        no_default_policy?: boolean | undefined;
+        renewable?: boolean | undefined;
+        ttl?: string | undefined;
+        type?: string | undefined;
+        explicit_max_ttl?: string | undefined;
+        display_name?: string | undefined;
+        num_uses?: number | undefined;
+        period?: string | undefined;
+        entity_alias?: string | undefined;
+    } | undefined): PromiseLike<Object>;
     /**
     * @param {string} vaultToken
     * @param {string} clientToken
     * @returns {PromiseLike<Object>}
     */
-    revokeToken(vaultToken: string, clientToken: string): PromiseLike<any>;
+    revokeToken(vaultToken: string, clientToken: string): PromiseLike<Object>;
     /**
     * @param {string} clientToken
     * @returns {PromiseLike<Object>}
     */
-    revokeSelfToken(clientToken: string): PromiseLike<any>;
+    revokeSelfToken(clientToken: string): PromiseLike<Object>;
     /**
     * @param {string} vaultToken
     * @param {string} clientToken
     * @returns {PromiseLike<Object>}
     */
-    lookupToken(vaultToken: string, clientToken: string): PromiseLike<any>;
+    lookupToken(vaultToken: string, clientToken: string): PromiseLike<Object>;
     /**
     * @param {string} clientToken
     * @returns {PromiseLike<Object>}
     */
-    lookupSelfToken(clientToken: string): PromiseLike<any>;
+    lookupSelfToken(clientToken: string): PromiseLike<Object>;
     /**
     * @param {string} vaultToken
     * @param {string} clientToken
     * @param {string} increment
     * @returns {PromiseLike<Object>}
     */
-    renewToken(vaultToken: string, clientToken: string, increment: string): PromiseLike<any>;
+    renewToken(vaultToken: string, clientToken: string, increment: string): PromiseLike<Object>;
     /**
     * @param {string} clientToken
     * @param {string} increment
     * @returns {PromiseLike<Object>}
     */
-    renewSelfToken(clientToken: string, increment: string): PromiseLike<any>;
+    renewSelfToken(clientToken: string, increment: string): PromiseLike<Object>;
     /**
     * @param {string} sudoToken
     * @returns {PromiseLike<Object>}
     */
-    listAccessors(sudoToken: string): PromiseLike<any>;
+    listAccessors(sudoToken: string): PromiseLike<Object>;
     /**
     * @param {string} vaultToken
     * @param {string} accessor
     * @returns {PromiseLike<Object>}
     */
-    lookupAccessor(vaultToken: string, accessor: string): PromiseLike<any>;
+    lookupAccessor(vaultToken: string, accessor: string): PromiseLike<Object>;
     /**
     * @param {string} vaultToken
     * @param {string} accessor
     * @param {string} increment
     * @returns {PromiseLike<Object>}
     */
-    renewAccessor(vaultToken: string, accessor: string, increment: string): PromiseLike<any>;
+    renewAccessor(vaultToken: string, accessor: string, increment: string): PromiseLike<Object>;
     /**
     * @param {string} vaultToken
     * @param {string} accessor
     * @returns {PromiseLike<Object>}
     */
-    revokeAccessor(vaultToken: string, accessor: string): PromiseLike<any>;
+    revokeAccessor(vaultToken: string, accessor: string): PromiseLike<Object>;
     /**
     * @param {string} username
     * @param {string} password
     * @param {string} [mount]
     * @returns {Object}
     */
-    loginWithLdap(username: string, password: string, mount?: string): any;
+    loginWithLdap(username: string, password: string, mount?: string | undefined): Object;
     /**
     * @param {string} token
     * @param {string} username
@@ -195,7 +195,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    createLdapUser(token: string, username: string, policies: string[], groups: string, mount?: string): PromiseLike<any>;
+    createLdapUser(token: string, username: string, policies: string[], groups: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} username
@@ -204,7 +204,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    updateLdapUser(token: string, username: string, policies: string[], groups: string, mount?: string): PromiseLike<any>;
+    updateLdapUser(token: string, username: string, policies: string[], groups: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} group
@@ -212,7 +212,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    createLdapGroup(token: string, group: string, policies: string[], mount?: string): PromiseLike<any>;
+    createLdapGroup(token: string, group: string, policies: string[], mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} group
@@ -220,53 +220,53 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    updateLdapGroup(token: string, group: string, policies: string[], mount?: string): PromiseLike<any>;
+    updateLdapGroup(token: string, group: string, policies: string[], mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} group
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readLdapGroup(token: string, group: string, mount?: string): PromiseLike<any>;
+    readLdapGroup(token: string, group: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} username
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readLdapUser(token: string, username: string, mount?: string): PromiseLike<any>;
+    readLdapUser(token: string, username: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    listLdapUsers(token: string, mount?: string): PromiseLike<any>;
+    listLdapUsers(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    listLdapGroups(token: string, mount?: string): PromiseLike<any>;
+    listLdapGroups(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} username
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    deleteLdapUser(token: string, username: string, mount?: string): PromiseLike<any>;
+    deleteLdapUser(token: string, username: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} group
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    deleteLdapGroup(token: string, group: string, mount?: string): PromiseLike<any>;
+    deleteLdapGroup(token: string, group: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readLdapConfig(token: string, mount?: string): PromiseLike<any>;
+    readLdapConfig(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
@@ -338,29 +338,20 @@ export default class Vault {
         token_num_uses: number;
         token_period: number;
         token_type: string;
-    }, mount?: string): PromiseLike<any>;
+    } | undefined, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} [mount]
     * @param {string} certName
     * @returns {PromiseLike<Object>}
     */
-    loginWithCert(certName: string, mount?: string): PromiseLike<any>;
+    loginWithCert(certName: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} username
     * @param {string} password
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    loginWithUserpass(username: string, password: string, mount?: string): PromiseLike<any>;
-    /**
-    * @param {string} token
-    * @param {string} username
-    * @param {string} password
-    * @param {string[]} policies
-    * @param {string} [mount]
-    * @returns {PromiseLike<Object>}
-    */
-    createUserpassUser(token: string, username: string, password: string, policies: string[], mount?: string): PromiseLike<any>;
+    loginWithUserpass(username: string, password: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} username
@@ -369,21 +360,30 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    updateUserpassUser(token: string, username: string, password: string, policies: string[], mount?: string): PromiseLike<any>;
+    createUserpassUser(token: string, username: string, password: string, policies: string[], mount?: string | undefined): PromiseLike<Object>;
+    /**
+    * @param {string} token
+    * @param {string} username
+    * @param {string} password
+    * @param {string[]} policies
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
+    */
+    updateUserpassUser(token: string, username: string, password: string, policies: string[], mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} username
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readUserpassUser(token: string, username: string, mount?: string): PromiseLike<any>;
+    readUserpassUser(token: string, username: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} username
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    deleteUserpassUser(token: string, username: string, mount?: string): PromiseLike<any>;
+    deleteUserpassUser(token: string, username: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} username
@@ -391,7 +391,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    updateUserpassPassword(token: string, username: string, password: string, mount?: string): PromiseLike<any>;
+    updateUserpassPassword(token: string, username: string, password: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} username
@@ -399,20 +399,20 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    updateUserpassPolicies(token: string, username: string, policies: string[], mount?: string): PromiseLike<any>;
+    updateUserpassPolicies(token: string, username: string, policies: string[], mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    listUserpassUsers(token: string, mount?: string): PromiseLike<any>;
+    listUserpassUsers(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} role
      * @param {string} jwt
      * @param {string} [mount]
      * @returns {Object}
      */
-    loginWithK8s(role: string, jwt: string, mount?: string): any;
+    loginWithK8s(role: string, jwt: string, mount?: string | undefined): Object;
     /**
      * @param {string} token
      * @param {Object} params
@@ -430,17 +430,17 @@ export default class Vault {
         kubernetes_host: string;
         kubernetes_ca_cert: string;
         token_reviewer_jwt: string;
-        pem_keys?: any;
+        pem_keys?: Object | undefined;
         issuer: string;
         disable_iss_validation: boolean;
         disable_local_ca_jwt: boolean;
-    }, mount?: string): PromiseLike<any>;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} [mount]
      * @returns {Object}
      */
-    readK8sConfig(token: string, mount?: string): any;
+    readK8sConfig(token: string, mount?: string | undefined): Object;
     /**
      * @param {string} token
      * @param {string} role
@@ -461,46 +461,46 @@ export default class Vault {
      * @returns {Object}
      */
     createK8sRole(token: string, role: string, params: {
-        bound_service_account_names?: any;
-        bound_service_account_namespaces?: any;
+        bound_service_account_names?: Object | undefined;
+        bound_service_account_namespaces?: Object | undefined;
         audience: string;
         token_ttl: number | string;
         token_max_ttl: number | string;
-        token_policies?: any;
-        token_bound_cidrs?: any;
+        token_policies?: Object | undefined;
+        token_bound_cidrs?: Object | undefined;
         token_explicit_max_ttl: number | string;
         token_no_default_policy: boolean;
         token_num_uses: number;
         token_period: number | string;
         token_type: string;
-    }, mount?: string): any;
+    }, mount?: string | undefined): Object;
     /**
      * @param {string} token
      * @param {string} role
      * @param {string} [mount]
      * @returns {Object}
      */
-    readK8sRole(token: string, role: string, mount?: string): any;
+    readK8sRole(token: string, role: string, mount?: string | undefined): Object;
     /**
      * @param {string} token
      * @param {string} [mount]
      * @returns {Object}
      */
-    listK8sRoles(token: string, mount?: string): any;
+    listK8sRoles(token: string, mount?: string | undefined): Object;
     /**
      * @param {string} token
      * @param {string} role
      * @param {string} [mount]
      * @returns {Object}
      */
-    deleteK8sRole(token: string, role: string, mount?: string): any;
+    deleteK8sRole(token: string, role: string, mount?: string | undefined): Object;
     /**
     * @param {string} roleId
     * @param {string} secretId
     * @param {string} [mount]
     * @returns {Object}
     */
-    loginWithAppRole(roleId: string, secretId: string, mount?: string): any;
+    loginWithAppRole(roleId: string, secretId: string, mount?: string | undefined): Object;
     /**
     * @param {string} token
     * @param {string} appRole
@@ -508,7 +508,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    generateAppRoleSecretId(token: string, appRole: string, metadata?: string, mount?: string): PromiseLike<any>;
+    generateAppRoleSecretId(token: string, appRole: string, metadata?: string | undefined, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} appRole
@@ -516,7 +516,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readAppRoleSecretId(token: string, appRole: string, secretId: string, mount?: string): PromiseLike<any>;
+    readAppRoleSecretId(token: string, appRole: string, secretId: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} appRole
@@ -524,49 +524,49 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    destroyAppRoleSecretId(token: string, appRole: string, secretId: string, mount?: string): PromiseLike<any>;
+    destroyAppRoleSecretId(token: string, appRole: string, secretId: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} format - certificate format either 'der' or 'pem'
     * @param {string} [mount]
     * @returns {PromiseLike<string>}
     */
-    readCACertificate(format: string, mount?: string): PromiseLike<string>;
+    readCACertificate(format: string, mount?: string | undefined): PromiseLike<string>;
     /**
     * @param {string} format - certificate format either 'der' or 'pem'
     * @param {string} [mount]
     * @returns {PromiseLike<string>}
     */
-    readPkiCrl(format: string, mount?: string): PromiseLike<string>;
+    readPkiCrl(format: string, mount?: string | undefined): PromiseLike<string>;
     /**
     * @param {string} [mount]
     * @returns {PromiseLike<string>}
     */
-    readCAChain(mount?: string): PromiseLike<string>;
+    readCAChain(mount?: string | undefined): PromiseLike<string>;
     /**
     * @param {string} serial
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readCertificate(serial: string, mount?: string): PromiseLike<any>;
+    readCertificate(serial: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    listCertificates(token: string, mount?: string): PromiseLike<any>;
+    listCertificates(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} pemBundle
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    setCACertificate(token: string, pemBundle: string, mount?: string): PromiseLike<any>;
+    setCACertificate(token: string, pemBundle: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readCrlConfig(token: string, mount?: string): PromiseLike<any>;
+    readCrlConfig(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [expiry]
@@ -574,13 +574,13 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    setCrlConfig(token: string, expiry?: string, disable?: boolean, mount?: string): PromiseLike<any>;
+    setCrlConfig(token: string, expiry?: string | undefined, disable?: boolean | undefined, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readPkiUrls(token: string, mount?: string): PromiseLike<any>;
+    readPkiUrls(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string[]} [issuingCertificates]
@@ -589,13 +589,13 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    setPkiUrls(token: string, issuingCertificates?: string[], crlDistributionPoints?: string[], oscpServers?: string[], mount?: string): PromiseLike<any>;
+    setPkiUrls(token: string, issuingCertificates?: string[] | undefined, crlDistributionPoints?: string[] | undefined, oscpServers?: string[] | undefined, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    rotatePkiCrl(token: string, mount?: string): PromiseLike<any>;
+    rotatePkiCrl(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} sudoToken
     * @param {Object} params
@@ -647,13 +647,13 @@ export default class Vault {
         streetAddress: string;
         postalCode: string;
         serialNumber: string;
-    }, mount?: string): PromiseLike<string>;
+    }, mount?: string | undefined): PromiseLike<string>;
     /**
     * @param {string} sudoToken
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    deleteRootCA(sudoToken: string, mount?: string): PromiseLike<any>;
+    deleteRootCA(sudoToken: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} params.type - intermediate CA type either 'internal' or 'exported'
@@ -681,24 +681,24 @@ export default class Vault {
     */
     genIntermediateCA(token: string, params: {
         commonName: string;
-        altNames?: string;
-        ipSans?: string;
-        uriSans?: string;
-        otherSans?: string;
-        format?: string;
-        pkFormat?: string;
-        keyType?: string;
-        keyBits?: number;
-        excludeCnFromSans?: boolean;
-        ou?: string;
-        organization?: string;
-        country?: string;
-        locality?: string;
-        province?: string;
-        streetAddress?: string;
-        postalCode?: string;
-        serialNumber?: string;
-    }, mount?: string): PromiseLike<string>;
+        altNames?: string | undefined;
+        ipSans?: string | undefined;
+        uriSans?: string | undefined;
+        otherSans?: string | undefined;
+        format?: string | undefined;
+        pkFormat?: string | undefined;
+        keyType?: string | undefined;
+        keyBits?: number | undefined;
+        excludeCnFromSans?: boolean | undefined;
+        ou?: string | undefined;
+        organization?: string | undefined;
+        country?: string | undefined;
+        locality?: string | undefined;
+        province?: string | undefined;
+        streetAddress?: string | undefined;
+        postalCode?: string | undefined;
+        serialNumber?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<string>;
     /**
     * @param {string} sudoToken
     * @param {Object} params
@@ -728,32 +728,32 @@ export default class Vault {
     signIntermediateCA(sudoToken: string, params: {
         csr: string;
         commonName: string;
-        altNames?: string;
-        ipSans?: string;
-        uriSans?: string;
-        otherSans?: string;
-        ttl?: string;
-        format?: string;
-        maxPathLength?: number;
-        excludeCnFromSans?: boolean;
-        useCsrValues?: boolean;
-        permittedDnsDomains?: string;
-        ou?: string;
-        organization?: string;
-        country?: string;
-        locality?: string;
-        province?: string;
-        streetAddress?: string;
-        postalCode?: string;
-        serialNumber?: string;
-    }, mount?: string): PromiseLike<string>;
+        altNames?: string | undefined;
+        ipSans?: string | undefined;
+        uriSans?: string | undefined;
+        otherSans?: string | undefined;
+        ttl?: string | undefined;
+        format?: string | undefined;
+        maxPathLength?: number | undefined;
+        excludeCnFromSans?: boolean | undefined;
+        useCsrValues?: boolean | undefined;
+        permittedDnsDomains?: string | undefined;
+        ou?: string | undefined;
+        organization?: string | undefined;
+        country?: string | undefined;
+        locality?: string | undefined;
+        province?: string | undefined;
+        streetAddress?: string | undefined;
+        postalCode?: string | undefined;
+        serialNumber?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<string>;
     /**
     * @param {string} token
     * @param {string} certificate
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    setIntermediateCA(token: string, certificate: string, mount?: string): PromiseLike<any>;
+    setIntermediateCA(token: string, certificate: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {Object} params
@@ -773,22 +773,22 @@ export default class Vault {
     genPkiCertificate(token: string, params: {
         role: string;
         commonName: string;
-        altNames?: string;
-        ipSans?: string;
-        uriSans?: string;
-        otherSans?: string;
-        ttl?: string;
+        altNames?: string | undefined;
+        ipSans?: string | undefined;
+        uriSans?: string | undefined;
+        otherSans?: string | undefined;
+        ttl?: string | undefined;
         format: string;
-        pkFormat?: string;
-        excludeCnFromSans?: boolean;
-    }, mount?: string): PromiseLike<string>;
+        pkFormat?: string | undefined;
+        excludeCnFromSans?: boolean | undefined;
+    }, mount?: string | undefined): PromiseLike<string>;
     /**
     * @param {string} token
     * @param {string} serialNumber
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    revokePkiCertificate(token: string, serialNumber: string, mount?: string): PromiseLike<any>;
+    revokePkiCertificate(token: string, serialNumber: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {Object} params
@@ -836,45 +836,45 @@ export default class Vault {
     */
     createPkiRole(token: string, params: {
         name: string;
-        ttl?: string;
-        maxTtl?: string;
-        allowLocalhost?: boolean;
-        allowedDomains?: string[];
-        allowedDomainsTemplate?: boolean;
-        allowBareDomains?: boolean;
-        allowSubdomains?: boolean;
-        allowGlobDomains?: boolean;
-        allowAnyName?: boolean;
-        enforceHostnames?: boolean;
-        allowIpSans?: string;
-        allowedUriSans?: string;
-        allowedOtherSans?: string;
-        serverFlag?: boolean;
-        clientFlag?: boolean;
-        codeSigningFlag?: boolean;
-        emailProtectionFlag?: boolean;
-        keyType?: string;
-        keyBits?: number;
-        keyUsage?: string[];
-        externalKeyUsage?: string[];
-        extKeyUsageOids?: string;
-        useCsrCommonName?: boolean;
-        useCsrSans?: boolean;
-        ou?: string;
-        organization?: string;
-        country?: string;
-        locality?: string;
-        province?: string;
-        streetAddress?: string;
-        postalCode?: string;
-        serialNumber?: string;
-        generateLease?: boolean;
-        noStore?: boolean;
-        requireCn?: boolean;
-        policyIdentifiers?: string[];
-        basicConstraintsValidForNonCa?: boolean;
-        notBeforeDuration?: string;
-    }, mount?: string): PromiseLike<any>;
+        ttl?: string | undefined;
+        maxTtl?: string | undefined;
+        allowLocalhost?: boolean | undefined;
+        allowedDomains?: string[] | undefined;
+        allowedDomainsTemplate?: boolean | undefined;
+        allowBareDomains?: boolean | undefined;
+        allowSubdomains?: boolean | undefined;
+        allowGlobDomains?: boolean | undefined;
+        allowAnyName?: boolean | undefined;
+        enforceHostnames?: boolean | undefined;
+        allowIpSans?: string | undefined;
+        allowedUriSans?: string | undefined;
+        allowedOtherSans?: string | undefined;
+        serverFlag?: boolean | undefined;
+        clientFlag?: boolean | undefined;
+        codeSigningFlag?: boolean | undefined;
+        emailProtectionFlag?: boolean | undefined;
+        keyType?: string | undefined;
+        keyBits?: number | undefined;
+        keyUsage?: string[] | undefined;
+        externalKeyUsage?: string[] | undefined;
+        extKeyUsageOids?: string | undefined;
+        useCsrCommonName?: boolean | undefined;
+        useCsrSans?: boolean | undefined;
+        ou?: string | undefined;
+        organization?: string | undefined;
+        country?: string | undefined;
+        locality?: string | undefined;
+        province?: string | undefined;
+        streetAddress?: string | undefined;
+        postalCode?: string | undefined;
+        serialNumber?: string | undefined;
+        generateLease?: boolean | undefined;
+        noStore?: boolean | undefined;
+        requireCn?: boolean | undefined;
+        policyIdentifiers?: string[] | undefined;
+        basicConstraintsValidForNonCa?: boolean | undefined;
+        notBeforeDuration?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {Object} params
@@ -922,65 +922,65 @@ export default class Vault {
     */
     updatePkiRole(token: string, params: {
         name: string;
-        ttl?: string;
-        maxTtl?: string;
-        allowLocalhost?: boolean;
-        allowedDomains?: string[];
-        allowedDomainsTemplate?: boolean;
-        allowBareDomains?: boolean;
-        allowSubdomains?: boolean;
-        allowGlobDomains?: boolean;
-        allowAnyName?: boolean;
-        enforceHostnames?: boolean;
-        allowIpSans?: string;
-        allowedUriSans?: string;
-        allowedOtherSans?: string;
-        serverFlag?: boolean;
-        clientFlag?: boolean;
-        codeSigningFlag?: boolean;
-        emailProtectionFlag?: boolean;
-        keyType?: string;
-        keyBits?: number;
-        keyUsage?: string[];
-        externalKeyUsage?: string[];
-        extKeyUsageOids?: string;
-        useCsrCommonName?: boolean;
-        useCsrSans?: boolean;
-        ou?: string;
-        organization?: string;
-        country?: string;
-        locality?: string;
-        province?: string;
-        streetAddress?: string;
-        postalCode?: string;
-        serialNumber?: string;
-        generateLease?: boolean;
-        noStore?: boolean;
-        requireCn?: boolean;
-        policyIdentifiers?: string[];
-        basicConstraintsValidForNonCa?: boolean;
-        notBeforeDuration?: string;
-    }, mount?: string): PromiseLike<any>;
+        ttl?: string | undefined;
+        maxTtl?: string | undefined;
+        allowLocalhost?: boolean | undefined;
+        allowedDomains?: string[] | undefined;
+        allowedDomainsTemplate?: boolean | undefined;
+        allowBareDomains?: boolean | undefined;
+        allowSubdomains?: boolean | undefined;
+        allowGlobDomains?: boolean | undefined;
+        allowAnyName?: boolean | undefined;
+        enforceHostnames?: boolean | undefined;
+        allowIpSans?: string | undefined;
+        allowedUriSans?: string | undefined;
+        allowedOtherSans?: string | undefined;
+        serverFlag?: boolean | undefined;
+        clientFlag?: boolean | undefined;
+        codeSigningFlag?: boolean | undefined;
+        emailProtectionFlag?: boolean | undefined;
+        keyType?: string | undefined;
+        keyBits?: number | undefined;
+        keyUsage?: string[] | undefined;
+        externalKeyUsage?: string[] | undefined;
+        extKeyUsageOids?: string | undefined;
+        useCsrCommonName?: boolean | undefined;
+        useCsrSans?: boolean | undefined;
+        ou?: string | undefined;
+        organization?: string | undefined;
+        country?: string | undefined;
+        locality?: string | undefined;
+        province?: string | undefined;
+        streetAddress?: string | undefined;
+        postalCode?: string | undefined;
+        serialNumber?: string | undefined;
+        generateLease?: boolean | undefined;
+        noStore?: boolean | undefined;
+        requireCn?: boolean | undefined;
+        policyIdentifiers?: string[] | undefined;
+        basicConstraintsValidForNonCa?: boolean | undefined;
+        notBeforeDuration?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readPkiRole(token: string, name: string, mount?: string): PromiseLike<any>;
+    readPkiRole(token: string, name: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    listPkiRoles(token: string, mount?: string): PromiseLike<any>;
+    listPkiRoles(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    deletePkiRole(token: string, name: string, mount?: string): PromiseLike<any>;
+    deletePkiRole(token: string, name: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} params
@@ -1001,20 +1001,20 @@ export default class Vault {
      * @returns {PromiseLike<Object>}
      */
     setADConfig(token: string, params: {
-        ttl?: number;
-        max_ttl?: number;
-        password_policy?: string;
-        url?: string;
-        request_timeout?: string;
-        starttls?: boolean;
-        insecure_tls?: boolean;
-        certificate?: string;
+        ttl?: number | undefined;
+        max_ttl?: number | undefined;
+        password_policy?: string | undefined;
+        url?: string | undefined;
+        request_timeout?: string | undefined;
+        starttls?: boolean | undefined;
+        insecure_tls?: boolean | undefined;
+        certificate?: string | undefined;
         binddn: string;
         bindpass: string;
-        userdn?: string;
-        upndomain?: string;
-        last_rotation_tolerance?: string;
-    }, mount?: string): PromiseLike<any>;
+        userdn?: string | undefined;
+        upndomain?: string | undefined;
+        last_rotation_tolerance?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} params
@@ -1035,38 +1035,38 @@ export default class Vault {
      * @returns {PromiseLike<Object>}
      */
     updateADConfig(token: string, params: {
-        ttl?: number;
-        max_ttl?: number;
-        password_policy?: string;
-        url?: string;
-        request_timeout?: string;
-        starttls?: boolean;
-        insecure_tls?: boolean;
-        certificate?: string;
+        ttl?: number | undefined;
+        max_ttl?: number | undefined;
+        password_policy?: string | undefined;
+        url?: string | undefined;
+        request_timeout?: string | undefined;
+        starttls?: boolean | undefined;
+        insecure_tls?: boolean | undefined;
+        certificate?: string | undefined;
         binddn: string;
         bindpass: string;
-        userdn?: string;
-        upndomain?: string;
-        last_rotation_tolerance?: string;
-    }, mount?: string): PromiseLike<any>;
+        userdn?: string | undefined;
+        upndomain?: string | undefined;
+        last_rotation_tolerance?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    readADConfig(token: string, mount?: string): PromiseLike<any>;
+    readADConfig(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    deleteADConfig(token: string, mount?: string): PromiseLike<any>;
+    deleteADConfig(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    listADRoles(token: string, mount?: string): PromiseLike<any>;
+    listADRoles(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} params
@@ -1079,8 +1079,8 @@ export default class Vault {
     createADRole(token: string, params: {
         name: string;
         service_account_name: string;
-        ttl?: string;
-    }, mount?: string): PromiseLike<any>;
+        ttl?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} params
@@ -1093,49 +1093,49 @@ export default class Vault {
     updateADRole(token: string, params: {
         name: string;
         service_account_name: string;
-        ttl?: string;
-    }, mount?: string): PromiseLike<any>;
+        ttl?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} roleName
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    readADRole(token: string, roleName: string, mount?: string): PromiseLike<any>;
+    readADRole(token: string, roleName: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} roleName
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    deleteADRole(token: string, roleName: string, mount?: string): PromiseLike<any>;
+    deleteADRole(token: string, roleName: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} roleName
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    getADRoleCred(token: string, roleName: string, mount?: string): PromiseLike<any>;
+    getADRoleCred(token: string, roleName: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} roleName
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    rotateADRoleCred(token: string, roleName: string, mount?: string): PromiseLike<any>;
+    rotateADRoleCred(token: string, roleName: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    listADLibraries(token: string, mount?: string): PromiseLike<any>;
+    listADLibraries(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} setName
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    readADLibrary(token: string, setName: string, mount?: string): PromiseLike<any>;
+    readADLibrary(token: string, setName: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} params
@@ -1150,10 +1150,10 @@ export default class Vault {
     createADLibrary(token: string, params: {
         name: string;
         service_account_names: string[];
-        ttl?: string;
-        max_ttl?: string;
-        disable_check_in_enforcement?: boolean;
-    }, mount?: string): PromiseLike<any>;
+        ttl?: string | undefined;
+        max_ttl?: string | undefined;
+        disable_check_in_enforcement?: boolean | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} params
@@ -1168,17 +1168,17 @@ export default class Vault {
     updateADLibrary(token: string, params: {
         name: string;
         service_account_names: string[];
-        ttl?: string;
-        max_ttl?: string;
-        disable_check_in_enforcement?: boolean;
-    }, mount?: string): PromiseLike<any>;
+        ttl?: string | undefined;
+        max_ttl?: string | undefined;
+        disable_check_in_enforcement?: boolean | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} setName
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    deleteADLibrary(token: string, setName: string, mount?: string): PromiseLike<any>;
+    deleteADLibrary(token: string, setName: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} params
@@ -1189,8 +1189,8 @@ export default class Vault {
      */
     checkADCredOut(token: string, params: {
         name: string;
-        ttl?: string;
-    }, mount?: string): PromiseLike<any>;
+        ttl?: string | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} params
@@ -1202,28 +1202,28 @@ export default class Vault {
      */
     checkADCredIn(token: string, params: {
         name: string;
-        service_account_names?: string[];
-    }, forceMode?: boolean, mount?: string): PromiseLike<any>;
+        service_account_names?: string[] | undefined;
+    }, forceMode?: boolean | undefined, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} setName
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    getADCredSatus(token: string, setName: string, mount?: string): PromiseLike<any>;
+    getADCredSatus(token: string, setName: string, mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {Object} data
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    updateKVEngineConfig(token: string, data: any, mount?: string): PromiseLike<any>;
+    updateKVEngineConfig(token: string, data: Object, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readKVEngineConfig(token: string, mount?: string): PromiseLike<any>;
+    readKVEngineConfig(token: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
@@ -1231,7 +1231,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    createKVSecret(token: string, name: string, secrets: any, mount?: string): PromiseLike<any>;
+    createKVSecret(token: string, name: string, secrets: Object, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
@@ -1240,7 +1240,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    updateKVSecret(token: string, name: string, secrets: any, version: number, mount?: string): PromiseLike<any>;
+    updateKVSecret(token: string, name: string, secrets: Object, version: number, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
@@ -1248,22 +1248,14 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readKVSecret(token: string, name: string, version?: number, mount?: string): PromiseLike<any>;
+    readKVSecret(token: string, name: string, version?: number | undefined, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    deleteLatestVerKVSecret(token: string, name: string, mount?: string): PromiseLike<any>;
-    /**
-    * @param {string} token
-    * @param {string} name
-    * @param {number[]} versions
-    * @param {string} [mount]
-    * @returns {PromiseLike<Object>}
-    */
-    deleteVersionsKVSecret(token: string, name: string, versions: number[], mount?: string): PromiseLike<any>;
+    deleteLatestVerKVSecret(token: string, name: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
@@ -1271,7 +1263,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    undeleteVersionsKVSecret(token: string, name: string, versions: number[], mount?: string): PromiseLike<any>;
+    deleteVersionsKVSecret(token: string, name: string, versions: number[], mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
@@ -1279,28 +1271,36 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    destroyVersionsKVSecret(token: string, name: string, versions: number[], mount?: string): PromiseLike<any>;
+    undeleteVersionsKVSecret(token: string, name: string, versions: number[], mount?: string | undefined): PromiseLike<Object>;
+    /**
+    * @param {string} token
+    * @param {string} name
+    * @param {number[]} versions
+    * @param {string} [mount]
+    * @returns {PromiseLike<Object>}
+    */
+    destroyVersionsKVSecret(token: string, name: string, versions: number[], mount?: string | undefined): PromiseLike<Object>;
     /**
      * @param {string} token
      * @param {string} name
      * @param {string} [mount]
      * @returns {PromiseLike<Object>}
      */
-    eliminateKVSecret(token: string, name: string, mount?: string): PromiseLike<any>;
+    eliminateKVSecret(token: string, name: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [folder]
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    listKVSecrets(token: string, folder?: string, mount?: string): PromiseLike<any>;
+    listKVSecrets(token: string, folder?: string | undefined, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} [path]
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readKVSecretMeta(token: string, path?: string, mount?: string): PromiseLike<any>;
+    readKVSecretMeta(token: string, path?: string | undefined, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} path
@@ -1308,7 +1308,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    createKVSecretMeta(token: string, path: string, metadata: string, mount?: string): PromiseLike<any>;
+    createKVSecretMeta(token: string, path: string, metadata: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} path
@@ -1316,7 +1316,7 @@ export default class Vault {
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    updateKVSecretMeta(token: string, path: string, metadata: string, mount?: string): PromiseLike<any>;
+    updateKVSecretMeta(token: string, path: string, metadata: string, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
@@ -1338,24 +1338,24 @@ export default class Vault {
     */
     createTOTPKey(token: string, name: string, params: {
         generate: boolean;
-        exported?: boolean;
-        key_size?: number;
-        key_url?: string;
-        key?: string;
-        issuer?: string;
-        account_name?: string;
-        period?: number;
-        algorithm?: string;
-        digits?: number;
-        skew?: number;
-        gr_size?: number;
-    }, mount?: string): PromiseLike<any>;
+        exported?: boolean | undefined;
+        key_size?: number | undefined;
+        key_url?: string | undefined;
+        key?: string | undefined;
+        issuer?: string | undefined;
+        account_name?: string | undefined;
+        period?: number | undefined;
+        algorithm?: string | undefined;
+        digits?: number | undefined;
+        skew?: number | undefined;
+        gr_size?: number | undefined;
+    }, mount?: string | undefined): PromiseLike<Object>;
     /**
     * @param {string} token
     * @param {string} name
     * @param {string} [mount]
     * @returns {PromiseLike<Object>}
     */
-    readTOTPKey(token: string, name: string, mount?: string): PromiseLike<any>;
+    readTOTPKey(token: string, name: string, mount?: string | undefined): PromiseLike<Object>;
 }
 //# sourceMappingURL=Vault.d.ts.map
