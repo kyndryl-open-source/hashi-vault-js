@@ -2,7 +2,11 @@
 
 ## Change Log
 
-* `0.5.0` (**latest**)
+* `0.5.1` (**latest**)
+  * Fixed the TypeScript configuration for better support
+  * Updated Axios dependency to `1.8.2`
+
+* `0.5.0` (**stable**)
   * Upgraded all dependencies to the latest versions
   * Upgraded development env to Vault server `1.18.5`
   * Converted modules to ESM for Node v20 compatibility
