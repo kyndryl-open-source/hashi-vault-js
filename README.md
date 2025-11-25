@@ -1,11 +1,11 @@
 # Hashi Vault JS
 
-![GitHub issues](https://img.shields.io/github/issues/rod4n4m1/hashi-vault-js)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/rod4n4m1/hashi-vault-js)
-![GitHub repo file count](https://img.shields.io/github/directory-file-count/rod4n4m1/hashi-vault-js)
-![GitHub top language](https://img.shields.io/github/languages/top/rod4n4m1/hashi-vault-js)
-![GitHub contributors](https://img.shields.io/github/contributors/rod4n4m1/hashi-vault-js)
-![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/rod4n4m1/hashi-vault-js/axios)
+![GitHub issues](https://img.shields.io/github/issues/kyndryl-open-source/hashi-vault-js)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/kyndryl-open-source/hashi-vault-js)
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/kyndryl-open-source/hashi-vault-js)
+![GitHub top language](https://img.shields.io/github/languages/top/kyndryl-open-source/hashi-vault-js)
+![GitHub contributors](https://img.shields.io/github/contributors/kyndryl-open-source/hashi-vault-js)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/kyndryl-open-source/hashi-vault-js/axios)
 ![npm](https://img.shields.io/npm/dm/hashi-vault-js)
 ![NPM](https://img.shields.io/npm/l/hashi-vault-js)
 
@@ -50,11 +50,17 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 
 ### Install
 
-`npm install hashi-vault-js --save`
+```bash
+npm install hashi-vault-js --save
+```
+
+For TypeScript projects, type definitions are included automatically. No need for `@types/hashi-vault-js`.
 
 ### Uninstall
 
-`npm uninstall hashi-vault-js`
+```bash
+npm uninstall hashi-vault-js
+```
 
 ### Release notes and versions
 
@@ -204,15 +210,80 @@ const data = await vault.updateKVSecret(token, Item.name , newData, 1);
 
 ### TypeScript
 
-`hashi-vault-js` includes TypeScript definitions in the `Vault.d.ts`.
+`hashi-vault-js` includes full TypeScript support with type definitions automatically generated from the source code.
+
+**Type Definitions:**
+
+* `dist/index.d.ts` - Main entry point with both Vault and Config exports
+* `dist/Vault.d.ts` - Vault class with all method signatures
+* `dist/Config.d.ts` - Configuration object types
+* Declaration maps included for IDE navigation to source
+
+**Import Options:**
+
+```typescript
+// Default import (recommended)
+import Vault from 'hashi-vault-js';
+
+// Named imports
+import { Vault, config } from 'hashi-vault-js';
+
+// Import config separately
+import { config } from 'hashi-vault-js/config';
+
+// Type-only import
+import type { VaultClient } from 'hashi-vault-js';
+```
+
+**Usage Example:**
 
 ```typescript
 import Vault from 'hashi-vault-js';
+import { config } from 'hashi-vault-js';
 
-let response: ReadKVSecretResponse = null;
-try {
-  const { data } = await vault.readKVSecret(token, Item.name);
-  response = data;
+// Constructor params are fully typed
+const vault = new Vault({
+  https: true,
+  baseUrl: 'https://vault.example.com:8200/v1',
+  timeout: 5000,
+  namespace: 'my-namespace'
+});
+
+// Access configuration constants
+console.log('Default timeout:', config.timeout);
+console.log('App name:', config.appName);
+
+async function example() {
+  const token = 'hvs.xxxxx';
+  
+  // All method parameters and return types are inferred
+  const secret = await vault.readKVSecret(
+    token,      // string
+    'my-secret', // string
+    1,          // version (optional)
+    'secret'    // mount path (optional)
+  );
+  
+  // TypeScript knows the structure
+  console.log(secret.data);
+}
+```
+
+**TypeScript Project Configuration:**
+
+For best compatibility, use these settings in your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
 }
 ```
 
@@ -262,7 +333,7 @@ Check below docs for more information on specific function groups.
 
 | **Group** | **Type** | **Default mount point** | **Link** |
 |:------------------|:------------------|:------------------|:--------------:|
-| **Active Directory** (AD) - deprectated | Secret engine | `/ad` | [Doc file](/docs/AD-Functions.md) |
+| **Active Directory** (AD) - deprecated | Secret engine | `/ad` | [Doc file](/docs/AD-Functions.md) |
 | **AppRole** | Auth method | `/auth/approle` | [Doc file](/docs/AppRole-Functions.md) |
 | **LDAP** | Auth method | `/auth/ldap` | [Doc file](/docs/LDAP-Functions.md) |
 | **Kubernetes** | Auth method | `/auth/kubernetes` | [Doc file](/docs/Kubernetes-Functions.md) |
@@ -324,11 +395,11 @@ By contributing to this public repository, you fully agree with the following De
 
 ### Reporting an issue
 
-If you have found what you believe to be an issue with `hashi-vault-js` please do not hesitate to file an issue on the GitHub repository [here](https://github.com/rod4n4m1/hashi-vault-js/issues/new?template=bug-report.md).
+If you have found what you believe to be an issue with `hashi-vault-js` please do not hesitate to file an issue on the GitHub repository [here](https://github.com/kyndryl-open-source/hashi-vault-js/issues/new?template=bug-report.md).
 
 ### Suggesting a new feature
 
-If you want to see new features or enhancements to the current ones, we would love to hear them. Please submit an issue on the GitHub repository [here](https://github.com/rod4n4m1/hashi-vault-js/issues/new?template=new-feature.md).
+If you want to see new features or enhancements to the current ones, we would love to hear them. Please submit an issue on the GitHub repository [here](https://github.com/kyndryl-open-source/hashi-vault-js/issues/new?template=new-feature.md).
 
 ### Authors
 

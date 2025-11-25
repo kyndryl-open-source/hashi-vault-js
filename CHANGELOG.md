@@ -5,6 +5,7 @@
 * `0.5.1` (**latest**)
   * Fixed the TypeScript configuration for better support
   * Updated Axios dependency to `1.8.2`
+  * Improved README with Copilot
 
 * `0.5.0` (**stable**)
   * Upgraded all dependencies to the latest versions
