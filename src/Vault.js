@@ -271,7 +271,7 @@ export default class Vault {
     let message = {};
     if (config.sysCounterTypes.includes(type)) {
       const Options = {
-        url: `${config.sysInternalCounters}/${type}`,
+        url: `${config.sysInternalCounters}/${encodeURIComponent(type)}`,
         method: 'get',
         headers: {
           "X-Vault-Token": sudoToken
@@ -307,7 +307,8 @@ export default class Vault {
       }
     };
     if (config.sysMetricFormats.includes(format)) {
-      Options.url= `${config.sysMetrics}?format=${format}`;
+      const qs = new URLSearchParams({ format }).toString();
+      Options.url= `${config.sysMetrics}?${qs}`;
     }
     else {
       Options.url= `${config.sysMetrics}`;
@@ -419,7 +420,7 @@ export default class Vault {
       no_default_policy, renewable, ttl, type, explicit_max_ttl, display_name,
       num_uses, period, entity_alias } = params;
 
-    const url = role_name ? `${config.tokenCreate}/${role_name}` : config.tokenCreate;
+    const url = role_name ? `${config.tokenCreate}/${encodeURIComponent(role_name)}` : config.tokenCreate;
 
     const Options = {
       url,
@@ -704,7 +705,7 @@ export default class Vault {
       rootPath = config.ldapRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.ldapLogin[0]}/${username}`,
+      url: `${rootPath}/${config.ldapLogin[0]}/${encodeURIComponent(username)}`,
       method: config.ldapLogin[1],
       data: {
         password: password
@@ -737,7 +738,7 @@ export default class Vault {
       rootPath = config.ldapRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.ldapCreateUser[0]}/${username}`,
+      url: `${rootPath}/${config.ldapCreateUser[0]}/${encodeURIComponent(username)}`,
       method: config.ldapCreateUser[1],
       headers: {
         "X-Vault-Token": token
@@ -785,7 +786,7 @@ export default class Vault {
       rootPath = config.ldapRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.ldapCreateGroup[0]}/${group}`,
+      url: `${rootPath}/${config.ldapCreateGroup[0]}/${encodeURIComponent(group)}`,
       method: config.ldapCreateGroup[1],
       headers: {
         "X-Vault-Token": token
@@ -830,7 +831,7 @@ export default class Vault {
       rootPath = config.ldapRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.ldapReadGroup[0]}/${group}`,
+      url: `${rootPath}/${config.ldapReadGroup[0]}/${encodeURIComponent(group)}`,
       method: config.ldapReadGroup[1],
       headers: {
         "X-Vault-Token": token
@@ -861,7 +862,7 @@ export default class Vault {
       rootPath = config.ldapRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.ldapReadUser[0]}/${username}`,
+      url: `${rootPath}/${config.ldapReadUser[0]}/${encodeURIComponent(username)}`,
       method: config.ldapReadUser[1],
       headers: {
         "X-Vault-Token": token
@@ -952,7 +953,7 @@ export default class Vault {
       rootPath = config.ldapRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.ldapDeleteUser[0]}/${username}`,
+      url: `${rootPath}/${config.ldapDeleteUser[0]}/${encodeURIComponent(username)}`,
       method: config.ldapDeleteUser[1],
       headers: {
         "X-Vault-Token": token
@@ -983,7 +984,7 @@ export default class Vault {
       rootPath = config.ldapRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.ldapDeleteGroup[0]}/${group}`,
+      url: `${rootPath}/${config.ldapDeleteGroup[0]}/${encodeURIComponent(group)}`,
       method: config.ldapDeleteGroup[1],
       headers: {
         "X-Vault-Token": token
@@ -1180,7 +1181,7 @@ export default class Vault {
       rootPath = config.userpassRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.userpassLogin[0]}/${username}`,
+      url: `${rootPath}/${config.userpassLogin[0]}/${encodeURIComponent(username)}`,
       method: config.userpassLogin[1],
       data: {
         password: password
@@ -1213,7 +1214,7 @@ export default class Vault {
       rootPath = config.userpassRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.userpassCreateUser[0]}/${username}`,
+      url: `${rootPath}/${config.userpassCreateUser[0]}/${encodeURIComponent(username)}`,
       method: config.userpassCreateUser[1],
       headers: {
         "X-Vault-Token": token
@@ -1260,7 +1261,7 @@ export default class Vault {
       rootPath = config.userpassRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.userpassReadUser[0]}/${username}`,
+      url: `${rootPath}/${config.userpassReadUser[0]}/${encodeURIComponent(username)}`,
       method: config.userpassReadUser[1],
       headers: {
         "X-Vault-Token": token
@@ -1291,7 +1292,7 @@ export default class Vault {
       rootPath = config.userpassRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.userpassDeleteUser[0]}/${username}`,
+      url: `${rootPath}/${config.userpassDeleteUser[0]}/${encodeURIComponent(username)}`,
       method: config.userpassDeleteUser[1],
       headers: {
         "X-Vault-Token": token
@@ -1323,7 +1324,7 @@ export default class Vault {
       rootPath = config.userpassRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.userpassUpdatePass[0]}/${username}/password`,
+      url: `${rootPath}/${config.userpassUpdatePass[0]}/${encodeURIComponent(username)}/password`,
       method: config.userpassUpdatePass[1],
       headers: {
         "X-Vault-Token": token
@@ -1358,7 +1359,7 @@ export default class Vault {
       rootPath = config.userpassRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.userpassUpdatePolicies[0]}/${username}/policies`,
+      url: `${rootPath}/${config.userpassUpdatePolicies[0]}/${encodeURIComponent(username)}/policies`,
       method: config.userpassUpdatePolicies[1],
       headers: {
         "X-Vault-Token": token
@@ -1581,7 +1582,7 @@ export default class Vault {
       rootPath = config.k8sRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.k8sCreateRole[0]}/${role}`,
+      url: `${rootPath}/${config.k8sCreateRole[0]}/${encodeURIComponent(role)}`,
       method: config.k8sCreateRole[1],
       headers: {
         "X-Vault-Token": token
@@ -1620,7 +1621,7 @@ export default class Vault {
       rootPath = config.k8sRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.k8sReadRole[0]}/${role}`,
+      url: `${rootPath}/${config.k8sReadRole[0]}/${encodeURIComponent(role)}`,
       method: config.k8sReadRole[1],
       headers: {
         "X-Vault-Token": token
@@ -1687,7 +1688,7 @@ export default class Vault {
       rootPath = config.k8sRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.k8sDeleteRole[0]}/${role}`,
+      url: `${rootPath}/${config.k8sDeleteRole[0]}/${encodeURIComponent(role)}`,
       method: config.k8sDeleteRole[1],
       headers: {
         "X-Vault-Token": token
@@ -1757,7 +1758,7 @@ export default class Vault {
       rootPath = config.appRoleRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.appRoleCreateSecret[0]}/${appRole}/${config.appRoleCreateSecret[1]}`,
+      url: `${rootPath}/${config.appRoleCreateSecret[0]}/${encodeURIComponent(appRole)}/${config.appRoleCreateSecret[1]}`,
       method: config.appRoleCreateSecret[2],
       headers: {
         "X-Vault-Token": token
@@ -1792,7 +1793,7 @@ export default class Vault {
       rootPath = config.appRoleRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.appRoleReadSecret[0]}/${appRole}/${config.appRoleReadSecret[1]}`,
+      url: `${rootPath}/${config.appRoleReadSecret[0]}/${encodeURIComponent(appRole)}/${config.appRoleReadSecret[1]}`,
       method: config.appRoleReadSecret[2],
       headers: {
         "X-Vault-Token": token
@@ -1827,7 +1828,7 @@ export default class Vault {
       rootPath = config.appRoleRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.appRoleDestroySecret[0]}/${appRole}/${config.appRoleDestroySecret[1]}`,
+      url: `${rootPath}/${config.appRoleDestroySecret[0]}/${encodeURIComponent(appRole)}/${config.appRoleDestroySecret[1]}`,
       method: config.appRoleDestroySecret[2],
       headers: {
         "X-Vault-Token": token
@@ -1957,7 +1958,7 @@ export default class Vault {
       rootPath = config.pkiRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.pkiReadCert[0]}/${serial}`,
+      url: `${rootPath}/${config.pkiReadCert[0]}/${encodeURIComponent(serial)}`,
       method: config.pkiReadCert[1]
     };
 
@@ -2757,7 +2758,7 @@ export default class Vault {
       rootPath = config.pkiRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.pkiReadRole[0]}/${name}`,
+      url: `${rootPath}/${config.pkiReadRole[0]}/${encodeURIComponent(name)}`,
       method: config.pkiReadRole[1],
       headers: {
         "X-Vault-Token": token
@@ -2819,7 +2820,7 @@ export default class Vault {
       rootPath = config.pkiRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.pkiDeleteRole[0]}/${name}`,
+      url: `${rootPath}/${config.pkiDeleteRole[0]}/${encodeURIComponent(name)}`,
       method: config.pkiDeleteRole[1],
       headers: {
         "X-Vault-Token": token
@@ -3036,7 +3037,7 @@ export default class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adCreateRole[0]}/${name}`,
+      url: `${rootPath}/${config.adCreateRole[0]}/${encodeURIComponent(name)}`,
       method: config.adCreateRole[1],
       headers: {
         "X-Vault-Token": token
@@ -3089,7 +3090,7 @@ export default class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adReadRole[0]}/${roleName}`,
+      url: `${rootPath}/${config.adReadRole[0]}/${encodeURIComponent(roleName)}`,
       method: config.adReadRole[1],
       headers: {
         "X-Vault-Token": token
@@ -3123,7 +3124,7 @@ export default class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adDeleteRole[0]}/${roleName}`,
+      url: `${rootPath}/${config.adDeleteRole[0]}/${encodeURIComponent(roleName)}`,
       method: config.adDeleteRole[1],
       headers: {
         "X-Vault-Token": token
@@ -3158,7 +3159,7 @@ export default class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adGetCred[0]}/${roleName}`,
+      url: `${rootPath}/${config.adGetCred[0]}/${encodeURIComponent(roleName)}`,
       method: config.adGetCred[1],
       headers: {
         "X-Vault-Token": token
@@ -3192,7 +3193,7 @@ export default class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adRotateCred[0]}/${roleName}`,
+      url: `${rootPath}/${config.adRotateCred[0]}/${encodeURIComponent(roleName)}`,
       method: config.adRotateCred[1],
       headers: {
         "X-Vault-Token": token
@@ -3260,7 +3261,7 @@ export default class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adReadLibrary[0]}/${setName}`,
+      url: `${rootPath}/${config.adReadLibrary[0]}/${encodeURIComponent(setName)}`,
       method: config.adReadLibrary[1],
       headers: {
         "X-Vault-Token": token
@@ -3301,7 +3302,7 @@ export default class Vault {
       rootPath = config.adRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.adCreateLibrary[0]}/${name}`,
+      url: `${rootPath}/${config.adCreateLibrary[0]}/${encodeURIComponent(name)}`,
       method: config.adCreateLibrary[1],
       headers: {
         "X-Vault-Token": token
@@ -3358,7 +3359,7 @@ export default class Vault {
        rootPath = config.adRootPath;
      }
      const Options = {
-       url: `${rootPath}/${config.adDeleteLibrary[0]}/${setName}`,
+       url: `${rootPath}/${config.adDeleteLibrary[0]}/${encodeURIComponent(setName)}`,
        method: config.adDeleteLibrary[1],
        headers: {
          "X-Vault-Token": token
@@ -3396,7 +3397,7 @@ export default class Vault {
        rootPath = config.adRootPath;
      }
      const Options = {
-       url: `${rootPath}/${config.adCheckCredOut[0]}/${name}/${config.adCheckCredOut[1]}`,
+       url: `${rootPath}/${config.adCheckCredOut[0]}/${encodeURIComponent(name)}/${config.adCheckCredOut[1]}`,
        method: config.adCheckCredOut[2],
        headers: {
          "X-Vault-Token": token
@@ -3437,7 +3438,7 @@ export default class Vault {
      } else {
        rootPath = config.adRootPath;
      }
-     const Mode = forceMode ? `manage/${name}` : `${name}`;
+     const Mode = forceMode ? `manage/${encodeURIComponent(name)}` : `${encodeURIComponent(name)}`;
      const Options = {
        url: `${rootPath}/${config.adCheckCredIn[0]}/${Mode}/${config.adCheckCredIn[1]}`,
        method: config.adCheckCredIn[2],
@@ -3477,7 +3478,7 @@ export default class Vault {
        rootPath = config.adRootPath;
      }
      const Options = {
-       url: `${rootPath}/${config.adGetCredStatus[0]}/${setName}/${config.adGetCredStatus[1]}`,
+       url: `${rootPath}/${config.adGetCredStatus[0]}/${encodeURIComponent(setName)}/${config.adGetCredStatus[1]}`,
        method: config.adGetCredStatus[2],
        headers: {
          "X-Vault-Token": token
@@ -3578,7 +3579,7 @@ export default class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.kvCreateSecret[0]}/${name}`,
+      url: `${rootPath}/${config.kvCreateSecret[0]}/${encodeURIComponent(name)}`,
       method: config.kvCreateSecret[1],
       headers: {
         "X-Vault-Token": token
@@ -3618,7 +3619,7 @@ export default class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.kvUpdateSecret[0]}/${name}`,
+      url: `${rootPath}/${config.kvUpdateSecret[0]}/${encodeURIComponent(name)}`,
       method: config.kvUpdateSecret[1],
       headers: {
         "X-Vault-Token": token
@@ -3657,9 +3658,9 @@ export default class Vault {
     } else {
       rootPath = config.kvRootPath;
     }
-    const suffix = version ? `?version=${version}` : "";
+    const suffix = version ? `?${new URLSearchParams({ version }).toString()}` : "";
     const Options = {
-      url: `${rootPath}/${config.kvReadSecret[0]}/${name}${suffix}`,
+      url: `${rootPath}/${config.kvReadSecret[0]}/${encodeURIComponent(name)}${suffix}`,
       method: config.kvReadSecret[1],
       headers: {
         "X-Vault-Token": token
@@ -3691,7 +3692,7 @@ export default class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.kvDeleteLatestSecret[0]}/${name}`,
+      url: `${rootPath}/${config.kvDeleteLatestSecret[0]}/${encodeURIComponent(name)}`,
       method: config.kvDeleteLatestSecret[1],
       headers: {
         "X-Vault-Token": token
@@ -3724,7 +3725,7 @@ export default class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.kvDeleteSecret[0]}/${name}`,
+      url: `${rootPath}/${config.kvDeleteSecret[0]}/${encodeURIComponent(name)}`,
       method: config.kvDeleteSecret[1],
       headers: {
         "X-Vault-Token": token
@@ -3760,7 +3761,7 @@ export default class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.kvUndeleteSecret[0]}/${name}`,
+      url: `${rootPath}/${config.kvUndeleteSecret[0]}/${encodeURIComponent(name)}`,
       method: config.kvUndeleteSecret[1],
       headers: {
         "X-Vault-Token": token
@@ -3796,7 +3797,7 @@ export default class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.kvDestroySecret[0]}/${name}`,
+      url: `${rootPath}/${config.kvDestroySecret[0]}/${encodeURIComponent(name)}`,
       method: config.kvDestroySecret[1],
       headers: {
         "X-Vault-Token": token
@@ -3831,7 +3832,7 @@ export default class Vault {
       rootPath = config.kvRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.kvEliminateSecret[0]}/${name}`,
+      url: `${rootPath}/${config.kvEliminateSecret[0]}/${encodeURIComponent(name)}`,
       method: config.kvEliminateSecret[1],
       headers: {
         "X-Vault-Token": token
@@ -3864,7 +3865,7 @@ export default class Vault {
       rootPath = config.kvRootPath;
     }
     if (folder) {
-      url = `${rootPath}/${config.kvListSecrets[0]}/${folder}`;
+      url = `${rootPath}/${config.kvListSecrets[0]}/${encodeURIComponent(folder)}`;
     } else {
       url = `${rootPath}/${config.kvListSecrets[0]}`;
     }
@@ -3902,7 +3903,7 @@ export default class Vault {
     } else {
       rootPath = config.kvRootPath;
     }
-    url = `${rootPath}/${config.kvReadSecretMeta[0]}/${path}`;
+    url = `${rootPath}/${config.kvReadSecretMeta[0]}/${encodeURIComponent(path)}`;
     const Options = {
       url: url,
       method: config.kvReadSecretMeta[1],
@@ -3938,7 +3939,7 @@ export default class Vault {
     } else {
       rootPath = config.kvRootPath;
     }
-    url = `${rootPath}/${config.kvCreateSecretMeta[0]}/${path}`;
+    url = `${rootPath}/${config.kvCreateSecretMeta[0]}/${encodeURIComponent(path)}`;
     const Options = {
       url: url,
       method: config.kvCreateSecretMeta[1],
@@ -4010,7 +4011,7 @@ export default class Vault {
   const { generate, exported, key_size, key_url, key, issuer, account_name, 
     period, algorithm, digits, skew, gr_size } = params;
   
-  url = `${rootPath}/${config.totpCreateKey[0]}/${name}`;
+  url = `${rootPath}/${config.totpCreateKey[0]}/${encodeURIComponent(name)}`;
   const Options = {
     url: url,
     method: config.totpCreateKey[1],
@@ -4060,7 +4061,7 @@ export default class Vault {
       rootPath = config.totpRootPath;
     }
     
-    url = `${rootPath}/${config.totpReadKey[0]}/${name}`;
+    url = `${rootPath}/${config.totpReadKey[0]}/${encodeURIComponent(name)}`;
     const Options = {
       url: url,
       method: config.totpReadKey[1],

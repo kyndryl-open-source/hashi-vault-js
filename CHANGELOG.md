@@ -2,12 +2,19 @@
 
 ## Change Log
 
-* `0.5.1` (**latest**)
+* `0.5.2` (**latest**)
+  * Updated Axios dependency to `1.8.3` [#53](CVE-2024-39339)
+  * Upgraded development env to Vault server `1.18.5`
+  * Added SBOM file
+  * Encoded Identifiers in Path Segments (GHSA-g956-2f74-rmv7 reported by @sebasteou)
+  * Updated Query String Builder logic (GHSA-g956-2f74-rmv7 reported by @sebasteou)
+
+* `0.5.1` (**stable**)
   * Fixed the TypeScript configuration for better support
   * Updated Axios dependency to `1.8.2`
   * Improved README with Copilot
 
-* `0.5.0` (**stable**)
+* `0.5.0`
   * Upgraded all dependencies to the latest versions
   * Upgraded development env to Vault server `1.18.5`
   * Converted modules to ESM for Node v20 compatibility
