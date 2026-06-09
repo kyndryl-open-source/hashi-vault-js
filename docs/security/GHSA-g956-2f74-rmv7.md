@@ -1,5 +1,12 @@
 # Security Advisory - GHSA-g956-2f74-rmv7
 
+- Title: Path traversal and query parameter injection
+- CVE ID: TBD
+- CVSS Score: TBD
+- Reported Date: 2026-06-07
+- Published Date: 2026-06-09
+- Last Updated: 2026-06-09
+
 ## Summary
 
 The `hashi-vault-js` library is vulnerable to path traversal and query string injection due to the lack of proper encoding of identifiers in path segments and query strings. This allows attackers to manipulate the request URL and potentially access unintended downstream endpoints or inject malicious parameters if untrusted input is passed to the library.
