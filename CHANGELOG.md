@@ -4,7 +4,7 @@
 
 * `0.5.2` (**latest**)
   * Updated Axios dependency to `1.8.3` [#53](CVE-2024-39339)
-  * Upgraded development env to Vault server `1.18.5`
+  * Upgraded development env to Vault server `1.21.4`
   * Added SBOM file
   * Encoded Identifiers in Path Segments (GHSA-g956-2f74-rmv7 reported by @sebasteou)
   * Updated Query String Builder logic (GHSA-g956-2f74-rmv7 reported by @sebasteou)
