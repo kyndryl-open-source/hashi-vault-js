@@ -29,24 +29,27 @@ This package is **NOT** affected by the _log4shell_ [CVE-2021-44228](https://nvd
 
 ## Table of Contents
 
-* [Install](#install)
-* [Uninstall](#uninstall)
-* [Release notes and versions](#release-notes-and-versions)
-* [Class Constructor](#class-constructor)
-* [Module usage](#module-usage)
-* [TypeScript](#typescript)
-* [Mount points](#mount-points)
-* [Error handling](#error-handling)
-* [Available functions](#available-functions)
-* [Coverage and limitations](#coverage-and-limitations)
-* [Test environment](#test-environment)
-* [References](#references)
-* [Contributing](#contributing)
-* [Reporting an issue](#reporting-an-issue)
-* [Suggesting a new feature](#suggesting-a-new-feature)
-* [Authors](#authors)
-* [Contributors](#contributors)
-* [License](#license)
+- [Hashi Vault JS](#hashi-vault-js)
+  - [Requirements (MacOS/Windows)](#requirements-macoswindows)
+  - [Table of Contents](#table-of-contents)
+    - [Install](#install)
+    - [Uninstall](#uninstall)
+    - [Release notes and versions](#release-notes-and-versions)
+    - [Class Constructor](#class-constructor)
+    - [Module usage](#module-usage)
+    - [TypeScript](#typescript)
+    - [Mount points](#mount-points)
+    - [Error handling](#error-handling)
+    - [Available functions](#available-functions)
+    - [Coverage and limitations](#coverage-and-limitations)
+    - [Test environment](#test-environment)
+    - [References](#references)
+    - [Contributing](#contributing)
+    - [Reporting an issue](#reporting-an-issue)
+    - [Suggesting a new feature](#suggesting-a-new-feature)
+    - [Authors](#authors)
+    - [Contributors](#contributors)
+    - [License](#license)
 
 ### Install
 
@@ -411,6 +414,7 @@ Written by Rod Anami <rod.anami@kyndryl.com>, June 2020.
 * Ordinary IT9 <hkgnobody@>
 * Osama Adil <adilosama47@gmail.com>
 * Jose <josedev-union@>
+* Sebastián Alba Vives <Sebasteuo@>
 
 ### License
 

@@ -26,25 +26,25 @@ path "auth/approle/login" {
   capabilities = ["create"]
 }
 
-path "/auth/approle/role/knight" {
+path "auth/approle/role/knight" {
 capabilities = ["update"]
   allowed_parameters = {
         "token_ttl" = []
   }
 }
 
-path "/auth/approle/role/knight/secret-id" {
+path "auth/approle/role/knight/secret-id" {
     capabilities = ["create", "read", "update", "delete", "list"]
 }
 
-path "/auth/approle/role/knight/secret-id/*" {
+path "auth/approle/role/knight/secret-id/*" {
     capabilities = ["create", "read", "update", "delete", "list"]
 }
 
-path "/auth/approle/role/knight/secret-id-accessor" {
+path "auth/approle/role/knight/secret-id-accessor" {
     capabilities = ["create", "read", "update", "delete", "list"]
 }
 
-path "/auth/approle/role/knight/secret-id-accessor/*" {
+path "auth/approle/role/knight/secret-id-accessor/*" {
     capabilities = ["create", "read", "update", "delete", "list"]
 }
