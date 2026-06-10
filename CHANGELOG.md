@@ -3,11 +3,11 @@
 ## Change Log
 
 * `0.5.2` (**latest**)
-  * Updated Axios dependency to `1.8.3` [#53](CVE-2024-39339)
+  * Updated Axios dependency to `1.17.0` (multiple CVEs fixed)
   * Upgraded development env to Vault server `1.21.4`
-  * Added SBOM file
   * Encoded Identifiers in Path Segments (GHSA-g956-2f74-rmv7 reported by @sebasteou)
   * Updated Query String Builder logic (GHSA-g956-2f74-rmv7 reported by @sebasteou)
+  * Redacted sensitive information from error messages (GHSA-5pq8-3ffp-7w5m7 reported by @sebasteou)
 
 * `0.5.1` (**stable**)
   * Fixed the TypeScript configuration for better support
