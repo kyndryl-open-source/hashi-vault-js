@@ -47,7 +47,7 @@ const vault = new Vault({
 
 describe('Testing loginWithAppRole', () => {
   test('the result is a new AppRole authentication token', async () => {
-    const data = await vault.loginWithAppRole(RoleId, SecretId);
+    const data: any = await vault.loginWithAppRole(RoleId, SecretId);
     console.log(data);
     token = data.client_token;
     return expect(data).toBeDefined();

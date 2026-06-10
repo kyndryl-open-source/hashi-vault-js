@@ -1,6 +1,6 @@
 {
   "name": "hashi-vault-js",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A node.js module to interact with the Hashicorp Vault API.",
   "exports": {
     ".": {
@@ -53,7 +53,8 @@
     "Richard <richie765@> (https://github.com/Richie765)",
     "Ordinary IT9 <hkgnobody@> (https://github.com/hkgnobody)",
     "Osama Adil <dilosama47@gmail.com> (https://github.com/phr3nzy)",
-    "Jose <josedev-union@> (https://github.com/josedev-union)"
+    "Jose <josedev-union@> (https://github.com/josedev-union)",
+    "Sebastián Alba Vives <Sebasteuo@> (https://github.com/Sebasteuo)"
   ],
   "license": "MIT",
   "bugs": {

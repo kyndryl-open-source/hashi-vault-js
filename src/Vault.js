@@ -63,6 +63,25 @@ const parseAxiosError = function(error){
   // Fix the stack
   // passing parseAxiosError as the second param will leave this function out of the trace
   Error.captureStackTrace(error, parseAxiosError);
+
+  // Redact sensitive data from the original request
+  if (error.config) {
+    if (error.config.headers && error.config.headers['X-Vault-Token']) {
+      error.config.headers['X-Vault-Token'] = '[REDACTED]';
+    }
+    if (error.config.data) {
+      error.config.data = '[REDACTED]';
+    }
+  }
+  if (error.response && error.response.config) {
+    if (error.response.config.headers && error.response.config.headers['X-Vault-Token']) {
+      error.response.config.headers['X-Vault-Token'] = '[REDACTED]';
+    }
+    if (error.response.config.data) {
+      error.response.config.data = '[REDACTED]';
+    }
+  }
+
   // Verify if it's a Vault error
   // https://www.vaultproject.io/api-docs#error-response
   if (error.response && error.response.status) {
