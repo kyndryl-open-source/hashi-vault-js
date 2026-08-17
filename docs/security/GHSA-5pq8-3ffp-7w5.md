@@ -1,8 +1,8 @@
 # Security Advisory - GHSA-5pq8-3ffp-7w5
 
 - Title: Vault token and secret values exposed in thrown errors
-- CVE ID: TBD
-- CVSS Score: TBD
+- CVE ID: [CVE-2026-55102](https://github.com/advisories/GHSA-5pq8-3ffp-7w5)
+- CVSS Score: 6.5/10
 - Reported Date: 2026-06-07
 - Published Date: 2026-06-09
 - Last Updated: 2026-06-09

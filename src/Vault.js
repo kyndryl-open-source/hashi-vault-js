@@ -2539,7 +2539,7 @@ export default class Vault {
       rootPath = config.pkiRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.pkiGenerateCertificate[0]}/${params.role}`,
+      url: `${rootPath}/${config.pkiGenerateCertificate[0]}/${encodeURIComponent(params.role)}`,
       method: config.pkiGenerateCertificate[1],
       headers: {
         "X-Vault-Token": token
@@ -2655,7 +2655,7 @@ export default class Vault {
       rootPath = config.pkiRootPath;
     }
     const Options = {
-      url: `${rootPath}/${config.pkiCreateRole[0]}/${params.name}`,
+      url: `${rootPath}/${config.pkiCreateRole[0]}/${encodeURIComponent(params.name)}`,
       method: config.pkiCreateRole[1],
       headers: {
         "X-Vault-Token": token

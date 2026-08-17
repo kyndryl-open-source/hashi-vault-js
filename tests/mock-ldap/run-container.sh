@@ -12,7 +12,7 @@ podman run -p 8389:389 -p 8636:636 \
   --env LDAP_CONFIG_PASSWORD=$LDAP_CONFIG_PASSWORD \
   --detach osixia/openldap:$LDAP_IMAGE_VERSION
 
-podman inspect ck-ldap | grep "IPAddress"
+podman inspect ck-ldap --format '{{.NetworkSettings.IPAddress}}'
 
 #  docker run -p 389:389 -p 636:636 \
 #    --name open-ldap-1.5.0 \

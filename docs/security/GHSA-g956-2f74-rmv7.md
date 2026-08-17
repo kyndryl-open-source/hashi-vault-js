@@ -1,8 +1,8 @@
 # Security Advisory - GHSA-g956-2f74-rmv7
 
 - Title: Path traversal and query parameter injection
-- CVE ID: TBD
-- CVSS Score: TBD
+- CVE ID: [CVE-2026-55100](https://github.com/advisories/GHSA-g956-2f74-rmv7)
+- CVSS Score: 8.7/10
 - Reported Date: 2026-06-07
 - Published Date: 2026-06-09
 - Last Updated: 2026-06-09
