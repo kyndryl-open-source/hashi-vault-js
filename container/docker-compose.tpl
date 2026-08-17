@@ -18,5 +18,4 @@ services:
       - IPC_LOCK
     entrypoint: vault server -config=/vault/config/vault.hcl
     extra_hosts:
-      - "ldap.chatopsknight.com:10.88.0.4"
-
+      - "ldap.chatopsknight.com:<LDAP_IP>"

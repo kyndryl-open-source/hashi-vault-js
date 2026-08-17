@@ -2,6 +2,12 @@
 
 ## Change Log
 
+
+* `0.5.3`(**latest**)
+  * Updated Axios dependency to `1.19.0` (multiple CVEs fixed)
+  * Upgraded development env to Vault server `2.0.4`
+  * Encoded PKI path segment identifiers in `genPkiCertificate` and `createPkiRole` (GHSA-9gmj-q25w-vq6x reported by @manus-use)
+
 * `0.5.2` (**latest**)
   * Updated Axios dependency to `1.17.0` (multiple CVEs fixed)
   * Upgraded development env to Vault server `1.21.4`
